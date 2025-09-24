@@ -1,7 +1,6 @@
 const SpanMaker = class {
   constructor(text) {
     this.text = text;
-    //this.output = "this is the outputs";
     this.textParagraphs = [];
     this.spanParagraphs = [];
   }
@@ -21,18 +20,20 @@ const SpanMaker = class {
   }
 
   makeSpans() {
-    this.spanParagraphs = this.textParagraphs.map((p, pIndex) => {
-      return "x";
+    this.spanParagraphs = this.textParagraphs.map((para) => {
+      return para.split("").map((char, charIndex) => {
+        if (isLetter(char)) {
+          const letterClass = `letter-${char.toLowerCase()}`;
+          if (charIndex === 0) {
+            return `<span class="${letterClass}">${char}</span>`;
+          } else {
+            return `<span class="${letterClass}">${char}</span>`;
+          }
+        } else {
+          return char;
+        }
+      }).join("");
     });
-    // this.paraArray.map((para) => {
-    //   this.para.split("").map((char, charIndex) => {
-    //     if (charIndex === 0) {
-    //       return `<span class="paragraph-first-character">x</span>`;
-    //     } else {
-    //       return `<span class="">y</span>`;
-    //     }
-    //   });
-    // });
     return this;
   }
 
@@ -45,34 +46,6 @@ function isLetter(char) {
   let code = char.charCodeAt(0);
   return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
 }
-
-// function paras(text) {
-//   const results = [];
-//   let parasIndex = 0;
-//   text.split("\n").forEach((line) => {
-//     if (!results[parasIndex]) {
-//       results.push("");
-//     }
-//     results[parasIndex] += `${line} `;
-//     if (line === "") {
-//       parasIndex += 1;
-//     }
-//   });
-//   return results;
-// }
-
-// function makeSpans(paras) {
-//   // return paras.map((para) => {
-//   //   return para.split("").map((char, charIndex) => {
-//   //     if (charIndex === 0) {
-//   //       return `<span class="paragraph-first-character">x</span>`;
-//   //     } else {
-//   //       return `<span class="">y</span>`;
-//   //     }
-//   //   });
-//   // });
-//   return "asdf";
-// }
 
 export default class {
   #currentText = "";
