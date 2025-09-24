@@ -1,3 +1,5 @@
+const letterNums = [65, 90];
+
 const SpanMaker = class {
   constructor(text) {
     this.text = text;
@@ -23,7 +25,7 @@ const SpanMaker = class {
     this.spanParagraphs = this.textParagraphs.map((para) => {
       return para.split("").map((char, charIndex) => {
         if (isLetter(char)) {
-          const letterClass = `letter-${char.toLowerCase()}`;
+          const letterClass = `letter-${char.toUpperCase()}`;
           if (charIndex === 0) {
             return `<span class="${letterClass}">${char}</span>`;
           } else {
@@ -48,7 +50,18 @@ function isLetter(char) {
 }
 
 export default class {
+  #currentLetter = "A";
   #currentText = "";
+
+  letters(_event, el) {
+    for (let num = letterNums[0]; num <= letterNums[1]; num += 1) {
+      let btn = document.createElement("button");
+      btn.innerHTML = String.fromCharCode(num);
+      btn.dataset.send = "setLetter";
+      btn.dataset.letter = String.fromCharCode(num);
+      el.appendChild(btn);
+    }
+  }
 
   input(_event, el) {
     const ta = this.api.querySelector("textarea");
@@ -57,5 +70,10 @@ export default class {
       let spans = new SpanMaker(ta.value).paras().makeSpans();
       el.innerHTML = spans.output();
     }
+  }
+
+  setLetter(event, _el) {
+    this.#currentLetter = event.target.dataset.letter;
+    console.log(this.#currentLetter);
   }
 }

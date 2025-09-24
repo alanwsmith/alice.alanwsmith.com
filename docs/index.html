@@ -69,7 +69,7 @@ textarea {
     <main class="default-wrapper default-flow"><bitty-js 
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="input">
+  data-send="input|letters">
   <h1>Individual CSS</h1>
   <details open><summary>Input</summary>
   <textarea data-send="input">the quick brown
@@ -81,6 +81,8 @@ with some more lines.</textarea>
   </details>
 
   <div class="output" data-receive="input"></div>
+  
+  <div data-receive="letters"></div>
 
 </bitty-js>
 
