@@ -1,2 +1,3 @@
 # individual-css.alanwsmith.com
-Playing aournd with stying individual characters
+
+Playing around with styling individual characters

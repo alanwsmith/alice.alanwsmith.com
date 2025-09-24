@@ -1,0 +1,31 @@
+[!- extends "_includes/wrapper.html" -!]
+[! block main !]
+<bitty-js 
+  class="default-flow" 
+  data-connect="/components/page.js"
+  data-send="input">
+  <h1>Individual CSS</h1>
+  <label>Input
+  <textarea data-send="input">the quick brown
+fox jumps over the lazy dog.
+
+and here is some more stuff
+
+with some more lines.</textarea>
+  </label>
+
+  <div class="output" data-receive="input"></div>
+
+</bitty-js>
+
+  <noscript>
+    <p>
+      This page uses JavaScript. It appears to
+      be turned off or unavailable in this
+      browser. Please try again when it's
+      available.
+    </p>
+  </noscript>
+[! endblock !]
+
+

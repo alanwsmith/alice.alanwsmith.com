@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+:root {
+  --background-color: white;
+  --border-color: #ddd;
+  --color: black;
+}
+
+*, 
+*::before, 
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  color-scheme: dark light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: black;
+    --border-color: #aaa;
+    --color: white;
+  }
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+bitty-js {
+  display: block;
+}
+
+.default-flow > :where(:not(:first-child)) {
+  margin-top: var(--flow-space, 1em);
+}
+
+.default-wrapper {
+  width: min(100vw - 3rem, 62ch);
+  margin-inline: auto;
+}
+
+.output {
+  width: 100%;
+  min-height: 8rem;
+  border: 1px solid var(--border-color);
+}
+
+textarea {
+  width: 100%;
+  height: 8rem;
+}
+
+
+
+    </style>
+  </head>
+  <body>
+    <header class="default-wrapper">
+    </header>
+    <main class="default-wrapper default-flow">
+    [!- block main -!][!- endblock -!]
+    </main>
+    <footer class="default-wrapper">
+    </footer>
+    <script src="/components/bitty-1.0.0-rc4.min.js" type="module"></script>
+  </body>
+</html>

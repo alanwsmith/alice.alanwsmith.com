@@ -1,0 +1,648 @@
+2025-09-24T18:37:44.230952Z|I|src/bin/ssb.rs|26
+Initilizing
+2025-09-24T18:37:44.231158Z|I|src/bin/ssb.rs|29
+Found port for web server: 5446
+2025-09-24T18:37:44.231202Z|I|src/watcher/mod.rs|27
+Starting watcher
+2025-09-24T18:37:44.231317Z|I|src/builder/mod.rs|280
+Starting builder
+2025-09-24T18:37:44.231343Z|I|src/server/mod.rs|28
+Starting web server
+2025-09-24T18:37:44.231426Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:37:44.231555Z|I|/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-8.0.1/src/sources/fs.rs|159
+obtaining pathset [3mconfig_pathset[0m[2m=[0m[WatchedPath { path: "content", recursive: true }]
+2025-09-24T18:37:44.233446Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:39:07.330593Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:39:07.358680Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:39:20.566003Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:39:20.610902Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:40:53.040649Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:40:53.063540Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:41:27.506942Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:41:27.537326Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:41:53.414935Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:41:53.448639Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:45:08.740738Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:45:08.765381Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:45:57.829735Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:45:57.853314Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:46:10.540323Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:46:10.574885Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:46:19.908819Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:46:19.928694Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:46:46.962693Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:46:47.006431Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:46:59.053066Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:46:59.073846Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:47:04.994450Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:47:05.023529Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:48:20.480756Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:48:20.511340Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:48:46.067311Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:48:46.086639Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:48:52.063692Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:48:52.105761Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:49:53.137102Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:49:53.165282Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:49:58.735342Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:49:58.770436Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:50:03.515658Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:50:03.559417Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:50:07.043640Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:50:07.080626Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:50:14.206041Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:50:14.237209Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:53:07.404780Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:53:07.429791Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:54:01.049170Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:54:01.086818Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:55:55.743987Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:55:55.784192Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:56:51.503498Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:56:51.544269Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:57:43.617178Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:57:43.649205Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:58:51.959107Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:58:51.994677Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:59:12.059603Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:59:12.085933Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:59:20.208735Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:59:20.243195Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:59:26.616375Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:59:26.641563Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T18:59:58.729560Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T18:59:58.770781Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:01:04.319543Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:01:04.356236Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:01:17.718027Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:01:17.752325Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:01:38.396036Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:01:38.426392Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:01:55.977218Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:01:56.009365Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:02:05.280995Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:02:05.323946Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:02:09.305611Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:02:09.349692Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:02:11.124885Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:02:11.162486Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:03:33.956970Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:03:33.999976Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:04:01.429598Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:04:01.466802Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:04:45.310859Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:04:45.353230Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:05:23.614574Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:05:23.664742Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:06:08.035167Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:06:08.080292Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:06:46.621403Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:06:46.679472Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:07:07.985313Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:07:08.033880Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:07:19.904531Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:07:19.953129Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:07:42.444308Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:07:42.489147Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:08:08.619688Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:08:08.658090Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:08:27.930318Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:08:27.979156Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:08:39.660654Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:08:39.711984Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:08:58.824954Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:09:28.202178Z|I|src/bin/ssb.rs|26
+Initilizing
+2025-09-24T19:09:28.202404Z|I|src/bin/ssb.rs|29
+Found port for web server: 5446
+2025-09-24T19:09:28.202449Z|I|src/watcher/mod.rs|27
+Starting watcher
+2025-09-24T19:09:28.202603Z|I|src/server/mod.rs|28
+Starting web server
+2025-09-24T19:09:28.202624Z|I|src/builder/mod.rs|280
+Starting builder
+2025-09-24T19:09:28.202677Z|I|/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-8.0.1/src/sources/fs.rs|159
+obtaining pathset [3mconfig_pathset[0m[2m=[0m[WatchedPath { path: "content", recursive: true }]
+2025-09-24T19:09:28.202691Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:09:28.239772Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:09:39.418223Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:09:39.462650Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:09:46.446468Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:09:46.489506Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:09:47.431597Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:09:47.471208Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:10:12.101458Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:11:04.100353Z|I|src/bin/ssb.rs|26
+Initilizing
+2025-09-24T19:11:04.100546Z|I|src/bin/ssb.rs|29
+Found port for web server: 5446
+2025-09-24T19:11:04.100580Z|I|src/watcher/mod.rs|27
+Starting watcher
+2025-09-24T19:11:04.100656Z|I|src/builder/mod.rs|280
+Starting builder
+2025-09-24T19:11:04.100677Z|I|src/server/mod.rs|28
+Starting web server
+2025-09-24T19:11:04.100712Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:11:04.100786Z|I|/Users/alan/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/watchexec-8.0.1/src/sources/fs.rs|159
+obtaining pathset [3mconfig_pathset[0m[2m=[0m[WatchedPath { path: "content", recursive: true }]
+2025-09-24T19:11:04.125496Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:11:14.388690Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:11:14.421275Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:11:35.196205Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:11:35.241988Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:12:20.655360Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:12:20.680361Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:12:46.368624Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:12:46.391774Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:13:06.157000Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:13:06.199280Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:14:15.075845Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:14:15.100455Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:29:18.695260Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:29:18.720468Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:29:47.727794Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:29:47.784443Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:30:01.681324Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:30:01.720445Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:30:12.127569Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:30:12.167103Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:30:19.779688Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:30:19.812756Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:30:27.287477Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:30:27.327040Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:30:53.538119Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:30:53.580851Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:31:43.788857Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:31:43.814303Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:32:21.105902Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:32:21.140690Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:32:48.670316Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:32:48.727387Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:32:57.219049Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:32:57.259189Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:33:43.999217Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:33:44.022564Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:36:07.730769Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:36:07.754999Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:36:12.162215Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:36:12.192722Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:36:22.830583Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:36:22.870641Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:36:26.865586Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:36:26.907541Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:36:55.905751Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:36:55.933281Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:37:05.709106Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:37:05.745699Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:37:29.160484Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:37:29.183574Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:37:37.010922Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:37:37.056658Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:38:03.689142Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:38:03.715184Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:38:18.360768Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:38:18.384982Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:38:43.554686Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:38:43.581518Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:39:32.576192Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:39:32.599986Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:39:50.818073Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:39:50.852689Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:40:48.853343Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:40:48.878222Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:40:53.323167Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:40:53.369888Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:41:15.923006Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:41:15.960451Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:41:23.538432Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:41:23.577424Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:41:32.487496Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:41:32.516981Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:41:46.485432Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:41:46.522890Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:41:50.728930Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:41:50.765368Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:42:29.634600Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:42:29.660462Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:43:01.505592Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:43:01.542186Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:43:05.891973Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:43:05.920953Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:43:10.080348Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:43:10.119563Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:43:14.329074Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:43:14.373185Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:44:10.173366Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:44:10.206800Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:44:18.142519Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:44:18.184170Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:44:35.027158Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:44:35.052438Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:46:02.074264Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:46:02.101560Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T19:46:32.423169Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T19:46:32.465577Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:19:51.671777Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:19:51.697732Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:20:32.294988Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:20:32.342127Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:21:52.566798Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:21:52.596671Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:22:06.780772Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:22:06.832209Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:22:31.617374Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:22:31.647020Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:23:32.390321Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:23:32.418969Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:23:39.714738Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:23:39.761785Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:23:48.627674Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:23:48.662192Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:25:02.949599Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:25:02.974973Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:25:19.693298Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:25:19.732228Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:25:41.868086Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:25:41.892908Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:25:49.777197Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:25:49.815915Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:26:17.524087Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:26:17.551428Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:30:27.778604Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:30:27.806721Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:31:00.700386Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:31:00.726022Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:31:15.746110Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:31:15.793125Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:31:40.663086Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:31:40.696218Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:31:53.827014Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:31:53.874857Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:31:58.410438Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:31:58.450429Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:32:06.335632Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:32:06.368091Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:32:15.791062Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:32:15.828134Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:32:20.107506Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:32:20.143010Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:32:25.010375Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:32:25.046210Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:32:35.277060Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:32:35.314434Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:33:50.687471Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:33:50.714130Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:33:52.208539Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:33:52.243459Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:33:54.020305Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:33:54.063659Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:34:01.256662Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:34:01.293553Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:34:39.556429Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:34:39.599927Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:35:31.992931Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:35:32.023424Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:36:12.796124Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:36:12.825420Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:36:34.934499Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:36:34.961132Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:36:47.215432Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:36:47.255047Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:36:48.899013Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:36:48.939495Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:36:54.726461Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:36:54.766211Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:37:15.122403Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:37:15.168430Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:38:04.327137Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:38:04.370263Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:38:22.542865Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:38:22.570535Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:38:30.023824Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:38:30.072681Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:39:33.729729Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:39:33.759163Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:40:04.662155Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:40:04.689739Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:40:31.466234Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:40:31.492359Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:40:34.173131Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:40:34.212837Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:40:42.752978Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:40:42.786892Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:40:58.857698Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:40:58.883036Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:41:24.886193Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:41:24.912561Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:44:32.676047Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:44:32.704958Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:45:15.795869Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:45:15.823594Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
+2025-09-24T21:45:34.552207Z|I|src/builder/mod.rs|41
+Building site
+2025-09-24T21:45:34.578492Z|I|src/builder/mod.rs|47
+Reloading browser for: http://localhost:5446/
