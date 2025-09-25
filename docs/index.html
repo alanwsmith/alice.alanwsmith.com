@@ -77,7 +77,7 @@ textarea {
     <main class="default-wrapper default-flow"><bitty-js 
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="loadControls|loadLetters|setLetter"
+  data-send="loadControls|loadLetters|setLetter|input"
 >
   <h1>Individual CSS</h1>
   <details open><summary>Input</summary>
@@ -90,13 +90,9 @@ with some more lines.</textarea>
   </details>
 
   <div class="output" data-receive="input" class="default-flow"></div>
-
   <div>Current Letter: <span data-receive="setLetter"></span></div>
-  
   <div data-receive="loadLetters"></div>
-
   <div data-receive="loadControls"></div>
-
 </bitty-js>
 
   <noscript>

@@ -164,13 +164,7 @@ class State {
 const state = new State();
 
 export default class {
-  #state = {
-    letters: {},
-  };
-
   bittyInit() {
-    this.#state.letter = "A";
-    this.initStateLetters();
     console.log(state);
     console.log(state.letters());
   }
@@ -200,7 +194,6 @@ export default class {
     state.sliders().forEach((slider) => {
       const newDiv = document.createElement("div");
       const value = state.getSliderValue(slider.name);
-      console.log(value);
       newDiv.innerHTML = `
       <label>${slider.name}
       <input
@@ -219,30 +212,13 @@ export default class {
     });
   }
 
-  initStateLetters() {
-    this.#state.letters = {};
-    letters().forEach((letter) => {
-      this.#state.letters[letter] = {
-        values: {},
-      };
-      sliders.forEach((slider) => {
-        this.#state.letters[letter].values[slider[0]] = {
-          value: parseFloat(slider[1]),
-        };
-      });
-    });
-  }
-
   input(_event, el) {
     const ta = this.api.querySelector("textarea");
-    if (this.#state.text !== ta.value) {
-      this.#state.text = ta.value;
-      let spans = new SpanMaker(ta.value).paras().makeSpans();
-      el.innerHTML = spans.output();
-    }
+    let spans = new SpanMaker(ta.value).paras().makeSpans();
+    el.innerHTML = spans.output();
   }
 
-  setLetter(event, el) {
+  setLetter(event, _el) {
     if (event) {
       state.setCurrentLetter(
         event.target.dataset.letter,
