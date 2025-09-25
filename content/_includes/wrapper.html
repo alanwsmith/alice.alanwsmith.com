@@ -10,7 +10,7 @@
 :root {
   --background-color: white;
   --border-color: #ddd;
-  --color: black;
+  --color: rgb(127 127 127);
 }
 
 *, 
@@ -31,11 +31,12 @@ html {
   :root {
     --background-color: black;
     --border-color: #aaa;
-    --color: white;
+    --color: rgb(180 180 180);
   }
 }
 
 body {
+  font-family: system-ui;
   background-color: var(--background-color);
   color: var(--color);
 }
@@ -53,6 +54,11 @@ bitty-js {
   margin-inline: auto;
 }
 
+h1 {
+  padding-top: 2.4rem;
+}
+
+
 .output {
   width: 100%;
   min-height: 18rem;
@@ -68,6 +74,10 @@ textarea {
   display: grid;
   grid-template-columns: 1fr 10rem;
   gap: 1.8rem;
+}
+
+.adjusted {
+  font-size: 3rem;
 }
 
     </style>

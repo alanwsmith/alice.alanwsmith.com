@@ -87,9 +87,7 @@ class State {
     let styles = [];
 
     styles.push(
-      `.adjusted, .output { 
-            padding-inline: var(--padding-Q);
-            font-size: var(--font-size-Q);
+      `.output { 
             color: lch(var(--color-l-Q) var(--color-c-Q) var(--color-h-Q) ); 
             font-variation-settings: 
               'BLDA' var(--BLDA-Q), 

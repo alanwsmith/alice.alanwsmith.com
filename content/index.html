@@ -5,8 +5,21 @@
   data-connect="/components/page.js"
   data-send="loadControls|loadLetters|setLetter|input|makeSpans"
 >
-  <h1 data-receive="makeSpans" class="adjusted">Individual CSS</h1>
+  <h1>Individual CSS</h1>
+  <div class="two-columns">
+    <div>
+      <div class="output default-flow" data-receive="input"></div>
+    </div>
+  <div>
+
+  <div data-receive="loadLetters"></div>
+  <div data-receive="loadControls"></div>
+    </div>
+    </div>
+
+
   <details><summary>Input</summary>
+
   <textarea data-send="input">
 Alice was beginning to get very tired of sitting by her sister on the
 bank, and of having nothing to do. Once or twice she had peeped into the
@@ -64,16 +77,6 @@ the Rabbit was no longer to be seen.
     </textarea>
   </details>
 
-  <div class="two-columns">
-    <div>
-      <div class="output default-flow" data-receive="input"></div>
-    </div>
-  <div>
-
-  <div data-receive="loadLetters"></div>
-  <div data-receive="loadControls"></div>
-    </div>
-    </div>
 </bitty-js>
 
   <noscript>
