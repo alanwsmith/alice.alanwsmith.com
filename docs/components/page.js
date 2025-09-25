@@ -91,9 +91,21 @@ class State {
             padding-inline: var(--padding-${letter});
             font-size: var(--font-size-${letter});
             color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) ); 
-            font-variation-settings: 'BLDA' var(--BLDA-${letter}), 'BLDB' var(--BLDB-${letter}), 'SKLA' 0, 'SKLB' 0, 'SKLD' 0,
-              'TRMA' 0, 'TRMB' 0, 'TRMC' 0, 'TRMD' 0, 'TRME' 0, 'TRMF' 0, 'TRMG' 0,
-              'TRMK' 0, 'TRML' 0;
+            font-variation-settings: 
+'BLDA' var(--BLDA-${letter}), 
+'BLDB' var(--BLDB-${letter}), 
+'SKLA' var(--SKLA-${letter}), 
+'SKLB' var(--SKLB-${letter}), 
+'SKLD' var(--SKLD-${letter}), 
+'TRMA' var(--TRMA-${letter}), 
+'TRMB' var(--TRMB-${letter}), 
+'TRMC' var(--TRMC-${letter}), 
+'TRMD' var(--TRMD-${letter}), 
+'TRME' var(--TRME-${letter}), 
+'TRMF' var(--TRMF-${letter}), 
+'TRMG' var(--TRMG-${letter}), 
+'TRMK' var(--TRMK-${letter}), 
+'TRML' var(--TRML-${letter});
         }`,
       );
     });
