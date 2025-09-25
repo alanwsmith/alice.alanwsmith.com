@@ -83,6 +83,11 @@ function randomNumberBetween(min, max) {
 
 class State {
   constructor() {
+    this.seeds = {
+      lightness: randomNumberBetween(40, 40),
+      chroma: randomNumberBetween(30, 190),
+      hue: randomNumberBetween(30, 300),
+    };
     this.loadData();
   }
 
@@ -180,9 +185,30 @@ class State {
 
   randomizeLetter(letter) {
     this.sliders().forEach((slider) => {
-      if (slider.name !== "Padding" && slider.name !== "Size") {
+      if (slider.name === "Lightness") {
         this.data.letters[letter].values[slider.name] = {
-          value: randomNumberBetween(slider.min, slider.max),
+          value: randomNumberBetween(
+            this.seeds.lightness - 10,
+            this.seeds.lightness + 10,
+          ),
+        };
+      } else if (slider.name === "Chroma") {
+        this.data.letters[letter].values[slider.name] = {
+          value: randomNumberBetween(
+            this.seeds.chroma - 20,
+            this.seeds.chroma + 30,
+          ),
+        };
+      } else if (slider.name === "Hue") {
+        this.data.letters[letter].values[slider.name] = {
+          value: randomNumberBetween(
+            this.seeds.hue - 30,
+            this.seeds.hue + 60,
+          ),
+        };
+      } else if (slider.name !== "Padding" && slider.name !== "Size") {
+        this.data.letters[letter].values[slider.name] = {
+          value: randomNumberBetween(slider.min, 560),
         };
       } else {
         this.data.letters[letter].values[slider.name] = {
