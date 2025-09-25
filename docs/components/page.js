@@ -16,10 +16,6 @@ const axes = [
   "TRML",
 ];
 
-const sliders = [
-  ["Size", "1.1", "0.8", "2.2", "0.05", "font-size", "rem"],
-];
-
 const SpanMaker = class {
   constructor(text) {
     this.text = text;
@@ -80,10 +76,43 @@ function letters() {
 class State {
   constructor() {
     this._sliders = [
+      "L|40|0|100|0.1|color-l|%",
+      "C|90|0|180|0.1|color-c|",
+      "H|140|0|360|0.1|color-h|",
+      "A|1|0|1|0.01|color-a|",
       "Size|1.1|0.8|2.2|0.05|font-size|rem",
       "Weight|400|100|900|50|font-weight|",
     ];
     this.loadData();
+  }
+
+  addStyleSheet() {
+    const stylesSheet = new CSSStyleSheet();
+    let styles = [];
+    this.letters().forEach((letter) => {
+      styles.push(
+        `.letter-${letter} { color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) / var(--color-a-${letter})) ; }`,
+      );
+    });
+    stylesSheet.replaceSync(styles.join("\n"));
+    document.adoptedStyleSheets.push(stylesSheet);
+
+    const varsSheet = new CSSStyleSheet();
+    let styleVars = [];
+    styleVars.push(":root {");
+    for (let key in this.sliderHash()) {
+      const v = this.sliderHash()[key].key;
+      this.letters().forEach((letter) => {
+        const flag = `--${v}-${letter}`;
+        const value = `${this.data.letters[letter].values[key].value}${
+          this.sliderHash()[key].unit
+        }`;
+        styleVars.push(`${flag}: ${value};`);
+      });
+    }
+    styleVars.push("}");
+    varsSheet.replaceSync(styleVars.join("\n"));
+    document.adoptedStyleSheets.push(varsSheet);
   }
 
   getCurrentLetter() {
@@ -118,7 +147,12 @@ class State {
 
   setSliderValue(name, value) {
     this.data.letters[this.getCurrentLetter()].values[name].value = value;
-    console.log(this.data);
+    const varName = `--${
+      this.sliderHash()[name].key
+    }-${this.getCurrentLetter()}`;
+    const varValue = `${value}${this.sliderHash()[name].unit}`;
+    console.log(varName);
+    document.documentElement.style.setProperty(varName, varValue);
   }
 
   sliderHash() {
@@ -130,7 +164,7 @@ class State {
         min: parts[2],
         max: parts[3],
         step: parts[4],
-        var: parts[5],
+        key: parts[5],
         unit: parts[6],
       };
     });
@@ -146,7 +180,7 @@ class State {
         min: parts[2],
         max: parts[3],
         step: parts[4],
-        var: parts[5],
+        key: parts[5],
         unit: parts[6],
       };
     });
@@ -165,8 +199,7 @@ const state = new State();
 
 export default class {
   bittyInit() {
-    console.log(state);
-    console.log(state.letters());
+    state.addStyleSheet();
   }
 
   changeValue(event, el) {
@@ -189,7 +222,6 @@ export default class {
   }
 
   loadControls(_event, el) {
-    console.log("loadControls");
     el.replaceChildren();
     state.sliders().forEach((slider) => {
       const newDiv = document.createElement("div");
