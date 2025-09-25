@@ -1,20 +1,28 @@
-const axes = [
-  "BLDA",
-  "BLDB",
-  "WMX2",
-  "SKLA",
-  "SKLB",
-  "SKLD",
-  "TRMA",
-  "TRMB",
-  "TRMC",
-  "TRMD",
-  "TRME",
-  "TRMF",
-  "TRMG",
-  "TRMK",
-  "TRML",
+const styleSet = [
+  "L|40|0|100|0.1|color-l|%",
+  "C|90|0|180|0.1|color-c|",
+  "H|140|0|360|0.1|color-h|",
+  "Size|1.4|1.0|2.0|0.05|font-size|rem",
+  "Padding|0.07|0.01|0.3|0.01|padding|rem",
+  "BLDA|100|0|1000|1|BLDA|",
+  "BLDB|100|0|1000|1|BLDB|",
 ];
+
+// "BLDA",
+// "BLDB",
+// "WMX2",
+// "SKLA",
+// "SKLB",
+// "SKLD",
+// "TRMA",
+// "TRMB",
+// "TRMC",
+// "TRMD",
+// "TRME",
+// "TRMF",
+// "TRMG",
+// "TRMK",
+// "TRML",
 
 const SpanMaker = class {
   constructor(text) {
@@ -75,14 +83,6 @@ function letters() {
 
 class State {
   constructor() {
-    this._sliders = [
-      "L|40|0|100|0.1|color-l|%",
-      "C|90|0|180|0.1|color-c|",
-      "H|140|0|360|0.1|color-h|",
-      "A|1|0|1|0.01|color-a|",
-      "Size|1.1|0.8|2.2|0.05|font-size|rem",
-      "Weight|400|100|900|50|font-weight|",
-    ];
     this.loadData();
   }
 
@@ -91,7 +91,14 @@ class State {
     let styles = [];
     this.letters().forEach((letter) => {
       styles.push(
-        `.letter-${letter} { color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) / var(--color-a-${letter})) ; }`,
+        `.letter-${letter} { 
+            padding-inline: var(--padding-${letter});
+            font-size: var(--font-size-${letter});
+            color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) ); 
+            font-variation-settings: 'BLDA' var(--BLDA-${letter}), 'BLDB' var(--BLDB-${letter}), 'SKLA' 0, 'SKLB' 0, 'SKLD' 0,
+              'TRMA' 0, 'TRMB' 0, 'TRMC' 0, 'TRMD' 0, 'TRME' 0, 'TRMF' 0, 'TRMG' 0,
+              'TRMK' 0, 'TRML' 0;
+        }`,
       );
     });
     stylesSheet.replaceSync(styles.join("\n"));
@@ -157,7 +164,7 @@ class State {
 
   sliderHash() {
     const result = {};
-    this._sliders.forEach((slider) => {
+    styleSet.forEach((slider) => {
       const parts = slider.split("|");
       result[parts[0]] = {
         default: parts[1],
@@ -172,7 +179,7 @@ class State {
   }
 
   sliders() {
-    return this._sliders.map((slider) => {
+    return styleSet.map((slider) => {
       const parts = slider.split("|");
       return {
         name: parts[0],
