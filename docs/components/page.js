@@ -3,7 +3,7 @@ const styleSet = [
   "Chroma|90|0|270|0.1|color-c|",
   "Hue|140|0|360|0.1|color-h|",
   "Size|2.2|2.0|3.0|0.05|font-size|rem",
-  "Padding|0.07|0.01|0.3|0.01|padding|rem",
+  "Padding|0.09|0.01|0.3|0.01|padding|rem",
   "BLDA|200|0|1000|1|BLDA|",
   "BLDB|200|0|1000|1|BLDB|",
   "SKLA|200|0|1000|1|SKLA|",
@@ -46,13 +46,12 @@ const SpanMaker = class {
       return para.split("").map((char, charIndex) => {
         if (isLetter(char)) {
           const letterClass = `letter-${char.toUpperCase()}`;
-          if (charIndex === 0) {
-            return `<span class="${letterClass}">${char}</span>`;
-          } else {
-            return `<span class="${letterClass}">${char}</span>`;
-          }
+          return `<span 
+data-send="setLetter|loadControls"
+data-letter="${char.toUpperCase()}"
+class="letter ${letterClass}">${char}</span>`;
         } else {
-          return char;
+          return `<span class="letter letter-Q">${char}</span>`;
         }
       }).join("");
     });
@@ -324,11 +323,14 @@ export default class {
   }
 
   makeSpans(_event, el) {
-    let spans = new SpanMaker(el.innerText).paras().makeSpans();
-    el.innerHTML = spans.output();
+    if (el) {
+      let spans = new SpanMaker(el.innerText).paras().makeSpans();
+      el.innerHTML = spans.output();
+    }
   }
 
   setLetter(event, _el) {
+    console.log(event);
     if (event) {
       state.setCurrentLetter(
         event.target.dataset.letter,
