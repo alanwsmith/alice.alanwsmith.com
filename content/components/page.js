@@ -79,13 +79,6 @@ function letters() {
 
 class State {
   constructor() {
-    // this._letters = {};
-    // for (let num = 65; num <= 90; num += 1) {
-    //   const letter = String.fromCharCode(num);
-    //   this._letters[letter] = {};
-    // }
-    // this._currentLetter = "A";
-
     this._sliders = [
       "Size|1.1|0.8|2.2|0.05|font-size|rem",
       "Weight|400|100|900|50|font-weight|",
@@ -93,7 +86,7 @@ class State {
     this.loadData();
   }
 
-  currentLetter() {
+  getCurrentLetter() {
     return this.data.currentLetter;
   }
 
@@ -124,7 +117,8 @@ class State {
   }
 
   setSliderValue(name, value) {
-    this.data.letters[this.data.currentLetter].values[name].value = value;
+    this.data.letters[this.getCurrentLetter()].values[name].value = value;
+    console.log(this.data);
   }
 
   sliderHash() {
@@ -162,8 +156,8 @@ class State {
     return this.sliderHash()[name][key];
   }
 
-  sliderValue(name) {
-    return this.data.letters[this.currentLetter()].values[name].value;
+  getSliderValue(name) {
+    return this.data.letters[this.getCurrentLetter()].values[name].value;
   }
 }
 
@@ -184,7 +178,7 @@ export default class {
   changeValue(event, el) {
     const ds = event.target.dataset;
     if (el.dataset.name === ds.name) {
-      let value = parseFloat(event.target.value);
+      let value = event.target.value;
       state.setSliderValue(ds.name, value);
       el.innerHTML = value;
     }
@@ -205,7 +199,8 @@ export default class {
     el.replaceChildren();
     state.sliders().forEach((slider) => {
       const newDiv = document.createElement("div");
-      const value = state.sliderValue(slider.name);
+      const value = state.getSliderValue(slider.name);
+      console.log(value);
       newDiv.innerHTML = `
       <label>${slider.name}
       <input
@@ -213,7 +208,7 @@ export default class {
         min="${state.sliderData(slider.name, "min")}"
         max="${state.sliderData(slider.name, "max")}"
         step="${state.sliderData(slider.name, "step")}"
-        value="${state.sliderValue(slider.name)}"
+        value="${value}"
         data-send="changeValue"
         data-name="${slider.name}"
       />
@@ -249,8 +244,9 @@ export default class {
 
   setLetter(event, el) {
     if (event) {
-      this.#state.letter = event.target.dataset.letter;
+      state.setCurrentLetter(
+        event.target.dataset.letter,
+      );
     }
-    el.innerHTML = this.#state.letter;
   }
 }
