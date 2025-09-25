@@ -2,7 +2,7 @@ const styleSet = [
   "Lightness|40|0|100|0.1|color-l|%",
   "Chroma|90|0|270|0.1|color-c|",
   "Hue|140|0|360|0.1|color-h|",
-  "Size|1.6|1.4|2.0|0.05|font-size|rem",
+  "Size|2.2|2.0|3.0|0.05|font-size|rem",
   "Padding|0.07|0.01|0.3|0.01|padding|rem",
   "BLDA|200|0|1000|1|BLDA|",
   "BLDB|200|0|1000|1|BLDB|",
@@ -75,6 +75,10 @@ function letters() {
     output.push(String.fromCharCode(num));
   }
   return output;
+}
+
+function randomNumberBetween(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 class State {
@@ -170,12 +174,22 @@ class State {
       this.data.letters[letter] = {
         values: {},
       };
-      this.sliders().forEach((slider) => {
+      this.randomizeLetter(letter);
+    }
+  }
+
+  randomizeLetter(letter) {
+    this.sliders().forEach((slider) => {
+      if (slider.name !== "Padding" && slider.name !== "Size") {
+        this.data.letters[letter].values[slider.name] = {
+          value: randomNumberBetween(slider.min, slider.max),
+        };
+      } else {
         this.data.letters[letter].values[slider.name] = {
           value: slider.default,
         };
-      });
-    }
+      }
+    });
   }
 
   setCurrentLetter(letter) {
