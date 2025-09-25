@@ -1,9 +1,7 @@
 const styleSet = [
-  "Lightness|40|0|100|0.1|color-l|%",
-  "Chroma|90|0|270|0.1|color-c|",
   "Hue|140|0|360|0.1|color-h|",
+  "Lightness|40|0|100|0.1|color-l|%",
   "Size|2.2|2.0|3.0|0.05|font-size|rem",
-  "Padding|0.09|0.01|0.3|0.01|padding|rem",
   "BLDA|200|0|1000|1|BLDA|",
   "BLDB|200|0|1000|1|BLDB|",
   "SKLA|200|0|1000|1|SKLA|",
@@ -96,7 +94,7 @@ class State {
 
     styles.push(
       `.output { 
-            color: lch(var(--color-l-Q) var(--color-c-Q) var(--color-h-Q) ); 
+            color: lch(var(--color-l-Q) 140 var(--color-h-Q) ); 
             font-variation-settings: 
               'BLDA' var(--BLDA-Q), 
               'BLDB' var(--BLDB-Q), 
@@ -118,9 +116,9 @@ class State {
     this.letters().forEach((letter) => {
       styles.push(
         `.letter-${letter} { 
-            padding-inline: var(--padding-${letter});
+            padding-inline: 0.11rem;
             font-size: var(--font-size-${letter});
-            color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) ); 
+            color: lch(var(--color-l-${letter}) 130 var(--color-h-${letter}) ); 
             font-variation-settings: 
               'BLDA' var(--BLDA-${letter}), 
               'BLDB' var(--BLDB-${letter}), 
