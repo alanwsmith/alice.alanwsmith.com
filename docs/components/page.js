@@ -2,7 +2,7 @@ const styleSet = [
   "Lightness|40|0|100|0.1|color-l|%",
   "Chroma|90|0|270|0.1|color-c|",
   "Hue|140|0|360|0.1|color-h|",
-  "Size|1.4|1.0|2.0|0.05|font-size|rem",
+  "Size|1.6|1.4|2.0|0.05|font-size|rem",
   "Padding|0.07|0.01|0.3|0.01|padding|rem",
   "BLDA|200|0|1000|1|BLDA|",
   "BLDB|200|0|1000|1|BLDB|",
@@ -85,6 +85,30 @@ class State {
   addStyleSheet() {
     const stylesSheet = new CSSStyleSheet();
     let styles = [];
+
+    styles.push(
+      `.adjusted, .output { 
+            padding-inline: var(--padding-Q);
+            font-size: var(--font-size-Q);
+            color: lch(var(--color-l-Q) var(--color-c-Q) var(--color-h-Q) ); 
+            font-variation-settings: 
+              'BLDA' var(--BLDA-Q), 
+              'BLDB' var(--BLDB-Q), 
+              'SKLA' var(--SKLA-Q), 
+              'SKLB' var(--SKLB-Q), 
+              'SKLD' var(--SKLD-Q), 
+              'TRMA' var(--TRMA-Q), 
+              'TRMB' var(--TRMB-Q), 
+              'TRMC' var(--TRMC-Q), 
+              'TRMD' var(--TRMD-Q), 
+              'TRME' var(--TRME-Q), 
+              'TRMF' var(--TRMF-Q), 
+              'TRMG' var(--TRMG-Q), 
+              'TRMK' var(--TRMK-Q), 
+              'TRML' var(--TRML-Q);
+        }`,
+    );
+
     this.letters().forEach((letter) => {
       styles.push(
         `.letter-${letter} { 
@@ -92,20 +116,20 @@ class State {
             font-size: var(--font-size-${letter});
             color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) ); 
             font-variation-settings: 
-'BLDA' var(--BLDA-${letter}), 
-'BLDB' var(--BLDB-${letter}), 
-'SKLA' var(--SKLA-${letter}), 
-'SKLB' var(--SKLB-${letter}), 
-'SKLD' var(--SKLD-${letter}), 
-'TRMA' var(--TRMA-${letter}), 
-'TRMB' var(--TRMB-${letter}), 
-'TRMC' var(--TRMC-${letter}), 
-'TRMD' var(--TRMD-${letter}), 
-'TRME' var(--TRME-${letter}), 
-'TRMF' var(--TRMF-${letter}), 
-'TRMG' var(--TRMG-${letter}), 
-'TRMK' var(--TRMK-${letter}), 
-'TRML' var(--TRML-${letter});
+              'BLDA' var(--BLDA-${letter}), 
+              'BLDB' var(--BLDB-${letter}), 
+              'SKLA' var(--SKLA-${letter}), 
+              'SKLB' var(--SKLB-${letter}), 
+              'SKLD' var(--SKLD-${letter}), 
+              'TRMA' var(--TRMA-${letter}), 
+              'TRMB' var(--TRMB-${letter}), 
+              'TRMC' var(--TRMC-${letter}), 
+              'TRMD' var(--TRMD-${letter}), 
+              'TRME' var(--TRME-${letter}), 
+              'TRMF' var(--TRMF-${letter}), 
+              'TRMG' var(--TRMG-${letter}), 
+              'TRMK' var(--TRMK-${letter}), 
+              'TRML' var(--TRML-${letter});
         }`,
       );
     });
@@ -250,7 +274,6 @@ export default class {
         data-name="${slider.name}"
       />
       </label>
-
       `;
       el.appendChild(newDiv);
     });
@@ -259,6 +282,11 @@ export default class {
   input(_event, el) {
     const ta = this.api.querySelector("textarea");
     let spans = new SpanMaker(ta.value).paras().makeSpans();
+    el.innerHTML = spans.output();
+  }
+
+  makeSpans(_event, el) {
+    let spans = new SpanMaker(el.innerText).paras().makeSpans();
     el.innerHTML = spans.output();
   }
 
