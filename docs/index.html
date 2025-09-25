@@ -49,14 +49,13 @@ bitty-js {
 }
 
 .default-wrapper {
-  width: min(100vw - 3rem, 82ch);
+  width: min(100vw - 3rem, 110ch);
   margin-inline: auto;
 }
 
 .output {
   width: 100%;
   min-height: 18rem;
-  border: 1px solid var(--border-color);
   font-family: Decovar;
 }
 
@@ -68,9 +67,8 @@ textarea {
 .two-columns {
   display: grid;
   grid-template-columns: 1fr 10rem;
+  gap: 1rem;
 }
-
-
 
     </style>
   </head>
@@ -83,8 +81,6 @@ textarea {
   data-send="loadControls|loadLetters|setLetter|input"
 >
   <h1>Individual CSS</h1>
-  <div class="two-columns">
-    <div>
   <details><summary>Input</summary>
   <textarea data-send="input">
 Alice was beginning to get very tired of sitting by her sister on the
@@ -112,11 +108,12 @@ fox jumps over the lazy dog.
     </textarea>
   </details>
 
-  <div class="output default-flow" data-receive="input"></div>
-    </div>
+  <div class="two-columns">
     <div>
+      <div class="output default-flow" data-receive="input"></div>
+    </div>
+  <div>
 
-  <div>Current Letter: <span data-receive="setLetter"></span></div>
   <div data-receive="loadLetters"></div>
   <div data-receive="loadControls"></div>
     </div>

@@ -6,8 +6,6 @@
   data-send="loadControls|loadLetters|setLetter|input"
 >
   <h1>Individual CSS</h1>
-  <div class="two-columns">
-    <div>
   <details><summary>Input</summary>
   <textarea data-send="input">
 Alice was beginning to get very tired of sitting by her sister on the
@@ -35,11 +33,12 @@ fox jumps over the lazy dog.
     </textarea>
   </details>
 
-  <div class="output default-flow" data-receive="input"></div>
-    </div>
+  <div class="two-columns">
     <div>
+      <div class="output default-flow" data-receive="input"></div>
+    </div>
+  <div>
 
-  <div>Current Letter: <span data-receive="setLetter"></span></div>
   <div data-receive="loadLetters"></div>
   <div data-receive="loadControls"></div>
     </div>

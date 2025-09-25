@@ -1,7 +1,7 @@
 const styleSet = [
-  "L|40|0|100|0.1|color-l|%",
-  "C|90|0|180|0.1|color-c|",
-  "H|140|0|360|0.1|color-h|",
+  "Lightness|40|0|100|0.1|color-l|%",
+  "Chroma|90|0|270|0.1|color-c|",
+  "Hue|140|0|360|0.1|color-h|",
   "Size|1.4|1.0|2.0|0.05|font-size|rem",
   "Padding|0.07|0.01|0.3|0.01|padding|rem",
   "BLDA|200|0|1000|1|BLDA|",
@@ -219,11 +219,8 @@ export default class {
 
   changeValue(event, el) {
     const ds = event.target.dataset;
-    if (el.dataset.name === ds.name) {
-      let value = event.target.value;
-      state.setSliderValue(ds.name, value);
-      el.innerHTML = value;
-    }
+    let value = event.target.value;
+    state.setSliderValue(ds.name, value);
   }
 
   loadLetters(_event, el) {
@@ -242,7 +239,7 @@ export default class {
       const newDiv = document.createElement("div");
       const value = state.getSliderValue(slider.name);
       newDiv.innerHTML = `
-      <label>${slider.name}
+      <label>${slider.name}<br />
       <input
         type="range"
         min="${state.sliderData(slider.name, "min")}"
@@ -253,7 +250,7 @@ export default class {
         data-name="${slider.name}"
       />
       </label>
-      <span data-name="${slider.name}" data-receive="changeValue">${value}</span>
+
       `;
       el.appendChild(newDiv);
     });
