@@ -8,9 +8,9 @@
 }
 
 :root {
-  --background-color: white;
-  --border-color: #ddd;
-  --color: rgb(127 127 127);
+    --background-color: black;
+    --border-color: #aaa;
+    --color: rgb(180 180 180);
 }
 
 *, 
@@ -25,14 +25,6 @@
 
 html {
   color-scheme: dark light;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: black;
-    --border-color: #aaa;
-    --color: rgb(180 180 180);
-  }
 }
 
 body {
@@ -66,6 +58,7 @@ h1 {
   width: 100%;
   min-height: 18rem;
   font-family: Decovar;
+  user-select: none;
 }
 
 textarea {
@@ -88,21 +81,19 @@ textarea {
   <body>
     <header class="default-wrapper">
     </header>
-    <main class="default-wrapper default-flow"><bitty-js 
+    <main class="default-wrapper default-flow"><bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="loadControls|setLetter|input|makeSpans"
+  data-send="setLetter|input|makeSpans|makeTitleSpans"
+  data-listeners="mousedown"
 >
-  <h1>Individual CSS</h1>
-  <div class="two-columns">
+  <h1 data-send="makeTitleSpans" data-receive="makeTitleSpans">Letters</h1>
     <div>
       <div class="output default-flow" data-receive="input"></div>
     </div>
     <div>
       <div data-receive="loadLetters"></div>
-        <div data-receive="loadControls"></div>
     </div>
-  </div>
   <details><summary>Input</summary>
 
   <textarea data-send="input">

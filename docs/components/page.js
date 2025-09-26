@@ -45,7 +45,7 @@ const SpanMaker = class {
         if (isLetter(char)) {
           const letterClass = `letter-${char.toUpperCase()}`;
           return `<span 
-data-send="setLetter|loadControls"
+data-send="setLetter"
 data-letter="${char.toUpperCase()}"
 class="letter ${letterClass}">${char}</span>`;
         } else {
@@ -81,9 +81,9 @@ function randomNumberBetween(min, max) {
 class State {
   constructor() {
     this.seeds = {
-      lightness: randomNumberBetween(40, 40),
+      lightness: randomNumberBetween(50, 70),
       chroma: randomNumberBetween(30, 190),
-      hue: randomNumberBetween(30, 300),
+      hue: randomNumberBetween(30, 310),
     };
     this.loadData();
   }
@@ -162,6 +162,10 @@ class State {
     return this.data.currentLetter;
   }
 
+  getSliderValue(name) {
+    return this.data.letters[this.getCurrentLetter()].values[name].value;
+  }
+
   letters() {
     return Object.keys(this.data.letters);
   }
@@ -185,8 +189,8 @@ class State {
       if (slider.name === "Lightness") {
         this.data.letters[letter].values[slider.name] = {
           value: randomNumberBetween(
-            this.seeds.lightness - 10,
-            this.seeds.lightness + 10,
+            this.seeds.lightness - 12,
+            this.seeds.lightness + 12,
           ),
         };
       } else if (slider.name === "Chroma") {
@@ -202,6 +206,10 @@ class State {
             this.seeds.hue - 30,
             this.seeds.hue + 60,
           ),
+        };
+      } else if (slider.name === "Size") {
+        this.data.letters[letter].values[slider.name] = {
+          value: Math.random() + 2,
         };
       } else if (slider.name !== "Padding" && slider.name !== "Size") {
         this.data.letters[letter].values[slider.name] = {
@@ -225,7 +233,7 @@ class State {
       this.sliderHash()[name].key
     }-${this.getCurrentLetter()}`;
     const varValue = `${value}${this.sliderHash()[name].unit}`;
-    console.log(varName);
+    //console.log(varName);
     document.documentElement.style.setProperty(varName, varValue);
   }
 
@@ -264,8 +272,11 @@ class State {
     return this.sliderHash()[name][key];
   }
 
-  getSliderValue(name) {
-    return this.data.letters[this.getCurrentLetter()].values[name].value;
+  updateLetter(x, y) {
+    const newHue = state.startValue.Hue + (x * 2);
+    this.setSliderValue("Hue", newHue);
+    // console.log(newHue);
+    // console.log(x);
   }
 }
 
@@ -274,6 +285,19 @@ const state = new State();
 export default class {
   bittyInit() {
     state.addStyleSheet();
+    this.api.querySelector(".output").addEventListener("mousemove", (event) => {
+      if (state.watchingMouse) {
+        state.updateLetter(
+          event.clientX -
+            state.mouseStart.x,
+          event.clientX -
+            state.mouseStart.x,
+        );
+      }
+    });
+    this.api.querySelector(".output").addEventListener("mouseup", (event) => {
+      state.watchingMouse = false;
+    });
   }
 
   changeValue(event, el) {
@@ -327,12 +351,26 @@ export default class {
     }
   }
 
+  makeTitleSpans(event, el) {
+    if (el) {
+      let spans = new SpanMaker(el.innerText).paras().makeSpans();
+      el.innerHTML = spans.output();
+    }
+  }
+
   setLetter(event, _el) {
-    console.log(event);
     if (event) {
       state.setCurrentLetter(
         event.target.dataset.letter,
       );
+      state.startValue = {
+        "Hue": state.data.letters[state.getCurrentLetter()].values["Hue"].value,
+      };
+      state.mouseStart = {
+        x: event.clientX,
+        y: event.clientY,
+      };
+      state.watchingMouse = true;
     }
   }
 }
