@@ -254,7 +254,7 @@ class State {
     this.seeds = {};
     this.changeCount = 0;
     this.updateSeeds();
-    this.loadData();
+    this.initData();
     this.addStyleSheetVars();
   }
 
@@ -275,7 +275,7 @@ class State {
     letters().forEach((letter) => {
       Object.keys(props()).forEach((prop) => {
         const flag = `--${prop}-${letter}`;
-        const value = this.data.letters[letter].values[prop].value;
+        const value = this.data.values[letter][prop];
         const unit = props()[prop].unit;
         result.push([
           flag,
@@ -299,12 +299,21 @@ class State {
   //   return Object.keys(this.data.letters);
   // }
 
-  loadData() {
+  initData() {
     this.data = {
       letters: {},
+      values: {},
       currentLetter: "A",
     };
-    // TODO: Switch to letters() function
+
+    letters().forEach((letter) => {
+      this.data.values[letter] = {};
+      Object.entries(props()).forEach(([prop, values]) => {
+        this.data.values[letter][prop] = randomInt(0, 500);
+      });
+    });
+
+    // TODO: Deprecate in favor of this.data.values
     for (let num = 65; num <= 90; num += 1) {
       const letter = String.fromCharCode(num);
       this.data.letters[letter] = {
@@ -318,7 +327,7 @@ class State {
     Object.keys(props()).forEach((prop) => {
       let randomShift = randomFloat(
         0,
-        props()[prop].large_jump,
+        props()[prop].small_jump,
       );
       if (randomInt(0, 1) === 1) {
         randomShift *= -1;
@@ -473,10 +482,11 @@ export default class {
   }
 
   triggerChange() {
-    setTimeout(() => {
-      this.api.forward(null, "doChange");
-      this.triggerChange();
-    }, 2000);
+    this.api.forward(null, "doChange");
+    // setTimeout(() => {
+    //   this.api.forward(null, "doChange");
+    //   this.triggerChange();
+    // }, 2000);
   }
 
   changeValue(event, el) {
@@ -536,14 +546,17 @@ export default class {
       state.setCurrentLetter(
         event.target.dataset.letter,
       );
+
       state.startValue = {
         "Hue": state.data.letters[state.getCurrentLetter()].values["Hue"].value,
       };
-      state.mouseStart = {
-        x: event.clientX,
-        y: event.clientY,
-      };
-      state.watchingMouse = true;
+
+      // TODO: Deprecate
+      // state.mouseStart = {
+      //   x: event.clientX,
+      //   y: event.clientY,
+      // };
+      // state.watchingMouse = true;
     }
   }
 

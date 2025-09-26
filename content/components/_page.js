@@ -5,10 +5,11 @@ export default class {
   }
 
   triggerChange() {
-    setTimeout(() => {
-      this.api.forward(null, "doChange");
-      this.triggerChange();
-    }, 2000);
+    this.api.forward(null, "doChange");
+    // setTimeout(() => {
+    //   this.api.forward(null, "doChange");
+    //   this.triggerChange();
+    // }, 2000);
   }
 
   changeValue(event, el) {
@@ -68,14 +69,17 @@ export default class {
       state.setCurrentLetter(
         event.target.dataset.letter,
       );
+
       state.startValue = {
         "Hue": state.data.letters[state.getCurrentLetter()].values["Hue"].value,
       };
-      state.mouseStart = {
-        x: event.clientX,
-        y: event.clientY,
-      };
-      state.watchingMouse = true;
+
+      // TODO: Deprecate
+      // state.mouseStart = {
+      //   x: event.clientX,
+      //   y: event.clientY,
+      // };
+      // state.watchingMouse = true;
     }
   }
 
