@@ -1,3 +1,9 @@
+const colorSet = [
+  "Hue|_|0|360|0.1|color-h||30|120|",
+  "Lightness|_|60|90|0.1|color-l|%|10|25",
+  "Chroma|_|0|200|0.1|color-c|%|30|90",
+];
+
 const styleSet = [
   // (Deprecated Key) |
   // (Deprecated Default) |
@@ -9,9 +15,7 @@ const styleSet = [
   // Small Step Max |
   // Large Step Max |
   // TODO: Move the style prop prefix to the key
-  "Hue|_|0|360|0.1|color-h||30|120|",
-  "Lightness|_|60|90|0.1|color-l|%|10|25",
-  "Chroma|_|0|200|0.1|color-c|%|30|90",
+
   "BLDA|_|0|1000|1|BLDA||150|600",
   "BLDB|_|0|1000|1|BLDB||150|600",
   "SKLA|_|0|1000|1|SKLA||150|600",

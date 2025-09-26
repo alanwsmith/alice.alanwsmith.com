@@ -58,6 +58,22 @@ function addBaseStyleSheet() {
   document.adoptedStyleSheets.push(stylesSheet);
 }
 
+function colorProps() {
+  const result = {};
+  styleSet.forEach((slider) => {
+    const parts = slider.split("|");
+    result[parts[5]] = {
+      default: parseFloat(parts[1]),
+      min: parseFloat(parts[2]),
+      max: parseFloat(parts[3]),
+      unit: parts[6],
+      small_jump: parseInt(parts[7]),
+      large_jump: parseInt(parts[8]),
+    };
+  });
+  return result;
+}
+
 function props() {
   const result = {};
   styleSet.forEach((slider) => {
@@ -66,7 +82,6 @@ function props() {
       default: parseFloat(parts[1]),
       min: parseFloat(parts[2]),
       max: parseFloat(parts[3]),
-      // step: parseInt(parts[4]),
       unit: parts[6],
       small_jump: parseInt(parts[7]),
       large_jump: parseInt(parts[8]),

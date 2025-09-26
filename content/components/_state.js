@@ -1,27 +1,7 @@
 class State {
   constructor() {
     this.seeds = {};
-    // this.seedRanges = {
-    //   lightness: [70, 90],
-    //   chroma: [0, 200],
-    //   hue: [0, 360],
-    // };
-
-    // this.seeds = {
-    //   lightness: randomInt(
-    //     this.seedRanges.lightness[0],
-    //     this.seedRanges.lightness[1],
-    //   ),
-    //   chroma: randomInt(
-    //     this.seedRanges.chroma[0],
-    //     this.seedRanges.chroma[1],
-    //   ),
-    //   hue: randomInt(
-    //     this.seedRanges.hue[0],
-    //     this.seedRanges.hue[1],
-    //   ),
-    // };
-
+    this.changeCount = 0;
     this.updateSeeds();
     this.loadData();
     this.addStyleSheetVars();

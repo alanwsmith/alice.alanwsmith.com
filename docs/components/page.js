@@ -10,6 +10,12 @@
 // the way it's working.
 
 
+const colorSet = [
+  "Hue|_|0|360|0.1|color-h||30|120|",
+  "Lightness|_|60|90|0.1|color-l|%|10|25",
+  "Chroma|_|0|200|0.1|color-c|%|30|90",
+];
+
 const styleSet = [
   // (Deprecated Key) |
   // (Deprecated Default) |
@@ -21,9 +27,7 @@ const styleSet = [
   // Small Step Max |
   // Large Step Max |
   // TODO: Move the style prop prefix to the key
-  "Hue|_|0|360|0.1|color-h||30|120|",
-  "Lightness|_|60|90|0.1|color-l|%|10|25",
-  "Chroma|_|0|200|0.1|color-c|%|30|90",
+
   "BLDA|_|0|1000|1|BLDA||150|600",
   "BLDB|_|0|1000|1|BLDB||150|600",
   "SKLA|_|0|1000|1|SKLA||150|600",
@@ -176,6 +180,22 @@ function addBaseStyleSheet() {
   document.adoptedStyleSheets.push(stylesSheet);
 }
 
+function colorProps() {
+  const result = {};
+  styleSet.forEach((slider) => {
+    const parts = slider.split("|");
+    result[parts[5]] = {
+      default: parseFloat(parts[1]),
+      min: parseFloat(parts[2]),
+      max: parseFloat(parts[3]),
+      unit: parts[6],
+      small_jump: parseInt(parts[7]),
+      large_jump: parseInt(parts[8]),
+    };
+  });
+  return result;
+}
+
 function props() {
   const result = {};
   styleSet.forEach((slider) => {
@@ -184,7 +204,6 @@ function props() {
       default: parseFloat(parts[1]),
       min: parseFloat(parts[2]),
       max: parseFloat(parts[3]),
-      // step: parseInt(parts[4]),
       unit: parts[6],
       small_jump: parseInt(parts[7]),
       large_jump: parseInt(parts[8]),
@@ -233,27 +252,7 @@ function sleep(ms) {
 class State {
   constructor() {
     this.seeds = {};
-    // this.seedRanges = {
-    //   lightness: [70, 90],
-    //   chroma: [0, 200],
-    //   hue: [0, 360],
-    // };
-
-    // this.seeds = {
-    //   lightness: randomInt(
-    //     this.seedRanges.lightness[0],
-    //     this.seedRanges.lightness[1],
-    //   ),
-    //   chroma: randomInt(
-    //     this.seedRanges.chroma[0],
-    //     this.seedRanges.chroma[1],
-    //   ),
-    //   hue: randomInt(
-    //     this.seedRanges.hue[0],
-    //     this.seedRanges.hue[1],
-    //   ),
-    // };
-
+    this.changeCount = 0;
     this.updateSeeds();
     this.loadData();
     this.addStyleSheetVars();
