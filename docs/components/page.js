@@ -106,7 +106,6 @@ const SpanMaker = class {
     return `<p>${this.spanParagraphs.join("</p><p>")}</p>`;
   }
 };
-
 function isLetter(char) {
   let code = char.charCodeAt(0);
   return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
@@ -140,7 +139,6 @@ function shiftNumber(position, min, max, move) {
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
 class State {
   constructor() {
     this.seeds = {
