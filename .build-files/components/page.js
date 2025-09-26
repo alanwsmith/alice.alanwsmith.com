@@ -43,7 +43,13 @@ const SpanMaker = class {
 
   makeWords() {
     this.wordParagraphs = this.textParagraphs.map((para) => {
-      return para.replaceAll(/\s\s+/g, " ").split(" ");
+      return para
+        .replaceAll(`"`, "")
+        .replaceAll(`?`, "")
+        .replaceAll(`-`, " ")
+        .replaceAll(`)`, "")
+        .replaceAll(`(`, "")
+        .replaceAll(/\s\s+/g, " ").split(" ");
     });
     return this;
   }
@@ -53,7 +59,7 @@ const SpanMaker = class {
       return para.map((word) => {
         return [
           `<div class="word">`,
-          word.split("").map((char) => {
+          word.trim().split("").map((char) => {
             if (isLetter(char)) {
               return [
                 `<span class="letter letter-`,
@@ -63,12 +69,17 @@ const SpanMaker = class {
                 `</span>`,
               ].join("");
             } else {
-              return char;
+              return [
+                `<span class="letter letter-Q letter-alt`,
+                `">`,
+                char,
+                `</span>`,
+              ].join("");
             }
           }).join(""),
           `</div>`,
         ].join("");
-      }).join(`<div class="space"></div>`);
+      }).join(``);
     });
 
     // this.spanParagraphs = this.textParagraphs.map((para) => {
@@ -110,6 +121,10 @@ function randomNumberBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 class State {
   constructor() {
     this.seeds = {
@@ -149,11 +164,15 @@ class State {
     this.letters().forEach((letter) => {
       styles.push(
         `.letter-${letter} { 
+  transition-property: color;
+  transition-duration: 4s;
+
 /*
             transform: rotate(var(--rotate-${letter}));
-*/
-            padding-inline: 0.11rem;
             font-size: var(--font-size-${letter});
+*/
+            font-size: 2.7rem;
+            padding-inline: 0.11rem;
             color: lch(var(--color-l-${letter}) 130 var(--color-h-${letter}) ); 
             font-variation-settings: 
               'BLDA' var(--BLDA-${letter}), 
@@ -173,6 +192,7 @@ class State {
         }`,
       );
     });
+
     stylesSheet.replaceSync(styles.join("\n"));
     document.adoptedStyleSheets.push(stylesSheet);
     const varsSheet = new CSSStyleSheet();
@@ -344,6 +364,14 @@ export default class {
     this.api.querySelector(".output").addEventListener("mouseup", (event) => {
       state.watchingMouse = false;
     });
+    this.doChange();
+  }
+
+  doChange() {
+    setTimeout(() => {
+      this.api.forward(null, "startChange");
+      this.doChange();
+    }, 2000);
   }
 
   changeValue(event, el) {
@@ -412,5 +440,12 @@ export default class {
       };
       state.watchingMouse = true;
     }
+  }
+
+  startChange(_event, _el) {
+    document.documentElement.style.setProperty(
+      "--color-h-A",
+      randomNumberBetween(0, 360),
+    );
   }
 }

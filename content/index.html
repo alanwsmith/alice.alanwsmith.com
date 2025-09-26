@@ -6,24 +6,16 @@
 <bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="setLetter|input|makeSpans"
+  data-send="input|makeSpans"
   data-listeners="mousedown"
 >
 <div>
   <ul>
-    <li>
-      <button data-send="toggleInstuctions">instructions</button>
-    </li>
     <li>made by <a href="https://www.alanwsmith.com/">alan w smith</a></li>
     <li><a href="https://socials.alanwsmith.com/">socials</a></li>
     <li><a href="https://links.alanwsmith.com/">other projects</a></li>
   </ul>
 </div>
-  <div data-recive="toggleInstructions" class="default-flow">
-    <p>This is an experiment in applying individual styles to each letter of the alphabet</p>
-    <p>Click and drag on a litter to change its appearance. Side to side is the color. Up and down is the shape</p>
-    <p>Open the &quot;input&quot; section at the bottom of the page to change the text</p>
-  </div>
   <div class="output default-flow" data-receive="input"></div>
   <details><summary>Input</summary>
   <textarea data-send="input">
