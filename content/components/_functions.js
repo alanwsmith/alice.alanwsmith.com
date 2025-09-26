@@ -66,8 +66,10 @@ function props() {
       default: parseFloat(parts[1]),
       min: parseFloat(parts[2]),
       max: parseFloat(parts[3]),
-      step: parseInt(parts[4]),
+      // step: parseInt(parts[4]),
       unit: parts[6],
+      small_jump: parseInt(parts[7]),
+      large_jump: parseInt(parts[8]),
     };
   });
   return result;

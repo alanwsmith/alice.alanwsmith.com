@@ -11,28 +11,37 @@
 
 
 const styleSet = [
-  // (Deprecated Key) | (Deprecated Default) | Min | Max | Step | Prefix | Unit
+  // (Deprecated Key) |
+  // (Deprecated Default) |
+  // Min |
+  // Max |
+  // (Deprecated Step) |
+  // Prefix |
+  // Unit |
+  // Small Step Max |
+  // Large Step Max |
   // TODO: Move the style prop prefix to the key
-  "Hue|140|0|360|0.1|color-h|",
-  "Lightness|60|0|90|0.1|color-l|%",
-  "Chroma|80|0|200|0.1|color-c|%",
-  "Size|2.2|2|3|0.05|font-size|rem",
-  "BLDA|200|0|1000|1|BLDA|",
-  "BLDB|200|0|1000|1|BLDB|",
-  "SKLA|200|0|1000|1|SKLA|",
-  "SKLB|200|0|1000|1|SKLB|",
-  "SKLD|200|0|1000|1|SKLD|",
-  "TRMA|200|0|1000|1|TRMA|",
-  "TRMB|200|0|1000|1|TRMB|",
-  "TRMC|200|0|1000|1|TRMC|",
-  "TRMD|200|0|1000|1|TRMD|",
-  "TRME|200|0|1000|1|TRME|",
-  "TRMF|200|0|1000|1|TRMF|",
-  "TRMG|200|0|1000|1|TRMG|",
-  "TRMK|200|0|1000|1|TRMK|",
-  "TRML|200|0|1000|1|TRML|",
-  "Rotate|0|0|0|0|rotate|deg",
+  "Hue|_|0|360|0.1|color-h||30|120|",
+  "Lightness|_|60|90|0.1|color-l|%|10|25",
+  "Chroma|_|0|200|0.1|color-c|%|30|90",
+  "BLDA|_|0|1000|1|BLDA||150|600",
+  "BLDB|_|0|1000|1|BLDB||150|600",
+  "SKLA|_|0|1000|1|SKLA||150|600",
+  "SKLB|_|0|1000|1|SKLB||150|600",
+  "SKLD|_|0|1000|1|SKLD||150|600",
+  "TRMA|_|0|1000|1|TRMA||150|600",
+  "TRMB|_|0|1000|1|TRMB||150|600",
+  "TRMC|_|0|1000|1|TRMC||150|600",
+  "TRMD|_|0|1000|1|TRMD||150|600",
+  "TRME|_|0|1000|1|TRME||150|600",
+  "TRMF|_|0|1000|1|TRMF||150|600",
+  "TRMG|_|0|1000|1|TRMG||150|600",
+  "TRMK|_|0|1000|1|TRMK||150|600",
+  "TRML|_|0|1000|1|TRML||150|600",
 ];
+
+// "Size|_|2|3|0.05|font-size|rem||",
+// "Rotate|0|0|0|0|rotate|deg",
 const SpanMaker = class {
   constructor(text) {
     this.text = text;
@@ -175,8 +184,10 @@ function props() {
       default: parseFloat(parts[1]),
       min: parseFloat(parts[2]),
       max: parseFloat(parts[3]),
-      step: parseInt(parts[4]),
+      // step: parseInt(parts[4]),
       unit: parts[6],
+      small_jump: parseInt(parts[7]),
+      large_jump: parseInt(parts[8]),
     };
   });
   return result;
@@ -252,14 +263,20 @@ class State {
     const varsSheet = new CSSStyleSheet();
     let styleVars = [];
     styleVars.push(":root {");
-    Object.keys(props()).forEach((prop) => {
-      letters().forEach((letter) => {
+    letters().forEach((letter) => {
+      Object.keys(props()).forEach((prop) => {
         const flag = `--${prop}-${letter}`;
-        // console.log(flag);
+        const value = this.data.letters[letter].values[prop].value;
+        const unit = props()[prop].unit;
+        const line = `${flag}: ${value}${unit};`;
+        console.log(line);
+        styleVars.push(line);
         // const value = `${this.data.letters[letter].values[prop].value}${
         //   props()[prop].unit
         // }`;
         //styleVars.push(`${flag}: ${value};`);
+        //
+        //
 
         //console.log(`${prop}-${letter}`);
       });
@@ -303,17 +320,33 @@ class State {
       this.data.letters[letter] = {
         values: {},
       };
-      this.randomizeLetter(letter);
+      this.randomizeLetterSmallJump(letter);
     }
   }
 
-  randomizeLetter(letter) {
+  randomizeLetterSmallJump(letter) {
     Object.keys(props()).forEach((prop) => {
+      let randomShift = randomFloat(
+        0,
+        props()[prop].large_jump,
+      );
+      if (randomInt(0, 1) === 1) {
+        randomShift *= -1;
+      }
+      const value = shiftNumber(
+        this.seeds[prop],
+        props()[prop].min,
+        props()[prop].max,
+        randomShift,
+      );
+      // console.log(randomShift);
+      // const seed = this.seeds[prop];
+      //console.log(seed);
       this.data.letters[letter].values[prop] = {
-        value: 0,
+        value: value,
       };
     });
-    //console.log(letter);
+    //  console.log(letter);
   }
 
   //this.sliders().forEach((slider) => {
@@ -408,10 +441,14 @@ class State {
   }
 
   updateSeeds() {
+    // TODO: use initial values to make
+    // changes from for small and large
+    // bumps instead of just completely
+    // random again.
     Object.keys(props()).forEach((prop) => {
       this.seeds[prop] = randomFloat(props()[prop].min, props()[prop].max);
     });
-    console.log(this.seeds);
+    // console.log(this.seeds);
 
     // this.seeds = {
     //   lightness: randomInt(
@@ -446,19 +483,22 @@ const state = new State();
 export default class {
   bittyInit() {
     addBaseStyleSheet();
-    this.api.querySelector(".output").addEventListener("mousemove", (event) => {
-      if (state.watchingMouse) {
-        state.updateLetter(
-          event.clientX -
-            state.mouseStart.x,
-          event.clientX -
-            state.mouseStart.x,
-        );
-      }
-    });
-    this.api.querySelector(".output").addEventListener("mouseup", (event) => {
-      state.watchingMouse = false;
-    });
+
+    // // TODO: Deprecated the mouse handling stuff
+    // this.api.querySelector(".output").addEventListener("mousemove", (event) => {
+    //   if (state.watchingMouse) {
+    //     state.updateLetter(
+    //       event.clientX -
+    //         state.mouseStart.x,
+    //       event.clientX -
+    //         state.mouseStart.x,
+    //     );
+    //   }
+    // });
+    // this.api.querySelector(".output").addEventListener("mouseup", (event) => {
+    //   state.watchingMouse = false;
+    // });
+
     this.triggerChange();
   }
 
