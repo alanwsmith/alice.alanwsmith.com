@@ -65,13 +65,20 @@ h1 {
   cursor: pointer;
   margin-inline: 0.11rem;
   min-width: 0.8rem;
+  display: inline-block;
 }
+
 
 .output {
   width: 100%;
   min-height: 18rem;
   font-family: Decovar;
   user-select: none;
+}
+
+.space {
+  display: inline-flex;
+  min-width: 0.9rem;
 }
 
 textarea {
@@ -85,8 +92,9 @@ textarea {
   gap: 1.8rem;
 }
 
-.adjusted {
-  font-size: 3rem;
+.word {
+  display: inline-flex;
+  align-items: end;
 }
 
     </style>
@@ -96,7 +104,7 @@ textarea {
     <main class="default-wrapper default-flow"><bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="setLetter|input|makeSpans|makeTitleSpans"
+  data-send="setLetter|input|makeSpans"
   data-listeners="mousedown"
 >
 <div>

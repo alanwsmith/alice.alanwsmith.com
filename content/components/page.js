@@ -23,10 +23,11 @@ const SpanMaker = class {
   constructor(text) {
     this.text = text;
     this.textParagraphs = [];
+    this.wordParagraphs = [];
     this.spanParagraphs = [];
   }
 
-  paras() {
+  makeParagraphs() {
     let parasIndex = 0;
     this.text.split("\n").forEach((line) => {
       if (!this.textParagraphs[parasIndex]) {
@@ -40,20 +41,50 @@ const SpanMaker = class {
     return this;
   }
 
-  makeSpans() {
-    this.spanParagraphs = this.textParagraphs.map((para) => {
-      return para.split("").map((char, charIndex) => {
-        if (isLetter(char)) {
-          const letterClass = `letter-${char.toUpperCase()}`;
-          return `<span 
-data-send="setLetter"
-data-letter="${char.toUpperCase()}"
-class="letter ${letterClass}">${char}</span>`;
-        } else {
-          return `<span class="letter letter-Q">${char}</span>`;
-        }
-      }).join("");
+  makeWords() {
+    this.wordParagraphs = this.textParagraphs.map((para) => {
+      return para.replaceAll(/\s\s+/g, " ").split(" ");
     });
+    return this;
+  }
+
+  makeSpans() {
+    this.spanParagraphs = this.wordParagraphs.map((para) => {
+      return para.map((word) => {
+        return [
+          `<div class="word">`,
+          word.split("").map((char) => {
+            if (isLetter(char)) {
+              return [
+                `<span class="letter letter-`,
+                char.toUpperCase(),
+                `">`,
+                char,
+                `</span>`,
+              ].join("");
+            } else {
+              return char;
+            }
+          }).join(""),
+          `</div>`,
+        ].join("");
+      }).join(`<div class="space"></div>`);
+    });
+
+    // this.spanParagraphs = this.textParagraphs.map((para) => {
+    //   return para.split("").map((char, charIndex) => {
+    //     if (isLetter(char)) {
+    //       const letterClass = `letter-${char.toUpperCase()}`;
+    //       return `<span
+    // data-send="setLetter"
+    // data-letter="${char.toUpperCase()}"
+    // class="letter ${letterClass}">${char}</span>`;
+    //     } else {
+    //       return `<span class="letter letter-Q">${char}</span>`;
+    //     }
+    //   }).join("");
+    // });
+
     return this;
   }
 
@@ -118,8 +149,9 @@ class State {
     this.letters().forEach((letter) => {
       styles.push(
         `.letter-${letter} { 
-            display: inline-block;
+/*
             transform: rotate(var(--rotate-${letter}));
+*/
             padding-inline: 0.11rem;
             font-size: var(--font-size-${letter});
             color: lch(var(--color-l-${letter}) 130 var(--color-h-${letter}) ); 
@@ -291,8 +323,6 @@ class State {
   updateLetter(x, y) {
     const newHue = state.startValue.Hue + (x * 2);
     this.setSliderValue("Hue", newHue);
-    // console.log(newHue);
-    // console.log(x);
   }
 }
 
@@ -348,28 +378,22 @@ export default class {
         data-send="changeValue"
         data-name="${slider.name}"
       />
-      </label>
-      `;
+      </label>`;
       el.appendChild(newDiv);
     });
   }
 
   input(_event, el) {
     const ta = this.api.querySelector("textarea");
-    let spans = new SpanMaker(ta.value).paras().makeSpans();
+    let spans = new SpanMaker(ta.value).makeParagraphs().makeWords()
+      .makeSpans();
     el.innerHTML = spans.output();
   }
 
   makeSpans(_event, el) {
     if (el) {
-      let spans = new SpanMaker(el.innerText).paras().makeSpans();
-      el.innerHTML = spans.output();
-    }
-  }
-
-  makeTitleSpans(event, el) {
-    if (el) {
-      let spans = new SpanMaker(el.innerText).paras().makeSpans();
+      let spans = new SpanMaker(el.innerText).makeParagraphs().makeWords()
+        .makeSpans();
       el.innerHTML = spans.output();
     }
   }
