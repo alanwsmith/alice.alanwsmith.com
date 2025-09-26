@@ -1,22 +1,6 @@
 export default class {
   bittyInit() {
     addBaseStyleSheet();
-
-    // // TODO: Deprecated the mouse handling stuff
-    // this.api.querySelector(".output").addEventListener("mousemove", (event) => {
-    //   if (state.watchingMouse) {
-    //     state.updateLetter(
-    //       event.clientX -
-    //         state.mouseStart.x,
-    //       event.clientX -
-    //         state.mouseStart.x,
-    //     );
-    //   }
-    // });
-    // this.api.querySelector(".output").addEventListener("mouseup", (event) => {
-    //   state.watchingMouse = false;
-    // });
-
     this.triggerChange();
   }
 
