@@ -1,6 +1,19 @@
+// Hey there!
+//
+// Welcome to the code! This project involved a lot
+// of prototyping. There's a bunch of
+// cruft left over from that. Other than that
+// the big thing to know is that this I'm
+// using bitty for this `https://bitty.alanwsmith.com`.
+// It's the first real thing I've built with it.
+// Helped me refine a bunch. I really like
+// the way it's working.
+
 const styleSet = [
+  // Key | Seed | Min | Max | Step | Prefix | Unit
   "Hue|140|0|360|0.1|color-h|",
-  "Lightness|40|0|100|0.1|color-l|%",
+  "Lightness|60|0|90|0.1|color-l|%",
+  "Chroma|80|0|200|0.1|color-c|%",
   "Size|2.2|2.0|3.0|0.05|font-size|rem",
   "BLDA|200|0|1000|1|BLDA|",
   "BLDB|200|0|1000|1|BLDB|",
@@ -42,6 +55,11 @@ const SpanMaker = class {
   }
 
   makeWords() {
+    // The word split was originally done so spans
+    // could be switch to `display: inline-block` to
+    // allow them to be rotated. Decided against
+    // the rotation after playing with a little,
+    // but leaving the word split in anyway.
     this.wordParagraphs = this.textParagraphs.map((para) => {
       return para
         .replaceAll(`"`, "")
@@ -81,21 +99,6 @@ const SpanMaker = class {
         ].join("");
       }).join(``);
     });
-
-    // this.spanParagraphs = this.textParagraphs.map((para) => {
-    //   return para.split("").map((char, charIndex) => {
-    //     if (isLetter(char)) {
-    //       const letterClass = `letter-${char.toUpperCase()}`;
-    //       return `<span
-    // data-send="setLetter"
-    // data-letter="${char.toUpperCase()}"
-    // class="letter ${letterClass}">${char}</span>`;
-    //     } else {
-    //       return `<span class="letter letter-Q">${char}</span>`;
-    //     }
-    //   }).join("");
-    // });
-
     return this;
   }
 
@@ -119,6 +122,19 @@ function letters() {
 
 function randomNumberBetween(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function shiftNumber(position, min, max, move) {
+  let step = (move > 0) ? 1 : -1;
+  for (let count = 0; count < Math.abs(move); count += 1) {
+    position += step;
+    if (position === max) {
+      step = -1;
+    } else if (position === min) {
+      step = 1;
+    }
+  }
+  return position;
 }
 
 function sleep(ms) {
@@ -364,12 +380,12 @@ export default class {
     this.api.querySelector(".output").addEventListener("mouseup", (event) => {
       state.watchingMouse = false;
     });
-    this.doChange();
+    this.triggerChange();
   }
 
-  doChange() {
+  triggerChange() {
     setTimeout(() => {
-      this.api.forward(null, "startChange");
+      this.api.forward(null, "doChange");
       this.doChange();
     }, 2000);
   }
@@ -442,7 +458,7 @@ export default class {
     }
   }
 
-  startChange(_event, _el) {
+  doChange(_event, _el) {
     document.documentElement.style.setProperty(
       "--color-h-A",
       randomNumberBetween(0, 360),
