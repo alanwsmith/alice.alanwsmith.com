@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+@font-face {
+  font-family: "Decovar";
+  src: url('/fonts/DecovarAlpha-VF.ttf');
+}
+
+:root {
+    --background-color: black;
+    --border-color: #aaa;
+    --color: rgb(180 180 180);
+}
+
+*, 
+*::before, 
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  color-scheme: dark light;
+}
+
+body {
+  font-family: system-ui;
+  background-color: var(--background-color);
+  color: var(--color);
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+}
+
+bitty-v1-rc4 {
+  display: block;
+}
+
+.default-flow > :where(:not(:first-child)) {
+  margin-top: var(--flow-space, 1em);
+}
+
+.default-wrapper {
+  width: min(100vw - 3rem, 110ch);
+  margin-inline: auto;
+}
+
+h1 {
+  padding-top: 2.4rem;
+  border-bottom: 1px solid #333;
+}
+
+.letter {
+  cursor: pointer;
+  margin-inline: 0.11rem;
+  min-width: 0.8rem;
+  display: inline-block;
+}
+
+.letter-alt {
+  font-family: system-ui;
+  opacity: 0.3;
+}
+
+.output {
+  width: 100%;
+  min-height: 18rem;
+  font-family: Decovar;
+  user-select: none;
+}
+
+.space {
+  display: inline-flex;
+}
+
+textarea {
+  width: 100%;
+  height: 16rem;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 10rem;
+  gap: 1.8rem;
+}
+
+.word {
+  display: inline-flex;
+  align-items: end;
+  margin-left: 0.96rem;
+}
+
+    </style>
+  </head>
+  <body>
+    <header class="default-wrapper">
+    [!- block header -!][!- endblock -!]
+    </header>
+    <main class="default-wrapper default-flow">
+    [!- block main -!][!- endblock -!]
+    </main>
+    <footer class="default-wrapper">
+    </footer>
+    <script src="/components/bitty-1.0.0-rc4.min.js" type="module"></script>
+  </body>
+</html>
