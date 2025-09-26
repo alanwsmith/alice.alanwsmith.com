@@ -57,6 +57,7 @@ class State {
         ]);
       });
     });
+    console.log(result);
     return result;
   }
 
@@ -83,7 +84,7 @@ class State {
       });
 
       Object.entries(colorProps()).forEach(([prop, values]) => {
-        const num = this.colorSeeds[prop];
+        let num = this.colorSeeds[prop] + randomFloat(0, values.small_step);
         this.colorValues[letter][prop] = num;
       });
     });

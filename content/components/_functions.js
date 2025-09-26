@@ -67,8 +67,8 @@ function colorProps() {
       min: parseFloat(parts[2]),
       max: parseFloat(parts[3]),
       unit: parts[6],
-      small_jump: parseInt(parts[7]),
-      large_jump: parseInt(parts[8]),
+      small_step: parseInt(parts[7]),
+      large_step: parseInt(parts[8]),
     };
   });
   return result;
@@ -83,6 +83,8 @@ function props() {
       min: parseFloat(parts[2]),
       max: parseFloat(parts[3]),
       unit: parts[6],
+      // TODO: Rename to _step to match
+      // color
       small_jump: parseInt(parts[7]),
       large_jump: parseInt(parts[8]),
     };

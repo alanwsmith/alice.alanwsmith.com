@@ -1,35 +1,35 @@
+// (Deprecated Key) |
+// (Deprecated Default) |
+// Min |
+// Max |
+// (Deprecated Step) |
+// Prefix |
+// Unit |
+// Small Step Max |
+// Large Step Max |
+// TODO: Move the style prop prefix to the key
+
 const colorSet = [
-  "Hue|_|0|360|0.1|color-h||30|120|",
-  "Lightness|_|60|90|0.1|color-l|%|10|25",
-  "Chroma|_|0|200|0.1|color-c|%|30|90",
+  "Hue|_|0|360|_|color-h||90|140|",
+  "Lightness|_|50|70|_|color-l|%|20|55",
+  "Chroma|_|0|190|_|color-c|%|30|90",
 ];
 
 const styleSet = [
-  // (Deprecated Key) |
-  // (Deprecated Default) |
-  // Min |
-  // Max |
-  // (Deprecated Step) |
-  // Prefix |
-  // Unit |
-  // Small Step Max |
-  // Large Step Max |
-  // TODO: Move the style prop prefix to the key
-
-  "BLDA|_|0|1000|1|BLDA||150|600",
-  "BLDB|_|0|1000|1|BLDB||150|600",
-  "SKLA|_|0|1000|1|SKLA||150|600",
-  "SKLB|_|0|1000|1|SKLB||150|600",
-  "SKLD|_|0|1000|1|SKLD||150|600",
-  "TRMA|_|0|1000|1|TRMA||150|600",
-  "TRMB|_|0|1000|1|TRMB||150|600",
-  "TRMC|_|0|1000|1|TRMC||150|600",
-  "TRMD|_|0|1000|1|TRMD||150|600",
-  "TRME|_|0|1000|1|TRME||150|600",
-  "TRMF|_|0|1000|1|TRMF||150|600",
-  "TRMG|_|0|1000|1|TRMG||150|600",
-  "TRMK|_|0|1000|1|TRMK||150|600",
-  "TRML|_|0|1000|1|TRML||150|600",
+  "BLDA|_|0|1000|_|BLDA||150|600",
+  "BLDB|_|0|1000|_|BLDB||150|600",
+  "SKLA|_|0|1000|_|SKLA||150|600",
+  "SKLB|_|0|1000|_|SKLB||150|600",
+  "SKLD|_|0|1000|_|SKLD||150|600",
+  "TRMA|_|0|1000|_|TRMA||150|600",
+  "TRMB|_|0|1000|_|TRMB||150|600",
+  "TRMC|_|0|1000|_|TRMC||150|600",
+  "TRMD|_|0|1000|_|TRMD||150|600",
+  "TRME|_|0|1000|_|TRME||150|600",
+  "TRMF|_|0|1000|_|TRMF||150|600",
+  "TRMG|_|0|1000|_|TRMG||150|600",
+  "TRMK|_|0|1000|_|TRMK||150|600",
+  "TRML|_|0|1000|_|TRML||150|600",
 ];
 
 // "Size|_|2|3|0.05|font-size|rem||",
