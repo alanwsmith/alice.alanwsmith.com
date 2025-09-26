@@ -18,5 +18,5 @@
 
 [! include "components/_state.js" !]
 
-[! include "components/_default.js" !]
+[! include "components/_page.js" !]
 

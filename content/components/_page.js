@@ -1,6 +1,6 @@
 export default class {
   bittyInit() {
-    state.addStyleSheet();
+    addBaseStyleSheet();
     this.api.querySelector(".output").addEventListener("mousemove", (event) => {
       if (state.watchingMouse) {
         state.updateLetter(
@@ -93,9 +93,10 @@ export default class {
   }
 
   doChange(_event, _el) {
-    document.documentElement.style.setProperty(
-      "--color-h-A",
-      randomInt(0, 360),
-    );
+    state.updateStyleVars();
+    // document.documentElement.style.setProperty(
+    //   "--color-h-A",
+    //   randomInt(0, 360),
+    // );
   }
 }
