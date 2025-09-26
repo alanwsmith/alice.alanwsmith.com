@@ -263,37 +263,28 @@ class State {
     const varsSheet = new CSSStyleSheet();
     let styleVars = [];
     styleVars.push(":root {");
+    this.generateStyleVars().forEach((sv) => {
+      styleVars.push(`${sv[0]}: ${sv[1]};`);
+    });
+    styleVars.push("}");
+    varsSheet.replaceSync(styleVars.join("\n"));
+    document.adoptedStyleSheets.push(varsSheet);
+  }
+
+  generateStyleVars() {
+    const result = [];
     letters().forEach((letter) => {
       Object.keys(props()).forEach((prop) => {
         const flag = `--${prop}-${letter}`;
         const value = this.data.letters[letter].values[prop].value;
         const unit = props()[prop].unit;
-        const line = `${flag}: ${value}${unit};`;
-        console.log(line);
-        styleVars.push(line);
-        // const value = `${this.data.letters[letter].values[prop].value}${
-        //   props()[prop].unit
-        // }`;
-        //styleVars.push(`${flag}: ${value};`);
-        //
-        //
-
-        //console.log(`${prop}-${letter}`);
+        result.push([
+          flag,
+          `${value}${unit}`,
+        ]);
       });
     });
-    // for (let key in this.sliderHash()) {
-    //   const v = this.sliderHash()[key].key;
-    //   this.letters().forEach((letter) => {
-    //     const flag = `--${v}-${letter}`;
-    //     const value = `${this.data.letters[letter].values[key].value}${
-    //       this.sliderHash()[key].unit
-    //     }`;
-    //     styleVars.push(`${flag}: ${value};`);
-    //   });
-    // }
-    styleVars.push("}");
-    varsSheet.replaceSync(styleVars.join("\n"));
-    document.adoptedStyleSheets.push(varsSheet);
+    return result;
   }
 
   getCurrentLetter() {
@@ -339,14 +330,10 @@ class State {
         props()[prop].max,
         randomShift,
       );
-      // console.log(randomShift);
-      // const seed = this.seeds[prop];
-      //console.log(seed);
       this.data.letters[letter].values[prop] = {
         value: value,
       };
     });
-    //  console.log(letter);
   }
 
   //this.sliders().forEach((slider) => {
