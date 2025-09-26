@@ -1,9 +1,23 @@
 class State {
   constructor() {
+    this.colorSeeds = {};
+    this.colorValues = {};
+    this.letters = {};
+
+    // TODO: Deprecate this and
+    // move everything up top.
+    this.data = {
+      letters: {},
+      values: {},
+      // Should be able to
+      // remove all the currentLetter
+      // stuff completely
+      currentLetter: "A",
+    };
     this.seeds = {};
     this.changeCount = 0;
     this.updateSeeds();
-    this.initData();
+    this.initLetters();
     this.addStyleSheetVars();
   }
 
@@ -24,8 +38,19 @@ class State {
     letters().forEach((letter) => {
       Object.keys(props()).forEach((prop) => {
         const flag = `--${prop}-${letter}`;
-        const value = this.data.values[letter][prop];
+        const value = this.letters[letter][prop];
         const unit = props()[prop].unit;
+        result.push([
+          flag,
+          `${value}${unit}`,
+        ]);
+      });
+    });
+    Object.entries(this.colorValues).forEach(([letter, props]) => {
+      console.log(props);
+      Object.entries(props).forEach(([prop, value]) => {
+        const flag = `--${prop}-${letter}`;
+        const unit = prop === "color-l" ? "%" : "";
         result.push([
           flag,
           `${value}${unit}`,
@@ -48,17 +73,18 @@ class State {
   //   return Object.keys(this.data.letters);
   // }
 
-  initData() {
-    this.data = {
-      letters: {},
-      values: {},
-      currentLetter: "A",
-    };
-
+  initLetters() {
     letters().forEach((letter) => {
-      this.data.values[letter] = {};
+      this.letters[letter] = {};
+      this.colorValues[letter] = {};
+
       Object.entries(props()).forEach(([prop, values]) => {
-        this.data.values[letter][prop] = randomInt(0, 500);
+        this.letters[letter][prop] = randomInt(0, 500);
+      });
+
+      Object.entries(colorProps()).forEach(([prop, values]) => {
+        const num = this.colorSeeds[prop];
+        this.colorValues[letter][prop] = num;
       });
     });
 
@@ -192,6 +218,11 @@ class State {
     Object.keys(props()).forEach((prop) => {
       this.seeds[prop] = randomFloat(props()[prop].min, props()[prop].max);
     });
+
+    Object.entries(colorProps()).forEach(([prop, values]) => {
+      this.colorSeeds[prop] = randomFloat(values.min, values.max);
+    });
+
     // console.log(this.seeds);
 
     // this.seeds = {

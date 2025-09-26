@@ -60,7 +60,7 @@ function addBaseStyleSheet() {
 
 function colorProps() {
   const result = {};
-  styleSet.forEach((slider) => {
+  colorSet.forEach((slider) => {
     const parts = slider.split("|");
     result[parts[5]] = {
       default: parseFloat(parts[1]),
