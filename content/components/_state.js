@@ -16,7 +16,7 @@ class State {
     };
     this.seeds = {};
     this.changeCount = 0;
-    this.updateSeeds();
+    this.initSeeds();
     this.initLetters();
     this.addStyleSheetVars();
   }
@@ -78,7 +78,6 @@ class State {
     letters().forEach((letter) => {
       this.letters[letter] = {};
       this.colorValues[letter] = {};
-
       Object.entries(props()).forEach(([prop, values]) => {
         this.letters[letter][prop] = randomInt(0, 500);
       });
@@ -89,14 +88,14 @@ class State {
       });
     });
 
-    // TODO: Deprecate in favor of this.data.values
-    for (let num = 65; num <= 90; num += 1) {
-      const letter = String.fromCharCode(num);
-      this.data.letters[letter] = {
-        values: {},
-      };
-      this.randomizeLetterSmallJump(letter);
-    }
+    // // TODO: Deprecate in favor of this.data.values
+    // for (let num = 65; num <= 90; num += 1) {
+    //   const letter = String.fromCharCode(num);
+    //   this.data.letters[letter] = {
+    //     values: {},
+    //   };
+    //   this.randomizeLetterSmallJump(letter);
+    // }
   }
 
   randomizeLetterSmallJump(letter) {
@@ -211,7 +210,7 @@ class State {
     this.setSliderValue("Hue", newHue);
   }
 
-  updateSeeds() {
+  initSeeds() {
     // TODO: use initial values to make
     // changes from for small and large
     // bumps instead of just completely
@@ -221,7 +220,11 @@ class State {
     });
 
     Object.entries(colorProps()).forEach(([prop, values]) => {
-      this.colorSeeds[prop] = randomFloat(values.min, values.max);
+      if (prop === "color-c") {
+        this.colorSeeds[prop] = randomFloat(20, 60);
+      } else {
+        this.colorSeeds[prop] = randomFloat(values.min, values.max);
+      }
     });
 
     // console.log(this.seeds);

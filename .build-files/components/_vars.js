@@ -12,7 +12,7 @@
 const colorSet = [
   "Hue|_|0|360|_|color-h||90|140|",
   "Lightness|_|50|70|_|color-l|%|20|55",
-  "Chroma|_|0|190|_|color-c|%|30|90",
+  "Chroma|_|0|110|_|color-c|%|30|90",
 ];
 
 const styleSet = [
