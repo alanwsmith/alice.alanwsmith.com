@@ -1,3 +1,7 @@
-# individual-css.alanwsmith.com
+# letters.alanwsmith.com
 
-Playing around with styling individual characters
+The source code for 
+[letters.alanwsmith.com](https://letters.alanwsmith.com)
+
+An experiment with styling each letter
+of the alphabet individually. 
