@@ -16,6 +16,7 @@ const styleSet = [
   "TRMG|200|0|1000|1|TRMG|",
   "TRMK|200|0|1000|1|TRMK|",
   "TRML|200|0|1000|1|TRML|",
+  "Rotate|0|0|0|0|rotate|deg",
 ];
 
 const SpanMaker = class {
@@ -92,6 +93,7 @@ class State {
     const stylesSheet = new CSSStyleSheet();
     let styles = [];
 
+    // cover everything that's not a letter
     styles.push(
       `.output { 
             color: lch(var(--color-l-Q) 140 var(--color-h-Q) ); 
@@ -116,6 +118,8 @@ class State {
     this.letters().forEach((letter) => {
       styles.push(
         `.letter-${letter} { 
+            display: inline-block;
+            transform: rotate(var(--rotate-${letter}));
             padding-inline: 0.11rem;
             font-size: var(--font-size-${letter});
             color: lch(var(--color-l-${letter}) 130 var(--color-h-${letter}) ); 
@@ -139,7 +143,6 @@ class State {
     });
     stylesSheet.replaceSync(styles.join("\n"));
     document.adoptedStyleSheets.push(stylesSheet);
-
     const varsSheet = new CSSStyleSheet();
     let styleVars = [];
     styleVars.push(":root {");
@@ -193,6 +196,19 @@ class State {
             this.seeds.lightness + 12,
           ),
         };
+      } else if (slider.name === "Rotate") {
+        // if ((Math.random() * 10) > 8) {
+        this.data.letters[letter].values[slider.name] = {
+          value: randomNumberBetween(
+            -4,
+            5,
+          ),
+        };
+        // } else {
+        //   this.data.letters[letter].values[slider.name] = {
+        //     value: 0,
+        //   };
+        //}
       } else if (slider.name === "Chroma") {
         this.data.letters[letter].values[slider.name] = {
           value: randomNumberBetween(

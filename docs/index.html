@@ -33,7 +33,17 @@ body {
   color: var(--color);
 }
 
-bitty-js {
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+}
+
+bitty-v1-rc4 {
   display: block;
 }
 
@@ -48,10 +58,13 @@ bitty-js {
 
 h1 {
   padding-top: 2.4rem;
+  border-bottom: 1px solid #333;
 }
 
 .letter {
   cursor: pointer;
+  margin-inline: 0.11rem;
+  min-width: 0.8rem;
 }
 
 .output {
@@ -79,23 +92,30 @@ textarea {
     </style>
   </head>
   <body>
-    <header class="default-wrapper">
-    </header>
+    <header class="default-wrapper"></header>
     <main class="default-wrapper default-flow"><bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
   data-send="setLetter|input|makeSpans|makeTitleSpans"
   data-listeners="mousedown"
 >
-  <h1 data-send="makeTitleSpans" data-receive="makeTitleSpans">Letters</h1>
-    <div>
-      <div class="output default-flow" data-receive="input"></div>
-    </div>
-    <div>
-      <div data-receive="loadLetters"></div>
-    </div>
+<div>
+  <ul>
+    <li>
+      <button data-send="toggleInstuctions">instructions</button>
+    </li>
+    <li>made by <a href="https://www.alanwsmith.com/">alan w smith</a></li>
+    <li><a href="https://socials.alanwsmith.com/">socials</a></li>
+    <li><a href="https://links.alanwsmith.com/">other projects</a></li>
+  </ul>
+</div>
+  <div data-recive="toggleInstructions" class="default-flow">
+    <p>This is an experiment in applying individual styles to each letter of the alphabet</p>
+    <p>Click and drag on a litter to change its appearance. Side to side is the color. Up and down is the shape</p>
+    <p>Open the &quot;input&quot; section at the bottom of the page to change the text</p>
+  </div>
+  <div class="output default-flow" data-receive="input"></div>
   <details><summary>Input</summary>
-
   <textarea data-send="input">
 Alice was beginning to get very tired of sitting by her sister on the
 bank, and of having nothing to do. Once or twice she had peeped into the
@@ -152,8 +172,7 @@ it's getting!&quot; She was close behind it when she turned the corner, but
 the Rabbit was no longer to be seen.
     </textarea>
   </details>
-
-</bitty-js>
+</bitty-v1-rc4>
 
   <noscript>
     <p>

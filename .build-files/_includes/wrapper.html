@@ -33,7 +33,17 @@ body {
   color: var(--color);
 }
 
-bitty-js {
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+}
+
+bitty-v1-rc4 {
   display: block;
 }
 
@@ -48,10 +58,13 @@ bitty-js {
 
 h1 {
   padding-top: 2.4rem;
+  border-bottom: 1px solid #333;
 }
 
 .letter {
   cursor: pointer;
+  margin-inline: 0.11rem;
+  min-width: 0.8rem;
 }
 
 .output {
@@ -80,6 +93,7 @@ textarea {
   </head>
   <body>
     <header class="default-wrapper">
+    [!- block header -!][!- endblock -!]
     </header>
     <main class="default-wrapper default-flow">
     [!- block main -!][!- endblock -!]
