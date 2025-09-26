@@ -1,10 +1,11 @@
 class State {
   constructor() {
-    this.seedRanges = {
-      lightness: [70, 90],
-      chroma: [0, 200],
-      hue: [0, 360],
-    };
+    this.seeds = {};
+    // this.seedRanges = {
+    //   lightness: [70, 90],
+    //   chroma: [0, 200],
+    //   hue: [0, 360],
+    // };
 
     // this.seeds = {
     //   lightness: randomInt(
@@ -31,7 +32,16 @@ class State {
     let styleVars = [];
     styleVars.push(":root {");
     Object.keys(props()).forEach((prop) => {
-      console.log(prop);
+      letters().forEach((letter) => {
+        const flag = `--${prop}-${letter}`;
+        // console.log(flag);
+        // const value = `${this.data.letters[letter].values[prop].value}${
+        //   props()[prop].unit
+        // }`;
+        //styleVars.push(`${flag}: ${value};`);
+
+        //console.log(`${prop}-${letter}`);
+      });
     });
     // for (let key in this.sliderHash()) {
     //   const v = this.sliderHash()[key].key;
@@ -66,7 +76,6 @@ class State {
       letters: {},
       currentLetter: "A",
     };
-
     // TODO: Switch to letters() function
     for (let num = 65; num <= 90; num += 1) {
       const letter = String.fromCharCode(num);
@@ -78,56 +87,63 @@ class State {
   }
 
   randomizeLetter(letter) {
-    this.sliders().forEach((slider) => {
-      if (slider.name === "Lightness") {
-        this.data.letters[letter].values[slider.name] = {
-          value: randomInt(
-            this.seeds.lightness - 12,
-            this.seeds.lightness + 12,
-          ),
-        };
-      } else if (slider.name === "Rotate") {
-        // if ((Math.random() * 10) > 8) {
-        this.data.letters[letter].values[slider.name] = {
-          value: randomInt(
-            -4,
-            5,
-          ),
-        };
-        // } else {
-        //   this.data.letters[letter].values[slider.name] = {
-        //     value: 0,
-        //   };
-        //}
-      } else if (slider.name === "Chroma") {
-        this.data.letters[letter].values[slider.name] = {
-          value: randomInt(
-            this.seeds.chroma - 20,
-            this.seeds.chroma + 30,
-          ),
-        };
-      } else if (slider.name === "Hue") {
-        this.data.letters[letter].values[slider.name] = {
-          value: randomInt(
-            this.seeds.hue - 30,
-            this.seeds.hue + 60,
-          ),
-        };
-      } else if (slider.name === "Size") {
-        this.data.letters[letter].values[slider.name] = {
-          value: Math.random() + 2,
-        };
-      } else if (slider.name !== "Padding" && slider.name !== "Size") {
-        this.data.letters[letter].values[slider.name] = {
-          value: randomInt(slider.min, 560),
-        };
-      } else {
-        this.data.letters[letter].values[slider.name] = {
-          value: slider.default,
-        };
-      }
+    Object.keys(props()).forEach((prop) => {
+      this.data.letters[letter].values[prop] = {
+        value: 0,
+      };
     });
+    //console.log(letter);
   }
+
+  //this.sliders().forEach((slider) => {
+  //  if (slider.name === "Lightness") {
+  //    this.data.letters[letter].values[slider.name] = {
+  //      value: randomInt(
+  //        this.seeds.lightness - 12,
+  //        this.seeds.lightness + 12,
+  //      ),
+  //    };
+  //  } else if (slider.name === "Rotate") {
+  //    // if ((Math.random() * 10) > 8) {
+  //    this.data.letters[letter].values[slider.name] = {
+  //      value: randomInt(
+  //        -4,
+  //        5,
+  //      ),
+  //    };
+  //    // } else {
+  //    //   this.data.letters[letter].values[slider.name] = {
+  //    //     value: 0,
+  //    //   };
+  //    //}
+  //  } else if (slider.name === "Chroma") {
+  //    this.data.letters[letter].values[slider.name] = {
+  //      value: randomInt(
+  //        this.seeds.chroma - 20,
+  //        this.seeds.chroma + 30,
+  //      ),
+  //    };
+  //  } else if (slider.name === "Hue") {
+  //    this.data.letters[letter].values[slider.name] = {
+  //      value: randomInt(
+  //        this.seeds.hue - 30,
+  //        this.seeds.hue + 60,
+  //      ),
+  //    };
+  //  } else if (slider.name === "Size") {
+  //    this.data.letters[letter].values[slider.name] = {
+  //      value: Math.random() + 2,
+  //    };
+  //  } else if (slider.name !== "Padding" && slider.name !== "Size") {
+  //    this.data.letters[letter].values[slider.name] = {
+  //      value: randomInt(slider.min, 560),
+  //    };
+  //  } else {
+  //    this.data.letters[letter].values[slider.name] = {
+  //      value: slider.default,
+  //    };
+  //  }
+  //});
 
   setCurrentLetter(letter) {
     this.data.currentLetter = letter;
@@ -171,6 +187,11 @@ class State {
   }
 
   updateSeeds() {
+    Object.keys(props()).forEach((prop) => {
+      this.seeds[prop] = randomFloat(props()[prop].min, props()[prop].max);
+    });
+    console.log(this.seeds);
+
     // this.seeds = {
     //   lightness: randomInt(
     //     this.seedRanges.lightness[0],
@@ -186,11 +207,11 @@ class State {
     //   ),
     // };
 
-    this.seeds = {
-      lightness: randomInt(70, 90),
-      chroma: randomInt(10, 18),
-      hue: randomInt(30, 310),
-    };
+    // this.seeds = {
+    //   lightness: randomInt(70, 90),
+    //   chroma: randomInt(10, 18),
+    //   hue: randomInt(30, 310),
+    // };
   }
 
   updateStyleVars() {

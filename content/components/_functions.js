@@ -63,10 +63,10 @@ function props() {
   styleSet.forEach((slider) => {
     const parts = slider.split("|");
     result[parts[5]] = {
-      default: parts[1],
-      min: parts[2],
-      max: parts[3],
-      step: parts[4],
+      default: parseFloat(parts[1]),
+      min: parseFloat(parts[2]),
+      max: parseFloat(parts[3]),
+      step: parseInt(parts[4]),
       unit: parts[6],
     };
   });
@@ -84,6 +84,10 @@ function letters() {
     output.push(String.fromCharCode(num));
   }
   return output;
+}
+
+function randomFloat(min, max) {
+  return Math.random() * (max - min) + min;
 }
 
 function randomInt(min, max) {

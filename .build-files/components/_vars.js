@@ -1,10 +1,10 @@
 const styleSet = [
-  // Key | (Deprecated Default) | Min | Max | Step | Prefix | Unit
+  // (Deprecated Key) | (Deprecated Default) | Min | Max | Step | Prefix | Unit
   // TODO: Move the style prop prefix to the key
   "Hue|140|0|360|0.1|color-h|",
   "Lightness|60|0|90|0.1|color-l|%",
   "Chroma|80|0|200|0.1|color-c|%",
-  "Size|2.2|2.0|3.0|0.05|font-size|rem",
+  "Size|2.2|2|3|0.05|font-size|rem",
   "BLDA|200|0|1000|1|BLDA|",
   "BLDB|200|0|1000|1|BLDB|",
   "SKLA|200|0|1000|1|SKLA|",
