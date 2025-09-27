@@ -64,15 +64,14 @@ class ColorSeed {
   }
 
   doMinorShift() {
-    this.previousValue = this.currentValue;
-    this.currentValue = randomShift(
+    this.setCurrentValue(randomShift(
       this.value(),
       this.min(),
       this.max(),
       this.minor(),
       this.direction(),
-    );
-    if (this.previousValue > this.currentValue) {
+    ));
+    if (this.previousValue() > this.currentValue()) {
       this.setDirection(-1);
     } else {
       this.setDirection(1);
@@ -80,11 +79,10 @@ class ColorSeed {
   }
 
   generateRandomSeed() {
-    this.previousValue = this.currentValue;
-    this.currentValue = randomInt(
+    this.setCurrentValue(randomInt(
       this.min(),
       this.max(),
-    );
+    ));
   }
 
   major() {
@@ -132,13 +130,13 @@ class ColorSeed {
     this._previousValue = value;
   }
 
-  setValue(value) {
-    this.previousValue = this.currentValue;
-    this.currentValue = value;
+  setCurrentValue(value) {
+    this.setPreviousValue(this.currentValue());
+    this._currentValue = value;
   }
 
-  value() {
-    return this.currentValue;
+  currentValue() {
+    return this._currentValue;
   }
 }
 class ColorSeeds {
@@ -293,8 +291,10 @@ class Letters {
     const updates = [];
     this.listOfChars().forEach((char) => {
       this.listOfColorPrefixes().forEach((prefix) => {
-        console.log(this.colorSeeds.seeds[prefix]);
-        updates.push([char, { [prefix]: randomInt(30, 80) }]);
+        this.colorSeeds.seeds[prefix].generateRandomSeed();
+        updates.push([char, {
+          [prefix]: this.colorSeeds.seeds[prefix].currentValue(),
+        }]);
       });
     });
     this.setUpdates(updates);

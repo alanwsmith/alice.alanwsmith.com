@@ -41,8 +41,10 @@ class Letters {
     const updates = [];
     this.listOfChars().forEach((char) => {
       this.listOfColorPrefixes().forEach((prefix) => {
-        console.log(this.colorSeeds.seeds[prefix]);
-        updates.push([char, { [prefix]: randomInt(30, 80) }]);
+        this.colorSeeds.seeds[prefix].generateRandomSeed();
+        updates.push([char, {
+          [prefix]: this.colorSeeds.seeds[prefix].currentValue(),
+        }]);
       });
     });
     this.setUpdates(updates);
