@@ -29,10 +29,4 @@ class ColorSeeds {
       seed.generateRandomSeed();
     });
   }
-
-  prefixes() {
-    return Object.entries(this.seeds).map(([prefix, _]) => {
-      return prefix;
-    });
-  }
 }
