@@ -1,45 +1,25 @@
-class ColorSeeds {
-  constructor() {
-    console.log("---");
-    colorSet.forEach((line) => {
-      const parts = line.split("|");
-      this.seeds = {};
-      this.seeds[parts[0]] = new ColorSeed(
-        parts[0],
-        parseInt(parts[2]),
-        parseInt(parts[3]),
-        parts[6],
-        parseInt(parts[7]),
-        parseInt(parts[8]),
-      );
-    });
-    this.randomizeColorSeeds();
-  }
-
-  randomizeColorSeeds() {
-    //  console.log("asdf");
-  }
-}
-
-class ColorSeed {
-  constructor(prefix, min, max, minor, major) {
-    this.prefix = prefix;
-    this.min = min;
-    this.max = max;
-    this.minor = minor;
-    this.major = major;
-    this.moves = [];
-  }
-}
-
 class Color {
-  constructor(prefix, min, max, unit, minor, major) {
+  constructor(prefix, min, max, unit, minor, major, current_seed) {
     this.prefix = prefix;
     this.min = min;
     this.max = max;
     this.unit = unit;
     this.minor = minor;
     this.major = major;
-    this.moves = [];
+    this.values = [];
+    this.values.push(100);
   }
+
+  valueString() {
+    return `${this.values[this.values.length - 1]}${this.unit}`;
+  }
+
+  // currentValue() {
+  //   return this.values[this.values.length - 1];
+  // }
+
+  //  updateColorVar() {
+  //    console.log(this.prefix);
+  //    //document.documentElement.style.setProperty(this.prefix, this.valueString());
+  //  }
 }

@@ -9,7 +9,79 @@
 // Helped me refine a bunch. I really like
 // the way it's working.
 
+class Color {
+  constructor(prefix, min, max, unit, minor, major, current_seed) {
+    this.prefix = prefix;
+    this.min = min;
+    this.max = max;
+    this.unit = unit;
+    this.minor = minor;
+    this.major = major;
+    this.values = [];
+    this.values.push(100);
+  }
 
+  valueString() {
+    return `${this.values[this.values.length - 1]}${this.unit}`;
+  }
+
+  // currentValue() {
+  //   return this.values[this.values.length - 1];
+  // }
+
+  //  updateColorVar() {
+  //    console.log(this.prefix);
+  //    //document.documentElement.style.setProperty(this.prefix, this.valueString());
+  //  }
+}
+class ColorSeed {
+  constructor(prefix, min, max, minor, major) {
+    this.prefix = prefix;
+    this.min = min;
+    this.max = max;
+    this.minor = minor;
+    this.major = major;
+    this.moves = [];
+    this.moves.push(randomInt(this.min, this.max));
+  }
+
+  currentSeed() {
+    return this.moves[this.moves.length - 1];
+  }
+
+  randomizeSeed() {
+    //
+  }
+}
+class ColorSeeds {
+  constructor() {
+    this.seeds = {};
+    colorSet.forEach((line) => {
+      const parts = line.split("|");
+      this.seeds[parts[0]] = new ColorSeed(
+        parts[0],
+        parseInt(parts[2]),
+        parseInt(parts[3]),
+        parts[6],
+        parseInt(parts[7]),
+        parseInt(parts[8]),
+      );
+    });
+    //    this.initSeeds();
+  }
+
+  // initSeeds() {
+  //   Object.entries(this.seeds).forEach(([_, seed]) => {
+  //     seed.initSeed();
+  //   });
+  // }
+
+  randomizeColorSeeds() {
+    Object.entries(this.seeds).forEach(([_, seed]) => {
+      seed.randomizeSeed();
+    });
+  }
+}
 // Key/Prefix |
 // (Deprecated Default) |
 // Min |
@@ -22,9 +94,9 @@
 // TODO: Move the style prop prefix to the key
 
 const colorSet = [
-  "color-h|_|0|360|_|color-h||30|140|",
   "color-l|_|50|70|_|color-l|%|20|55",
   "color-c|_|10|60|_|color-c||20|40",
+  "color-h|_|0|360|_|color-h||30|140|",
 ];
 
 const propSet = [
@@ -49,49 +121,14 @@ const styleSet = propSet;
 
 // "Size|_|2|3|0.05|font-size|rem||",
 // "Rotate|0|0|0|0|rotate|deg",
-class Letters {
-  constructor() {
-    this.colorSeeds = new ColorSeeds();
-    this.propSeeds = new PropSeeds();
-    this.letters = {};
-    letters().forEach((letter) => {
-      this.letters[letter] = new Letter(letter);
-    });
-  }
-
-  addBaseStyles() {
-    const stylesSheet = new CSSStyleSheet();
-    let styles = [];
-  }
-
-  updateVarsForLetters() {
-    Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.updateVarsForLetter();
-    });
-
-    // Object.entries(this.colorValues).forEach(([letter, props]) => {
-    //   Object.entries(props).forEach(([prop, value]) => {
-    //     const flag = `--${prop}-${letter}`;
-    //     const unit = prop === "color-l" ? "%" : "";
-    //     result.push([
-    //       flag,
-    //       `${value}${unit}`,
-    //     ]);
-    //   });
-    // });
-
-    //document.documentElement.style.setProperty(sv[0], sv[1]);
-  }
-}
-
 class Letter {
-  constructor(letter) {
+  constructor(letter, colorSeeds, propSeeds) {
     this.letter = letter;
-    this.initProps();
-    this.initColors();
+    this.initColors(colorSeeds);
+    this.initProps(propSeeds);
   }
 
-  initColors() {
+  initColors(colorSeeds) {
     this.colors = {};
     colorSet.forEach((line) => {
       const parts = line.split("|");
@@ -102,6 +139,7 @@ class Letter {
         parts[6],
         parseInt(parts[7]),
         parseInt(parts[8]),
+        colorSeeds.seeds[parts[0]].currentSeed(),
       );
     });
   }
@@ -121,6 +159,54 @@ class Letter {
   }
 
   updateVarsForLetter() {
+    Object.entries(this.colors).forEach(([_, color]) => {
+      const varKey = `--${color.prefix}-${this.letter}`;
+      console.log(varKey);
+      console.log(color.valueString());
+      document.documentElement.style.setProperty(varKey, color.valueString());
+    });
+    // const prop = "--color-h-A";
+    // const value = "200";
+    // document.documentElement.style.setProperty(prop, value);
+
+    // Object.entries(this.colorValues).forEach(([letter, props]) => {
+    //   Object.entries(props).forEach(([prop, value]) => {
+    //     const flag = `--${prop}-${letter}`;
+    //     const unit = prop === "color-l" ? "%" : "";
+    //     result.push([
+    //       flag,
+    //       `${value}${unit}`,
+    //     ]);
+    //   });
+    // });
+
+    //document.documentElement.style.setProperty(sv[0], sv[1]);
+  }
+}
+class Letters {
+  constructor() {
+    this.colorSeeds = new ColorSeeds();
+    this.propSeeds = new PropSeeds();
+    this.letters = {};
+    letters().forEach((letter) => {
+      this.letters[letter] = new Letter(
+        letter,
+        this.colorSeeds,
+        this.propSeeds,
+      );
+    });
+  }
+
+  addBaseStyles() {
+    const stylesSheet = new CSSStyleSheet();
+    let styles = [];
+  }
+
+  updateVarsForLetters() {
+    Object.entries(this.letters).forEach(([_, letter]) => {
+      letter.updateVarsForLetter();
+    });
+
     // Object.entries(this.colorValues).forEach(([letter, props]) => {
     //   Object.entries(props).forEach(([prop, value]) => {
     //     const flag = `--${prop}-${letter}`;
@@ -171,51 +257,7 @@ class PropSeed {
     this.moves = [];
   }
 }
-class ColorSeeds {
-  constructor() {
-    console.log("---");
-    colorSet.forEach((line) => {
-      const parts = line.split("|");
-      this.seeds = {};
-      this.seeds[parts[0]] = new ColorSeed(
-        parts[0],
-        parseInt(parts[2]),
-        parseInt(parts[3]),
-        parts[6],
-        parseInt(parts[7]),
-        parseInt(parts[8]),
-      );
-    });
-    this.randomizeColorSeeds();
-  }
 
-  randomizeColorSeeds() {
-    //  console.log("asdf");
-  }
-}
-
-class ColorSeed {
-  constructor(prefix, min, max, minor, major) {
-    this.prefix = prefix;
-    this.min = min;
-    this.max = max;
-    this.minor = minor;
-    this.major = major;
-    this.moves = [];
-  }
-}
-
-class Color {
-  constructor(prefix, min, max, unit, minor, major) {
-    this.prefix = prefix;
-    this.min = min;
-    this.max = max;
-    this.unit = unit;
-    this.minor = minor;
-    this.major = major;
-    this.moves = [];
-  }
-}
 const SpanMaker = class {
   constructor(text) {
     this.text = text;
@@ -296,6 +338,7 @@ function addBaseStyleSheet() {
   styles.push(`:root{
 --default-font-size: 1.0rem;
 --letter-font-size: 2.7rem;
+--color-h-A: 200;
 }`);
   styles.push(`.output { 
     font-size: var(--default-font-size);

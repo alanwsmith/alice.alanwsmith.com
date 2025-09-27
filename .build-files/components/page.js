@@ -9,14 +9,20 @@
 // Helped me refine a bunch. I really like
 // the way it's working.
 
+[! include "components/_color.js" !]
+
+[! include "components/_color_seed.js" !]
+
+[! include "components/_color_seeds.js" !]
 
 [! include "components/_vars.js" !]
 
 [! include "components/_letter.js" !]
 
+[! include "components/_letters.js" !]
+
 [! include "components/_prop.js" !]
 
-[! include "components/_color.js" !]
 
 [! include "components/_span-maker.js" !]
 

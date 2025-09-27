@@ -10,9 +10,9 @@
 // TODO: Move the style prop prefix to the key
 
 const colorSet = [
-  "color-h|_|0|360|_|color-h||30|140|",
   "color-l|_|50|70|_|color-l|%|20|55",
   "color-c|_|10|60|_|color-c||20|40",
+  "color-h|_|0|360|_|color-h||30|140|",
 ];
 
 const propSet = [
