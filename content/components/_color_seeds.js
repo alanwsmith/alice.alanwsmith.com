@@ -13,15 +13,15 @@ class ColorSeeds {
     });
   }
 
-  doMinorShift() {
+  doMinorSeedsShift() {
     Object.entries(this.seeds).forEach(([_, seed]) => {
-      seed.doMinorShift();
+      seed.doMinorSeedShift();
     });
   }
 
-  doMajorShift() {
+  doMajorSeedsShift() {
     Object.entries(this.seeds).forEach(([_, seed]) => {
-      seed.doMajorShift();
+      seed.doMajorSeedShift();
     });
   }
 
