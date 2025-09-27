@@ -11,14 +11,95 @@ class Letters {
     this.setCurrentDelay("default");
     this.initLetters();
     this.colorSeeds = new ColorSeeds();
+
+    this.testDelay = async () => {
+      await this.doDelay();
+    };
+
     this.collections = {
       first: [
+        this.applyUpdates.bind(this),
         this.prepRandomSeeds.bind(this),
         this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
+        this.doDelay,
+        //  this.testDelay.bind(this);
         this.applyUpdates.bind(this),
         //await sleep(this._delays.xsmall),
       ],
     };
+  }
+
+  async runCollection(key = "random") {
+    if (key === "random") {
+      key = "first"; // TODO: make random when there's other stuff
+    }
+
+    // this.collections[key].forEach(async (update) => {
+    //   await update();
+    // });
+
+    for (let update of this.collections[key]) {
+      await update();
+    }
+
+    // const werwer = this.collections[key].map((func) => (...args) => {
+    //   console.log("asdf");
+    //   Promise.resolve(func(...args));
+    // });
+    // werwer;
+
+    // const asdf = this.collections[key].map((func) => {
+    //   // console.log(func);
+    //   (async (...args) => {
+    //     return await func.apply(...args);
+    //   });
+    // });
+
+    // asdf;
+
+    // for (let update of this.collections[key]) {
+    //   async function () {
+    //     update.apply(this);
+    //   };
+    // }
+
+    // const aF = this.collections[key].map((func) => {
+    //   (async () => {
+    //     return await func();
+    //   });
+    // });
+
+    //for (let update of this.collections[key]) {
+    //  const x = async function () {
+    //    await update;
+    //  };
+    //  x;
+    //  //update();
+    //  // async function() {
+    //  //   return await update()
+    //  // }
+    //}
+
+    //// console.log(`Running collection: ${key}`);
+    //this.collections[key].forEach((update) => {
+    //  this.doDelay();
+    //  update();
+    //  //const result = await update();
+    //  // update();
+    //  // console.log(update);
+    //});
+  }
+
+  async doDelay() {
+    await sleep(1600);
+
+    // const sleeper = async () => {
+    //   console.log("START: delay");
+    //   await sleep(1600);
+    //   console.log("END: delay");
+    //   // await sleep(this.currentDelay());
+    // };
+    // await sleeper();
   }
 
   getDelay(key) {
@@ -50,26 +131,12 @@ class Letters {
     return Object.entries(this.colorSeeds.seeds).map(([prefix, _]) => prefix);
   }
 
-  async runCollection(key = "random") {
-    if (key === "random") {
-      // TODO randomise this when there are more
-      key = "first";
-    }
-    // console.log(`Running collection: ${key}`);
-
-    this.collections[key].forEach((update) => {
-      update();
-      // console.log(update);
-    });
-  }
-
   async start() {
     await this.runCollection("first");
     // this.colorSeeds.generateRandomSeeds();
     // this.loadMajorColorPrefixesFromSeedsForEveryChar();
     // this.applyUpdates();
     // await sleep(this._delays.xsmall);
-
     //  this.baselineUpdate();
   }
 
