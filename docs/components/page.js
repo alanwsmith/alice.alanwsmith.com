@@ -41,8 +41,8 @@ class ColorSeed {
   constructor(min, max, minor, major) {
     this.setMin(min);
     this.setMax(max);
-    this.minor(minor);
-    this.major(major);
+    this.setMinor(minor);
+    this.setMajor(major);
     this.setDirection(
       randomInt(0, 1) === 1 ? 1 : -1,
     );
@@ -76,6 +76,10 @@ class ColorSeed {
     } else {
       this.setDirection(1);
     }
+  }
+
+  direction() {
+    return this._direction;
   }
 
   generateRandomSeed() {
@@ -184,8 +188,8 @@ class ColorSeeds {
 
 const colorSet = [
   "color-l|_|50|70|_|color-l|%|10|30",
-  "color-c|_|10|40|_|color-c||10|60",
-  "color-h|_|0|360|_|color-h||60|200|",
+  "color-c|_|0|140|_|color-c||18|60",
+  "color-h|_|0|360|_|color-h||56|200|",
 ];
 
 const propSet = [
@@ -287,13 +291,26 @@ class Letters {
     //  this.baselineUpdate();
   }
 
+  minorShiftFromSeed(prefix) {
+    const seed = this.colorSeeds.seeds[prefix];
+    const value = randomShift(
+      seed.currentValue(),
+      seed.min(),
+      seed.max(),
+      seed.minor(),
+      seed.direction(),
+    );
+    console.log(value);
+    return value;
+  }
+
   setMinorColorPrefixesFromSeedsForEveryChar() {
     const updates = [];
     this.listOfChars().forEach((char) => {
       this.listOfColorPrefixes().forEach((prefix) => {
-        this.colorSeeds.seeds[prefix].generateRandomSeed();
+        const value = this.minorShiftFromSeed(prefix);
         updates.push([char, {
-          [prefix]: this.colorSeeds.seeds[prefix].currentValue(),
+          [prefix]: value,
         }]);
       });
     });

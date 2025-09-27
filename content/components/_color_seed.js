@@ -2,8 +2,8 @@ class ColorSeed {
   constructor(min, max, minor, major) {
     this.setMin(min);
     this.setMax(max);
-    this.minor(minor);
-    this.major(major);
+    this.setMinor(minor);
+    this.setMajor(major);
     this.setDirection(
       randomInt(0, 1) === 1 ? 1 : -1,
     );
@@ -37,6 +37,10 @@ class ColorSeed {
     } else {
       this.setDirection(1);
     }
+  }
+
+  direction() {
+    return this._direction;
   }
 
   generateRandomSeed() {

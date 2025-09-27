@@ -11,8 +11,8 @@
 
 const colorSet = [
   "color-l|_|50|70|_|color-l|%|10|30",
-  "color-c|_|10|40|_|color-c||10|60",
-  "color-h|_|0|360|_|color-h||60|200|",
+  "color-c|_|0|140|_|color-c||18|60",
+  "color-h|_|0|360|_|color-h||56|200|",
 ];
 
 const propSet = [

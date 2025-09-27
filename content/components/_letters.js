@@ -37,13 +37,26 @@ class Letters {
     //  this.baselineUpdate();
   }
 
+  minorShiftFromSeed(prefix) {
+    const seed = this.colorSeeds.seeds[prefix];
+    const value = randomShift(
+      seed.currentValue(),
+      seed.min(),
+      seed.max(),
+      seed.minor(),
+      seed.direction(),
+    );
+    console.log(value);
+    return value;
+  }
+
   setMinorColorPrefixesFromSeedsForEveryChar() {
     const updates = [];
     this.listOfChars().forEach((char) => {
       this.listOfColorPrefixes().forEach((prefix) => {
-        this.colorSeeds.seeds[prefix].generateRandomSeed();
+        const value = this.minorShiftFromSeed(prefix);
         updates.push([char, {
-          [prefix]: this.colorSeeds.seeds[prefix].currentValue(),
+          [prefix]: value,
         }]);
       });
     });
