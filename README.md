@@ -1,7 +1,7 @@
-# letters.alanwsmith.com
+# alice.alanwsmith.com
 
 The source code for 
-[letters.alanwsmith.com](https://letters.alanwsmith.com)
+[alice.alanwsmith.com](https://alice.alanwsmith.com)
 
 An experiment with styling each letter
 of the alphabet individually. 

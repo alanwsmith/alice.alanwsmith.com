@@ -266,8 +266,8 @@ class Letters {
   constructor() {
     this._delays = {
       "xxsmall": 300,
-      "xsmall": 500,
-      "small": 1500,
+      "xsmall": 600,
+      "small": 1400,
       "default": 4000,
       "large": 6500,
       "xlarge": 12000,
@@ -282,13 +282,11 @@ class Letters {
 
     this.collections = {
       first: [
-        this.applyUpdates.bind(this),
+        this.setDelay.bind(this, "xsmall"),
         this.prepRandomSeeds.bind(this),
         this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
         this.doDelay,
-        //  this.testDelay.bind(this);
         this.applyUpdates.bind(this),
-        //await sleep(this._delays.xsmall),
       ],
     };
   }
@@ -368,6 +366,10 @@ class Letters {
 
   getDelay(key) {
     return this._delays[key];
+  }
+
+  setDelay(key) {
+    this._delay = this._delays[key];
   }
 
   currentDelay() {
