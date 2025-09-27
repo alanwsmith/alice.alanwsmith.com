@@ -8,7 +8,7 @@ class Letters {
       "large": 6500,
       "xlarge": 12000,
     };
-    this.setCurrentDelay("default");
+    this.setCurrentUpdateDelay("default");
     this.initLetters();
     this.colorSeeds = new ColorSeeds();
 
@@ -18,13 +18,25 @@ class Letters {
 
     this.collections = {
       first: [
-        this.setDelay.bind(this, "xsmall"),
+        this.setCurrentUpdateDelay.bind(this, "small"),
+        this.setColorPrefixDelaysForAllChars.bind(this, "small"),
         this.prepRandomSeeds.bind(this),
         this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
-        this.doDelay,
         this.applyUpdates.bind(this),
+        this.doDelay,
       ],
     };
+  }
+
+  async setColorPrefixDelaysForAllChars(key) {
+    const updates = [];
+    this.listOfChars().forEach((char) => {
+      updates.push([char, {
+        key: "--color-transition",
+        value: this.getDelayForKey(key),
+      }]);
+    });
+    this.loadUpdates(updates);
   }
 
   async runCollection(key = "random") {
@@ -39,81 +51,26 @@ class Letters {
     for (let update of this.collections[key]) {
       await update();
     }
-
-    // const werwer = this.collections[key].map((func) => (...args) => {
-    //   console.log("asdf");
-    //   Promise.resolve(func(...args));
-    // });
-    // werwer;
-
-    // const asdf = this.collections[key].map((func) => {
-    //   // console.log(func);
-    //   (async (...args) => {
-    //     return await func.apply(...args);
-    //   });
-    // });
-
-    // asdf;
-
-    // for (let update of this.collections[key]) {
-    //   async function () {
-    //     update.apply(this);
-    //   };
-    // }
-
-    // const aF = this.collections[key].map((func) => {
-    //   (async () => {
-    //     return await func();
-    //   });
-    // });
-
-    //for (let update of this.collections[key]) {
-    //  const x = async function () {
-    //    await update;
-    //  };
-    //  x;
-    //  //update();
-    //  // async function() {
-    //  //   return await update()
-    //  // }
-    //}
-
-    //// console.log(`Running collection: ${key}`);
-    //this.collections[key].forEach((update) => {
-    //  this.doDelay();
-    //  update();
-    //  //const result = await update();
-    //  // update();
-    //  // console.log(update);
-    //});
   }
 
   async doDelay() {
     await sleep(1600);
-
-    // const sleeper = async () => {
-    //   console.log("START: delay");
-    //   await sleep(1600);
-    //   console.log("END: delay");
-    //   // await sleep(this.currentDelay());
-    // };
-    // await sleeper();
   }
 
-  getDelay(key) {
+  getDelayForKey(key) {
     return this._delays[key];
   }
 
-  setDelay(key) {
+  setCurrentUpdateDelay(key) {
     this._delay = this._delays[key];
   }
 
-  currentDelay() {
-    return this._currentDelay;
+  currentUpdateDelay() {
+    return this._currentUpdateDelay;
   }
 
-  setCurrentDelay(key) {
-    this._currentDelay = this._delays[key];
+  setCurrentUpdateDelay(key) {
+    this._currentUpdateDelay = this._delays[key];
   }
 
   initLetters(colorSeeds) {
@@ -135,11 +92,6 @@ class Letters {
 
   async start() {
     await this.runCollection("first");
-    // this.colorSeeds.generateRandomSeeds();
-    // this.loadMajorColorPrefixesFromSeedsForEveryChar();
-    // this.applyUpdates();
-    // await sleep(this._delays.xsmall);
-    //  this.baselineUpdate();
   }
 
   prepRandomSeeds() {
@@ -156,7 +108,6 @@ class Letters {
       seed.major(),
       seed.direction(),
     );
-    console.log(value);
     return value;
   }
 
@@ -169,17 +120,17 @@ class Letters {
       seed.minor(),
       seed.direction(),
     );
-    console.log(value);
     return value;
   }
 
   loadMajorColorPrefixesFromSeedsForEveryChar() {
     const updates = [];
-    this.listOfChars().forEach((char) => {
+    Object.entries(this.letters).forEach(([char, letter]) => {
       this.listOfColorPrefixes().forEach((prefix) => {
-        const value = this.getMajorShiftFromSeed(prefix);
+        letter.setColorPrefix(prefix, this.getMajorShiftFromSeed(prefix));
         updates.push([char, {
-          [prefix]: value,
+          key: `--${prefix}`,
+          value: letter.getCurrentColorPrefixValueString(prefix),
         }]);
       });
     });
@@ -187,41 +138,43 @@ class Letters {
   }
 
   loadMinorColorPrefixesFromSeedsForEveryChar() {
-    const updates = [];
-    this.listOfChars().forEach((char) => {
-      this.listOfColorPrefixes().forEach((prefix) => {
-        const value = this.minorShiftFromSeed(prefix);
-        updates.push([char, {
-          [prefix]: value,
-        }]);
-      });
-    });
-    this.loadUpdates(updates);
+    // const updates = [];
+    // this.listOfChars().forEach((char) => {
+    //   this.listOfColorPrefixes().forEach((prefix) => {
+    //     const value = this.minorShiftFromSeed(prefix);
+    //     updates.push([char, {
+    //       [prefix]: value,
+    //     }]);
+    //   });
+    // });
+    // this.loadUpdates(updates);
   }
 
   async baselineUpdate() {
-    this.loadUpdates(
-      {
-        "A": {
-          "color-transision": 100,
-          "color-l": randomInt(30, 80),
-          "color-c": randomInt(30, 80),
-          "color-h": randomInt(30, 80),
-        },
-      },
-    );
-    this.applyUpdates();
-    await sleep(this._delays.default);
-    this.changePicker();
+    // this.loadUpdates(
+    //   {
+    //     "A": {
+    //       "color-transision": 100,
+    //       "color-l": randomInt(30, 80),
+    //       "color-c": randomInt(30, 80),
+    //       "color-h": randomInt(30, 80),
+    //     },
+    //   },
+    // );
+    // this.applyUpdates();
+    // await sleep(this._delays.default);
+    // this.changePicker();
   }
 
-  loadUpdates(payload) {
-    payload.forEach(([char, details]) => {
-      this.listOfColorPrefixes().forEach((prefix) => {
-        if (details[prefix] !== undefined) {
-          this.letters[char].setColorPrefix(prefix, details[prefix]);
-        }
-      });
+  loadUpdates(updates) {
+    updates.forEach(([char, details]) => {
+      this.letters[char].loadUpdate(details);
+
+      // this.listOfColorPrefixes().forEach((prefix) => {
+      //   if (details[prefix] !== undefined) {
+      //     this.letters[char].setColorPrefix(prefix, details[prefix]);
+      //   }
+      // });
     });
   }
 

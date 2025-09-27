@@ -3,17 +3,18 @@ class Letter {
     this.char = letter;
     this.initColorPrefixes();
     this.previousUpdates = {};
+    this.nextUpdate = [];
   }
 
   applyUpdates() {
-    Object.entries(this.colorPrefixes).forEach(([prefix, details]) => {
-      const key = `--${prefix}-${this.char}`;
-      if (this.previousUpdates[key] !== details.currentValueString()) {
-        const value = details.currentValueString();
-        document.documentElement.style.setProperty(key, value);
-        this.previousUpdates[key] = value;
+    this.nextUpdate.forEach((update) => {
+      if (this.previousUpdates[update.key] !== update.value) {
+        const key = `${update.key}-${this.char}`;
+        document.documentElement.style.setProperty(key, update.value);
+        this.previousUpdates[update.key] = update.value;
       }
     });
+    this.nextUpdate = [];
   }
 
   initColorPrefixes() {
@@ -26,6 +27,15 @@ class Letter {
     });
   }
 
+  loadUpdate(details) {
+    //console.log(details);
+    this.nextUpdate.push(details);
+    //document.documentElement.style.setProperty(key, value);
+    //const key = `--${prefix}-${this.char}`;
+    // console.log(details);
+    // console.log(this.nextUpdate);
+  }
+
   setColorDelay(ms) {
     const key = `--color-transition-${this.char}`;
     const value = `${ms}ms`;
@@ -34,5 +44,10 @@ class Letter {
 
   setColorPrefix(prefix, value) {
     this.colorPrefixes[prefix].setCurrentValue(value);
+  }
+
+  getCurrentColorPrefixValueString(prefix) {
+    //console.log(this.colorPrefixes[prefix]);
+    return this.colorPrefixes[prefix].currentValueString();
   }
 }
