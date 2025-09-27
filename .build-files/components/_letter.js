@@ -52,8 +52,9 @@ class Letter {
 
   applyColor() {
     Object.entries(this.colors).forEach(([_, color]) => {
-      const varKey = `--${color.prefix}-${this.letter}`;
-      document.documentElement.style.setProperty(varKey, color.value());
+      const key = `--${color.prefix}-${this.letter}`;
+      const value = color.value();
+      document.documentElement.style.setProperty(key, value);
     });
   }
 }

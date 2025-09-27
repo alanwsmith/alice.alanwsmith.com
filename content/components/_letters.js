@@ -20,10 +20,12 @@ class Letters {
   }
 
   async init() {
+    this.colorSeeds.doMinorShift();
     await sleep(this.delays.xsmall);
-    this.setAllColorDelays(this.delays.large);
+    this.setAllColorDelays(this.delays.default);
     this.applyAllColors();
-    await sleep(this.delays.large);
+    await sleep(this.delays.default);
+
     this.updateAlice();
   }
 
@@ -43,7 +45,7 @@ class Letters {
     this.colorSeeds.doMinorShift();
     this.setMinorColorUpdatesFromSeeds();
     this.applyAllColors();
-    await sleep(3000);
+    await sleep(this.delays.default);
     this.updateAlice();
     //this.letters["A"].applyColor();
   }

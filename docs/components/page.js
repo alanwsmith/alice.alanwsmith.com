@@ -18,7 +18,6 @@ class Color {
     this.minor = minor;
     this.major = major;
     this.colorSeed = colorSeeds[this.prefix];
-    this.direction = randomInt(0, 1) === 1 ? 1 : -1;
     this.values = [];
     this.pushMinorRandomValueFromSeed();
   }
@@ -31,7 +30,7 @@ class Color {
         this.min,
         this.max,
         this.minor,
-        this.direction,
+        randomInt(0, 1) === 1 ? 1 : -1,
       ),
     );
   }
@@ -48,30 +47,44 @@ class ColorSeed {
     this.minor = minor;
     this.major = major;
     this.direction = randomInt(0, 1) === 1 ? 1 : -1;
-    this.values = [];
-    this.pushRandomSeed();
+    this.currentValue = randomInt(this.min, this.max);
   }
 
   value() {
-    return this.values[this.values.length - 1];
-  }
-
-  pushRandomSeed() {
-    this.values.push(randomInt(this.min, this.max));
+    return this.currentValue;
   }
 
   doMinorShift() {
-    this.values.push(
-      randomShift(
-        this.value(),
-        this.min,
-        this.max,
-        this.minor,
-        this.direction,
-      ),
+    this.previousValue = this.currentValue;
+    this.currentValue = randomShift(
+      this.value(),
+      this.min,
+      this.max,
+      this.minor,
+      this.direction,
     );
-    console.log(this.values);
+
+    if (this.previousValue > this.currentValue) {
+      this.direction = -1;
+    } else {
+      this.direction = 1;
+    }
+
+    if (this.prefix === "color-h") {
+      console.log(`${this.prefix} - Direction: ${this.direction}`);
+    }
+
+    //this.updateDirection();
   }
+
+  // updateDirection() {
+  //   if (this.directionCount > 7) {
+  //     this.directionCount = 0;
+  //     this.direction *= -1;
+  //   } else {
+  //     this.directionCount += 1;
+  //   }
+  // }
 }
 class ColorSeeds {
   constructor() {
@@ -187,8 +200,9 @@ class Letter {
 
   applyColor() {
     Object.entries(this.colors).forEach(([_, color]) => {
-      const varKey = `--${color.prefix}-${this.letter}`;
-      document.documentElement.style.setProperty(varKey, color.value());
+      const key = `--${color.prefix}-${this.letter}`;
+      const value = color.value();
+      document.documentElement.style.setProperty(key, value);
     });
   }
 }
@@ -214,10 +228,12 @@ class Letters {
   }
 
   async init() {
+    this.colorSeeds.doMinorShift();
     await sleep(this.delays.xsmall);
-    this.setAllColorDelays(this.delays.large);
+    this.setAllColorDelays(this.delays.default);
     this.applyAllColors();
-    await sleep(this.delays.large);
+    await sleep(this.delays.default);
+
     this.updateAlice();
   }
 
@@ -237,7 +253,7 @@ class Letters {
     this.colorSeeds.doMinorShift();
     this.setMinorColorUpdatesFromSeeds();
     this.applyAllColors();
-    await sleep(3000);
+    await sleep(this.delays.default);
     this.updateAlice();
     //this.letters["A"].applyColor();
   }

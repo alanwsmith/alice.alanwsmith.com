@@ -7,7 +7,6 @@ class Color {
     this.minor = minor;
     this.major = major;
     this.colorSeed = colorSeeds[this.prefix];
-    this.direction = randomInt(0, 1) === 1 ? 1 : -1;
     this.values = [];
     this.pushMinorRandomValueFromSeed();
   }
@@ -20,7 +19,7 @@ class Color {
         this.min,
         this.max,
         this.minor,
-        this.direction,
+        randomInt(0, 1) === 1 ? 1 : -1,
       ),
     );
   }
