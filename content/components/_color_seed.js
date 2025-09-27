@@ -1,9 +1,10 @@
 class ColorSeed {
-  constructor(min, max, minor, major) {
+  constructor(min, max, minor, major, huge) {
     this.setMin(min);
     this.setMax(max);
     this.setMinor(minor);
     this.setMajor(major);
+    this.setHuge(huge);
     this.setDirection(
       randomInt(0, 1) === 1 ? 1 : -1,
     );
@@ -50,6 +51,10 @@ class ColorSeed {
     ));
   }
 
+  huge() {
+    return this._major;
+  }
+
   major() {
     return this._major;
   }
@@ -73,6 +78,10 @@ class ColorSeed {
 
   setDirection(value) {
     this._direction = value;
+  }
+
+  setHuge(value) {
+    this._major = value;
   }
 
   setMajor(value) {

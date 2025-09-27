@@ -37,6 +37,19 @@ class Letters {
     //  this.baselineUpdate();
   }
 
+  majorShiftFromSeed(prefix) {
+    const seed = this.colorSeeds.seeds[prefix];
+    const value = randomShift(
+      seed.currentValue(),
+      seed.min(),
+      seed.max(),
+      seed.major(),
+      seed.direction(),
+    );
+    console.log(value);
+    return value;
+  }
+
   minorShiftFromSeed(prefix) {
     const seed = this.colorSeeds.seeds[prefix];
     const value = randomShift(
@@ -50,6 +63,19 @@ class Letters {
     return value;
   }
 
+  setMajorColorPrefixesFromSeedsForEveryChar() {
+    const updates = [];
+    this.listOfChars().forEach((char) => {
+      this.listOfColorPrefixes().forEach((prefix) => {
+        const value = this.majorShiftFromSeed(prefix);
+        updates.push([char, {
+          [prefix]: value,
+        }]);
+      });
+    });
+    this.loadUpdates(updates);
+  }
+
   setMinorColorPrefixesFromSeedsForEveryChar() {
     const updates = [];
     this.listOfChars().forEach((char) => {
@@ -60,11 +86,11 @@ class Letters {
         }]);
       });
     });
-    this.setUpdates(updates);
+    this.loadUpdates(updates);
   }
 
   async baselineUpdate() {
-    this.setUpdates(
+    this.loadUpdates(
       {
         "A": {
           "color-transision": 100,
@@ -79,7 +105,7 @@ class Letters {
     this.changePicker();
   }
 
-  setUpdates(payload) {
+  loadUpdates(payload) {
     payload.forEach(([char, details]) => {
       this.listOfColorPrefixes().forEach((prefix) => {
         if (details[prefix] !== undefined) {
@@ -132,38 +158,40 @@ class Letters {
     // this.changePicker();
   }
 
-  setMinorColorUpdatesFromSeeds() {
-    Object.entries(this.letters).forEach(([_, letter]) => {
-      // letter.setMinorColorUpdateFromSeeds();
-    });
-  }
+  // setMinorColorUpdatesFromSeeds() {
+  //   Object.entries(this.letters).forEach(([_, letter]) => {
+  //     // letter.setMinorColorUpdateFromSeeds();
+  //   });
+  // }
 
-  setEveryColorDelay(ms) {
-    Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.setColorDelay(ms);
-    });
-  }
+  // setEveryColorDelay(ms) {
+  //   Object.entries(this.letters).forEach(([_, letter]) => {
+  //     letter.setColorDelay(ms);
+  //   });
+  // }
 
-  async shiftThingsAround() {
-    // this.updateLetterColorsWithSeed();
-    this.updateVarsForLetters();
-    // this.shiftThingsAround();
-  }
+  // async shiftThingsAround() {
+  //   // this.updateLetterColorsWithSeed();
+  //   this.updateVarsForLetters();
+  //   // this.shiftThingsAround();
+  // }
 
-  async doBasicUpdate() {
-    this.colorSeeds.doMinorShift();
-  }
+  // async doBasicUpdate() {
+  //   this.colorSeeds.doMinorShift();
+  // }
 
   addBaseStyles() {
     const stylesSheet = new CSSStyleSheet();
     let styles = [];
   }
 
-  applyAllColors() {
-    Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.applyColor();
-    });
-  }
+  // applyAllColors() {
+  //   Object.entries(this.letters).forEach(([_, letter]) => {
+  //     letter.applyColor();
+  //   });
+  // }
+
+  //
 }
 
 // // TODO: I don't know about this one.

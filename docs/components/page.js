@@ -38,11 +38,12 @@ class ColorPrefix {
   }
 }
 class ColorSeed {
-  constructor(min, max, minor, major) {
+  constructor(min, max, minor, major, huge) {
     this.setMin(min);
     this.setMax(max);
     this.setMinor(minor);
     this.setMajor(major);
+    this.setHuge(huge);
     this.setDirection(
       randomInt(0, 1) === 1 ? 1 : -1,
     );
@@ -89,6 +90,10 @@ class ColorSeed {
     ));
   }
 
+  huge() {
+    return this._major;
+  }
+
   major() {
     return this._major;
   }
@@ -112,6 +117,10 @@ class ColorSeed {
 
   setDirection(value) {
     this._direction = value;
+  }
+
+  setHuge(value) {
+    this._major = value;
   }
 
   setMajor(value) {
@@ -153,6 +162,7 @@ class ColorSeeds {
         parseInt(parts[3]),
         parseInt(parts[7]),
         parseInt(parts[8]),
+        parseInt(parts[9]),
       );
     });
   }
@@ -187,26 +197,26 @@ class ColorSeeds {
 // TODO: Move the style prop prefix to the key
 
 const colorSet = [
-  "color-l|_|50|70|_|color-l|%|10|30",
-  "color-c|_|0|140|_|color-c||18|60",
-  "color-h|_|0|360|_|color-h||56|200|",
+  "color-l|_|50|70|_|color-l|%|10|20|30",
+  "color-c|_|0|140|_|color-c||18|30|60",
+  "color-h|_|0|360|_|color-h||56|120|200|",
 ];
 
 const propSet = [
-  "BLDA|_|0|1000|_|BLDA||150|500",
-  "BLDB|_|0|1000|_|BLDB||150|500",
-  "SKLA|_|0|1000|_|SKLA||150|500",
-  "SKLB|_|0|1000|_|SKLB||150|500",
-  "SKLD|_|0|1000|_|SKLD||150|500",
-  "TRMA|_|0|1000|_|TRMA||150|500",
-  "TRMB|_|0|1000|_|TRMB||150|500",
-  "TRMC|_|0|1000|_|TRMC||150|500",
-  "TRMD|_|0|1000|_|TRMD||150|500",
-  "TRME|_|0|1000|_|TRME||150|500",
-  "TRMF|_|0|1000|_|TRMF||150|500",
-  "TRMG|_|0|1000|_|TRMG||150|500",
-  "TRMK|_|0|1000|_|TRMK||150|500",
-  "TRML|_|0|1000|_|TRML||150|500",
+  "BLDA|_|0|1000|_|BLDA||150|300|500",
+  "BLDB|_|0|1000|_|BLDB||150|300|500",
+  "SKLA|_|0|1000|_|SKLA||150|300|500",
+  "SKLB|_|0|1000|_|SKLB||150|300|500",
+  "SKLD|_|0|1000|_|SKLD||150|300|500",
+  "TRMA|_|0|1000|_|TRMA||150|300|500",
+  "TRMB|_|0|1000|_|TRMB||150|300|500",
+  "TRMC|_|0|1000|_|TRMC||150|300|500",
+  "TRMD|_|0|1000|_|TRMD||150|300|500",
+  "TRME|_|0|1000|_|TRME||150|300|500",
+  "TRMF|_|0|1000|_|TRMF||150|300|500",
+  "TRMG|_|0|1000|_|TRMG||150|300|500",
+  "TRMK|_|0|1000|_|TRMK||150|300|500",
+  "TRML|_|0|1000|_|TRML||150|300|500",
 ];
 
 // TODO: Deprecate styleSet;
@@ -291,6 +301,19 @@ class Letters {
     //  this.baselineUpdate();
   }
 
+  majorShiftFromSeed(prefix) {
+    const seed = this.colorSeeds.seeds[prefix];
+    const value = randomShift(
+      seed.currentValue(),
+      seed.min(),
+      seed.max(),
+      seed.major(),
+      seed.direction(),
+    );
+    console.log(value);
+    return value;
+  }
+
   minorShiftFromSeed(prefix) {
     const seed = this.colorSeeds.seeds[prefix];
     const value = randomShift(
@@ -304,6 +327,19 @@ class Letters {
     return value;
   }
 
+  setMajorColorPrefixesFromSeedsForEveryChar() {
+    const updates = [];
+    this.listOfChars().forEach((char) => {
+      this.listOfColorPrefixes().forEach((prefix) => {
+        const value = this.majorShiftFromSeed(prefix);
+        updates.push([char, {
+          [prefix]: value,
+        }]);
+      });
+    });
+    this.loadUpdates(updates);
+  }
+
   setMinorColorPrefixesFromSeedsForEveryChar() {
     const updates = [];
     this.listOfChars().forEach((char) => {
@@ -314,11 +350,11 @@ class Letters {
         }]);
       });
     });
-    this.setUpdates(updates);
+    this.loadUpdates(updates);
   }
 
   async baselineUpdate() {
-    this.setUpdates(
+    this.loadUpdates(
       {
         "A": {
           "color-transision": 100,
@@ -333,7 +369,7 @@ class Letters {
     this.changePicker();
   }
 
-  setUpdates(payload) {
+  loadUpdates(payload) {
     payload.forEach(([char, details]) => {
       this.listOfColorPrefixes().forEach((prefix) => {
         if (details[prefix] !== undefined) {
@@ -386,38 +422,40 @@ class Letters {
     // this.changePicker();
   }
 
-  setMinorColorUpdatesFromSeeds() {
-    Object.entries(this.letters).forEach(([_, letter]) => {
-      // letter.setMinorColorUpdateFromSeeds();
-    });
-  }
+  // setMinorColorUpdatesFromSeeds() {
+  //   Object.entries(this.letters).forEach(([_, letter]) => {
+  //     // letter.setMinorColorUpdateFromSeeds();
+  //   });
+  // }
 
-  setEveryColorDelay(ms) {
-    Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.setColorDelay(ms);
-    });
-  }
+  // setEveryColorDelay(ms) {
+  //   Object.entries(this.letters).forEach(([_, letter]) => {
+  //     letter.setColorDelay(ms);
+  //   });
+  // }
 
-  async shiftThingsAround() {
-    // this.updateLetterColorsWithSeed();
-    this.updateVarsForLetters();
-    // this.shiftThingsAround();
-  }
+  // async shiftThingsAround() {
+  //   // this.updateLetterColorsWithSeed();
+  //   this.updateVarsForLetters();
+  //   // this.shiftThingsAround();
+  // }
 
-  async doBasicUpdate() {
-    this.colorSeeds.doMinorShift();
-  }
+  // async doBasicUpdate() {
+  //   this.colorSeeds.doMinorShift();
+  // }
 
   addBaseStyles() {
     const stylesSheet = new CSSStyleSheet();
     let styles = [];
   }
 
-  applyAllColors() {
-    Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.applyColor();
-    });
-  }
+  // applyAllColors() {
+  //   Object.entries(this.letters).forEach(([_, letter]) => {
+  //     letter.applyColor();
+  //   });
+  // }
+
+  //
 }
 
 // // TODO: I don't know about this one.

@@ -8,6 +8,7 @@ class ColorSeeds {
         parseInt(parts[3]),
         parseInt(parts[7]),
         parseInt(parts[8]),
+        parseInt(parts[9]),
       );
     });
   }
