@@ -14,8 +14,20 @@ class Letters {
 
   async init() {
     await sleep(200);
-    this.updateVarsForLetters();
-    // this.shiftThingsAround();
+    this.applyAllColors();
+    // await sleep(1600);
+    // this.updateAlice();
+  }
+
+  setMinorColorUpdatesFromSeeds() {
+    Object.entries(this.letters).forEach(([_, letter]) => {
+      letter.setMinorColorUpdateFromSeeds();
+    });
+  }
+
+  updateAlice() {
+    this.colorSeeds.doMinorShift();
+    this.setMinorColorUpdatesFromSeeds();
   }
 
   async shiftThingsAround() {
@@ -33,9 +45,9 @@ class Letters {
     let styles = [];
   }
 
-  updateVarsForLetters() {
+  applyAllColors() {
     Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.updateVarsForLetter();
+      letter.applyColor();
     });
   }
 }
