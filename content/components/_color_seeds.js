@@ -25,9 +25,15 @@ class ColorSeeds {
     });
   }
 
-  doRandomShift() {
+  generateRandomSeeds() {
     Object.entries(this.seeds).forEach(([_, seed]) => {
-      seed.doRandomShift();
+      seed.generateRandomSeed();
+    });
+  }
+
+  prefixes() {
+    return Object.entries(this.seeds).map(([prefix, _]) => {
+      return prefix;
     });
   }
 }

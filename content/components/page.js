@@ -9,7 +9,7 @@
 // Helped me refine a bunch. I really like
 // the way it's working.
 
-[! include "components/_color.js" !]
+[! include "components/_color_prefix.js" !]
 
 [! include "components/_color_seed.js" !]
 

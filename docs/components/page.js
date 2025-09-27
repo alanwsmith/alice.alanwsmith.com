@@ -9,42 +9,32 @@
 // Helped me refine a bunch. I really like
 // the way it's working.
 
-class Color {
-  constructor(prefix, min, max, unit, minor, major, colorSeeds) {
-    this.prefix = prefix;
-    this.min = min;
-    this.max = max;
-    this.unit = unit;
-    this.minor = minor;
-    this.major = major;
-    this.colorSeed = colorSeeds[this.prefix];
-    this.currentValue = null;
-    this.previousValue = null;
-    this.setMinorRandomValueFromSeed();
+class ColorPrefix {
+  constructor(unit) {
+    this._unit = unit;
+    this._currentValue = null;
+    this._previousValue = null;
   }
 
-  setValue(value) {
-    this.previousValue = this.currentValue;
-    this.currentValue = value;
+  currentValueString() {
+    return `${this.currentValue()}${this.unit()}`;
   }
 
-  setMinorRandomValueFromSeed() {
-    this.previousValue = this.currentValue;
-    this.currentValue = randomShift(
-      this.colorSeed.value(),
-      this.min,
-      this.max,
-      this.minor,
-      randomInt(0, 1) === 1 ? 1 : -1,
-    );
+  currentValue() {
+    return this._currentValue;
   }
 
-  value() {
-    return this.currentValue;
+  setCurrentValue(value) {
+    this.setPreviousValue = this.currentValue();
+    this._currentValue = value;
   }
 
-  valueString() {
-    return `${this.currentValue}${this.unit}`;
+  setPreviousValue(value) {
+    this._previousValue = value;
+  }
+
+  unit() {
+    return this._unit;
   }
 }
 class ColorSeed {
@@ -90,7 +80,7 @@ class ColorSeed {
     }
   }
 
-  doRandomShift() {
+  generateRandomSeed() {
     this.previousValue = this.currentValue;
     this.currentValue = randomInt(
       this.min,
@@ -105,6 +95,10 @@ class ColorSeed {
   setValue(value) {
     this.previousValue = this.currentValue;
     this.currentValue = value;
+  }
+
+  prefix() {
+    return this.prefix;
   }
 
   value() {
@@ -138,9 +132,15 @@ class ColorSeeds {
     });
   }
 
-  doRandomShift() {
+  generateRandomSeeds() {
     Object.entries(this.seeds).forEach(([_, seed]) => {
-      seed.doRandomShift();
+      seed.generateRandomSeed();
+    });
+  }
+
+  prefixes() {
+    return Object.entries(this.seeds).map(([prefix, _]) => {
+      return prefix;
     });
   }
 }
@@ -184,46 +184,47 @@ const styleSet = propSet;
 // "Size|_|2|3|0.05|font-size|rem||",
 // "Rotate|0|0|0|0|rotate|deg",
 class Letter {
-  constructor(letter, colorSeeds, propSeeds) {
+  constructor(letter) {
     this.char = letter;
-    this.lastApplied = {};
-    this.setColorDelay(3000);
-    this.initColors(colorSeeds);
-    this.initProps(propSeeds);
+    this.initColorPrefixes();
+    this.previousUpdate = {};
   }
 
-  initColors(colorSeeds) {
-    this.colors = {};
+  initColorPrefixes() {
+    this.colorPrefixes = {};
     colorSet.forEach((line) => {
       const parts = line.split("|");
-      this.colors[parts[0]] = new Color(
-        parts[0],
-        parseInt(parts[2]),
-        parseInt(parts[3]),
+      this.colorPrefixes[parts[0]] = new ColorPrefix(
         parts[6],
-        parseInt(parts[7]),
-        parseInt(parts[8]),
-        colorSeeds.seeds,
       );
     });
   }
 
-  initProps() {
-    this.props = {};
-    propSet.forEach((line) => {
-      const parts = line.split("|");
-      this.props[parts[0]] = new Prop(
-        parts[0],
-        parseInt(parts[2]),
-        parseInt(parts[3]),
-        parseInt(parts[7]),
-        parseInt(parts[8]),
-      );
-    });
-  }
+  // initProps() {
+  //   this.props = {};
+  //   propSet.forEach((line) => {
+  //     const parts = line.split("|");
+  //     this.props[parts[0]] = new Prop(
+  //       parts[0],
+  //       parseInt(parts[2]),
+  //       parseInt(parts[3]),
+  //       parseInt(parts[7]),
+  //       parseInt(parts[8]),
+  //     );
+  //   });
+  // }
 
-  setColorL(value) {
-    this.colors["color-l"].setValue(value);
+  // // TODO: Deprecate this
+  // setColorL(value) {
+  //   this.colors["color-l"].setValue(value);
+  // }
+
+  setColorPrefix(prefix, value) {
+    // console.log(prefix);
+    // console.log(value);
+    //console.log(this.colors[prefix].value());
+    this.colorPrefixes[prefix].setCurrentValue(value);
+    // console.log(this.colorPrefixes[prefix].currentValue());
   }
 
   setColorDelay(ms) {
@@ -238,58 +239,104 @@ class Letter {
     });
   }
 
-  applyColor() {
-    Object.entries(this.colors).forEach(([_, color]) => {
-      if (this.lastApplied[color.prefix] !== color.value) {
-        const key = `--${color.prefix}-${this.char}`;
-        const value = color.value();
+  applyColorPrefixes() {
+    Object.entries(this.colorPrefixes).forEach(([prefix, details]) => {
+      const key = `--${prefix}-${this.char}`;
+      if (this.previousUpdate[key] !== details.currentValueString()) {
+        const value = details.currentValueString();
         document.documentElement.style.setProperty(key, value);
-        this.lastApplied[color.prefix] = color.value;
+        this.previousUpdate[key] = value;
       }
     });
-  }
-
-  setColor(prefix, value) {
-    this.colors[prefix].setValue(value);
   }
 }
 class Letters {
   constructor() {
     this.delays = {
-      "xsmall": 200,
-      "small": 500,
-      "default": 1000,
-      "large": 1500,
-      "xlarge": 2000,
+      "xxsmall": 300,
+      "xsmall": 500,
+      "small": 1500,
+      "default": 4000,
+      "large": 6500,
+      "xlarge": 12000,
     };
+    this.initLetters();
     this.colorSeeds = new ColorSeeds();
-    this.propSeeds = new PropSeeds();
+  }
+
+  initLetters(colorSeeds) {
     this.letters = {};
-    letters().forEach((letter) => {
-      this.letters[letter] = new Letter(
-        letter,
-        this.colorSeeds,
-        this.propSeeds,
+    chars().forEach((char) => {
+      this.letters[char] = new Letter(
+        char,
       );
     });
   }
 
-  letterArray() {
-    return Object.entries(this.letters).map(([_, letter]) => letter);
+  listOfChars() {
+    return Object.entries(this.letters).map(([char, _]) => char);
+  }
+
+  listOfColorPrefixes() {
+    return Object.entries(this.colorSeeds.seeds).map(([prefix, _]) => prefix);
   }
 
   async start() {
+    this.colorSeeds.generateRandomSeeds();
+    this.setMinorColorPrefixesFromSeedsForEveryChar();
+    this.applyColorPrefixes();
     await sleep(this.delays.xsmall);
-    this.baselineUpdate();
+    //  this.baselineUpdate();
+  }
+
+  setMinorColorPrefixesFromSeedsForEveryChar() {
+    const updates = [];
+    this.listOfChars().forEach((char) => {
+      this.listOfColorPrefixes().forEach((prefix) => {
+        updates.push([char, { [prefix]: randomInt(30, 80) }]);
+      });
+    });
+    this.setUpdates(updates);
   }
 
   async baselineUpdate() {
-    this.colorSeeds.doMinorShift();
-    this.setEveryColorDelay(this.delays.default);
-    this.applyAllColors();
+    this.setUpdates(
+      {
+        "A": {
+          "color-transision": 100,
+          "color-l": randomInt(30, 80),
+          "color-c": randomInt(30, 80),
+          "color-h": randomInt(30, 80),
+        },
+      },
+    );
+    this.applyUpdates();
     await sleep(this.delays.default);
     this.changePicker();
   }
+
+  setUpdates(payload) {
+    payload.forEach(([char, details]) => {
+      this.listOfColorPrefixes().forEach((prefix) => {
+        if (details[prefix] !== undefined) {
+          this.letters[char].setColorPrefix(prefix, details[prefix]);
+        }
+      });
+    });
+  }
+
+  applyColorPrefixes() {
+    Object.entries(this.letters).forEach(([_, letter]) => {
+      // console.log(letter);
+      letter.applyColorPrefixes();
+    });
+  }
+
+  // applyUpdates() {
+  //   Object.entries(this.letters).forEach(([_, letter]) => {
+  //     letter.applyColorPrefixes();
+  //   });
+  // }
 
   async changePicker() {
     [
@@ -303,8 +350,12 @@ class Letters {
   async makeMonochrome() {
     this.setEveryColorDelay(this.delays.default);
     this.setEveryColor("color-c", 2);
-    // this.applyAllColors();
+    this.applyAllColors();
     await sleep(this.delays.default);
+  }
+
+  setSingleColorDelay(char, value) {
+    this.letters[char].setColorDelay(value);
   }
 
   setEveryColor(prefix, value) {
@@ -358,6 +409,30 @@ class Letters {
     });
   }
 }
+
+// // TODO: I don't know about this one.
+// async initialUpdate() {
+//   const localDelay = this.delays.xsmall;
+//   this.colorSeeds.doMinorShift();
+//   this.setSingleColorDelay("A", localDelay);
+//   this.applySingleColor("A");
+//   await sleep(localDelay);
+//   this.setSingleColorDelay("L", localDelay);
+//   this.applySingleColor("L");
+//   await sleep(localDelay);
+//   this.setSingleColorDelay("I", localDelay);
+//   this.applySingleColor("I");
+//   await sleep(localDelay);
+//   this.setSingleColorDelay("C", localDelay);
+//   this.applySingleColor("C");
+//   await sleep(localDelay);
+//   this.setSingleColorDelay("E", localDelay);
+//   this.applySingleColor("E");
+//   await sleep(localDelay);
+//   this.applyAllColors();
+//   await sleep(this.delays.xlarge);
+//   this.changePicker();
+// }
 class Prop {
   constructor(prefix, min, max, minor, major) {
     this.prefix = prefix;
@@ -497,7 +572,7 @@ function addBaseStyleSheet() {
       'TRMG' var(--TRMG-Q), 
       'TRMK' var(--TRMK-Q), 
       'TRML' var(--TRML-Q);}`);
-  letters().forEach((letter) => {
+  chars().forEach((letter) => {
     styles.push(`.letter-${letter} { 
       font-size: var(--letter-font-size);
       color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) ); 
@@ -564,7 +639,7 @@ function isLetter(char) {
   return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
 }
 
-function letters() {
+function chars() {
   let output = [];
   for (let num = 65; num <= 90; num += 1) {
     output.push(String.fromCharCode(num));

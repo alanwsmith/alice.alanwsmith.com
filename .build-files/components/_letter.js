@@ -1,44 +1,45 @@
 class Letter {
-  constructor(letter, colorSeeds, propSeeds) {
+  constructor(letter) {
     this.char = letter;
-    this.lastApplied = {};
-    this.setColorDelay(3000);
-    this.initColors(colorSeeds);
-    this.initProps(propSeeds);
+    this.initColorPrefixes();
+    this.previousUpdate = {};
   }
 
-  initColors(colorSeeds) {
-    this.colors = {};
+  initColorPrefixes() {
+    this.colorPrefixes = {};
     colorSet.forEach((line) => {
       const parts = line.split("|");
-      this.colors[parts[0]] = new Color(
-        parts[0],
-        parseInt(parts[2]),
-        parseInt(parts[3]),
+      this.colorPrefixes[parts[0]] = new ColorPrefix(
         parts[6],
-        parseInt(parts[7]),
-        parseInt(parts[8]),
-        colorSeeds.seeds,
       );
     });
   }
 
-  initProps() {
-    this.props = {};
-    propSet.forEach((line) => {
-      const parts = line.split("|");
-      this.props[parts[0]] = new Prop(
-        parts[0],
-        parseInt(parts[2]),
-        parseInt(parts[3]),
-        parseInt(parts[7]),
-        parseInt(parts[8]),
-      );
-    });
-  }
+  // initProps() {
+  //   this.props = {};
+  //   propSet.forEach((line) => {
+  //     const parts = line.split("|");
+  //     this.props[parts[0]] = new Prop(
+  //       parts[0],
+  //       parseInt(parts[2]),
+  //       parseInt(parts[3]),
+  //       parseInt(parts[7]),
+  //       parseInt(parts[8]),
+  //     );
+  //   });
+  // }
 
-  setColorL(value) {
-    this.colors["color-l"].setValue(value);
+  // // TODO: Deprecate this
+  // setColorL(value) {
+  //   this.colors["color-l"].setValue(value);
+  // }
+
+  setColorPrefix(prefix, value) {
+    // console.log(prefix);
+    // console.log(value);
+    //console.log(this.colors[prefix].value());
+    this.colorPrefixes[prefix].setCurrentValue(value);
+    // console.log(this.colorPrefixes[prefix].currentValue());
   }
 
   setColorDelay(ms) {
@@ -53,18 +54,14 @@ class Letter {
     });
   }
 
-  applyColor() {
-    Object.entries(this.colors).forEach(([_, color]) => {
-      if (this.lastApplied[color.prefix] !== color.value) {
-        const key = `--${color.prefix}-${this.char}`;
-        const value = color.value();
+  applyColorPrefixes() {
+    Object.entries(this.colorPrefixes).forEach(([prefix, details]) => {
+      const key = `--${prefix}-${this.char}`;
+      if (this.previousUpdate[key] !== details.currentValueString()) {
+        const value = details.currentValueString();
         document.documentElement.style.setProperty(key, value);
-        this.lastApplied[color.prefix] = color.value;
+        this.previousUpdate[key] = value;
       }
     });
-  }
-
-  setColor(prefix, value) {
-    this.colors[prefix].setValue(value);
   }
 }

@@ -26,7 +26,7 @@ function addBaseStyleSheet() {
       'TRMG' var(--TRMG-Q), 
       'TRMK' var(--TRMK-Q), 
       'TRML' var(--TRML-Q);}`);
-  letters().forEach((letter) => {
+  chars().forEach((letter) => {
     styles.push(`.letter-${letter} { 
       font-size: var(--letter-font-size);
       color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) ); 
@@ -93,7 +93,7 @@ function isLetter(char) {
   return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
 }
 
-function letters() {
+function chars() {
   let output = [];
   for (let num = 65; num <= 90; num += 1) {
     output.push(String.fromCharCode(num));

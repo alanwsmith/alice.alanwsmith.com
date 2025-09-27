@@ -41,7 +41,7 @@ class ColorSeed {
     }
   }
 
-  doRandomShift() {
+  generateRandomSeed() {
     this.previousValue = this.currentValue;
     this.currentValue = randomInt(
       this.min,
@@ -56,6 +56,10 @@ class ColorSeed {
   setValue(value) {
     this.previousValue = this.currentValue;
     this.currentValue = value;
+  }
+
+  prefix() {
+    return this.prefix;
   }
 
   value() {
