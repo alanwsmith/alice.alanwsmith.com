@@ -1,6 +1,7 @@
 class Letter {
   constructor(letter, colorSeeds, propSeeds) {
     this.letter = letter;
+    this.setColorTransitionTime(1200);
     this.initColors(colorSeeds);
     this.initProps(propSeeds);
   }
@@ -35,10 +36,16 @@ class Letter {
     });
   }
 
+  setColorTransitionTime(ms) {
+    const key = `--color-transition-${this.letter}`;
+    const value = `${ms}ms`;
+    document.documentElement.style.setProperty(key, value);
+  }
+
   updateVarsForLetter() {
     Object.entries(this.colors).forEach(([_, color]) => {
       const varKey = `--${color.prefix}-${this.letter}`;
-      document.documentElement.style.setProperty(varKey, color.valueString());
+      document.documentElement.style.setProperty(varKey, color.value());
     });
   }
 }

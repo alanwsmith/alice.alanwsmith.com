@@ -28,18 +28,9 @@ class Color {
     );
   }
 
-  valueString() {
+  value() {
     return `${this.values[this.values.length - 1]}${this.unit}`;
   }
-
-  // currentValue() {
-  //   return this.values[this.values.length - 1];
-  // }
-
-  //  updateColorVar() {
-  //    console.log(this.prefix);
-  //    //document.documentElement.style.setProperty(this.prefix, this.valueString());
-  //  }
 }
 class ColorSeed {
   constructor(prefix, min, max, minor, major) {
@@ -59,6 +50,10 @@ class ColorSeed {
   pushRandomSeed() {
     this.moves.push(randomInt(this.min, this.max));
   }
+
+  doMinorShift() {
+    console.log("here");
+  }
 }
 class ColorSeeds {
   constructor() {
@@ -73,6 +68,12 @@ class ColorSeeds {
         parseInt(parts[7]),
         parseInt(parts[8]),
       );
+    });
+  }
+
+  doMinorShift() {
+    Object.entries(this.seeds).forEach(([_, seed]) => {
+      seed.doMinorShift();
     });
   }
 }
@@ -118,6 +119,7 @@ const styleSet = propSet;
 class Letter {
   constructor(letter, colorSeeds, propSeeds) {
     this.letter = letter;
+    this.setColorTransitionTime(1200);
     this.initColors(colorSeeds);
     this.initProps(propSeeds);
   }
@@ -152,10 +154,16 @@ class Letter {
     });
   }
 
+  setColorTransitionTime(ms) {
+    const key = `--color-transition-${this.letter}`;
+    const value = `${ms}ms`;
+    document.documentElement.style.setProperty(key, value);
+  }
+
   updateVarsForLetter() {
     Object.entries(this.colors).forEach(([_, color]) => {
       const varKey = `--${color.prefix}-${this.letter}`;
-      document.documentElement.style.setProperty(varKey, color.valueString());
+      document.documentElement.style.setProperty(varKey, color.value());
     });
   }
 }
@@ -171,6 +179,22 @@ class Letters {
         this.propSeeds,
       );
     });
+  }
+
+  async init() {
+    await sleep(200);
+    this.updateVarsForLetters();
+    // this.shiftThingsAround();
+  }
+
+  async shiftThingsAround() {
+    // this.updateLetterColorsWithSeed();
+    this.updateVarsForLetters();
+    // this.shiftThingsAround();
+  }
+
+  async doBasicUpdate() {
+    this.colorSeeds.doMinorShift();
   }
 
   addBaseStyles() {
@@ -307,7 +331,7 @@ function addBaseStyleSheet() {
     font-size: var(--default-font-size);
     color: lch(var(--color-l-Q) var(--color-c-Q) var(--color-h-Q) ); 
     transition-property: color;
-    transition-duration: var(--transition-time-Q);
+    transition-duration: var(--color-transition-Q);
     font-variation-settings: 
       'BLDA' var(--BLDA-Q), 
       'BLDB' var(--BLDB-Q), 
@@ -328,7 +352,7 @@ function addBaseStyleSheet() {
       font-size: var(--letter-font-size);
       color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) ); 
       transition-property: color;
-      transition-duration: var(--transition-time-${letter});
+      transition-duration: var(--color-transition-${letter});
       font-variation-settings: 
         'BLDA' var(--BLDA-${letter}), 
         'BLDB' var(--BLDB-${letter}), 
@@ -709,7 +733,7 @@ export default class {
   bittyInit() {
     addBaseStyleSheet();
     const letters = new Letters();
-    letters.updateVarsForLetters();
+    letters.init();
 
     // state.updateSeeds();
     // state.updateLetters();

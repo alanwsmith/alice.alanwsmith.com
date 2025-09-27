@@ -12,6 +12,22 @@ class Letters {
     });
   }
 
+  async init() {
+    await sleep(200);
+    this.updateVarsForLetters();
+    // this.shiftThingsAround();
+  }
+
+  async shiftThingsAround() {
+    // this.updateLetterColorsWithSeed();
+    this.updateVarsForLetters();
+    // this.shiftThingsAround();
+  }
+
+  async doBasicUpdate() {
+    this.colorSeeds.doMinorShift();
+  }
+
   addBaseStyles() {
     const stylesSheet = new CSSStyleSheet();
     let styles = [];

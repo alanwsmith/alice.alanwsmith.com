@@ -10,7 +10,7 @@ function addBaseStyleSheet() {
     font-size: var(--default-font-size);
     color: lch(var(--color-l-Q) var(--color-c-Q) var(--color-h-Q) ); 
     transition-property: color;
-    transition-duration: var(--transition-time-Q);
+    transition-duration: var(--color-transition-Q);
     font-variation-settings: 
       'BLDA' var(--BLDA-Q), 
       'BLDB' var(--BLDB-Q), 
@@ -31,7 +31,7 @@ function addBaseStyleSheet() {
       font-size: var(--letter-font-size);
       color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) ); 
       transition-property: color;
-      transition-duration: var(--transition-time-${letter});
+      transition-duration: var(--color-transition-${letter});
       font-variation-settings: 
         'BLDA' var(--BLDA-${letter}), 
         'BLDB' var(--BLDB-${letter}), 

@@ -13,4 +13,10 @@ class ColorSeeds {
       );
     });
   }
+
+  doMinorShift() {
+    Object.entries(this.seeds).forEach(([_, seed]) => {
+      seed.doMinorShift();
+    });
+  }
 }

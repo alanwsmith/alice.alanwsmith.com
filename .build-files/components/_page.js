@@ -2,7 +2,7 @@ export default class {
   bittyInit() {
     addBaseStyleSheet();
     const letters = new Letters();
-    letters.updateVarsForLetters();
+    letters.init();
 
     // state.updateSeeds();
     // state.updateLetters();

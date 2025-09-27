@@ -17,16 +17,7 @@ class Color {
     );
   }
 
-  valueString() {
+  value() {
     return `${this.values[this.values.length - 1]}${this.unit}`;
   }
-
-  // currentValue() {
-  //   return this.values[this.values.length - 1];
-  // }
-
-  //  updateColorVar() {
-  //    console.log(this.prefix);
-  //    //document.documentElement.style.setProperty(this.prefix, this.valueString());
-  //  }
 }

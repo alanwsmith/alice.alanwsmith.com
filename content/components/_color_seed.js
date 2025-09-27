@@ -16,4 +16,8 @@ class ColorSeed {
   pushRandomSeed() {
     this.moves.push(randomInt(this.min, this.max));
   }
+
+  doMinorShift() {
+    console.log("here");
+  }
 }
