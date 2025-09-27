@@ -264,7 +264,7 @@ class Letter {
 }
 class Letters {
   constructor() {
-    this.delays = {
+    this._delays = {
       "xxsmall": 300,
       "xsmall": 500,
       "small": 1500,
@@ -272,8 +272,29 @@ class Letters {
       "large": 6500,
       "xlarge": 12000,
     };
+    this.setCurrentDelay("default");
     this.initLetters();
     this.colorSeeds = new ColorSeeds();
+    this.collections = {
+      first: [
+        this.prepRandomSeeds.bind(this),
+        this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
+        this.applyUpdates.bind(this),
+        //await sleep(this._delays.xsmall),
+      ],
+    };
+  }
+
+  getDelay(key) {
+    return this._delays[key];
+  }
+
+  currentDelay() {
+    return this._currentDelay;
+  }
+
+  setCurrentDelay(key) {
+    this._currentDelay = this._delays[key];
   }
 
   initLetters(colorSeeds) {
@@ -293,15 +314,35 @@ class Letters {
     return Object.entries(this.colorSeeds.seeds).map(([prefix, _]) => prefix);
   }
 
+  async runCollection(key = "random") {
+    if (key === "random") {
+      // TODO randomise this when there are more
+      key = "first";
+    }
+    // console.log(`Running collection: ${key}`);
+
+    this.collections[key].forEach((update) => {
+      update();
+      // console.log(update);
+    });
+  }
+
   async start() {
-    this.colorSeeds.generateRandomSeeds();
-    this.setMinorColorPrefixesFromSeedsForEveryChar();
-    this.applyUpdates();
-    await sleep(this.delays.xsmall);
+    await this.runCollection("first");
+    // this.colorSeeds.generateRandomSeeds();
+    // this.loadMajorColorPrefixesFromSeedsForEveryChar();
+    // this.applyUpdates();
+    // await sleep(this._delays.xsmall);
+
     //  this.baselineUpdate();
   }
 
-  majorShiftFromSeed(prefix) {
+  prepRandomSeeds() {
+    console.log("Prepping random seeds");
+    this.colorSeeds.generateRandomSeeds();
+  }
+
+  getMajorShiftFromSeed(prefix) {
     const seed = this.colorSeeds.seeds[prefix];
     const value = randomShift(
       seed.currentValue(),
@@ -314,7 +355,7 @@ class Letters {
     return value;
   }
 
-  minorShiftFromSeed(prefix) {
+  getMinorShiftFromSeed(prefix) {
     const seed = this.colorSeeds.seeds[prefix];
     const value = randomShift(
       seed.currentValue(),
@@ -327,11 +368,11 @@ class Letters {
     return value;
   }
 
-  setMajorColorPrefixesFromSeedsForEveryChar() {
+  loadMajorColorPrefixesFromSeedsForEveryChar() {
     const updates = [];
     this.listOfChars().forEach((char) => {
       this.listOfColorPrefixes().forEach((prefix) => {
-        const value = this.majorShiftFromSeed(prefix);
+        const value = this.getMajorShiftFromSeed(prefix);
         updates.push([char, {
           [prefix]: value,
         }]);
@@ -340,7 +381,7 @@ class Letters {
     this.loadUpdates(updates);
   }
 
-  setMinorColorPrefixesFromSeedsForEveryChar() {
+  loadMinorColorPrefixesFromSeedsForEveryChar() {
     const updates = [];
     this.listOfChars().forEach((char) => {
       this.listOfColorPrefixes().forEach((prefix) => {
@@ -365,7 +406,7 @@ class Letters {
       },
     );
     this.applyUpdates();
-    await sleep(this.delays.default);
+    await sleep(this._delays.default);
     this.changePicker();
   }
 
