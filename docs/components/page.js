@@ -83,7 +83,7 @@ class ColorSeed {
     return this._direction;
   }
 
-  generateRandomSeed() {
+  generateSeed(key) {
     this.setCurrentValue(randomInt(
       this.min(),
       this.max(),
@@ -179,9 +179,9 @@ class ColorSeeds {
     });
   }
 
-  generateRandomSeeds() {
+  generateSeeds(key) {
     Object.entries(this.seeds).forEach(([_, seed]) => {
-      seed.generateRandomSeed();
+      seed.generateSeed(key);
     });
   }
 }
@@ -197,7 +197,7 @@ class ColorSeeds {
 // TODO: Move the style prop prefix to the key
 
 const colorSet = [
-  "color-l|_|50|70|_|color-l|%|10|20|30",
+  "color-l|_|60|90|_|color-l|%|10|20|30",
   "color-c|_|0|140|_|color-c||18|30|60",
   "color-h|_|0|360|_|color-h||56|120|200|",
 ];
@@ -297,12 +297,22 @@ class Letters {
 
     this.collections = {
       first: [
-        this.setCurrentUpdateDelay.bind(this, "small"),
-        this.setColorPrefixDelaysForAllChars.bind(this, "small"),
-        this.prepRandomSeeds.bind(this),
+        this.setColorPrefixDelaysForAllChars.bind(this, "default"),
+        this.applyUpdates.bind(this),
+        this.setCurrentUpdateDelay.bind(this, "xxsmall"),
+        this.doDelay.bind(this),
+        this.generateSeeds.bind(this, "random"),
         this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
         this.applyUpdates.bind(this),
-        this.doDelay,
+        // this.setCurrentUpdateDelay.bind(this, "xxsmall"),
+        // this.doDelay.bind(this),
+        // this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
+        // this.setCurrentUpdateDelay.bind(this, "default"),
+        // this.applyUpdates.bind(this),
+        // this.doDelay.bind(this),
+        // this.prepRandomSeeds.bind(this),
+        // this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
+        // this.applyUpdates.bind(this),
       ],
     };
   }
@@ -312,7 +322,7 @@ class Letters {
     this.listOfChars().forEach((char) => {
       updates.push([char, {
         key: "--color-transition",
-        value: this.getDelayForKey(key),
+        value: `${this.getDelayForKey(key)}ms`,
       }]);
     });
     this.loadUpdates(updates);
@@ -322,18 +332,13 @@ class Letters {
     if (key === "random") {
       key = "first"; // TODO: make random when there's other stuff
     }
-
-    // this.collections[key].forEach(async (update) => {
-    //   await update();
-    // });
-
     for (let update of this.collections[key]) {
       await update();
     }
   }
 
   async doDelay() {
-    await sleep(1600);
+    await sleep(this.currentUpdateDelay());
   }
 
   getDelayForKey(key) {
@@ -373,9 +378,8 @@ class Letters {
     await this.runCollection("first");
   }
 
-  prepRandomSeeds() {
-    console.log("Prepping random seeds");
-    this.colorSeeds.generateRandomSeeds();
+  generateSeeds(key) {
+    this.colorSeeds.generateSeeds(key);
   }
 
   getMajorShiftFromSeed(prefix) {
@@ -676,7 +680,6 @@ function addBaseStyleSheet() {
   styles.push(`:root{
 --default-font-size: 1.0rem;
 --letter-font-size: 2.7rem;
---color-h-A: 200;
 }`);
   styles.push(`.output { 
     font-size: var(--default-font-size);

@@ -18,12 +18,22 @@ class Letters {
 
     this.collections = {
       first: [
-        this.setCurrentUpdateDelay.bind(this, "small"),
-        this.setColorPrefixDelaysForAllChars.bind(this, "small"),
-        this.prepRandomSeeds.bind(this),
+        this.setColorPrefixDelaysForAllChars.bind(this, "default"),
+        this.applyUpdates.bind(this),
+        this.setCurrentUpdateDelay.bind(this, "xxsmall"),
+        this.doDelay.bind(this),
+        this.generateSeeds.bind(this, "random"),
         this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
         this.applyUpdates.bind(this),
-        this.doDelay,
+        // this.setCurrentUpdateDelay.bind(this, "xxsmall"),
+        // this.doDelay.bind(this),
+        // this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
+        // this.setCurrentUpdateDelay.bind(this, "default"),
+        // this.applyUpdates.bind(this),
+        // this.doDelay.bind(this),
+        // this.prepRandomSeeds.bind(this),
+        // this.loadMajorColorPrefixesFromSeedsForEveryChar.bind(this),
+        // this.applyUpdates.bind(this),
       ],
     };
   }
@@ -33,7 +43,7 @@ class Letters {
     this.listOfChars().forEach((char) => {
       updates.push([char, {
         key: "--color-transition",
-        value: this.getDelayForKey(key),
+        value: `${this.getDelayForKey(key)}ms`,
       }]);
     });
     this.loadUpdates(updates);
@@ -43,18 +53,13 @@ class Letters {
     if (key === "random") {
       key = "first"; // TODO: make random when there's other stuff
     }
-
-    // this.collections[key].forEach(async (update) => {
-    //   await update();
-    // });
-
     for (let update of this.collections[key]) {
       await update();
     }
   }
 
   async doDelay() {
-    await sleep(1600);
+    await sleep(this.currentUpdateDelay());
   }
 
   getDelayForKey(key) {
@@ -94,9 +99,8 @@ class Letters {
     await this.runCollection("first");
   }
 
-  prepRandomSeeds() {
-    console.log("Prepping random seeds");
-    this.colorSeeds.generateRandomSeeds();
+  generateSeeds(key) {
+    this.colorSeeds.generateSeeds(key);
   }
 
   getMajorShiftFromSeed(prefix) {

@@ -4,7 +4,6 @@ function addBaseStyleSheet() {
   styles.push(`:root{
 --default-font-size: 1.0rem;
 --letter-font-size: 2.7rem;
---color-h-A: 200;
 }`);
   styles.push(`.output { 
     font-size: var(--default-font-size);

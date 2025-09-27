@@ -25,9 +25,9 @@ class ColorSeeds {
     });
   }
 
-  generateRandomSeeds() {
+  generateSeeds(key) {
     Object.entries(this.seeds).forEach(([_, seed]) => {
-      seed.generateRandomSeed();
+      seed.generateSeed(key);
     });
   }
 }
