@@ -16,7 +16,7 @@ class Letter {
         parts[6],
         parseInt(parts[7]),
         parseInt(parts[8]),
-        colorSeeds.seeds[parts[0]].currentSeed(),
+        colorSeeds.seeds[parts[0]].value(),
       );
     });
   }

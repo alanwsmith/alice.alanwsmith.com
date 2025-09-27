@@ -52,7 +52,7 @@ class ColorSeed {
     this.pushRandomSeed();
   }
 
-  currentSeed() {
+  value() {
     return this.moves[this.moves.length - 1];
   }
 
@@ -74,20 +74,7 @@ class ColorSeeds {
         parseInt(parts[8]),
       );
     });
-    //    this.initSeeds();
   }
-
-  // initSeeds() {
-  //   Object.entries(this.seeds).forEach(([_, seed]) => {
-  //     seed.initSeed();
-  //   });
-  // }
-
-  // randomizeColorSeeds() {
-  //   Object.entries(this.seeds).forEach(([_, seed]) => {
-  //     seed.randomizeSeed();
-  //   });
-  // }
 }
 // Key/Prefix |
 // (Deprecated Default) |
@@ -146,7 +133,7 @@ class Letter {
         parts[6],
         parseInt(parts[7]),
         parseInt(parts[8]),
-        colorSeeds.seeds[parts[0]].currentSeed(),
+        colorSeeds.seeds[parts[0]].value(),
       );
     });
   }

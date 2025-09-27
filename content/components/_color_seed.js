@@ -9,7 +9,7 @@ class ColorSeed {
     this.pushRandomSeed();
   }
 
-  currentSeed() {
+  value() {
     return this.moves[this.moves.length - 1];
   }
 

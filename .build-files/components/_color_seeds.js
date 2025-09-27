@@ -12,18 +12,5 @@ class ColorSeeds {
         parseInt(parts[8]),
       );
     });
-    //    this.initSeeds();
   }
-
-  // initSeeds() {
-  //   Object.entries(this.seeds).forEach(([_, seed]) => {
-  //     seed.initSeed();
-  //   });
-  // }
-
-  // randomizeColorSeeds() {
-  //   Object.entries(this.seeds).forEach(([_, seed]) => {
-  //     seed.randomizeSeed();
-  //   });
-  // }
 }
