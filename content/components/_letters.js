@@ -23,7 +23,7 @@ class Letters {
     return Object.entries(this.letters).map(([_, letter]) => letter);
   }
 
-  async init() {
+  async start() {
     this.colorSeeds.doMinorShift();
     await sleep(this.delays.xsmall);
     this.setAllColorDelays(this.delays.default);
@@ -40,20 +40,31 @@ class Letters {
   }
 
   async makeMonochrome() {
-    console.log(this.letterArray());
+    this.setEveryColorC(0);
+    this.applyAllColors();
+  }
+
+  setEveryColorC(value) {
+    this.letterArray().forEach((letter) => {
+      this.setIndividualColor(letter, "color-c", value);
+    });
+  }
+
+  setIndividualColor(letter, prefix, value) {
+    letter.setColor(prefix, value);
   }
 
   async updateAlice() {
-    this.colorSeeds.doMinorShift();
-    this.setMinorColorUpdatesFromSeeds();
-    this.applyAllColors();
-    await sleep(this.delays.default);
-    this.changePicker();
+    // this.colorSeeds.doMinorShift();
+    // this.setMinorColorUpdatesFromSeeds();
+    // this.applyAllColors();
+    // await sleep(this.delays.default);
+    // this.changePicker();
   }
 
   setMinorColorUpdatesFromSeeds() {
     Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.setMinorColorUpdateFromSeeds();
+      // letter.setMinorColorUpdateFromSeeds();
     });
   }
 

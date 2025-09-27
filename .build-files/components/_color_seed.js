@@ -9,8 +9,20 @@ class ColorSeed {
     this.currentValue = randomInt(this.min, this.max);
   }
 
-  value() {
-    return this.currentValue;
+  doMajorShift() {
+    this.previousValue = this.currentValue;
+    this.currentValue = randomShift(
+      this.value(),
+      this.min,
+      this.max,
+      this.major,
+      this.direction,
+    );
+    if (this.previousValue > this.currentValue) {
+      this.setDirection(-1);
+    } else {
+      this.setDirection(1);
+    }
   }
 
   doMinorShift() {
@@ -22,26 +34,31 @@ class ColorSeed {
       this.minor,
       this.direction,
     );
-
     if (this.previousValue > this.currentValue) {
-      this.direction = -1;
+      this.setDirection(-1);
     } else {
-      this.direction = 1;
+      this.setDirection(1);
     }
-
-    if (this.prefix === "color-h") {
-      console.log(`${this.prefix} - Direction: ${this.direction}`);
-    }
-
-    //this.updateDirection();
   }
 
-  // updateDirection() {
-  //   if (this.directionCount > 7) {
-  //     this.directionCount = 0;
-  //     this.direction *= -1;
-  //   } else {
-  //     this.directionCount += 1;
-  //   }
-  // }
+  doRandomShift() {
+    this.previousValue = this.currentValue;
+    this.currentValue = randomInt(
+      this.min,
+      this.max,
+    );
+  }
+
+  setDirection(value) {
+    this.direction = value;
+  }
+
+  setValue(value) {
+    this.previousValue = this.currentValue;
+    this.currentValue = value;
+  }
+
+  value() {
+    return this.currentValue;
+  }
 }

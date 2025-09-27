@@ -58,8 +58,20 @@ class ColorSeed {
     this.currentValue = randomInt(this.min, this.max);
   }
 
-  value() {
-    return this.currentValue;
+  doMajorShift() {
+    this.previousValue = this.currentValue;
+    this.currentValue = randomShift(
+      this.value(),
+      this.min,
+      this.max,
+      this.major,
+      this.direction,
+    );
+    if (this.previousValue > this.currentValue) {
+      this.setDirection(-1);
+    } else {
+      this.setDirection(1);
+    }
   }
 
   doMinorShift() {
@@ -71,28 +83,33 @@ class ColorSeed {
       this.minor,
       this.direction,
     );
-
     if (this.previousValue > this.currentValue) {
-      this.direction = -1;
+      this.setDirection(-1);
     } else {
-      this.direction = 1;
+      this.setDirection(1);
     }
-
-    if (this.prefix === "color-h") {
-      console.log(`${this.prefix} - Direction: ${this.direction}`);
-    }
-
-    //this.updateDirection();
   }
 
-  // updateDirection() {
-  //   if (this.directionCount > 7) {
-  //     this.directionCount = 0;
-  //     this.direction *= -1;
-  //   } else {
-  //     this.directionCount += 1;
-  //   }
-  // }
+  doRandomShift() {
+    this.previousValue = this.currentValue;
+    this.currentValue = randomInt(
+      this.min,
+      this.max,
+    );
+  }
+
+  setDirection(value) {
+    this.direction = value;
+  }
+
+  setValue(value) {
+    this.previousValue = this.currentValue;
+    this.currentValue = value;
+  }
+
+  value() {
+    return this.currentValue;
+  }
 }
 class ColorSeeds {
   constructor() {
@@ -156,15 +173,13 @@ const styleSet = propSet;
 // "Rotate|0|0|0|0|rotate|deg",
 class Letter {
   constructor(letter, colorSeeds, propSeeds) {
-    this.letter = letter;
-    this.colorSeeds = colorSeeds;
-    this.propSeeds = propSeeds;
+    this.char = letter;
     this.setColorDelay(3000);
-    this.initColors();
-    this.initProps();
+    this.initColors(colorSeeds);
+    this.initProps(propSeeds);
   }
 
-  initColors() {
+  initColors(colorSeeds) {
     this.colors = {};
     colorSet.forEach((line) => {
       const parts = line.split("|");
@@ -175,7 +190,7 @@ class Letter {
         parts[6],
         parseInt(parts[7]),
         parseInt(parts[8]),
-        this.colorSeeds.seeds,
+        colorSeeds.seeds,
       );
     });
   }
@@ -199,7 +214,7 @@ class Letter {
   }
 
   setColorDelay(ms) {
-    const key = `--color-transition-${this.letter}`;
+    const key = `--color-transition-${this.char}`;
     const value = `${ms}ms`;
     document.documentElement.style.setProperty(key, value);
   }
@@ -212,10 +227,14 @@ class Letter {
 
   applyColor() {
     Object.entries(this.colors).forEach(([_, color]) => {
-      const key = `--${color.prefix}-${this.letter}`;
+      const key = `--${color.prefix}-${this.char}`;
       const value = color.value();
       document.documentElement.style.setProperty(key, value);
     });
+  }
+
+  setColor(prefix, value) {
+    this.colors[prefix].setValue(value);
   }
 }
 class Letters {
@@ -243,7 +262,7 @@ class Letters {
     return Object.entries(this.letters).map(([_, letter]) => letter);
   }
 
-  async init() {
+  async start() {
     this.colorSeeds.doMinorShift();
     await sleep(this.delays.xsmall);
     this.setAllColorDelays(this.delays.default);
@@ -260,20 +279,31 @@ class Letters {
   }
 
   async makeMonochrome() {
-    console.log(this.letterArray());
+    this.setEveryColorC(0);
+    this.applyAllColors();
+  }
+
+  setEveryColorC(value) {
+    this.letterArray().forEach((letter) => {
+      this.setIndividualColor(letter, "color-c", value);
+    });
+  }
+
+  setIndividualColor(letter, prefix, value) {
+    letter.setColor(prefix, value);
   }
 
   async updateAlice() {
-    this.colorSeeds.doMinorShift();
-    this.setMinorColorUpdatesFromSeeds();
-    this.applyAllColors();
-    await sleep(this.delays.default);
-    this.changePicker();
+    // this.colorSeeds.doMinorShift();
+    // this.setMinorColorUpdatesFromSeeds();
+    // this.applyAllColors();
+    // await sleep(this.delays.default);
+    // this.changePicker();
   }
 
   setMinorColorUpdatesFromSeeds() {
     Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.setMinorColorUpdateFromSeeds();
+      // letter.setMinorColorUpdateFromSeeds();
     });
   }
 
@@ -831,7 +861,7 @@ export default class {
   bittyInit() {
     addBaseStyleSheet();
     const letters = new Letters();
-    letters.init();
+    letters.start();
 
     // state.updateSeeds();
     // state.updateLetters();
