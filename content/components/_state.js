@@ -1,8 +1,10 @@
-class State {
+const State = class {
   constructor() {
-    this.colorSeeds = {};
+    this.letters = new Letters();
+    //this.letters = {};
+
+    // TODO: Deprecate this
     this.colorValues = {};
-    this.letters = {};
 
     // TODO: Deprecate this and
     // move everything up top.
@@ -16,8 +18,10 @@ class State {
     };
     this.seeds = {};
     this.changeCount = 0;
-    this.initSeeds();
-    this.initLetters();
+
+    // this.initSeeds();
+    // this.initLetters();
+
     this.addStyleSheetVars();
   }
 
@@ -35,19 +39,20 @@ class State {
 
   generateStyleVars() {
     const result = [];
-    letters().forEach((letter) => {
-      Object.keys(props()).forEach((prop) => {
-        const flag = `--${prop}-${letter}`;
-        const value = this.letters[letter][prop];
-        const unit = props()[prop].unit;
-        result.push([
-          flag,
-          `${value}${unit}`,
-        ]);
-      });
-    });
+
+    // letters().forEach((letter) => {
+    //   Object.keys(props()).forEach((prop) => {
+    //     const flag = `--${prop}-${letter}`;
+    //     const value = this.letters[letter][prop];
+    //     const unit = props()[prop].unit;
+    //     result.push([
+    //       flag,
+    //       `${value}${unit}`,
+    //     ]);
+    //   });
+    // });
+
     Object.entries(this.colorValues).forEach(([letter, props]) => {
-      console.log(props);
       Object.entries(props).forEach(([prop, value]) => {
         const flag = `--${prop}-${letter}`;
         const unit = prop === "color-l" ? "%" : "";
@@ -57,7 +62,7 @@ class State {
         ]);
       });
     });
-    console.log(result);
+
     return result;
   }
 
@@ -74,35 +79,15 @@ class State {
   //   return Object.keys(this.data.letters);
   // }
 
-  initLetters() {
-    letters().forEach((letter) => {
-      this.letters[letter] = {};
-      this.colorValues[letter] = {};
-      Object.entries(props()).forEach(([prop, values]) => {
-        this.letters[letter][prop] = randomInt(0, 500);
-      });
-
-      Object.entries(colorProps()).forEach(([prop, values]) => {
-        let num = this.colorSeeds[prop] + randomFloat(0, values.small_step);
-        this.colorValues[letter][prop] = num;
-      });
-    });
-
-    // // TODO: Deprecate in favor of this.data.values
-    // for (let num = 65; num <= 90; num += 1) {
-    //   const letter = String.fromCharCode(num);
-    //   this.data.letters[letter] = {
-    //     values: {},
-    //   };
-    //   this.randomizeLetterSmallJump(letter);
-    // }
-  }
+  // initLetters() {
+  //   this.letters = {};
+  // }
 
   randomizeLetterSmallJump(letter) {
     Object.keys(props()).forEach((prop) => {
       let randomShift = randomFloat(
         0,
-        props()[prop].small_jump,
+        props()[prop].little_step,
       );
       if (randomInt(0, 1) === 1) {
         randomShift *= -1;
@@ -169,6 +154,7 @@ class State {
   //  }
   //});
 
+  // TODO: Deprecate this
   setCurrentLetter(letter) {
     this.data.currentLetter = letter;
   }
@@ -210,52 +196,73 @@ class State {
     this.setSliderValue("Hue", newHue);
   }
 
-  initSeeds() {
-    // TODO: use initial values to make
-    // changes from for small and large
-    // bumps instead of just completely
-    // random again.
-    Object.keys(props()).forEach((prop) => {
-      this.seeds[prop] = randomFloat(props()[prop].min, props()[prop].max);
-    });
+  // initDirections() {
+  //   this.directions = {};
+  //   Object.keys(props()).forEach((prop) => {
+  //     this.directions[prop] = randomInt(0, 1) === 1 ? 1 : -1;
+  //   });
+  //   Object.keys(colorProps()).forEach(([prop, values]) => {
+  //     this.directions[prop] = randomInt(0, 1) === 1 ? 1 : -1;
+  //   });
+  // }
 
+  // initSeeds() {
+  //   this.colorSeeds = new ColorSeeds();
+  //   this.propSeeds = new PropSeeds();
+  //   // Object.keys(props()).forEach((prop) => {
+  //   //   this.seeds[prop] = randomFloat(props()[prop].min, props()[prop].max);
+  //   // });
+  //   // Object.entries(colorProps()).forEach(([prop, values]) => {
+  //   //   this.colorSeeds[prop] = randomFloat(values.min, values.max);
+  //   // });
+  // }
+
+  updateLetters() {
+    // const direction = randomInt(0, 1) === 1 ? 1 : -1;
+    // letters().forEach((letter) => {
+    //   Object.entries(props()).forEach(([prop, values]) => {
+    //     this.letters[letter][prop] = randomInt(0, 500);
+    //   });
+    //   Object.entries(colorProps()).forEach(([prop, values]) => {
+    //     const move = randomFloat(0, values.little_step) * direction;
+    //     const num = shiftNumber(
+    //       this.colorSeeds[prop],
+    //       values.min,
+    //       values.max,
+    //       move,
+    //     );
+    //     this.colorValues[letter][prop] = num;
+    //   });
+    // });
+  }
+
+  updateSeeds() {
+    Object.entries(props()).forEach(([prop, values]) => {
+      this.seeds[prop] = shiftNumber(
+        this.seeds[prop],
+        values.min,
+        values.max,
+        randomFloat(0, 20),
+      );
+    });
     Object.entries(colorProps()).forEach(([prop, values]) => {
-      if (prop === "color-c") {
-        this.colorSeeds[prop] = randomFloat(20, 60);
-      } else {
-        this.colorSeeds[prop] = randomFloat(values.min, values.max);
-      }
+      const num = shiftNumber(
+        this.colorSeeds[prop],
+        values.min,
+        values.max,
+        values.little_step,
+      );
+      this.colorSeeds[prop] = num;
     });
-
-    // console.log(this.seeds);
-
-    // this.seeds = {
-    //   lightness: randomInt(
-    //     this.seedRanges.lightness[0],
-    //     this.seedRanges.lightness[1],
-    //   ),
-    //   chroma: randomInt(
-    //     this.seedRanges.chroma[0],
-    //     this.seedRanges.chroma[1],
-    //   ),
-    //   hue: randomInt(
-    //     this.seedRanges.hue[0],
-    //     this.seedRanges.hue[1],
-    //   ),
-    // };
-
-    // this.seeds = {
-    //   lightness: randomInt(70, 90),
-    //   chroma: randomInt(10, 18),
-    //   hue: randomInt(30, 310),
-    // };
   }
 
   updateStyleVars() {
-    document.documentElement.style.setProperty("-color-h-A", 200);
+    this.generateStyleVars().forEach((sv) => {
+      document.documentElement.style.setProperty(sv[0], sv[1]);
+    });
   }
 
   //
-}
+};
 
-const state = new State();
+// const state = new State();

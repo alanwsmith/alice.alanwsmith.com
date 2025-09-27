@@ -63,12 +63,12 @@ function colorProps() {
   colorSet.forEach((slider) => {
     const parts = slider.split("|");
     result[parts[5]] = {
-      default: parseFloat(parts[1]),
+      default: "",
       min: parseFloat(parts[2]),
       max: parseFloat(parts[3]),
       unit: parts[6],
-      small_step: parseInt(parts[7]),
-      large_step: parseInt(parts[8]),
+      little_step: parseInt(parts[7]),
+      big_step: parseInt(parts[8]),
     };
   });
   return result;
@@ -85,8 +85,8 @@ function props() {
       unit: parts[6],
       // TODO: Rename to _step to match
       // color
-      small_jump: parseInt(parts[7]),
-      large_jump: parseInt(parts[8]),
+      little_step: parseInt(parts[7]),
+      big_step: parseInt(parts[8]),
     };
   });
   return result;
@@ -117,9 +117,9 @@ function shiftNumber(position, min, max, move) {
   let step = (move > 0) ? 1 : -1;
   for (let count = 0; count < Math.abs(move); count += 1) {
     position += step;
-    if (position === max) {
+    if (position >= max) {
       step = -1;
-    } else if (position === min) {
+    } else if (position <= min) {
       step = 1;
     }
   }

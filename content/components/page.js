@@ -12,6 +12,12 @@
 
 [! include "components/_vars.js" !]
 
+[! include "components/_letter.js" !]
+
+[! include "components/_prop.js" !]
+
+[! include "components/_color.js" !]
+
 [! include "components/_span-maker.js" !]
 
 [! include "components/_functions.js" !]

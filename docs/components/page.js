@@ -10,42 +10,173 @@
 // the way it's working.
 
 
-// (Deprecated Key) |
+// Key/Prefix |
 // (Deprecated Default) |
 // Min |
 // Max |
 // (Deprecated Step) |
-// Prefix |
+// (Deprecated Prefix) |
 // Unit |
 // Small Step Max |
 // Large Step Max |
 // TODO: Move the style prop prefix to the key
 
 const colorSet = [
-  "Hue|_|0|360|_|color-h||90|140|",
-  "Lightness|_|50|70|_|color-l|%|20|55",
-  "Chroma|_|0|110|_|color-c|%|30|90",
+  "color-h|_|0|360|_|color-h||30|140|",
+  "color-l|_|50|70|_|color-l|%|20|55",
+  "color-c|_|10|60|_|color-c||20|40",
 ];
 
-const styleSet = [
-  "BLDA|_|0|1000|_|BLDA||150|600",
-  "BLDB|_|0|1000|_|BLDB||150|600",
-  "SKLA|_|0|1000|_|SKLA||150|600",
-  "SKLB|_|0|1000|_|SKLB||150|600",
-  "SKLD|_|0|1000|_|SKLD||150|600",
-  "TRMA|_|0|1000|_|TRMA||150|600",
-  "TRMB|_|0|1000|_|TRMB||150|600",
-  "TRMC|_|0|1000|_|TRMC||150|600",
-  "TRMD|_|0|1000|_|TRMD||150|600",
-  "TRME|_|0|1000|_|TRME||150|600",
-  "TRMF|_|0|1000|_|TRMF||150|600",
-  "TRMG|_|0|1000|_|TRMG||150|600",
-  "TRMK|_|0|1000|_|TRMK||150|600",
-  "TRML|_|0|1000|_|TRML||150|600",
+const propSet = [
+  "BLDA|_|0|1000|_|BLDA||150|500",
+  "BLDB|_|0|1000|_|BLDB||150|500",
+  "SKLA|_|0|1000|_|SKLA||150|500",
+  "SKLB|_|0|1000|_|SKLB||150|500",
+  "SKLD|_|0|1000|_|SKLD||150|500",
+  "TRMA|_|0|1000|_|TRMA||150|500",
+  "TRMB|_|0|1000|_|TRMB||150|500",
+  "TRMC|_|0|1000|_|TRMC||150|500",
+  "TRMD|_|0|1000|_|TRMD||150|500",
+  "TRME|_|0|1000|_|TRME||150|500",
+  "TRMF|_|0|1000|_|TRMF||150|500",
+  "TRMG|_|0|1000|_|TRMG||150|500",
+  "TRMK|_|0|1000|_|TRMK||150|500",
+  "TRML|_|0|1000|_|TRML||150|500",
 ];
+
+// TODO: Deprecate styleSet;
+const styleSet = propSet;
 
 // "Size|_|2|3|0.05|font-size|rem||",
 // "Rotate|0|0|0|0|rotate|deg",
+class Letters {
+  constructor() {
+    this.colorSeeds = new ColorSeeds();
+    this.propSeeds = new PropSeeds();
+    this.letters = {};
+    letters().forEach((letter) => {
+      this.letters[letter] = new Letter(letter);
+    });
+  }
+}
+
+class Letter {
+  constructor(letter) {
+    this.letter = letter;
+    this.initProps();
+    this.initColors();
+  }
+
+  initColors() {
+    this.colors = {};
+    colorSet.forEach((line) => {
+      const parts = line.split("|");
+      this.colors[parts[0]] = new Color(
+        parts[0],
+        parseInt(parts[2]),
+        parseInt(parts[3]),
+        parts[6],
+        parseInt(parts[7]),
+        parseInt(parts[8]),
+      );
+    });
+  }
+
+  initProps() {
+    this.props = {};
+    propSet.forEach((line) => {
+      const parts = line.split("|");
+      this.props[parts[0]] = new Prop(
+        parts[0],
+        parseInt(parts[2]),
+        parseInt(parts[3]),
+        parseInt(parts[7]),
+        parseInt(parts[8]),
+      );
+    });
+  }
+}
+class Prop {
+  constructor(prefix, min, max, minor, major) {
+    this.prefix = prefix;
+    this.min = min;
+    this.max = max;
+    this.minor = minor;
+    this.major = major;
+    this.moves = [];
+  }
+}
+
+class PropSeeds {
+  constructor() {
+    propSet.forEach((line) => {
+      const parts = line.split("|");
+      this[parts[0]] = new PropSeed(
+        parts[0],
+        parseInt(parts[2]),
+        parseInt(parts[3]),
+        parseInt(parts[7]),
+        parseInt(parts[8]),
+      );
+    });
+  }
+}
+
+class PropSeed {
+  constructor(key, min, max, minor, major) {
+    this.prefix = key;
+    this.min = min;
+    this.max = max;
+    this.minor = minor;
+    this.major = major;
+    this.moves = [];
+  }
+}
+class ColorSeeds {
+  constructor() {
+    console.log("---");
+    colorSet.forEach((line) => {
+      const parts = line.split("|");
+      this.seeds = {};
+      this.seeds[parts[0]] = new ColorSeed(
+        parts[0],
+        parseInt(parts[2]),
+        parseInt(parts[3]),
+        parts[6],
+        parseInt(parts[7]),
+        parseInt(parts[8]),
+      );
+    });
+    this.randomizeColorSeeds();
+  }
+
+  randomizeColorSeeds() {
+    //  console.log("asdf");
+  }
+}
+
+class ColorSeed {
+  constructor(prefix, min, max, minor, major) {
+    this.prefix = prefix;
+    this.min = min;
+    this.max = max;
+    this.minor = minor;
+    this.major = major;
+    this.moves = [];
+  }
+}
+
+class Color {
+  constructor(prefix, min, max, unit, minor, major) {
+    this.prefix = prefix;
+    this.min = min;
+    this.max = max;
+    this.unit = unit;
+    this.minor = minor;
+    this.major = major;
+    this.moves = [];
+  }
+}
 const SpanMaker = class {
   constructor(text) {
     this.text = text;
@@ -185,12 +316,12 @@ function colorProps() {
   colorSet.forEach((slider) => {
     const parts = slider.split("|");
     result[parts[5]] = {
-      default: parseFloat(parts[1]),
+      default: "",
       min: parseFloat(parts[2]),
       max: parseFloat(parts[3]),
       unit: parts[6],
-      small_step: parseInt(parts[7]),
-      large_step: parseInt(parts[8]),
+      little_step: parseInt(parts[7]),
+      big_step: parseInt(parts[8]),
     };
   });
   return result;
@@ -207,8 +338,8 @@ function props() {
       unit: parts[6],
       // TODO: Rename to _step to match
       // color
-      small_jump: parseInt(parts[7]),
-      large_jump: parseInt(parts[8]),
+      little_step: parseInt(parts[7]),
+      big_step: parseInt(parts[8]),
     };
   });
   return result;
@@ -239,9 +370,9 @@ function shiftNumber(position, min, max, move) {
   let step = (move > 0) ? 1 : -1;
   for (let count = 0; count < Math.abs(move); count += 1) {
     position += step;
-    if (position === max) {
+    if (position >= max) {
       step = -1;
-    } else if (position === min) {
+    } else if (position <= min) {
       step = 1;
     }
   }
@@ -251,11 +382,13 @@ function shiftNumber(position, min, max, move) {
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-class State {
+const State = class {
   constructor() {
-    this.colorSeeds = {};
+    this.letters = new Letters();
+    //this.letters = {};
+
+    // TODO: Deprecate this
     this.colorValues = {};
-    this.letters = {};
 
     // TODO: Deprecate this and
     // move everything up top.
@@ -269,8 +402,10 @@ class State {
     };
     this.seeds = {};
     this.changeCount = 0;
-    this.initSeeds();
-    this.initLetters();
+
+    // this.initSeeds();
+    // this.initLetters();
+
     this.addStyleSheetVars();
   }
 
@@ -288,19 +423,20 @@ class State {
 
   generateStyleVars() {
     const result = [];
-    letters().forEach((letter) => {
-      Object.keys(props()).forEach((prop) => {
-        const flag = `--${prop}-${letter}`;
-        const value = this.letters[letter][prop];
-        const unit = props()[prop].unit;
-        result.push([
-          flag,
-          `${value}${unit}`,
-        ]);
-      });
-    });
+
+    // letters().forEach((letter) => {
+    //   Object.keys(props()).forEach((prop) => {
+    //     const flag = `--${prop}-${letter}`;
+    //     const value = this.letters[letter][prop];
+    //     const unit = props()[prop].unit;
+    //     result.push([
+    //       flag,
+    //       `${value}${unit}`,
+    //     ]);
+    //   });
+    // });
+
     Object.entries(this.colorValues).forEach(([letter, props]) => {
-      console.log(props);
       Object.entries(props).forEach(([prop, value]) => {
         const flag = `--${prop}-${letter}`;
         const unit = prop === "color-l" ? "%" : "";
@@ -310,7 +446,7 @@ class State {
         ]);
       });
     });
-    console.log(result);
+
     return result;
   }
 
@@ -327,35 +463,15 @@ class State {
   //   return Object.keys(this.data.letters);
   // }
 
-  initLetters() {
-    letters().forEach((letter) => {
-      this.letters[letter] = {};
-      this.colorValues[letter] = {};
-      Object.entries(props()).forEach(([prop, values]) => {
-        this.letters[letter][prop] = randomInt(0, 500);
-      });
-
-      Object.entries(colorProps()).forEach(([prop, values]) => {
-        let num = this.colorSeeds[prop] + randomFloat(0, values.small_step);
-        this.colorValues[letter][prop] = num;
-      });
-    });
-
-    // // TODO: Deprecate in favor of this.data.values
-    // for (let num = 65; num <= 90; num += 1) {
-    //   const letter = String.fromCharCode(num);
-    //   this.data.letters[letter] = {
-    //     values: {},
-    //   };
-    //   this.randomizeLetterSmallJump(letter);
-    // }
-  }
+  // initLetters() {
+  //   this.letters = {};
+  // }
 
   randomizeLetterSmallJump(letter) {
     Object.keys(props()).forEach((prop) => {
       let randomShift = randomFloat(
         0,
-        props()[prop].small_jump,
+        props()[prop].little_step,
       );
       if (randomInt(0, 1) === 1) {
         randomShift *= -1;
@@ -422,6 +538,7 @@ class State {
   //  }
   //});
 
+  // TODO: Deprecate this
   setCurrentLetter(letter) {
     this.data.currentLetter = letter;
   }
@@ -463,74 +580,101 @@ class State {
     this.setSliderValue("Hue", newHue);
   }
 
-  initSeeds() {
-    // TODO: use initial values to make
-    // changes from for small and large
-    // bumps instead of just completely
-    // random again.
-    Object.keys(props()).forEach((prop) => {
-      this.seeds[prop] = randomFloat(props()[prop].min, props()[prop].max);
-    });
+  // initDirections() {
+  //   this.directions = {};
+  //   Object.keys(props()).forEach((prop) => {
+  //     this.directions[prop] = randomInt(0, 1) === 1 ? 1 : -1;
+  //   });
+  //   Object.keys(colorProps()).forEach(([prop, values]) => {
+  //     this.directions[prop] = randomInt(0, 1) === 1 ? 1 : -1;
+  //   });
+  // }
 
+  // initSeeds() {
+  //   this.colorSeeds = new ColorSeeds();
+  //   this.propSeeds = new PropSeeds();
+  //   // Object.keys(props()).forEach((prop) => {
+  //   //   this.seeds[prop] = randomFloat(props()[prop].min, props()[prop].max);
+  //   // });
+  //   // Object.entries(colorProps()).forEach(([prop, values]) => {
+  //   //   this.colorSeeds[prop] = randomFloat(values.min, values.max);
+  //   // });
+  // }
+
+  updateLetters() {
+    // const direction = randomInt(0, 1) === 1 ? 1 : -1;
+    // letters().forEach((letter) => {
+    //   Object.entries(props()).forEach(([prop, values]) => {
+    //     this.letters[letter][prop] = randomInt(0, 500);
+    //   });
+    //   Object.entries(colorProps()).forEach(([prop, values]) => {
+    //     const move = randomFloat(0, values.little_step) * direction;
+    //     const num = shiftNumber(
+    //       this.colorSeeds[prop],
+    //       values.min,
+    //       values.max,
+    //       move,
+    //     );
+    //     this.colorValues[letter][prop] = num;
+    //   });
+    // });
+  }
+
+  updateSeeds() {
+    Object.entries(props()).forEach(([prop, values]) => {
+      this.seeds[prop] = shiftNumber(
+        this.seeds[prop],
+        values.min,
+        values.max,
+        randomFloat(0, 20),
+      );
+    });
     Object.entries(colorProps()).forEach(([prop, values]) => {
-      if (prop === "color-c") {
-        this.colorSeeds[prop] = randomFloat(20, 60);
-      } else {
-        this.colorSeeds[prop] = randomFloat(values.min, values.max);
-      }
+      const num = shiftNumber(
+        this.colorSeeds[prop],
+        values.min,
+        values.max,
+        values.little_step,
+      );
+      this.colorSeeds[prop] = num;
     });
-
-    // console.log(this.seeds);
-
-    // this.seeds = {
-    //   lightness: randomInt(
-    //     this.seedRanges.lightness[0],
-    //     this.seedRanges.lightness[1],
-    //   ),
-    //   chroma: randomInt(
-    //     this.seedRanges.chroma[0],
-    //     this.seedRanges.chroma[1],
-    //   ),
-    //   hue: randomInt(
-    //     this.seedRanges.hue[0],
-    //     this.seedRanges.hue[1],
-    //   ),
-    // };
-
-    // this.seeds = {
-    //   lightness: randomInt(70, 90),
-    //   chroma: randomInt(10, 18),
-    //   hue: randomInt(30, 310),
-    // };
   }
 
   updateStyleVars() {
-    document.documentElement.style.setProperty("-color-h-A", 200);
+    this.generateStyleVars().forEach((sv) => {
+      document.documentElement.style.setProperty(sv[0], sv[1]);
+    });
   }
 
   //
-}
+};
 
-const state = new State();
+// const state = new State();
 export default class {
   bittyInit() {
-    addBaseStyleSheet();
-    this.triggerChange();
+    // addBaseStyleSheet();
+    // const letters = new Letters();
+
+    // state.updateSeeds();
+    // state.updateLetters();
+    // state.updateStyleVars();
+
+    // this.triggerChange();
   }
 
   triggerChange() {
-    this.api.forward(null, "doChange");
-    // setTimeout(() => {
-    //   this.api.forward(null, "doChange");
-    //   this.triggerChange();
-    // }, 2000);
+    setTimeout(() => {
+      this.api.forward(null, "doChange");
+      this.triggerChange();
+    }, 4000);
   }
 
-  changeValue(event, el) {
-    const ds = event.target.dataset;
-    let value = event.target.value;
-    state.setSliderValue(ds.name, value);
-  }
+  // TODO: Deprecate
+  //changeValue(event, el) {
+  //  const ds = event.target.dataset;
+  //  let value = event.target.value;
+  //  //state.setSliderValue(ds.name, value);
+  //}
 
   loadLetters(_event, el) {
     letters().forEach((letter) => {
@@ -542,26 +686,27 @@ export default class {
     });
   }
 
-  loadControls(_event, el) {
-    el.replaceChildren();
-    state.sliders().forEach((slider) => {
-      const newDiv = document.createElement("div");
-      const value = state.getSliderValue(slider.name);
-      newDiv.innerHTML = `
-      <label>${slider.name}<br />
-      <input
-        type="range"
-        min="${state.sliderData(slider.name, "min")}"
-        max="${state.sliderData(slider.name, "max")}"
-        step="${state.sliderData(slider.name, "step")}"
-        value="${value}"
-        data-send="changeValue"
-        data-name="${slider.name}"
-      />
-      </label>`;
-      el.appendChild(newDiv);
-    });
-  }
+  // TODO: Deprecate
+  // loadControls(_event, el) {
+  //   el.replaceChildren();
+  //   state.sliders().forEach((slider) => {
+  //     const newDiv = document.createElement("div");
+  //     const value = state.getSliderValue(slider.name);
+  //     newDiv.innerHTML = `
+  //     <label>${slider.name}<br />
+  //     <input
+  //       type="range"
+  //       min="${state.sliderData(slider.name, "min")}"
+  //       max="${state.sliderData(slider.name, "max")}"
+  //       step="${state.sliderData(slider.name, "step")}"
+  //       value="${value}"
+  //       data-send="changeValue"
+  //       data-name="${slider.name}"
+  //     />
+  //     </label>`;
+  //     el.appendChild(newDiv);
+  //   });
+  // }
 
   input(_event, el) {
     const ta = this.api.querySelector("textarea");
@@ -578,27 +723,23 @@ export default class {
     }
   }
 
-  setLetter(event, _el) {
-    if (event) {
-      state.setCurrentLetter(
-        event.target.dataset.letter,
-      );
-
-      state.startValue = {
-        "Hue": state.data.letters[state.getCurrentLetter()].values["Hue"].value,
-      };
-
-      // TODO: Deprecate
-      // state.mouseStart = {
-      //   x: event.clientX,
-      //   y: event.clientY,
-      // };
-      // state.watchingMouse = true;
-    }
-  }
+  // TODO: Deprecate
+  // setLetter(event, _el) {
+  //   if (event) {
+  //     state.setCurrentLetter(
+  //       event.target.dataset.letter,
+  //     );
+  //     state.startValue = {
+  //       "Hue": state.data.letters[state.getCurrentLetter()].values["Hue"].value,
+  //     };
+  //   }
+  // }
 
   doChange(_event, _el) {
-    state.updateStyleVars();
+    // state.updateSeeds();
+    // state.updateLetters();
+    // state.updateStyleVars();
+
     // document.documentElement.style.setProperty(
     //   "--color-h-A",
     //   randomInt(0, 360),
