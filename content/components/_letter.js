@@ -42,21 +42,5 @@ class Letter {
       console.log(color.valueString());
       document.documentElement.style.setProperty(varKey, color.valueString());
     });
-    // const prop = "--color-h-A";
-    // const value = "200";
-    // document.documentElement.style.setProperty(prop, value);
-
-    // Object.entries(this.colorValues).forEach(([letter, props]) => {
-    //   Object.entries(props).forEach(([prop, value]) => {
-    //     const flag = `--${prop}-${letter}`;
-    //     const unit = prop === "color-l" ? "%" : "";
-    //     result.push([
-    //       flag,
-    //       `${value}${unit}`,
-    //     ]);
-    //   });
-    // });
-
-    //document.documentElement.style.setProperty(sv[0], sv[1]);
   }
 }
