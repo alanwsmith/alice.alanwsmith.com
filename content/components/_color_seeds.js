@@ -21,9 +21,9 @@ class ColorSeeds {
   //   });
   // }
 
-  randomizeColorSeeds() {
-    Object.entries(this.seeds).forEach(([_, seed]) => {
-      seed.randomizeSeed();
-    });
-  }
+  // randomizeColorSeeds() {
+  //   Object.entries(this.seeds).forEach(([_, seed]) => {
+  //     seed.randomizeSeed();
+  //   });
+  // }
 }

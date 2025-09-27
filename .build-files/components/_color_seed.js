@@ -6,14 +6,14 @@ class ColorSeed {
     this.minor = minor;
     this.major = major;
     this.moves = [];
-    this.moves.push(randomInt(this.min, this.max));
+    this.pushRandomSeed();
   }
 
   currentSeed() {
     return this.moves[this.moves.length - 1];
   }
 
-  randomizeSeed() {
-    //
+  pushRandomSeed() {
+    this.moves.push(randomInt(this.min, this.max));
   }
 }

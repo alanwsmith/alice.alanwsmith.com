@@ -38,8 +38,6 @@ class Letter {
   updateVarsForLetter() {
     Object.entries(this.colors).forEach(([_, color]) => {
       const varKey = `--${color.prefix}-${this.letter}`;
-      console.log(varKey);
-      console.log(color.valueString());
       document.documentElement.style.setProperty(varKey, color.valueString());
     });
   }

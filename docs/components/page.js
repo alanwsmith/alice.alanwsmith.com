@@ -10,15 +10,22 @@
 // the way it's working.
 
 class Color {
-  constructor(prefix, min, max, unit, minor, major, current_seed) {
+  constructor(prefix, min, max, unit, minor, major, initialSeed) {
     this.prefix = prefix;
     this.min = min;
     this.max = max;
     this.unit = unit;
     this.minor = minor;
     this.major = major;
+    this.direction = randomInt(0, 1) === 1 ? 1 : -1;
     this.values = [];
-    this.values.push(100);
+    this.pushMinorRandomValue(initialSeed);
+  }
+
+  pushMinorRandomValue(fromValue) {
+    this.values.push(
+      randomShift(fromValue, this.min, this.max, this.minor, this.direction),
+    );
   }
 
   valueString() {
@@ -42,15 +49,15 @@ class ColorSeed {
     this.minor = minor;
     this.major = major;
     this.moves = [];
-    this.moves.push(randomInt(this.min, this.max));
+    this.pushRandomSeed();
   }
 
   currentSeed() {
     return this.moves[this.moves.length - 1];
   }
 
-  randomizeSeed() {
-    //
+  pushRandomSeed() {
+    this.moves.push(randomInt(this.min, this.max));
   }
 }
 class ColorSeeds {
@@ -76,11 +83,11 @@ class ColorSeeds {
   //   });
   // }
 
-  randomizeColorSeeds() {
-    Object.entries(this.seeds).forEach(([_, seed]) => {
-      seed.randomizeSeed();
-    });
-  }
+  // randomizeColorSeeds() {
+  //   Object.entries(this.seeds).forEach(([_, seed]) => {
+  //     seed.randomizeSeed();
+  //   });
+  // }
 }
 // Key/Prefix |
 // (Deprecated Default) |
@@ -161,8 +168,6 @@ class Letter {
   updateVarsForLetter() {
     Object.entries(this.colors).forEach(([_, color]) => {
       const varKey = `--${color.prefix}-${this.letter}`;
-      console.log(varKey);
-      console.log(color.valueString());
       document.documentElement.style.setProperty(varKey, color.valueString());
     });
   }
@@ -190,19 +195,6 @@ class Letters {
     Object.entries(this.letters).forEach(([_, letter]) => {
       letter.updateVarsForLetter();
     });
-
-    // Object.entries(this.colorValues).forEach(([letter, props]) => {
-    //   Object.entries(props).forEach(([prop, value]) => {
-    //     const flag = `--${prop}-${letter}`;
-    //     const unit = prop === "color-l" ? "%" : "";
-    //     result.push([
-    //       flag,
-    //       `${value}${unit}`,
-    //     ]);
-    //   });
-    // });
-
-    //document.documentElement.style.setProperty(sv[0], sv[1]);
   }
 }
 class Prop {
@@ -428,6 +420,20 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+function randomShift(position, min, max, base, direction) {
+  const move = randomInt(0, base);
+  for (let count = 0; count < Math.abs(move); count += 1) {
+    position += direction;
+    if (position >= max) {
+      direction = -1;
+    } else if (position <= min) {
+      direction = 1;
+    }
+  }
+  return position;
+}
+
+// TODO: Deprecate this in favor of randomShift
 function shiftNumber(position, min, max, move) {
   let step = (move > 0) ? 1 : -1;
   for (let count = 0; count < Math.abs(move); count += 1) {
