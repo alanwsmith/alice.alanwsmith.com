@@ -18,4 +18,16 @@ class ColorSeeds {
       seed.doMinorShift();
     });
   }
+
+  doMajorShift() {
+    Object.entries(this.seeds).forEach(([_, seed]) => {
+      seed.doMajorShift();
+    });
+  }
+
+  doRandomShift() {
+    Object.entries(this.seeds).forEach(([_, seed]) => {
+      seed.doRandomShift();
+    });
+  }
 }

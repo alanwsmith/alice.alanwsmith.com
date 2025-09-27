@@ -1,6 +1,7 @@
 class Letter {
   constructor(letter, colorSeeds, propSeeds) {
     this.char = letter;
+    this.lastApplied = {};
     this.setColorDelay(3000);
     this.initColors(colorSeeds);
     this.initProps(propSeeds);
@@ -54,9 +55,12 @@ class Letter {
 
   applyColor() {
     Object.entries(this.colors).forEach(([_, color]) => {
-      const key = `--${color.prefix}-${this.char}`;
-      const value = color.value();
-      document.documentElement.style.setProperty(key, value);
+      if (this.lastApplied[color.prefix] !== color.value) {
+        const key = `--${color.prefix}-${this.char}`;
+        const value = color.value();
+        document.documentElement.style.setProperty(key, value);
+        this.lastApplied[color.prefix] = color.value;
+      }
     });
   }
 

@@ -131,6 +131,18 @@ class ColorSeeds {
       seed.doMinorShift();
     });
   }
+
+  doMajorShift() {
+    Object.entries(this.seeds).forEach(([_, seed]) => {
+      seed.doMajorShift();
+    });
+  }
+
+  doRandomShift() {
+    Object.entries(this.seeds).forEach(([_, seed]) => {
+      seed.doRandomShift();
+    });
+  }
 }
 // Key/Prefix |
 // (Deprecated Default) |
@@ -174,6 +186,7 @@ const styleSet = propSet;
 class Letter {
   constructor(letter, colorSeeds, propSeeds) {
     this.char = letter;
+    this.lastApplied = {};
     this.setColorDelay(3000);
     this.initColors(colorSeeds);
     this.initProps(propSeeds);
@@ -227,9 +240,12 @@ class Letter {
 
   applyColor() {
     Object.entries(this.colors).forEach(([_, color]) => {
-      const key = `--${color.prefix}-${this.char}`;
-      const value = color.value();
-      document.documentElement.style.setProperty(key, value);
+      if (this.lastApplied[color.prefix] !== color.value) {
+        const key = `--${color.prefix}-${this.char}`;
+        const value = color.value();
+        document.documentElement.style.setProperty(key, value);
+        this.lastApplied[color.prefix] = color.value;
+      }
     });
   }
 
@@ -263,29 +279,37 @@ class Letters {
   }
 
   async start() {
-    this.colorSeeds.doMinorShift();
     await sleep(this.delays.xsmall);
-    this.setAllColorDelays(this.delays.default);
+    this.baselineUpdate();
+  }
+
+  async baselineUpdate() {
+    this.colorSeeds.doMinorShift();
+    this.setEveryColorDelay(this.delays.default);
     this.applyAllColors();
+    await sleep(this.delays.default);
     this.changePicker();
   }
 
   async changePicker() {
     [
+      this.baselineUpdate.bind(this),
       this.updateAlice.bind(this),
       this.makeMonochrome.bind(this),
-    ][1]();
+    ][0]();
     // this.updateAlice();
   }
 
   async makeMonochrome() {
-    this.setEveryColorC(0);
-    this.applyAllColors();
+    this.setEveryColorDelay(this.delays.default);
+    this.setEveryColor("color-c", 2);
+    // this.applyAllColors();
+    await sleep(this.delays.default);
   }
 
-  setEveryColorC(value) {
+  setEveryColor(prefix, value) {
     this.letterArray().forEach((letter) => {
-      this.setIndividualColor(letter, "color-c", value);
+      this.setIndividualColor(letter, prefix, value);
     });
   }
 
@@ -307,7 +331,7 @@ class Letters {
     });
   }
 
-  setAllColorDelays(ms) {
+  setEveryColorDelay(ms) {
     Object.entries(this.letters).forEach(([_, letter]) => {
       letter.setColorDelay(ms);
     });
