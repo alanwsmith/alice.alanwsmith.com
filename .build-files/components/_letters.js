@@ -32,7 +32,7 @@ class Letters {
   async start() {
     this.colorSeeds.generateRandomSeeds();
     this.setMinorColorPrefixesFromSeedsForEveryChar();
-    this.applyColorPrefixes();
+    this.applyUpdates();
     await sleep(this.delays.xsmall);
     //  this.baselineUpdate();
   }
@@ -89,9 +89,9 @@ class Letters {
     });
   }
 
-  applyColorPrefixes() {
+  applyUpdates() {
     Object.entries(this.letters).forEach(([_, letter]) => {
-      letter.applyColorPrefixes();
+      letter.applyUpdates();
     });
   }
 

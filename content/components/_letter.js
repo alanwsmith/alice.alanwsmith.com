@@ -5,7 +5,7 @@ class Letter {
     this.previousUpdates = {};
   }
 
-  applyColorPrefixes() {
+  applyUpdates() {
     Object.entries(this.colorPrefixes).forEach(([prefix, details]) => {
       const key = `--${prefix}-${this.char}`;
       if (this.previousUpdates[key] !== details.currentValueString()) {
