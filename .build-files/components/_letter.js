@@ -8,6 +8,11 @@ class Letters {
     });
   }
 
+  addBaseStyles() {
+    const stylesSheet = new CSSStyleSheet();
+    let styles = [];
+  }
+
   updateVarsForLetters() {
     Object.entries(this.letters).forEach(([_, letter]) => {
       letter.updateVarsForLetter();
