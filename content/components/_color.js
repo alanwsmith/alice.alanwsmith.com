@@ -9,11 +9,11 @@ class Color {
     this.colorSeed = colorSeeds[this.prefix];
     this.direction = randomInt(0, 1) === 1 ? 1 : -1;
     this.values = [];
-    // this.pushMinorRandomValueFromSeed(this.colorSeed.value());
     this.pushMinorRandomValueFromSeed();
   }
 
   pushMinorRandomValueFromSeed() {
+    // console.log(`${this.colorSeed.value()} ${this.minor}`);
     this.values.push(
       randomShift(
         this.colorSeed.value(),

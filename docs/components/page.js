@@ -20,11 +20,11 @@ class Color {
     this.colorSeed = colorSeeds[this.prefix];
     this.direction = randomInt(0, 1) === 1 ? 1 : -1;
     this.values = [];
-    // this.pushMinorRandomValueFromSeed(this.colorSeed.value());
     this.pushMinorRandomValueFromSeed();
   }
 
   pushMinorRandomValueFromSeed() {
+    // console.log(`${this.colorSeed.value()} ${this.minor}`);
     this.values.push(
       randomShift(
         this.colorSeed.value(),
@@ -47,31 +47,41 @@ class ColorSeed {
     this.max = max;
     this.minor = minor;
     this.major = major;
-    this.moves = [];
+    this.direction = randomInt(0, 1) === 1 ? 1 : -1;
+    this.values = [];
     this.pushRandomSeed();
   }
 
   value() {
-    return this.moves[this.moves.length - 1];
+    return this.values[this.values.length - 1];
   }
 
   pushRandomSeed() {
-    this.moves.push(randomInt(this.min, this.max));
+    this.values.push(randomInt(this.min, this.max));
   }
 
   doMinorShift() {
-    console.log("here");
+    this.values.push(
+      randomShift(
+        this.value(),
+        this.min,
+        this.max,
+        this.minor,
+        this.direction,
+      ),
+    );
+    console.log(this.values);
   }
 }
 class ColorSeeds {
   constructor() {
+    this.seeds = {};
     colorSet.forEach((line) => {
       const parts = line.split("|");
-      this[parts[0]] = new ColorSeed(
+      this.seeds[parts[0]] = new ColorSeed(
         parts[0],
         parseInt(parts[2]),
         parseInt(parts[3]),
-        parts[6],
         parseInt(parts[7]),
         parseInt(parts[8]),
       );
@@ -97,8 +107,8 @@ class ColorSeeds {
 
 const colorSet = [
   "color-l|_|50|70|_|color-l|%|20|55",
-  "color-c|_|10|60|_|color-c||20|40",
-  "color-h|_|0|360|_|color-h||30|140|",
+  "color-c|_|10|60|_|color-c||30|60",
+  "color-h|_|0|360|_|color-h||80|200|",
 ];
 
 const propSet = [
@@ -128,7 +138,7 @@ class Letter {
     this.letter = letter;
     this.colorSeeds = colorSeeds;
     this.propSeeds = propSeeds;
-    this.setColorTransitionTime(1200);
+    this.setColorDelay(3000);
     this.initColors();
     this.initProps();
   }
@@ -144,7 +154,7 @@ class Letter {
         parts[6],
         parseInt(parts[7]),
         parseInt(parts[8]),
-        this.colorSeeds,
+        this.colorSeeds.seeds,
       );
     });
   }
@@ -163,13 +173,16 @@ class Letter {
     });
   }
 
-  setMinorColorUpdateFromSeeds() {
-  }
-
-  setColorTransitionTime(ms) {
+  setColorDelay(ms) {
     const key = `--color-transition-${this.letter}`;
     const value = `${ms}ms`;
     document.documentElement.style.setProperty(key, value);
+  }
+
+  setMinorColorUpdateFromSeeds() {
+    Object.entries(this.colors).forEach(([_, color]) => {
+      color.pushMinorRandomValueFromSeed();
+    });
   }
 
   applyColor() {
@@ -181,6 +194,13 @@ class Letter {
 }
 class Letters {
   constructor() {
+    this.delays = {
+      "xsmall": 200,
+      "small": 500,
+      "default": 1000,
+      "large": 1500,
+      "xlarge": 2000,
+    };
     this.colorSeeds = new ColorSeeds();
     this.propSeeds = new PropSeeds();
     this.letters = {};
@@ -194,10 +214,11 @@ class Letters {
   }
 
   async init() {
-    await sleep(200);
+    await sleep(this.delays.xsmall);
+    this.setAllColorDelays(this.delays.large);
     this.applyAllColors();
-    // await sleep(1600);
-    // this.updateAlice();
+    await sleep(this.delays.large);
+    this.updateAlice();
   }
 
   setMinorColorUpdatesFromSeeds() {
@@ -206,9 +227,19 @@ class Letters {
     });
   }
 
-  updateAlice() {
+  setAllColorDelays(ms) {
+    Object.entries(this.letters).forEach(([_, letter]) => {
+      letter.setColorDelay(ms);
+    });
+  }
+
+  async updateAlice() {
     this.colorSeeds.doMinorShift();
     this.setMinorColorUpdatesFromSeeds();
+    this.applyAllColors();
+    await sleep(3000);
+    this.updateAlice();
+    //this.letters["A"].applyColor();
   }
 
   async shiftThingsAround() {
@@ -456,6 +487,8 @@ function randomInt(min, max) {
 }
 
 function randomShift(position, min, max, base, direction) {
+  // console.log(`${position} ${min} ${max} ${base} ${direction}`);
+  // console.log(position);
   const move = randomInt(0, base);
   for (let count = 0; count < Math.abs(move); count += 1) {
     position += direction;
@@ -465,10 +498,10 @@ function randomShift(position, min, max, base, direction) {
       direction = 1;
     }
   }
+  // console.log(position);
   return position;
 }
 
-// TODO: Deprecate this in favor of randomShift
 function shiftNumber(position, min, max, move) {
   let step = (move > 0) ? 1 : -1;
   for (let count = 0; count < Math.abs(move); count += 1) {

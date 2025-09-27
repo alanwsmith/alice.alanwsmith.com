@@ -3,7 +3,7 @@ class Letter {
     this.letter = letter;
     this.colorSeeds = colorSeeds;
     this.propSeeds = propSeeds;
-    this.setColorTransitionTime(1200);
+    this.setColorDelay(3000);
     this.initColors();
     this.initProps();
   }
@@ -19,7 +19,7 @@ class Letter {
         parts[6],
         parseInt(parts[7]),
         parseInt(parts[8]),
-        this.colorSeeds,
+        this.colorSeeds.seeds,
       );
     });
   }
@@ -38,13 +38,16 @@ class Letter {
     });
   }
 
-  setMinorColorUpdateFromSeeds() {
-  }
-
-  setColorTransitionTime(ms) {
+  setColorDelay(ms) {
     const key = `--color-transition-${this.letter}`;
     const value = `${ms}ms`;
     document.documentElement.style.setProperty(key, value);
+  }
+
+  setMinorColorUpdateFromSeeds() {
+    Object.entries(this.colors).forEach(([_, color]) => {
+      color.pushMinorRandomValueFromSeed();
+    });
   }
 
   applyColor() {

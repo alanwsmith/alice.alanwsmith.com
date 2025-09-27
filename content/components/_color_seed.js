@@ -5,19 +5,29 @@ class ColorSeed {
     this.max = max;
     this.minor = minor;
     this.major = major;
-    this.moves = [];
+    this.direction = randomInt(0, 1) === 1 ? 1 : -1;
+    this.values = [];
     this.pushRandomSeed();
   }
 
   value() {
-    return this.moves[this.moves.length - 1];
+    return this.values[this.values.length - 1];
   }
 
   pushRandomSeed() {
-    this.moves.push(randomInt(this.min, this.max));
+    this.values.push(randomInt(this.min, this.max));
   }
 
   doMinorShift() {
-    console.log("here");
+    this.values.push(
+      randomShift(
+        this.value(),
+        this.min,
+        this.max,
+        this.minor,
+        this.direction,
+      ),
+    );
+    console.log(this.values);
   }
 }

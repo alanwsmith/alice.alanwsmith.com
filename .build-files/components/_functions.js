@@ -111,6 +111,8 @@ function randomInt(min, max) {
 }
 
 function randomShift(position, min, max, base, direction) {
+  // console.log(`${position} ${min} ${max} ${base} ${direction}`);
+  // console.log(position);
   const move = randomInt(0, base);
   for (let count = 0; count < Math.abs(move); count += 1) {
     position += direction;
@@ -120,10 +122,10 @@ function randomShift(position, min, max, base, direction) {
       direction = 1;
     }
   }
+  // console.log(position);
   return position;
 }
 
-// TODO: Deprecate this in favor of randomShift
 function shiftNumber(position, min, max, move) {
   let step = (move > 0) ? 1 : -1;
   for (let count = 0; count < Math.abs(move); count += 1) {

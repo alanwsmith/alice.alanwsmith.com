@@ -1,5 +1,12 @@
 class Letters {
   constructor() {
+    this.delays = {
+      "xsmall": 200,
+      "small": 500,
+      "default": 1000,
+      "large": 1500,
+      "xlarge": 2000,
+    };
     this.colorSeeds = new ColorSeeds();
     this.propSeeds = new PropSeeds();
     this.letters = {};
@@ -13,10 +20,11 @@ class Letters {
   }
 
   async init() {
-    await sleep(200);
+    await sleep(this.delays.xsmall);
+    this.setAllColorDelays(this.delays.large);
     this.applyAllColors();
-    // await sleep(1600);
-    // this.updateAlice();
+    await sleep(this.delays.large);
+    this.updateAlice();
   }
 
   setMinorColorUpdatesFromSeeds() {
@@ -25,9 +33,19 @@ class Letters {
     });
   }
 
-  updateAlice() {
+  setAllColorDelays(ms) {
+    Object.entries(this.letters).forEach(([_, letter]) => {
+      letter.setColorDelay(ms);
+    });
+  }
+
+  async updateAlice() {
     this.colorSeeds.doMinorShift();
     this.setMinorColorUpdatesFromSeeds();
+    this.applyAllColors();
+    await sleep(3000);
+    this.updateAlice();
+    //this.letters["A"].applyColor();
   }
 
   async shiftThingsAround() {
