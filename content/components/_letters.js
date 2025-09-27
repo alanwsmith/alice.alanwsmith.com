@@ -41,6 +41,7 @@ class Letters {
     const updates = [];
     this.listOfChars().forEach((char) => {
       this.listOfColorPrefixes().forEach((prefix) => {
+        console.log(this.colorSeeds.seeds[prefix]);
         updates.push([char, { [prefix]: randomInt(30, 80) }]);
       });
     });
@@ -75,46 +76,38 @@ class Letters {
 
   applyColorPrefixes() {
     Object.entries(this.letters).forEach(([_, letter]) => {
-      // console.log(letter);
       letter.applyColorPrefixes();
     });
   }
 
-  // applyUpdates() {
-  //   Object.entries(this.letters).forEach(([_, letter]) => {
-  //     letter.applyColorPrefixes();
-  //   });
-  // }
-
   async changePicker() {
     [
       this.baselineUpdate.bind(this),
-      this.updateAlice.bind(this),
-      this.makeMonochrome.bind(this),
+      //     this.updateAlice.bind(this),
+      //      this.makeMonochrome.bind(this),
     ][0]();
-    // this.updateAlice();
   }
 
-  async makeMonochrome() {
-    this.setEveryColorDelay(this.delays.default);
-    this.setEveryColor("color-c", 2);
-    this.applyAllColors();
-    await sleep(this.delays.default);
-  }
+  // async makeMonochrome() {
+  //   this.setEveryColorDelay(this.delays.default);
+  //   this.setEveryColor("color-c", 2);
+  //   this.applyAllColors();
+  //   await sleep(this.delays.default);
+  // }
 
-  setSingleColorDelay(char, value) {
-    this.letters[char].setColorDelay(value);
-  }
+  // setSingleColorDelay(char, value) {
+  //   this.letters[char].setColorDelay(value);
+  // }
 
-  setEveryColor(prefix, value) {
-    this.letterArray().forEach((letter) => {
-      this.setIndividualColor(letter, prefix, value);
-    });
-  }
+  // setEveryColor(prefix, value) {
+  //   this.letterArray().forEach((letter) => {
+  //     this.setIndividualColor(letter, prefix, value);
+  //   });
+  // }
 
-  setIndividualColor(letter, prefix, value) {
-    letter.setColor(prefix, value);
-  }
+  // setIndividualColor(letter, prefix, value) {
+  //   letter.setColor(prefix, value);
+  // }
 
   async updateAlice() {
     // this.colorSeeds.doMinorShift();

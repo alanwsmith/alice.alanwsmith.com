@@ -1,12 +1,14 @@
 class ColorSeed {
-  constructor(prefix, min, max, minor, major) {
-    this.prefix = prefix;
+  constructor(min, max, minor, major) {
     this.min = min;
     this.max = max;
     this.minor = minor;
     this.major = major;
-    this.direction = randomInt(0, 1) === 1 ? 1 : -1;
-    this.currentValue = randomInt(this.min, this.max);
+    this._currentValue = null;
+    this._previousValue = null;
+    this.setDirection(
+      randomInt(0, 1) === 1 ? 1 : -1,
+    );
   }
 
   doMajorShift() {
@@ -18,7 +20,7 @@ class ColorSeed {
       this.major,
       this.direction,
     );
-    if (this.previousValue > this.currentValue) {
+    if (this.previousValue() > this.currentValue()) {
       this.setDirection(-1);
     } else {
       this.setDirection(1);
@@ -32,7 +34,7 @@ class ColorSeed {
       this.min,
       this.max,
       this.minor,
-      this.direction,
+      this.direction(),
     );
     if (this.previousValue > this.currentValue) {
       this.setDirection(-1);
@@ -50,16 +52,21 @@ class ColorSeed {
   }
 
   setDirection(value) {
-    this.direction = value;
+    this._direction = value;
+  }
+
+  setCurrentValue(value) {
+    this.setPreviousValue(this.currentValue());
+    this._currentValue = value;
+  }
+
+  setPreviousValue(value) {
+    this._previousValue = value;
   }
 
   setValue(value) {
     this.previousValue = this.currentValue;
     this.currentValue = value;
-  }
-
-  prefix() {
-    return this.prefix;
   }
 
   value() {

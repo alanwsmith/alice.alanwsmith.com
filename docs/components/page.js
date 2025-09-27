@@ -38,14 +38,16 @@ class ColorPrefix {
   }
 }
 class ColorSeed {
-  constructor(prefix, min, max, minor, major) {
-    this.prefix = prefix;
+  constructor(min, max, minor, major) {
     this.min = min;
     this.max = max;
     this.minor = minor;
     this.major = major;
-    this.direction = randomInt(0, 1) === 1 ? 1 : -1;
-    this.currentValue = randomInt(this.min, this.max);
+    this._currentValue = null;
+    this._previousValue = null;
+    this.setDirection(
+      randomInt(0, 1) === 1 ? 1 : -1,
+    );
   }
 
   doMajorShift() {
@@ -57,7 +59,7 @@ class ColorSeed {
       this.major,
       this.direction,
     );
-    if (this.previousValue > this.currentValue) {
+    if (this.previousValue() > this.currentValue()) {
       this.setDirection(-1);
     } else {
       this.setDirection(1);
@@ -71,7 +73,7 @@ class ColorSeed {
       this.min,
       this.max,
       this.minor,
-      this.direction,
+      this.direction(),
     );
     if (this.previousValue > this.currentValue) {
       this.setDirection(-1);
@@ -89,16 +91,21 @@ class ColorSeed {
   }
 
   setDirection(value) {
-    this.direction = value;
+    this._direction = value;
+  }
+
+  setCurrentValue(value) {
+    this.setPreviousValue(this.currentValue());
+    this._currentValue = value;
+  }
+
+  setPreviousValue(value) {
+    this._previousValue = value;
   }
 
   setValue(value) {
     this.previousValue = this.currentValue;
     this.currentValue = value;
-  }
-
-  prefix() {
-    return this.prefix;
   }
 
   value() {
@@ -111,7 +118,6 @@ class ColorSeeds {
     colorSet.forEach((line) => {
       const parts = line.split("|");
       this.seeds[parts[0]] = new ColorSeed(
-        parts[0],
         parseInt(parts[2]),
         parseInt(parts[3]),
         parseInt(parts[7]),
@@ -264,6 +270,7 @@ class Letters {
     const updates = [];
     this.listOfChars().forEach((char) => {
       this.listOfColorPrefixes().forEach((prefix) => {
+        console.log(this.colorSeeds.seeds[prefix]);
         updates.push([char, { [prefix]: randomInt(30, 80) }]);
       });
     });
@@ -298,46 +305,38 @@ class Letters {
 
   applyColorPrefixes() {
     Object.entries(this.letters).forEach(([_, letter]) => {
-      // console.log(letter);
       letter.applyColorPrefixes();
     });
   }
 
-  // applyUpdates() {
-  //   Object.entries(this.letters).forEach(([_, letter]) => {
-  //     letter.applyColorPrefixes();
-  //   });
-  // }
-
   async changePicker() {
     [
       this.baselineUpdate.bind(this),
-      this.updateAlice.bind(this),
-      this.makeMonochrome.bind(this),
+      //     this.updateAlice.bind(this),
+      //      this.makeMonochrome.bind(this),
     ][0]();
-    // this.updateAlice();
   }
 
-  async makeMonochrome() {
-    this.setEveryColorDelay(this.delays.default);
-    this.setEveryColor("color-c", 2);
-    this.applyAllColors();
-    await sleep(this.delays.default);
-  }
+  // async makeMonochrome() {
+  //   this.setEveryColorDelay(this.delays.default);
+  //   this.setEveryColor("color-c", 2);
+  //   this.applyAllColors();
+  //   await sleep(this.delays.default);
+  // }
 
-  setSingleColorDelay(char, value) {
-    this.letters[char].setColorDelay(value);
-  }
+  // setSingleColorDelay(char, value) {
+  //   this.letters[char].setColorDelay(value);
+  // }
 
-  setEveryColor(prefix, value) {
-    this.letterArray().forEach((letter) => {
-      this.setIndividualColor(letter, prefix, value);
-    });
-  }
+  // setEveryColor(prefix, value) {
+  //   this.letterArray().forEach((letter) => {
+  //     this.setIndividualColor(letter, prefix, value);
+  //   });
+  // }
 
-  setIndividualColor(letter, prefix, value) {
-    letter.setColor(prefix, value);
-  }
+  // setIndividualColor(letter, prefix, value) {
+  //   letter.setColor(prefix, value);
+  // }
 
   async updateAlice() {
     // this.colorSeeds.doMinorShift();

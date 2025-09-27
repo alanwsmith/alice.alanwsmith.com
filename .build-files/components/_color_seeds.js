@@ -4,7 +4,6 @@ class ColorSeeds {
     colorSet.forEach((line) => {
       const parts = line.split("|");
       this.seeds[parts[0]] = new ColorSeed(
-        parts[0],
         parseInt(parts[2]),
         parseInt(parts[3]),
         parseInt(parts[7]),
