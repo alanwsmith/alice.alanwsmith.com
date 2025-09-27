@@ -1,25 +1,22 @@
 class ColorSeed {
   constructor(min, max, minor, major) {
-    this.min = min;
-    this.max = max;
-    this.minor = minor;
-    this.major = major;
-    this._currentValue = null;
-    this._previousValue = null;
+    this.setMin(min);
+    this.setMax(max);
+    this.minor(minor);
+    this.major(major);
     this.setDirection(
       randomInt(0, 1) === 1 ? 1 : -1,
     );
   }
 
   doMajorShift() {
-    this.previousValue = this.currentValue;
-    this.currentValue = randomShift(
+    this.setCurrentValue(randomShift(
       this.value(),
-      this.min,
-      this.max,
-      this.major,
+      this.min(),
+      this.max(),
+      this.major(),
       this.direction,
-    );
+    ));
     if (this.previousValue() > this.currentValue()) {
       this.setDirection(-1);
     } else {
@@ -31,9 +28,9 @@ class ColorSeed {
     this.previousValue = this.currentValue;
     this.currentValue = randomShift(
       this.value(),
-      this.min,
-      this.max,
-      this.minor,
+      this.min(),
+      this.max(),
+      this.minor(),
       this.direction(),
     );
     if (this.previousValue > this.currentValue) {
@@ -46,18 +43,50 @@ class ColorSeed {
   generateRandomSeed() {
     this.previousValue = this.currentValue;
     this.currentValue = randomInt(
-      this.min,
-      this.max,
+      this.min(),
+      this.max(),
     );
+  }
+
+  major() {
+    return this._major;
+  }
+
+  max() {
+    return this._max;
+  }
+
+  min() {
+    return this._min;
+  }
+
+  minor() {
+    return this._minor;
+  }
+
+  setCurrentValue(value) {
+    this.setPreviousValue(this.currentValue());
+    this._currentValue = value;
   }
 
   setDirection(value) {
     this._direction = value;
   }
 
-  setCurrentValue(value) {
-    this.setPreviousValue(this.currentValue());
-    this._currentValue = value;
+  setMajor(value) {
+    this._major = value;
+  }
+
+  setMax(value) {
+    this._max = value;
+  }
+
+  setMin(value) {
+    this._min = value;
+  }
+
+  setMinor(value) {
+    this._minor = value;
   }
 
   setPreviousValue(value) {
