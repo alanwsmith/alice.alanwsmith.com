@@ -18,25 +18,33 @@ class Color {
     this.minor = minor;
     this.major = major;
     this.colorSeed = colorSeeds[this.prefix];
-    this.values = [];
-    this.pushMinorRandomValueFromSeed();
+    this.currentValue = null;
+    this.previousValue = null;
+    this.setMinorRandomValueFromSeed();
   }
 
-  pushMinorRandomValueFromSeed() {
-    // console.log(`${this.colorSeed.value()} ${this.minor}`);
-    this.values.push(
-      randomShift(
-        this.colorSeed.value(),
-        this.min,
-        this.max,
-        this.minor,
-        randomInt(0, 1) === 1 ? 1 : -1,
-      ),
+  setValue(value) {
+    this.previousValue = this.currentValue;
+    this.currentValue = value;
+  }
+
+  setMinorRandomValueFromSeed() {
+    this.previousValue = this.currentValue;
+    this.currentValue = randomShift(
+      this.colorSeed.value(),
+      this.min,
+      this.max,
+      this.minor,
+      randomInt(0, 1) === 1 ? 1 : -1,
     );
   }
 
   value() {
-    return `${this.values[this.values.length - 1]}${this.unit}`;
+    return this.currentValue;
+  }
+
+  valueString() {
+    return `${this.currentValue}${this.unit}`;
   }
 }
 class ColorSeed {
@@ -119,9 +127,9 @@ class ColorSeeds {
 // TODO: Move the style prop prefix to the key
 
 const colorSet = [
-  "color-l|_|50|70|_|color-l|%|20|55",
-  "color-c|_|10|60|_|color-c||30|60",
-  "color-h|_|0|360|_|color-h||80|200|",
+  "color-l|_|50|70|_|color-l|%|10|30",
+  "color-c|_|10|40|_|color-c||10|60",
+  "color-h|_|0|360|_|color-h||60|200|",
 ];
 
 const propSet = [
@@ -186,6 +194,10 @@ class Letter {
     });
   }
 
+  setColorL(value) {
+    this.colors["color-l"].setValue(value);
+  }
+
   setColorDelay(ms) {
     const key = `--color-transition-${this.letter}`;
     const value = `${ms}ms`;
@@ -227,14 +239,36 @@ class Letters {
     });
   }
 
+  letterArray() {
+    return Object.entries(this.letters).map(([_, letter]) => letter);
+  }
+
   async init() {
     this.colorSeeds.doMinorShift();
     await sleep(this.delays.xsmall);
     this.setAllColorDelays(this.delays.default);
     this.applyAllColors();
-    await sleep(this.delays.default);
+    this.changePicker();
+  }
 
-    this.updateAlice();
+  async changePicker() {
+    [
+      this.updateAlice.bind(this),
+      this.makeMonochrome.bind(this),
+    ][1]();
+    // this.updateAlice();
+  }
+
+  async makeMonochrome() {
+    console.log(this.letterArray());
+  }
+
+  async updateAlice() {
+    this.colorSeeds.doMinorShift();
+    this.setMinorColorUpdatesFromSeeds();
+    this.applyAllColors();
+    await sleep(this.delays.default);
+    this.changePicker();
   }
 
   setMinorColorUpdatesFromSeeds() {
@@ -247,15 +281,6 @@ class Letters {
     Object.entries(this.letters).forEach(([_, letter]) => {
       letter.setColorDelay(ms);
     });
-  }
-
-  async updateAlice() {
-    this.colorSeeds.doMinorShift();
-    this.setMinorColorUpdatesFromSeeds();
-    this.applyAllColors();
-    await sleep(this.delays.default);
-    this.updateAlice();
-    //this.letters["A"].applyColor();
   }
 
   async shiftThingsAround() {

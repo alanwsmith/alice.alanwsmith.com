@@ -38,6 +38,10 @@ class Letter {
     });
   }
 
+  setColorL(value) {
+    this.colors["color-l"].setValue(value);
+  }
+
   setColorDelay(ms) {
     const key = `--color-transition-${this.letter}`;
     const value = `${ms}ms`;

@@ -19,14 +19,36 @@ class Letters {
     });
   }
 
+  letterArray() {
+    return Object.entries(this.letters).map(([_, letter]) => letter);
+  }
+
   async init() {
     this.colorSeeds.doMinorShift();
     await sleep(this.delays.xsmall);
     this.setAllColorDelays(this.delays.default);
     this.applyAllColors();
-    await sleep(this.delays.default);
+    this.changePicker();
+  }
 
-    this.updateAlice();
+  async changePicker() {
+    [
+      this.updateAlice.bind(this),
+      this.makeMonochrome.bind(this),
+    ][1]();
+    // this.updateAlice();
+  }
+
+  async makeMonochrome() {
+    console.log(this.letterArray());
+  }
+
+  async updateAlice() {
+    this.colorSeeds.doMinorShift();
+    this.setMinorColorUpdatesFromSeeds();
+    this.applyAllColors();
+    await sleep(this.delays.default);
+    this.changePicker();
   }
 
   setMinorColorUpdatesFromSeeds() {
@@ -39,15 +61,6 @@ class Letters {
     Object.entries(this.letters).forEach(([_, letter]) => {
       letter.setColorDelay(ms);
     });
-  }
-
-  async updateAlice() {
-    this.colorSeeds.doMinorShift();
-    this.setMinorColorUpdatesFromSeeds();
-    this.applyAllColors();
-    await sleep(this.delays.default);
-    this.updateAlice();
-    //this.letters["A"].applyColor();
   }
 
   async shiftThingsAround() {

@@ -7,24 +7,32 @@ class Color {
     this.minor = minor;
     this.major = major;
     this.colorSeed = colorSeeds[this.prefix];
-    this.values = [];
-    this.pushMinorRandomValueFromSeed();
+    this.currentValue = null;
+    this.previousValue = null;
+    this.setMinorRandomValueFromSeed();
   }
 
-  pushMinorRandomValueFromSeed() {
-    // console.log(`${this.colorSeed.value()} ${this.minor}`);
-    this.values.push(
-      randomShift(
-        this.colorSeed.value(),
-        this.min,
-        this.max,
-        this.minor,
-        randomInt(0, 1) === 1 ? 1 : -1,
-      ),
+  setValue(value) {
+    this.previousValue = this.currentValue;
+    this.currentValue = value;
+  }
+
+  setMinorRandomValueFromSeed() {
+    this.previousValue = this.currentValue;
+    this.currentValue = randomShift(
+      this.colorSeed.value(),
+      this.min,
+      this.max,
+      this.minor,
+      randomInt(0, 1) === 1 ? 1 : -1,
     );
   }
 
   value() {
-    return `${this.values[this.values.length - 1]}${this.unit}`;
+    return this.currentValue;
+  }
+
+  valueString() {
+    return `${this.currentValue}${this.unit}`;
   }
 }
