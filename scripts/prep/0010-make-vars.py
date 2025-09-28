@@ -61,8 +61,8 @@ class DataMaker:
                     "large": int(parts[8]),
                     "xlarge": int(parts[9]),
                 },
-                "next_value": None,
-                "previous_value": None,
+                "next_value": 0,
+                "previous_value": 0,
             }
 
     def output(self):

@@ -2119,9 +2119,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "BLDA",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2135,9 +2135,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "BLDB",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2151,9 +2151,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "SKLA",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2167,9 +2167,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "SKLB",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2183,9 +2183,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "SKLD",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2199,9 +2199,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRMA",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2215,9 +2215,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRMB",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2231,9 +2231,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRMC",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2247,9 +2247,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRMD",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2263,9 +2263,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRME",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2279,9 +2279,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRMF",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2295,9 +2295,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRMG",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2311,9 +2311,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRMK",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2327,9 +2327,9 @@ const state = {
         "xlarge": 700,
         "xsmall": 90
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "TRML",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font",
       "unit": ""
     },
@@ -2343,9 +2343,9 @@ const state = {
         "xlarge": 90,
         "xsmall": 10
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "color-c",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "color",
       "unit": ""
     },
@@ -2359,9 +2359,9 @@ const state = {
         "xlarge": 210,
         "xsmall": 30
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "color-h",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "color",
       "unit": ""
     },
@@ -2375,9 +2375,9 @@ const state = {
         "xlarge": 30,
         "xsmall": 5
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "color-l",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "color",
       "unit": "%"
     },
@@ -2391,9 +2391,9 @@ const state = {
         "xlarge": 4500,
         "xsmall": 100
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "color-transition",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "color-transition",
       "unit": "ms"
     },
@@ -2407,9 +2407,9 @@ const state = {
         "xlarge": 4500,
         "xsmall": 100
       },
-      "next_value": null,
+      "next_value": 0,
       "prefix": "font-transition",
-      "previous_value": null,
+      "previous_value": 0,
       "type": "font-transition",
       "unit": "ms"
     }
