@@ -21,6 +21,7 @@ seedStrings = [
   "font|TRMK|0|1000||90|150|300|450|700",
   "font|TRML|0|1000||90|150|300|450|700",
   "color-transition|color-transition|0|7000|ms|100|300|1000|3000|4500",
+  "font-transition|font-transition|0|7000|ms|100|300|1000|3000|4500",
 ]
 
 
@@ -35,10 +36,10 @@ class DataMaker:
         for letter in [chr(c) for c in range(ord('a'), ord('a') + 26 )]:
             self.data["letters"][letter] = {
                 "char": letter,
-                "vars": {},
+                "props": {},
             }
             for seed in self.data["seeds"]:
-                self.data["letters"][letter]["vars"][seed] = {
+                self.data["letters"][letter]["props"][seed] = {
                         "next_value": None,
                         "previous_value": None,
                     }
@@ -79,14 +80,6 @@ class DataMaker:
             _out.write(f"""const state = {self.output()};""")
 
 
-
-
-# for letter in [chr(c) for c in range(ord('a'), ord('a') + 26 )]:
-#     data["letters"][letter] = {
-#         "vars": {},
-#     }
-#     for seed in data["seeds"]:
-#         data["letters"][letter]["vars"][seed] = {}
 
 
 

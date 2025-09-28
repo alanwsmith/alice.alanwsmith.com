@@ -3,7 +3,7 @@ const state = {
   "letters": {
     "a": {
       "char": "a",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -73,6 +73,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -80,7 +84,7 @@ const state = {
     },
     "b": {
       "char": "b",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -150,6 +154,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -157,7 +165,7 @@ const state = {
     },
     "c": {
       "char": "c",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -227,6 +235,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -234,7 +246,7 @@ const state = {
     },
     "d": {
       "char": "d",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -304,6 +316,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -311,7 +327,7 @@ const state = {
     },
     "e": {
       "char": "e",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -381,6 +397,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -388,7 +408,7 @@ const state = {
     },
     "f": {
       "char": "f",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -458,6 +478,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -465,7 +489,7 @@ const state = {
     },
     "g": {
       "char": "g",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -535,6 +559,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -542,7 +570,7 @@ const state = {
     },
     "h": {
       "char": "h",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -612,6 +640,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -619,7 +651,7 @@ const state = {
     },
     "i": {
       "char": "i",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -689,6 +721,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -696,7 +732,7 @@ const state = {
     },
     "j": {
       "char": "j",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -766,6 +802,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -773,7 +813,7 @@ const state = {
     },
     "k": {
       "char": "k",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -843,6 +883,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -850,7 +894,7 @@ const state = {
     },
     "l": {
       "char": "l",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -920,6 +964,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -927,7 +975,7 @@ const state = {
     },
     "m": {
       "char": "m",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -997,6 +1045,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1004,7 +1056,7 @@ const state = {
     },
     "n": {
       "char": "n",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1074,6 +1126,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1081,7 +1137,7 @@ const state = {
     },
     "o": {
       "char": "o",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1151,6 +1207,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1158,7 +1218,7 @@ const state = {
     },
     "p": {
       "char": "p",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1228,6 +1288,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1235,7 +1299,7 @@ const state = {
     },
     "q": {
       "char": "q",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1305,6 +1369,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1312,7 +1380,7 @@ const state = {
     },
     "r": {
       "char": "r",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1382,6 +1450,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1389,7 +1461,7 @@ const state = {
     },
     "s": {
       "char": "s",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1459,6 +1531,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1466,7 +1542,7 @@ const state = {
     },
     "t": {
       "char": "t",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1536,6 +1612,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1543,7 +1623,7 @@ const state = {
     },
     "u": {
       "char": "u",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1613,6 +1693,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1620,7 +1704,7 @@ const state = {
     },
     "v": {
       "char": "v",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1690,6 +1774,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1697,7 +1785,7 @@ const state = {
     },
     "w": {
       "char": "w",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1767,6 +1855,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1774,7 +1866,7 @@ const state = {
     },
     "x": {
       "char": "x",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1844,6 +1936,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1851,7 +1947,7 @@ const state = {
     },
     "y": {
       "char": "y",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1921,6 +2017,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1928,7 +2028,7 @@ const state = {
     },
     "z": {
       "char": "z",
-      "vars": {
+      "props": {
         "BLDA": {
           "next_value": null,
           "previous_value": null
@@ -1998,6 +2098,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -2291,6 +2395,22 @@ const state = {
       "prefix": "color-transition",
       "previous_value": null,
       "type": "color-transition",
+      "unit": "ms"
+    },
+    "font-transition": {
+      "max": 7000,
+      "min": 0,
+      "moves": {
+        "default": 1000,
+        "large": 3000,
+        "small": 300,
+        "xlarge": 4500,
+        "xsmall": 100
+      },
+      "next_value": null,
+      "prefix": "font-transition",
+      "previous_value": null,
+      "type": "font-transition",
       "unit": "ms"
     }
   }

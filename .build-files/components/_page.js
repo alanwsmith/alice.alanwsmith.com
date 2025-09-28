@@ -1,11 +1,16 @@
 export default class {
   bittyInit() {
     this.spans = null;
-    initLetterColors();
+    setAllColorL(0);
+    setAllColorC(0);
+    setAllColorH(0);
     setAllColorTransitions(0);
-    // initColorTransitions();
-    //initSeeds();
-    // initLetters();
+    generateFontSeeds(100, 400);
+    generateColorSeed("color-l", 60, 70);
+    generateColorSeed("color-c", 40, 80);
+    generateColorSeed("color-h", 0, 360);
+    generateColorTransitionSeed(3000, 4000);
+    console.log(state.seeds);
   }
 
   injestInput(_event, el) {
@@ -18,30 +23,99 @@ export default class {
   }
 }
 
-function arrayOfLetterObjects() {
-  for (let [prefix, details] of Object.entries(state.letters[char].vars)) {
-    if (listOfColorPrefixes().includes(prefix)) {
-      details.next_value = 0;
+function generateColorTransitionSeed(min, max) {
+  arrayOfSeeds("color-transition").forEach((seed) => {
+    seed.next_value = randomInt(min, max);
+  });
+}
+
+function generateColorSeed(prefix, min, max) {
+  arrayOfSeeds("color").forEach((seed) => {
+    if (seed.prefix === prefix) {
+      seed.next_value = randomInt(min, max);
     }
-  }
-  return [];
+  });
+}
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function generateFontSeeds(min, max) {
+  arrayOfSeeds("font").forEach((seed) => {
+    seed.next_value = randomInt(min, max);
+  });
+}
+
+// function generateRandomFontSeeds() {
+//   arrayOfFontSeeds().forEach((seed) => {
+//     seed.next_value = randomInt(seed.min, seed.max);
+//   });
+// }
+
+function arrayOfSeeds(type) {
+  return Object.entries(state.seeds).filter(([prefix, details]) => {
+    return details.type === type;
+  }).map(([prefix, details]) => {
+    return details;
+  });
+}
+
+function arrayOfFontSeeds() {
+  return Object.entries(state.seeds).filter(([prefix, details]) => {
+    return details.type === "font";
+  }).map(([prefix, details]) => {
+    return details;
+  });
+}
+
+function arrayOfColorSeeds() {
+  return Object.entries(state.seeds).filter(([prefix, details]) => {
+    return details.type === "color";
+  }).map(([prefix, details]) => {
+    return details;
+  });
+}
+
+function setLetterProp(char, prop, value) {
+  state.letters[char].props[prop].next_value = value;
+}
+
+function arrayOfLetter() {
+  return Object.entries(state.letters).map(([prefix, details]) => {
+    return details;
+  });
+}
+
+function setColorTransition(char, value) {
+  state.letters[char].props["color-transition"].next_value = value;
 }
 
 function setAllColorTransitions(value) {
-  arrayOfLetterObjects().forEach((letterObject) => {
-    console.log(letterObject);
+  listOfLetterChars().forEach((char) => {
+    setLetterProp(char, "color-transition", value);
   });
-
-  // listOfLetters().forEach((char) => {
-  //   for (let [prefix, details] of Object.entries(state.letters[char].vars)) {
-  //     if (listOfColorPrefixes().includes(prefix)) {
-  //       details.next_value = 0;
-  //     }
-  //   }
-  // });
 }
 
-function listOfLetters() {
+function setAllColorL(value) {
+  listOfLetterChars().forEach((char) => {
+    setLetterProp(char, "color-l", value);
+  });
+}
+
+function setAllColorC(value) {
+  listOfLetterChars().forEach((char) => {
+    setLetterProp(char, "color-c", value);
+  });
+}
+
+function setAllColorH(value) {
+  listOfLetterChars().forEach((char) => {
+    setLetterProp(char, "color-h", value);
+  });
+}
+
+function listOfLetterChars() {
   return Object.keys(state.letters).map((char) => char);
 }
 
@@ -63,7 +137,7 @@ function listOfAllPrefixes() {
 
 // function initColorTransitions() {
 //   listOfLetters().forEach((char) => {
-//     for (let [prefix, details] of Object.entries(state.letters[char].vars)) {
+//     for (let [prefix, details] of Object.entries(state.letters[char].props)) {
 //       if (listOfColorPrefixes().includes(prefix)) {
 //         details.next_value = 0;
 //       }
@@ -72,8 +146,8 @@ function listOfAllPrefixes() {
 // }
 
 function initLetterColors() {
-  listOfLetters().forEach((char) => {
-    for (let [prefix, details] of Object.entries(state.letters[char].vars)) {
+  listOfLetterChars().forEach((char) => {
+    for (let [prefix, details] of Object.entries(state.letters[char].props)) {
       if (listOfColorPrefixes().includes(prefix)) {
         details.next_value = 0;
       }
