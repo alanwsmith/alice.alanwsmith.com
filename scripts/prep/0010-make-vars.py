@@ -8,9 +8,9 @@ seedStrings = [
   "color|color-h|0|360||50|90|170|240|300",
 #  "font|BLDA|0|500||50|100|150|200|300",
 #  "font|BLDB|0|1000||90|150|300|450|700",
-  "font-s|SKLA|0|460||20|60|120|200|300",
+  "font-s|SKLA|0|1000||20|60|120|200|300",
   "font-s|SKLB|0|1000||90|150|300|450|700",
-  "font-s|SKLD|0|400||20|60|120|200|300",
+  "font-s|SKLD|0|1000||20|60|120|200|300",
 #  "font-t|TRMA|0|1000||90|150|300|450|700",
   "font-t|TRMB|0|1000||90|150|300|450|700",
   "font-t|TRMC|0|1000||90|150|300|450|700",
@@ -22,6 +22,8 @@ seedStrings = [
   "font-t2|TRML|0|1000||90|150|300|450|700",
   "color-transition|color-transition|0|7000|ms|100|300|1000|3000|4500",
   "font-transition|font-transition|0|7000|ms|100|300|1000|3000|4500",
+  "size-transition|size-transition|0|7000|ms|100|300|1000|3000|4500",
+  "background-transition|background-transition|0|7000|ms|100|300|1000|3000|4500",
   "font-size|font-size|0.9|3.0|rem|0.2|0.3|0.5|0.6|0.7",
 ]
 

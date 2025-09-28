@@ -4,6 +4,9 @@ export default class {
   async bittyInit() {
     addBaseStyleSheet();
     // Must set to zero to start
+    setAllOfType("color-transition", 0);
+    setAllOfType("font-transition", 0);
+    setAllOfType("size-transition", 0);
     setAllOfType("font-s", 0);
     setAllOfType("font-t", 0);
     setAllOfType("font-t2", 0);
@@ -15,10 +18,12 @@ export default class {
     setAllOfPrefix("color-l", 0);
     setAllOfPrefix("color-c", 0);
     setAllOfPrefix("color-h", 0);
-    setAllOfType("color-transition", 2000);
-    setAllOfType("font-transition", 2200);
-    setAllOfType("size-transition", 2200);
     applyUpdates();
+    await sleep(100);
+    setAllOfType("color-transition", 3000);
+    setAllOfType("font-transition", 4200);
+    setAllOfType("size-transition", 2200);
+    await sleep(100);
   }
 
   loadInput(_event, el) {
@@ -37,59 +42,46 @@ export default class {
     generateSeed("color-c", 14, 24);
     generateSeed("color-h", 0, 360);
     prepAllFromSeed("color", "small");
-    applyUpdates();
-    await sleep(2000);
-
     setAllOfPrefix("SKLD", 200);
     setAllOfPrefix("TRMF", 200);
     setAllOfPrefix("TRMK", 200);
     setAllOfPrefix("TRML", 200);
     applyUpdates();
-
-    pickColors();
-    pickShapes();
-
-    // await sleep(200);
-
-    // setAllOfType("font-s", 300);
-    // setAllOfType("font-t", 300);
-    //  setAllOfType("font-t2", 300);
-
-    //console.log(state.letters["a"]);
-    // applyUpdates();
-    // pickColors();
-    // pickShapes();
-
-    // await sleep(100);
-    // pickOne("font-t");
-    // generateSeed("color-l", 74, 86);
-    // generateSeed("color-c", 10, 18);
-    // generateSeed("color-h", 0, 360);
-    // generateSeeds("font", 100, 300);
-    // prepAllFromSeed("color", "small");
-    // prepAllFromSeed("font", "default");
-    // applyUpdates();
-    // await sleep(5200);
-    // shiftLoop();
+    await sleep(4600);
+    doRun();
   }
 }
 
+async function doRun() {
+  await sleep(100);
+  setAllOfType("color-transition", 7000);
+  setAllOfType("font-transition", 6200);
+  setAllOfType("size-transition", 9200);
+  applyUpdates();
+  await sleep(100);
+  pickColors();
+  pickShapes();
+}
+
 async function pickColors() {
+  applyUpdates();
   generateSeed("color-l", 74, 86);
   generateSeed("color-c", 10, 100);
   generateSeed("color-h", 0, 360);
   prepAllFromSeed("color", "small");
   applyUpdates();
-  await sleep(5200);
+  await sleep(7000);
   pickColors();
 }
 
 async function pickShapes() {
   pickOne("font-t");
+  pickOne("font-t2");
+  pickOne("font-s");
   generateSeeds("font", 100, 500);
   prepAllFromSeed("font", "default");
   applyUpdates();
-  await sleep(1000);
+  await sleep(5000);
   pickShapes();
 }
 
