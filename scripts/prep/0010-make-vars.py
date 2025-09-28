@@ -22,6 +22,7 @@ seedStrings = [
   "font-t|TRML|0|1000||90|150|300|450|700",
   "color-transition|color-transition|0|7000|ms|100|300|1000|3000|4500",
   "font-transition|font-transition|0|7000|ms|100|300|1000|3000|4500",
+  "font-size|font-size|0.9|3.0|rem|0.2|0.3|0.5|0.6|0.7",
 ]
 
 
@@ -44,22 +45,21 @@ class DataMaker:
                         "previous_value": None,
                     }
 
-
     def load_seeds(self):
         for seed in seedStrings:
             parts = seed.split("|")
             self.data["seeds"][parts[1]] = {
                 "type": parts[0],
                 "prefix": parts[1],
-                "min": int(parts[2]),
-                "max": int(parts[3]),
+                "min": parts[2],
+                "max": parts[3],
                 "unit": parts[4],
                 "moves": {
-                    "xsmall": int(parts[5]),
-                    "small": int(parts[6]),
-                    "default": int(parts[7]),
-                    "large": int(parts[8]),
-                    "xlarge": int(parts[9]),
+                    "xsmall": parts[5],
+                    "small": parts[6],
+                    "default": parts[7],
+                    "large": parts[8],
+                    "xlarge": parts[9],
                 },
                 "next_value": 0,
                 "previous_value": 0,

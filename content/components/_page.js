@@ -3,6 +3,7 @@ let loopCount = 0;
 export default class {
   async bittyInit() {
     addBaseStyleSheet();
+    setAllFontsToSize(2.7);
     /*
     pickOne("font-t");
     setAll("color-l", 0);
@@ -85,6 +86,13 @@ async function shiftLoop() {
   shiftLoop();
 }
 
+function setAllFontsToSize(size) {
+  arrayOfLetters().forEach((letter) => {
+    console.log(letter.char);
+    setProp("font-size", letter.char, size);
+  });
+}
+
 function pickOne(type) {
   const pick = randomInt(0, arrayOfSeeds(type).length - 1);
   arrayOfLetters().forEach((letter) => {
@@ -92,9 +100,9 @@ function pickOne(type) {
       // console.log(letter.char);
       // console.log(seed.prefix);
       if (index === pick) {
-        setProp(letter.char, seed.prefix, randomInt(400, 1000));
+        setProp(seed.prefix, letter.char, randomInt(400, 1000));
       } else {
-        setProp(letter.char, seed.prefix, 0);
+        setProp(seed.prefix, letter.char, 0);
       }
       // console.log(pick);
       // console.log(seed);
@@ -204,7 +212,7 @@ function prepAllFromSeed(type, distance) {
         seed.moves[distance],
         randomDirection(),
       );
-      setProp(letter.char, seed.prefix, value);
+      setProp(seed.prefix, letter.char, value);
     });
   });
 }
@@ -221,7 +229,7 @@ function setSeed(prefix, value) {
   state.seeds[prefix].next_value = value;
 }
 
-function setProp(char, prefix, value) {
+function setProp(prefix, char, value) {
   state.letters[char].props[prefix].previous_value =
     state.letters[char].props[prefix].next_value;
   state.letters[char].props[prefix].next_value = value;
@@ -229,7 +237,7 @@ function setProp(char, prefix, value) {
 
 function setAll(prefix, value) {
   arrayOfLetters().forEach((letter) => {
-    setProp(letter.char, prefix, value);
+    setProp(prefix, letter.char, value);
   });
 }
 
@@ -287,6 +295,7 @@ function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
   styles.push(`.output { 
+    font-size: var(--font-size-q);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
       color var(--color-transition-q) linear,
@@ -299,6 +308,7 @@ function addBaseStyleSheet() {
   arrayOfLetters().forEach((details) => {
     const letter = details.char;
     styles.push(`.letter-${letter} {
+        font-size: var(--font-size-${letter});
         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
         transition: 
           color var(--color-transition-${letter}) linear,

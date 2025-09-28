@@ -64,6 +64,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -130,6 +134,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -202,6 +210,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -268,6 +280,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -340,6 +356,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -406,6 +426,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -478,6 +502,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -544,6 +572,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -616,6 +648,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -682,6 +718,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -754,6 +794,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -820,6 +864,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -892,6 +940,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -958,6 +1010,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -1030,6 +1086,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -1096,6 +1156,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -1168,6 +1232,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -1234,6 +1302,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -1306,6 +1378,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -1372,6 +1448,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -1444,6 +1524,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -1510,6 +1594,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -1582,6 +1670,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -1648,6 +1740,10 @@ const state = {
           "previous_value": null
         },
         "color-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "font-size": {
           "next_value": null,
           "previous_value": null
         },
@@ -1720,6 +1816,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -1789,6 +1889,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
           "next_value": null,
           "previous_value": null
@@ -1798,14 +1902,14 @@ const state = {
   },
   "seeds": {
     "SKLA": {
-      "max": 460,
-      "min": 0,
+      "max": "460",
+      "min": "0",
       "moves": {
-        "default": 120,
-        "large": 200,
-        "small": 60,
-        "xlarge": 300,
-        "xsmall": 20
+        "default": "120",
+        "large": "200",
+        "small": "60",
+        "xlarge": "300",
+        "xsmall": "20"
       },
       "next_value": 0,
       "prefix": "SKLA",
@@ -1814,14 +1918,14 @@ const state = {
       "unit": ""
     },
     "SKLB": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "SKLB",
@@ -1830,14 +1934,14 @@ const state = {
       "unit": ""
     },
     "SKLD": {
-      "max": 400,
-      "min": 0,
+      "max": "400",
+      "min": "0",
       "moves": {
-        "default": 120,
-        "large": 200,
-        "small": 60,
-        "xlarge": 300,
-        "xsmall": 20
+        "default": "120",
+        "large": "200",
+        "small": "60",
+        "xlarge": "300",
+        "xsmall": "20"
       },
       "next_value": 0,
       "prefix": "SKLD",
@@ -1846,14 +1950,14 @@ const state = {
       "unit": ""
     },
     "TRMB": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMB",
@@ -1862,14 +1966,14 @@ const state = {
       "unit": ""
     },
     "TRMC": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMC",
@@ -1878,14 +1982,14 @@ const state = {
       "unit": ""
     },
     "TRMD": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMD",
@@ -1894,14 +1998,14 @@ const state = {
       "unit": ""
     },
     "TRME": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRME",
@@ -1910,14 +2014,14 @@ const state = {
       "unit": ""
     },
     "TRMF": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMF",
@@ -1926,14 +2030,14 @@ const state = {
       "unit": ""
     },
     "TRMG": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMG",
@@ -1942,14 +2046,14 @@ const state = {
       "unit": ""
     },
     "TRMK": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMK",
@@ -1958,14 +2062,14 @@ const state = {
       "unit": ""
     },
     "TRML": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRML",
@@ -1974,14 +2078,14 @@ const state = {
       "unit": ""
     },
     "color-c": {
-      "max": 140,
-      "min": 0,
+      "max": "140",
+      "min": "0",
       "moves": {
-        "default": 30,
-        "large": 60,
-        "small": 18,
-        "xlarge": 90,
-        "xsmall": 10
+        "default": "30",
+        "large": "60",
+        "small": "18",
+        "xlarge": "90",
+        "xsmall": "10"
       },
       "next_value": 0,
       "prefix": "color-c",
@@ -1990,14 +2094,14 @@ const state = {
       "unit": ""
     },
     "color-h": {
-      "max": 360,
-      "min": 0,
+      "max": "360",
+      "min": "0",
       "moves": {
-        "default": 170,
-        "large": 240,
-        "small": 90,
-        "xlarge": 300,
-        "xsmall": 50
+        "default": "170",
+        "large": "240",
+        "small": "90",
+        "xlarge": "300",
+        "xsmall": "50"
       },
       "next_value": 0,
       "prefix": "color-h",
@@ -2006,14 +2110,14 @@ const state = {
       "unit": ""
     },
     "color-l": {
-      "max": 90,
-      "min": 60,
+      "max": "90",
+      "min": "60",
       "moves": {
-        "default": 15,
-        "large": 20,
-        "small": 10,
-        "xlarge": 30,
-        "xsmall": 5
+        "default": "15",
+        "large": "20",
+        "small": "10",
+        "xlarge": "30",
+        "xsmall": "5"
       },
       "next_value": 0,
       "prefix": "color-l",
@@ -2022,14 +2126,14 @@ const state = {
       "unit": "%"
     },
     "color-transition": {
-      "max": 7000,
-      "min": 0,
+      "max": "7000",
+      "min": "0",
       "moves": {
-        "default": 1000,
-        "large": 3000,
-        "small": 300,
-        "xlarge": 4500,
-        "xsmall": 100
+        "default": "1000",
+        "large": "3000",
+        "small": "300",
+        "xlarge": "4500",
+        "xsmall": "100"
       },
       "next_value": 0,
       "prefix": "color-transition",
@@ -2037,15 +2141,31 @@ const state = {
       "type": "color-transition",
       "unit": "ms"
     },
-    "font-transition": {
-      "max": 7000,
-      "min": 0,
+    "font-size": {
+      "max": "3.0",
+      "min": "0.9",
       "moves": {
-        "default": 1000,
-        "large": 3000,
-        "small": 300,
-        "xlarge": 4500,
-        "xsmall": 100
+        "default": "0.5",
+        "large": "0.6",
+        "small": "0.3",
+        "xlarge": "0.7",
+        "xsmall": "0.2"
+      },
+      "next_value": 0,
+      "prefix": "font-size",
+      "previous_value": 0,
+      "type": "font-size",
+      "unit": "rem"
+    },
+    "font-transition": {
+      "max": "7000",
+      "min": "0",
+      "moves": {
+        "default": "1000",
+        "large": "3000",
+        "small": "300",
+        "xlarge": "4500",
+        "xsmall": "100"
       },
       "next_value": 0,
       "prefix": "font-transition",
