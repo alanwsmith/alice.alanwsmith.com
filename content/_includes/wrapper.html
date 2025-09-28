@@ -14,29 +14,49 @@
     --background-color: black;
     --border-color: #aaa;
     --color: rgb(180 180 180);
-    --letter-font-size: 2.9rem;
+    --letter-font-size: 1.1em;
 }
 
+
+/*
 *, 
 *::before, 
 *::after {
   box-sizing: border-box;
 }
 
+*/
+
+/*
 * {
   margin: 0;
 }
 
+*/
+
+/*
 html {
   color-scheme: dark light;
 }
 
+*/
+
 body {
-  font-family: system-ui;
   background-color: var(--background-color);
   color: #333;
+  font-family: Decovar;
+vertical-align: middle;
+  /*
+-moz-font-smoothing: 2em;
+font-smooth: never;
+text-rendering: geometricPrecision;
+text-rendering: optimizeLegibility;
+*/
+
 }
 
+
+/*
 button {
   background: none;
   border: none;
@@ -46,67 +66,110 @@ button {
   outline: inherit;
   padding: 0;
 }
+*/
+
+/*
 
 bitty-v1-rc4 {
   display: block;
 }
+*/
 
+/*
 .default-flow > :where(:not(:first-child)) {
   margin-top: var(--flow-space, 0.7em);
 }
+*/
 
+/*
 .default-wrapper {
-  width: min(100vw - 3rem, 48rem);
+  width: min(100vw - 3em, 48em);
   margin-inline: auto;
 }
+*/
 
+
+/*
 h1 {
-  padding-top: 2.4rem;
+  padding-top: 2.4em;
   border-bottom: 1px solid #333;
 }
+*/
 
-.letter {
-  cursor: pointer;
-  display: block;
-  align-content: end;
-  padding: 0;
-}
 
-.letter-alt {
-  font-family: system-ui;
-  opacity: 0.7;
-  padding: 0;
-}
-
-.output {
-  width: 100%;
-  font-family: Decovar;
-  user-select: none;
-  font-size: var(--letter-font-size);
-}
-
-.space {
-  display: inline-flex;
-}
-
-textarea {
-  width: 100%;
-  height: 16rem;
-}
-
-.two-columns {
-  display: grid;
-  grid-template-columns: 1fr 10rem;
-  gap: 1.8rem;
-}
 
 .word {
   display: inline-flex;
-  margin-left: 1.1rem;
-  height: 3.96rem;
+dominant-baseline: middle;
+
+vertical-align: middle;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+    /*
+  margin-left: 0.5em;
   padding: 0;
-  margin-block: 0rem;;
+  margin-block: 0.2em;;
+  */
 }
+
+.padder {
+  font-size: 3.7em;
+  height: 3.2em;
+}
+
+.letter {
+
+  /*
+vertical-align: middle;
+font-size-adjust: none;
+dominant-baseline: middle;
+*/
+
+  display: block;
+  /*
+  position-self: center;
+*/
+
+  /*
+overflow-position: unsafe;
+  display: grid;
+  align-self: center;
+  padding: 0.2em;
+  margin: 0.2em;
+  outline-offset: 0.2em;
+  transform: translate(-0.1em, -0.1em);
+*/
+
+}
+
+/*
+.letter-a {
+transform: translate(30%, 50%);
+}
+*/
+
+
+/*
+.letter-alt {
+  display: block;
+  align-content: end;
+  padding: 0;
+  margin: 0;
+  height: 1.7em;
+}
+*/
+
+.output {
+  width: 100%;
+}
+
+
+/*
+.space {
+  display: inline-flex;
+}
+*/
 
     </style>
   </head>

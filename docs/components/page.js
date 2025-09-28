@@ -3,6 +3,7 @@ let loopCount = 0;
 export default class {
   async bittyInit() {
     addBaseStyleSheet();
+    /*
     pickOne("font-t");
     setAll("color-l", 0);
     setAll("color-c", 0);
@@ -12,6 +13,7 @@ export default class {
     generateSeeds("font", 700, 900);
     prepAllFromSeed("font", "default");
     applyUpdates();
+    */
   }
 
   loadInput(_event, el) {
@@ -22,22 +24,44 @@ export default class {
 
   async startUpdates(_event, el) {
     //console.log(state.letters["a"]);
-    await sleep(100);
-    setAll("color-transition", 1600);
-    setAll("font-transition", 3000);
+    setAll("color-transition", 5000);
+    setAll("font-transition", 700);
     applyUpdates();
     await sleep(100);
-    pickOne("font-t");
-    generateSeed("color-l", 74, 86);
-    generateSeed("color-c", 10, 18);
-    generateSeed("color-h", 0, 360);
-    generateSeeds("font", 100, 300);
-    prepAllFromSeed("color", "small");
-    prepAllFromSeed("font", "default");
-    applyUpdates();
-    await sleep(5200);
-    shiftLoop();
+    // pickColors();
+    pickShapes();
+
+    // await sleep(100);
+    // pickOne("font-t");
+    // generateSeed("color-l", 74, 86);
+    // generateSeed("color-c", 10, 18);
+    // generateSeed("color-h", 0, 360);
+    // generateSeeds("font", 100, 300);
+    // prepAllFromSeed("color", "small");
+    // prepAllFromSeed("font", "default");
+    // applyUpdates();
+    // await sleep(5200);
+    // shiftLoop();
   }
+}
+
+async function pickColors() {
+  generateSeed("color-l", 74, 86);
+  generateSeed("color-c", 10, 100);
+  generateSeed("color-h", 0, 360);
+  prepAllFromSeed("color", "small");
+  applyUpdates();
+  await sleep(5200);
+  pickColors();
+}
+
+async function pickShapes() {
+  pickOne("font-t");
+  generateSeeds("font", 100, 500);
+  prepAllFromSeed("font", "default");
+  applyUpdates();
+  await sleep(1000);
+  pickShapes();
 }
 
 async function shiftLoop() {
@@ -123,7 +147,9 @@ function applyUpdates() {
           const value = `${letter.props[seed.prefix].next_value}${
             propUnit(seed.prefix)
           }`;
-          //console.log(`${key} - ${value}`);
+          // if (letter.char === "a") {
+          //   console.log(`${key} - ${value}`);
+          // }
           document.documentElement.style.setProperty(
             key,
             value,
@@ -251,23 +277,23 @@ function fontVariations(char) {
   arrayOfSeeds("font-t").forEach((seed) => {
     prefixes.push(seed.prefix);
   });
-  console.log(prefixes);
+  const output = prefixes.map((prefix) => {
+    return `'${prefix}' var(--${prefix}-${char})`;
+  });
+  console.log(output.join(",\n"));
 }
 
 function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
-  fontVariations();
+  fontVariations("a");
 
   styles.push(`.output { 
-    font-size: var(--letter-font-size);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
       color var(--color-transition-q) linear,
       font-variation-settings var(--font-transition-q) linear;
     font-variation-settings: 
-      'BLDA' var(--BLDA-q), 
-      'BLDB' var(--BLDB-q), 
       'SKLA' var(--SKLA-q), 
       'SKLB' var(--SKLB-q), 
       'SKLD' var(--SKLD-q), 
@@ -281,14 +307,11 @@ function addBaseStyleSheet() {
   arrayOfLetters().forEach((details) => {
     const letter = details.char;
     styles.push(`.letter-${letter} {
-        font-size: var(--letter-font-size);
         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
         transition: 
           color var(--color-transition-${letter}) linear,
           font-variation-settings var(--font-transition-${letter}) linear;
         font-variation-settings:
-          'BLDA' var(--BLDA-${letter}),
-          'BLDB' var(--BLDB-${letter}),
           'SKLA' var(--SKLA-${letter}),
           'SKLB' var(--SKLB-${letter}),
           'SKLD' var(--SKLD-${letter}),
@@ -309,14 +332,6 @@ const state = {
     "a": {
       "char": "a",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -333,7 +348,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -341,7 +364,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -374,14 +405,6 @@ const state = {
     "b": {
       "char": "b",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -398,7 +421,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -406,7 +437,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -439,14 +478,6 @@ const state = {
     "c": {
       "char": "c",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -463,7 +494,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -471,7 +510,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -504,14 +551,6 @@ const state = {
     "d": {
       "char": "d",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -528,7 +567,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -536,7 +583,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -569,14 +624,6 @@ const state = {
     "e": {
       "char": "e",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -593,7 +640,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -601,7 +656,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -634,14 +697,6 @@ const state = {
     "f": {
       "char": "f",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -658,7 +713,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -666,7 +729,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -699,14 +770,6 @@ const state = {
     "g": {
       "char": "g",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -723,7 +786,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -731,7 +802,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -764,14 +843,6 @@ const state = {
     "h": {
       "char": "h",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -788,7 +859,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -796,7 +875,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -829,14 +916,6 @@ const state = {
     "i": {
       "char": "i",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -853,7 +932,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -861,7 +948,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -894,14 +989,6 @@ const state = {
     "j": {
       "char": "j",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -918,7 +1005,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -926,7 +1021,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -959,14 +1062,6 @@ const state = {
     "k": {
       "char": "k",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -983,7 +1078,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -991,7 +1094,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1024,14 +1135,6 @@ const state = {
     "l": {
       "char": "l",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1048,7 +1151,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1056,7 +1167,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1089,14 +1208,6 @@ const state = {
     "m": {
       "char": "m",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1113,7 +1224,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1121,7 +1240,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1154,14 +1281,6 @@ const state = {
     "n": {
       "char": "n",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1178,7 +1297,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1186,7 +1313,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1219,14 +1354,6 @@ const state = {
     "o": {
       "char": "o",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1243,7 +1370,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1251,7 +1386,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1284,14 +1427,6 @@ const state = {
     "p": {
       "char": "p",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1308,7 +1443,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1316,7 +1459,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1349,14 +1500,6 @@ const state = {
     "q": {
       "char": "q",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1373,7 +1516,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1381,7 +1532,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1414,14 +1573,6 @@ const state = {
     "r": {
       "char": "r",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1438,7 +1589,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1446,7 +1605,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1479,14 +1646,6 @@ const state = {
     "s": {
       "char": "s",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1503,7 +1662,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1511,7 +1678,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1544,14 +1719,6 @@ const state = {
     "t": {
       "char": "t",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1568,7 +1735,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1576,7 +1751,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1609,14 +1792,6 @@ const state = {
     "u": {
       "char": "u",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1633,7 +1808,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1641,7 +1824,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1674,14 +1865,6 @@ const state = {
     "v": {
       "char": "v",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1698,7 +1881,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1706,7 +1897,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1739,14 +1938,6 @@ const state = {
     "w": {
       "char": "w",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1763,7 +1954,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1771,7 +1970,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1804,14 +2011,6 @@ const state = {
     "x": {
       "char": "x",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1828,7 +2027,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1836,7 +2043,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1869,14 +2084,6 @@ const state = {
     "y": {
       "char": "y",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1893,7 +2100,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1901,7 +2116,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1934,14 +2157,6 @@ const state = {
     "z": {
       "char": "z",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1958,7 +2173,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMC": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMD": {
           "next_value": null,
           "previous_value": null
         },
@@ -1966,7 +2189,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "TRMF": {
+          "next_value": null,
+          "previous_value": null
+        },
         "TRMG": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMK": {
           "next_value": null,
           "previous_value": null
         },
@@ -1998,38 +2229,6 @@ const state = {
     }
   },
   "seeds": {
-    "BLDA": {
-      "max": 500,
-      "min": 0,
-      "moves": {
-        "default": 150,
-        "large": 200,
-        "small": 100,
-        "xlarge": 300,
-        "xsmall": 50
-      },
-      "next_value": 0,
-      "prefix": "BLDA",
-      "previous_value": 0,
-      "type": "font",
-      "unit": ""
-    },
-    "BLDB": {
-      "max": 1000,
-      "min": 0,
-      "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
-      },
-      "next_value": 0,
-      "prefix": "BLDB",
-      "previous_value": 0,
-      "type": "font",
-      "unit": ""
-    },
     "SKLA": {
       "max": 460,
       "min": 0,
@@ -2091,7 +2290,23 @@ const state = {
       "next_value": 0,
       "prefix": "TRMA",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font",
+      "unit": ""
+    },
+    "TRMB": {
+      "max": 1000,
+      "min": 0,
+      "moves": {
+        "default": 300,
+        "large": 450,
+        "small": 150,
+        "xlarge": 700,
+        "xsmall": 90
+      },
+      "next_value": 0,
+      "prefix": "TRMB",
+      "previous_value": 0,
+      "type": "font",
       "unit": ""
     },
     "TRMC": {
@@ -2107,7 +2322,23 @@ const state = {
       "next_value": 0,
       "prefix": "TRMC",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font",
+      "unit": ""
+    },
+    "TRMD": {
+      "max": 1000,
+      "min": 0,
+      "moves": {
+        "default": 300,
+        "large": 450,
+        "small": 150,
+        "xlarge": 700,
+        "xsmall": 90
+      },
+      "next_value": 0,
+      "prefix": "TRMD",
+      "previous_value": 0,
+      "type": "font",
       "unit": ""
     },
     "TRME": {
@@ -2123,7 +2354,23 @@ const state = {
       "next_value": 0,
       "prefix": "TRME",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font",
+      "unit": ""
+    },
+    "TRMF": {
+      "max": 1000,
+      "min": 0,
+      "moves": {
+        "default": 300,
+        "large": 450,
+        "small": 150,
+        "xlarge": 700,
+        "xsmall": 90
+      },
+      "next_value": 0,
+      "prefix": "TRMF",
+      "previous_value": 0,
+      "type": "font",
       "unit": ""
     },
     "TRMG": {
@@ -2139,7 +2386,23 @@ const state = {
       "next_value": 0,
       "prefix": "TRMG",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font",
+      "unit": ""
+    },
+    "TRMK": {
+      "max": 1000,
+      "min": 0,
+      "moves": {
+        "default": 300,
+        "large": 450,
+        "small": 150,
+        "xlarge": 700,
+        "xsmall": 90
+      },
+      "next_value": 0,
+      "prefix": "TRMK",
+      "previous_value": 0,
+      "type": "font",
       "unit": ""
     },
     "TRML": {
@@ -2155,7 +2418,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRML",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font",
       "unit": ""
     },
     "color-c": {
@@ -2289,7 +2552,8 @@ const SpanMaker = class {
     this.spanParagraphs = this.wordParagraphs.map((para) => {
       return para.map((word) => {
         return [
-          `<div class="word">`,
+          `<div class="word"><span class="padder">|</span>`,
+
           word.trim().split("").map((char) => {
             if (this.isLetter(char)) {
               return [
@@ -2300,12 +2564,14 @@ const SpanMaker = class {
                 `</span>`,
               ].join("");
             } else {
-              return [
-                `<span class="letter letter-Q letter-alt`,
-                `">`,
-                char,
-                `</span>`,
-              ].join("");
+              return "";
+
+              //return [
+              //  `<span class="letter-alt`,
+              //  `">`,
+              //  //char,
+              //  `</span>`,
+              //].join("");
             }
           }).join(""),
           `</div>`,
