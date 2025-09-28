@@ -54,20 +54,6 @@ function generateSeed(prefix, min, max) {
   state.seeds[prefix].next_value = randomInt(min, max);
 }
 
-function generateColorTransitionSeed(min, max) {
-  arrayOfSeeds("color-transition").forEach((seed) => {
-    seed.next_value = randomInt(min, max);
-  });
-}
-
-function generateColorSeed(prefix, min, max) {
-  arrayOfSeeds("color").forEach((seed) => {
-    if (seed.prefix === prefix) {
-      seed.next_value = randomInt(min, max);
-    }
-  });
-}
-
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -78,31 +64,9 @@ function generateSeeds(min, max) {
   });
 }
 
-// function generateRandomFontSeeds() {
-//   arrayOfFontSeeds().forEach((seed) => {
-//     seed.next_value = randomInt(seed.min, seed.max);
-//   });
-// }
-
 function arrayOfSeeds(type) {
   return Object.entries(state.seeds).filter(([prefix, details]) => {
     return details.type === type;
-  }).map(([prefix, details]) => {
-    return details;
-  });
-}
-
-function arrayOfFontSeeds() {
-  return Object.entries(state.seeds).filter(([prefix, details]) => {
-    return details.type === "font";
-  }).map(([prefix, details]) => {
-    return details;
-  });
-}
-
-function arrayOfColorSeeds() {
-  return Object.entries(state.seeds).filter(([prefix, details]) => {
-    return details.type === "color";
   }).map(([prefix, details]) => {
     return details;
   });
