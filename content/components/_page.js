@@ -23,11 +23,11 @@ export default class {
     setAll("font-transition", 2400);
     applyUpdates();
     await sleep(100);
-    generateSeed("color-l", 60, 76);
-    generateSeed("color-c", 6, 14);
+    generateSeed("color-l", 74, 86);
+    generateSeed("color-c", 10, 18);
     generateSeed("color-h", 0, 360);
     generateSeeds("font", 100, 200);
-    prepAllFromSeed("color", "xsmall");
+    prepAllFromSeed("color", "small");
     prepAllFromSeed("font", "default");
     applyUpdates();
   }
