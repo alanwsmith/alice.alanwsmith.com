@@ -7,25 +7,9 @@ export default class {
     setAll("color-h", 0);
     setAll("color-transition", 0);
     setAll("font-transition", 0);
-    generateSeeds("font", 100, 200);
+    generateSeeds("font", 700, 900);
     prepAllFromSeed("font", "default");
-    generateSeed("color-transition", 300, 600);
-    //matchTransitionSeeds();
-    prepAllFromSeed("color-transition", "default");
-    prepAllFromSeed("font-transition", "default");
     applyUpdates();
-
-    // setAll("color-transition", 1000);
-    // applyUpdates();
-    // await sleep(1000);
-    // prepAllFromSeed( "color","default");
-    // applyUpdates();
-    // await sleep(1000);
-    // console.log("asdf");
-    // prepAllFromSeed("default", "color");
-
-    // applyUpdates();
-    // console.log(state.letters["a"]);
   }
 
   injestInput(_event, el) {
@@ -39,10 +23,16 @@ export default class {
 
   async startUpdates(_event, _el) {
     await sleep(100);
+    setAll("color-transition", 2400);
+    setAll("font-transition", 2400);
+    applyUpdates();
+    await sleep(100);
     generateSeed("color-l", 60, 76);
-    generateSeed("color-c", 30, 78);
+    generateSeed("color-c", 6, 14);
     generateSeed("color-h", 0, 360);
-    prepAllFromSeed("color", "default");
+    generateSeeds("font", 100, 200);
+    prepAllFromSeed("color", "xsmall");
+    prepAllFromSeed("font", "default");
     applyUpdates();
 
     // applyUpdates();
@@ -125,11 +115,11 @@ function prepAllFromSeed(type, distance) {
   });
 }
 
-function matchTransitions() {
-  // state.seeds["font-transition"].previous_value =
-  //   state.seeds["font-transition"].next_value;
-  // state.seeds["font-transition"].next_value =
-  //   state.seeds["color-transition"].next_value;
+function matchTransitionSeeds() {
+  state.seeds["font-transition"].previous_value =
+    state.seeds["font-transition"].next_value;
+  state.seeds["font-transition"].next_value =
+    state.seeds["color-transition"].next_value;
 }
 
 function setSeed(prefix, value) {
