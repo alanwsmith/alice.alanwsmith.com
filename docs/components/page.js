@@ -3,52 +3,151 @@ let loopCount = 0;
 export default class {
   async bittyInit() {
     addBaseStyleSheet();
-    setAll("color-l", 0);
-    setAll("color-c", 0);
-    setAll("color-h", 0);
-    setAll("color-transition", 0);
-    setAll("font-transition", 0);
-    generateSeeds("font", 700, 900);
-    prepAllFromSeed("font", "default");
+    // Must set to zero to start
+    setAllOfType("color-transition", 0);
+    setAllOfType("font-transition", 0);
+    setAllOfType("size-transition", 0);
+    setAllOfType("font-s", 0);
+    setAllOfType("font-t", 0);
+    setAllOfType("font-t2", 0);
+    setAllFontsToSize(2.5);
+    setAllOfPrefix("SKLD", 900);
+    setAllOfPrefix("TRMF", 800);
+    setAllOfPrefix("TRMK", 800);
+    setAllOfPrefix("TRML", 800);
+    setAllOfPrefix("color-l", 0);
+    setAllOfPrefix("color-c", 0);
+    setAllOfPrefix("color-h", 0);
     applyUpdates();
+    await sleep(100);
+    setAllOfType("color-transition", 3000);
+    setAllOfType("font-transition", 4200);
+    setAllOfType("size-transition", 2200);
+    await sleep(100);
   }
 
   loadInput(_event, el) {
     const spanMaker = new SpanMaker(el.innerText);
     this.spans = spanMaker.makeParagraphs().makeWords().makeSpans().output();
+    this.api.forward(null, "inputPayload");
+  }
+
+  inputPayload(_event, el) {
     el.innerHTML = this.spans;
   }
 
   async startUpdates(_event, el) {
-    await sleep(100);
-    setAll("color-transition", 4000);
-    setAll("font-transition", 4000);
-    applyUpdates();
-    await sleep(100);
+    await sleep(200);
     generateSeed("color-l", 74, 86);
-    generateSeed("color-c", 10, 18);
+    generateSeed("color-c", 14, 24);
     generateSeed("color-h", 0, 360);
-    generateSeeds("font", 100, 200);
     prepAllFromSeed("color", "small");
-    prepAllFromSeed("font", "default");
+    setAllOfPrefix("SKLD", 200);
+    setAllOfPrefix("TRMF", 200);
+    setAllOfPrefix("TRMK", 200);
+    setAllOfPrefix("TRML", 200);
     applyUpdates();
-    await sleep(4000);
-    shiftLoop();
+    await sleep(4600);
+    doRun();
   }
 }
 
-async function shiftLoop() {
-  setAll("color-transition", 4800);
-  setAll("font-transition", 4800);
-  shiftSeed("font", "default");
-  prepAllFromSeed("font", "large");
-  shiftSeed("color-h", "large");
-  shiftSeed("color-c", "deafult");
-  prepAllFromSeed("color", "large");
+async function doRun() {
+  await sleep(100);
+  setAllOfType("color-transition", 9000);
+  setAllOfType("font-transition", 3600);
+  setAllOfType("size-transition", 9200);
   applyUpdates();
-  await sleep(5100);
+  await sleep(100);
+  pickColors();
+  pickShapes();
+  pickBackground();
+}
+
+async function pickBackground() {
+  document.documentElement.style.setProperty(
+    `--background-l`,
+    `${randomInt(0, 30)}%`,
+  );
+  document.documentElement.style.setProperty(
+    `--background-c`,
+    randomInt(0, 40),
+  );
+  document.documentElement.style.setProperty(
+    `--background-h`,
+    randomInt(0, 360),
+  );
+  await sleep(24000);
+  pickBackground();
+}
+
+async function pickColors() {
+  applyUpdates();
+  generateSeed("color-l", 50, 90);
+  generateSeed("color-c", 10, 160);
+  generateSeed("color-h", 0, 360);
+  prepAllFromSeed("color", "default");
+  applyUpdates();
+  await sleep(9200);
+  pickColors();
+}
+
+async function pickShapes() {
+  pickOne("font-t");
+  pickOne("font-t2");
+  pickOne("font-s");
+  // generateSeeds("font-s", 100, 900);
+  // generateSeeds("font-t", 100, 900);
+  // generateSeeds("font-t", 100, 900);
+  prepAllFromSeed("font", "default");
+  applyUpdates();
+  await sleep(4000);
+  pickShapes();
+}
+
+async function shiftLoop() {
   loopCount += 1;
+  pickOne("font-t");
+  if (loopCount % 5 === 0) {
+    generateSeeds("font", 500, 700);
+    // generateRandomSeeds("font-t");
+    shiftSeed("color-h", "small");
+    prepAllFromSeed("color", "xsmall");
+    //generateSeed("color-c", 70, 180);
+  } else {
+    generateSeeds("font", 100, 200);
+    generateSeed("color-h", 0, 360);
+    prepAllFromSeed("color", "default");
+  }
+  shiftSeed("color-c", "xlarge");
+  prepAllFromSeed("font", "default");
+  applyUpdates();
+  await sleep(5200);
   shiftLoop();
+}
+
+function setAllFontsToSize(size) {
+  arrayOfLetters().forEach((letter) => {
+    // console.log(letter.char);
+    setProp("font-size", letter.char, size);
+  });
+}
+
+function pickOne(type) {
+  const pick = randomInt(0, arrayOfSeeds(type).length - 1);
+  arrayOfLetters().forEach((letter) => {
+    arrayOfSeeds(type).forEach((seed, index) => {
+      // console.log(letter.char);
+      // console.log(seed.prefix);
+      if (index === pick) {
+        setProp(seed.prefix, letter.char, randomInt(400, 1000));
+      } else {
+        setProp(seed.prefix, letter.char, 0);
+      }
+      // console.log(pick);
+      // console.log(seed);
+    });
+  });
 }
 
 function shiftSeed(prefix, amount) {
@@ -89,20 +188,24 @@ function applyUpdates() {
     seedTypes().forEach((type) => {
       arrayOfSeeds(type).forEach((seed) => {
         if (
-          letter.props[seed.prefix].previous_value !=
-            letter.props[seed.prefix].next_value
+          letter.props[seed.prefix].previous_value !==
+            getNextPrefixValue(letter.char, seed.prefix)
         ) {
           const key = `--${seed.prefix}-${letter.char}`;
           const value = `${letter.props[seed.prefix].next_value}${
             propUnit(seed.prefix)
           }`;
-          // console.log(`${key} - ${value}`);
+          // if (letter.char === "a") {
+          //   console.log(`${key} - ${value}`);
+          // }
           document.documentElement.style.setProperty(
             key,
             value,
           );
-          letter.props[seed.prefix].previous_value =
-            letter.props[seed.prefix].next_value;
+          letter.props[seed.prefix].previous_value = getNextPrefixValue(
+            letter.char,
+            seed.prefix,
+          );
         }
       });
     });
@@ -110,7 +213,17 @@ function applyUpdates() {
 }
 
 function seedTypes() {
-  return ["color", "color-transition", "font", "font-transition"];
+  const seedTypeSet = new Set();
+  Object.entries(state.seeds).forEach(([_, seed]) => {
+    seedTypeSet.add(seed.type);
+    //console.log(seed.type);
+  });
+  return [...seedTypeSet];
+
+  //console.log(seedTypeSet);
+  // console.log(state.seeds);
+
+  //return ["color", "color-transition", "font", "font-transition"];
 }
 
 function randomShift(position, min, max, distance, direction) {
@@ -141,36 +254,74 @@ function prepAllFromSeed(type, distance) {
         seed.moves[distance],
         randomDirection(),
       );
-      setProp(letter.char, seed.prefix, value);
+      setProp(seed.prefix, letter.char, value);
     });
   });
 }
 
 function matchTransitionSeeds() {
-  state.seeds["font-transition"].previous_value =
-    state.seeds["font-transition"].next_value;
-  state.seeds["font-transition"].next_value =
-    state.seeds["color-transition"].next_value;
+  state.seeds["font-transition"].previous_value = getNextSeedValue(
+    "font-transition",
+  );
+  state.seeds["font-transition"].next_value = getNextSeedValue(
+    "color-transition",
+  );
 }
 
 function setSeed(prefix, value) {
-  state.seeds[prefix].previous_value = state.seeds[prefix].next_value;
+  state.seeds[prefix].previous_value = getNextSeedValue(prefix);
   state.seeds[prefix].next_value = value;
 }
 
-function setProp(char, prefix, value) {
-  state.letters[char].props[prefix].previous_value =
-    state.letters[char].props[prefix].next_value;
-  state.letters[char].props[prefix].next_value = value;
+function getNextSeedValue(prefix) {
+  // Necessary to pull values out instead of
+  // getting a reference.
+  return state.seeds[prefix].next_value;
 }
 
-function setAll(prefix, value) {
+function getNextPrefixValue(char, prefix) {
+  // Necessary to pull values out instead of
+  // getting a reference.
+  return state.letters[char].props[prefix].next_value;
+}
+
+function setProp(prefix, char, value) {
+  state.letters[char].props[prefix].previous_value = getNextPrefixValue(
+    char,
+    prefix,
+  );
+  state.letters[char].props[prefix].next_value = value;
+  // if (char === "a") {
+  //   console.log(`${prefix} - ${char} - ${value}`);
+  // }
+}
+
+function setAllOfPrefix(prefix, value) {
   arrayOfLetters().forEach((letter) => {
-    setProp(letter.char, prefix, value);
+    setProp(prefix, letter.char, value);
+  });
+}
+
+function setAllOfType(type, value) {
+  arrayOfSeeds(type).forEach((seed) => {
+    arrayOfLetters().forEach((letter) => {
+      setProp(seed.prefix, letter.char, value);
+    });
+  });
+}
+
+function generateRandomSeed(prefix, min, max) {
+  // setSeed(prefix));
+}
+
+function generateRandomSeeds(type, min, max) {
+  arrayOfSeeds(type).forEach((seed) => {
+    generateRandomSeed(seed.prefix, min, max);
   });
 }
 
 function generateSeed(prefix, min, max) {
+  //console.log(prefix);
   setSeed(prefix, randomInt(min, max));
 }
 
@@ -196,59 +347,59 @@ function arrayOfLetters() {
   return Object.entries(state.letters).map(([char, letter]) => letter);
 }
 
+function fontVariations(char) {
+  const prefixes = [];
+  arrayOfSeeds("font-s").forEach((seed) => {
+    prefixes.push(seed.prefix);
+  });
+  arrayOfSeeds("font-t").forEach((seed) => {
+    prefixes.push(seed.prefix);
+  });
+  arrayOfSeeds("font-t2").forEach((seed) => {
+    prefixes.push(seed.prefix);
+  });
+  const output = prefixes.map((prefix) => {
+    return `"${prefix}" var(--${prefix}-${char})`;
+  });
+  return (output.join(",\n"));
+}
+
 function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
-  styles.push(`:root{
---default-font-size: 1.0rem;
---letter-font-size: 2.7rem;
-}`);
+
+  styles.push(
+    ":root { --color-easing: linear; }",
+    ":root { --font-easing: linear; }",
+    ":root { --size-easing: linear; }",
+  );
+
+  // styles.push(
+  //   ":root { --color-easing: ease; }",
+  //   ":root { --font-easing: ease; }",
+  //   ":root { --size-easing: ease; }",
+  // );
 
   styles.push(`.output { 
-    font-size: var(--default-font-size);
+    font-size: var(--font-size-q);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
-      color var(--color-transition-q),
-      font-variation-settings var(--font-transition-q);
+      color var(--color-transition-q) var(--color-easing),
+      font-variation-settings var(--font-transition-q) var(--font-easing);
     font-variation-settings: 
-      'BLDA' var(--BLDA-q), 
-      'BLDB' var(--BLDB-q), 
-      'SKLA' var(--SKLA-q), 
-      'SKLB' var(--SKLB-q), 
-      'SKLD' var(--SKLD-q), 
-      'TRMA' var(--TRMA-q), 
-      'TRMB' var(--TRMB-q), 
-      'TRMC' var(--TRMC-q), 
-      'TRMD' var(--TRMD-q), 
-      'TRME' var(--TRME-q), 
-      'TRMF' var(--TRMF-q), 
-      'TRMG' var(--TRMG-q), 
-      'TRMK' var(--TRMK-q), 
-      'TRML' var(--TRML-q);}`);
-
+      ${fontVariations("q")};
+}`);
   arrayOfLetters().forEach((details) => {
     const letter = details.char;
     styles.push(`.letter-${letter} {
-        font-size: var(--letter-font-size);
+        font-size: var(--font-size-${letter});
         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
         transition: 
-          color var(--color-transition-${letter}),
-          font-variation-settings var(--font-transition-${letter});
+          color var(--color-transition-${letter}) var(--color-easing),
+          font-variation-settings var(--font-transition-${letter}) var(--font-easing);
         font-variation-settings:
-          'BLDA' var(--BLDA-${letter}),
-          'BLDB' var(--BLDB-${letter}),
-          'SKLA' var(--SKLA-${letter}),
-          'SKLB' var(--SKLB-${letter}),
-          'SKLD' var(--SKLD-${letter}),
-          'TRMA' var(--TRMA-${letter}),
-          'TRMB' var(--TRMB-${letter}),
-          'TRMC' var(--TRMC-${letter}),
-          'TRMD' var(--TRMD-${letter}),
-          'TRME' var(--TRME-${letter}),
-          'TRMF' var(--TRMF-${letter}),
-          'TRMG' var(--TRMG-${letter}),
-          'TRMK' var(--TRMK-${letter}),
-          'TRML' var(--TRML-${letter});}`);
+          ${fontVariations(letter)};
+}`);
   });
 
   stylesSheet.replaceSync(styles.join("\n"));
@@ -260,14 +411,6 @@ const state = {
     "a": {
       "char": "a",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -277,10 +420,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -316,6 +455,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -332,7 +475,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -341,14 +492,6 @@ const state = {
     "b": {
       "char": "b",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -358,10 +501,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -397,6 +536,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -413,7 +556,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -422,14 +573,6 @@ const state = {
     "c": {
       "char": "c",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -439,10 +582,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -478,6 +617,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -494,7 +637,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -503,14 +654,6 @@ const state = {
     "d": {
       "char": "d",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -520,10 +663,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -559,6 +698,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -575,7 +718,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -584,14 +735,6 @@ const state = {
     "e": {
       "char": "e",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -601,10 +744,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -640,6 +779,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -656,7 +799,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -665,14 +816,6 @@ const state = {
     "f": {
       "char": "f",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -682,10 +825,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -721,6 +860,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -737,7 +880,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -746,14 +897,6 @@ const state = {
     "g": {
       "char": "g",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -763,10 +906,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -802,6 +941,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -818,7 +961,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -827,14 +978,6 @@ const state = {
     "h": {
       "char": "h",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -844,10 +987,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -883,6 +1022,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -899,7 +1042,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -908,14 +1059,6 @@ const state = {
     "i": {
       "char": "i",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -925,10 +1068,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -964,6 +1103,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -980,7 +1123,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -989,14 +1140,6 @@ const state = {
     "j": {
       "char": "j",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1006,10 +1149,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1045,6 +1184,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1061,7 +1204,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1070,14 +1221,6 @@ const state = {
     "k": {
       "char": "k",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1087,10 +1230,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1126,6 +1265,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1142,7 +1285,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1151,14 +1302,6 @@ const state = {
     "l": {
       "char": "l",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1168,10 +1311,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1207,6 +1346,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1223,7 +1366,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1232,14 +1383,6 @@ const state = {
     "m": {
       "char": "m",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1249,10 +1392,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1288,6 +1427,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1304,7 +1447,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1313,14 +1464,6 @@ const state = {
     "n": {
       "char": "n",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1330,10 +1473,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1369,6 +1508,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1385,7 +1528,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1394,14 +1545,6 @@ const state = {
     "o": {
       "char": "o",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1411,10 +1554,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1450,6 +1589,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1466,7 +1609,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1475,14 +1626,6 @@ const state = {
     "p": {
       "char": "p",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1492,10 +1635,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1531,6 +1670,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1547,7 +1690,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1556,14 +1707,6 @@ const state = {
     "q": {
       "char": "q",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1573,10 +1716,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1612,6 +1751,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1628,7 +1771,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1637,14 +1788,6 @@ const state = {
     "r": {
       "char": "r",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1654,10 +1797,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1693,6 +1832,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1709,7 +1852,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1718,14 +1869,6 @@ const state = {
     "s": {
       "char": "s",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1735,10 +1878,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1774,6 +1913,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1790,7 +1933,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1799,14 +1950,6 @@ const state = {
     "t": {
       "char": "t",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1816,10 +1959,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1855,6 +1994,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1871,7 +2014,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1880,14 +2031,6 @@ const state = {
     "u": {
       "char": "u",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1897,10 +2040,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1936,6 +2075,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -1952,7 +2095,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -1961,14 +2112,6 @@ const state = {
     "v": {
       "char": "v",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1978,10 +2121,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2017,6 +2156,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -2033,7 +2176,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -2042,14 +2193,6 @@ const state = {
     "w": {
       "char": "w",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2059,10 +2202,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2098,6 +2237,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -2114,7 +2257,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -2123,14 +2274,6 @@ const state = {
     "x": {
       "char": "x",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2140,10 +2283,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2179,6 +2318,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -2195,7 +2338,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -2204,14 +2355,6 @@ const state = {
     "y": {
       "char": "y",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2221,10 +2364,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2260,6 +2399,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -2276,7 +2419,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -2285,14 +2436,6 @@ const state = {
     "z": {
       "char": "z",
       "props": {
-        "BLDA": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "BLDB": {
-          "next_value": null,
-          "previous_value": null
-        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2302,10 +2445,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2341,6 +2480,10 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "background-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
         "color-c": {
           "next_value": null,
           "previous_value": null
@@ -2357,7 +2500,15 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
+        "font-size": {
+          "next_value": null,
+          "previous_value": null
+        },
         "font-transition": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "size-transition": {
           "next_value": null,
           "previous_value": null
         }
@@ -2365,239 +2516,207 @@ const state = {
     }
   },
   "seeds": {
-    "BLDA": {
-      "max": 1000,
-      "min": 0,
-      "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
-      },
-      "next_value": 0,
-      "prefix": "BLDA",
-      "previous_value": 0,
-      "type": "font",
-      "unit": ""
-    },
-    "BLDB": {
-      "max": 1000,
-      "min": 0,
-      "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
-      },
-      "next_value": 0,
-      "prefix": "BLDB",
-      "previous_value": 0,
-      "type": "font",
-      "unit": ""
-    },
     "SKLA": {
-      "max": 1000,
-      "min": 0,
+      "max": "700",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "120",
+        "large": "200",
+        "small": "60",
+        "xlarge": "300",
+        "xsmall": "20"
       },
       "next_value": 0,
       "prefix": "SKLA",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "SKLB": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "SKLB",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "SKLD": {
-      "max": 1000,
-      "min": 0,
+      "max": "700",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "120",
+        "large": "200",
+        "small": "60",
+        "xlarge": "300",
+        "xsmall": "20"
       },
       "next_value": 0,
       "prefix": "SKLD",
       "previous_value": 0,
-      "type": "font",
-      "unit": ""
-    },
-    "TRMA": {
-      "max": 1000,
-      "min": 0,
-      "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
-      },
-      "next_value": 0,
-      "prefix": "TRMA",
-      "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "TRMB": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMB",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMC": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMC",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMD": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMD",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRME": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRME",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMF": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMF",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t2",
       "unit": ""
     },
     "TRMG": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMG",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMK": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRMK",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t2",
       "unit": ""
     },
     "TRML": {
-      "max": 1000,
-      "min": 0,
+      "max": "1000",
+      "min": "0",
       "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
       },
       "next_value": 0,
       "prefix": "TRML",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t2",
       "unit": ""
     },
-    "color-c": {
-      "max": 140,
-      "min": 0,
+    "background-transition": {
+      "max": "7000",
+      "min": "0",
       "moves": {
-        "default": 30,
-        "large": 60,
-        "small": 18,
-        "xlarge": 90,
-        "xsmall": 10
+        "default": "1000",
+        "large": "3000",
+        "small": "300",
+        "xlarge": "4500",
+        "xsmall": "100"
+      },
+      "next_value": 0,
+      "prefix": "background-transition",
+      "previous_value": 0,
+      "type": "background-transition",
+      "unit": "ms"
+    },
+    "color-c": {
+      "max": "140",
+      "min": "0",
+      "moves": {
+        "default": "30",
+        "large": "60",
+        "small": "18",
+        "xlarge": "90",
+        "xsmall": "10"
       },
       "next_value": 0,
       "prefix": "color-c",
@@ -2606,14 +2725,14 @@ const state = {
       "unit": ""
     },
     "color-h": {
-      "max": 360,
-      "min": 0,
+      "max": "360",
+      "min": "0",
       "moves": {
-        "default": 170,
-        "large": 240,
-        "small": 90,
-        "xlarge": 300,
-        "xsmall": 50
+        "default": "170",
+        "large": "240",
+        "small": "90",
+        "xlarge": "300",
+        "xsmall": "50"
       },
       "next_value": 0,
       "prefix": "color-h",
@@ -2622,14 +2741,14 @@ const state = {
       "unit": ""
     },
     "color-l": {
-      "max": 90,
-      "min": 60,
+      "max": "90",
+      "min": "60",
       "moves": {
-        "default": 15,
-        "large": 20,
-        "small": 10,
-        "xlarge": 30,
-        "xsmall": 5
+        "default": "15",
+        "large": "20",
+        "small": "10",
+        "xlarge": "30",
+        "xsmall": "5"
       },
       "next_value": 0,
       "prefix": "color-l",
@@ -2638,14 +2757,14 @@ const state = {
       "unit": "%"
     },
     "color-transition": {
-      "max": 7000,
-      "min": 0,
+      "max": "7000",
+      "min": "0",
       "moves": {
-        "default": 1000,
-        "large": 3000,
-        "small": 300,
-        "xlarge": 4500,
-        "xsmall": 100
+        "default": "1000",
+        "large": "3000",
+        "small": "300",
+        "xlarge": "4500",
+        "xsmall": "100"
       },
       "next_value": 0,
       "prefix": "color-transition",
@@ -2653,20 +2772,52 @@ const state = {
       "type": "color-transition",
       "unit": "ms"
     },
-    "font-transition": {
-      "max": 7000,
-      "min": 0,
+    "font-size": {
+      "max": "3.0",
+      "min": "0.9",
       "moves": {
-        "default": 1000,
-        "large": 3000,
-        "small": 300,
-        "xlarge": 4500,
-        "xsmall": 100
+        "default": "0.5",
+        "large": "0.6",
+        "small": "0.3",
+        "xlarge": "0.7",
+        "xsmall": "0.2"
+      },
+      "next_value": 0,
+      "prefix": "font-size",
+      "previous_value": 0,
+      "type": "font-size",
+      "unit": "rem"
+    },
+    "font-transition": {
+      "max": "7000",
+      "min": "0",
+      "moves": {
+        "default": "1000",
+        "large": "3000",
+        "small": "300",
+        "xlarge": "4500",
+        "xsmall": "100"
       },
       "next_value": 0,
       "prefix": "font-transition",
       "previous_value": 0,
       "type": "font-transition",
+      "unit": "ms"
+    },
+    "size-transition": {
+      "max": "7000",
+      "min": "0",
+      "moves": {
+        "default": "1000",
+        "large": "3000",
+        "small": "300",
+        "xlarge": "4500",
+        "xsmall": "100"
+      },
+      "next_value": 0,
+      "prefix": "size-transition",
+      "previous_value": 0,
+      "type": "size-transition",
       "unit": "ms"
     }
   }
@@ -2690,9 +2841,11 @@ const SpanMaker = class {
       if (!this.textParagraphs[parasIndex]) {
         this.textParagraphs.push("");
       }
-      this.textParagraphs[parasIndex] += `${line} `;
-      if (line === "") {
+      if (line.trim() === "") {
         parasIndex += 1;
+      } else {
+        this.textParagraphs[parasIndex] += `${line} `;
+        // console.log(`LINE: ${line}`);
       }
     });
     return this;
@@ -2706,11 +2859,11 @@ const SpanMaker = class {
     // but leaving the word split in anyway.
     this.wordParagraphs = this.textParagraphs.map((para) => {
       return para
-        .replaceAll(`"`, "")
-        .replaceAll(`?`, "")
-        .replaceAll(`-`, " ")
-        .replaceAll(`)`, "")
-        .replaceAll(`(`, "")
+        //.replaceAll(`"`, "")
+        // .replaceAll(`?`, "")
+        // .replaceAll(`-`, " ")
+        // .replaceAll(`)`, "")
+        // .replaceAll(`(`, "")
         .replaceAll(/\s\s+/g, " ").split(" ");
     });
     return this;
@@ -2718,8 +2871,8 @@ const SpanMaker = class {
 
   makeSpans() {
     this.spanParagraphs = this.wordParagraphs.map((para) => {
-      return para.map((word) => {
-        return [
+      let content = para.map((word) => {
+        let content2 = [
           `<div class="word">`,
           word.trim().split("").map((char) => {
             if (this.isLetter(char)) {
@@ -2732,8 +2885,7 @@ const SpanMaker = class {
               ].join("");
             } else {
               return [
-                `<span class="letter letter-Q letter-alt`,
-                `">`,
+                `<span class="letter-alt letter-q">`,
                 char,
                 `</span>`,
               ].join("");
@@ -2741,13 +2893,19 @@ const SpanMaker = class {
           }).join(""),
           `</div>`,
         ].join("");
+        return content2;
       }).join(``);
+      return content;
     });
     return this;
   }
 
   output() {
-    return `<p>${this.spanParagraphs.join("</p><p>")}</p>`;
+    return `<div class="pAlt">${
+      this.spanParagraphs.join(
+        '</div><div class="pAlt">',
+      )
+    }</div>`;
   }
 };
 

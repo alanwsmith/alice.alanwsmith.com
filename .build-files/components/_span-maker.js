@@ -17,9 +17,11 @@ const SpanMaker = class {
       if (!this.textParagraphs[parasIndex]) {
         this.textParagraphs.push("");
       }
-      this.textParagraphs[parasIndex] += `${line} `;
-      if (line === "") {
+      if (line.trim() === "") {
         parasIndex += 1;
+      } else {
+        this.textParagraphs[parasIndex] += `${line} `;
+        // console.log(`LINE: ${line}`);
       }
     });
     return this;
@@ -33,11 +35,11 @@ const SpanMaker = class {
     // but leaving the word split in anyway.
     this.wordParagraphs = this.textParagraphs.map((para) => {
       return para
-        .replaceAll(`"`, "")
-        .replaceAll(`?`, "")
-        .replaceAll(`-`, " ")
-        .replaceAll(`)`, "")
-        .replaceAll(`(`, "")
+        //.replaceAll(`"`, "")
+        // .replaceAll(`?`, "")
+        // .replaceAll(`-`, " ")
+        // .replaceAll(`)`, "")
+        // .replaceAll(`(`, "")
         .replaceAll(/\s\s+/g, " ").split(" ");
     });
     return this;
@@ -45,8 +47,8 @@ const SpanMaker = class {
 
   makeSpans() {
     this.spanParagraphs = this.wordParagraphs.map((para) => {
-      return para.map((word) => {
-        return [
+      let content = para.map((word) => {
+        let content2 = [
           `<div class="word">`,
           word.trim().split("").map((char) => {
             if (this.isLetter(char)) {
@@ -59,8 +61,7 @@ const SpanMaker = class {
               ].join("");
             } else {
               return [
-                `<span class="letter letter-Q letter-alt`,
-                `">`,
+                `<span class="letter-alt letter-q">`,
                 char,
                 `</span>`,
               ].join("");
@@ -68,12 +69,18 @@ const SpanMaker = class {
           }).join(""),
           `</div>`,
         ].join("");
+        return content2;
       }).join(``);
+      return content;
     });
     return this;
   }
 
   output() {
-    return `<p>${this.spanParagraphs.join("</p><p>")}</p>`;
+    return `<div class="pAlt">${
+      this.spanParagraphs.join(
+        '</div><div class="pAlt">',
+      )
+    }</div>`;
   }
 };

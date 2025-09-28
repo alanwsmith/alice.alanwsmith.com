@@ -11,9 +11,13 @@
 }
 
 :root {
-    --background-color: black;
-    --border-color: #aaa;
-    --color: rgb(180 180 180);
+  --background-l: 0%;
+  --background-c: 0;
+  --background-h: 0;
+  --background-transition: 20000ms;
+  --background-easing: linear;
+  --border-color: #aaa;
+  --color: rgb(180 180 180);
 }
 
 *, 
@@ -26,90 +30,112 @@
   margin: 0;
 }
 
-html {
-  color-scheme: dark light;
-}
-
 body {
-  font-family: system-ui;
-  background-color: var(--background-color);
+  background-color: lch(var(--background-l) var(--background-c) var(--background-h));
   color: #333;
-}
-
-button {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
-  outline: inherit;
-  padding: 0;
+  font-family: Decovar;
+  transition: 
+    background-color var(--background-transition) var(--background-easing);
 }
 
 bitty-v1-rc4 {
-  display: block;
+  display: inilne-block;
 }
 
+/*
 .default-flow > :where(:not(:first-child)) {
   margin-top: var(--flow-space, 0.7em);
 }
+*/
 
 .default-wrapper {
-  width: min(100vw - 3rem, 48rem);
+  width: min(100vw - 3rem, 52rem);
   margin-inline: auto;
 }
 
-h1 {
-  padding-top: 2.4rem;
-  border-bottom: 1px solid #333;
+.letter {
+  display: block;
+  /*
+  position-self: center;
+*/
+
+  /*
+vertical-align: middle;
+font-size-adjust: none;
+dominant-baseline: middle;
+*/
+  /*
+overflow-position: unsafe;
+  display: grid;
+  align-self: center;
+  padding: 0.2em;
+  margin: 0.2em;
+  outline-offset: 0.2em;
+  transform: translate(-0.1em, -0.1em);
+*/
+
 }
 
-.letter {
-  cursor: pointer;
-  display: inline-block;
-  margin-left: 0.2rem;
+/*
+.letter-a {
+transform: translate(30%, 50%);
 }
+*/
 
 .letter-alt {
+  display: block;
   font-family: system-ui;
-  opacity: 0.7;
 }
 
+/*
+.letter-alt {
+  display: block;
+  align-content: end;
+  padding: 0;
+  margin: 0;
+  height: 1.7em;
+}
+*/
+
+/*
 .output {
   width: 100%;
-  font-family: Decovar;
-  user-select: none;
 }
+*/
 
-.space {
-  display: inline-flex;
-}
-
-textarea {
-  width: 100%;
-  height: 16rem;
-}
-
-.two-columns {
-  display: grid;
-  grid-template-columns: 1fr 10rem;
-  gap: 1.8rem;
+.pAlt {
+  margin-bottom: 3.5rem;
 }
 
 .word {
   display: inline-flex;
-  align-items: end;
-  margin-left: 1.0rem;
+  margin-left: 0.5em;
+/*
+ dominant-baseline: middle;
+  vertical-align: middle;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding: 0;
+  margin-block: 0.2em;;
+  */
 }
+
+
+/*
+.space {
+  display: inline-flex;
+}
+*/
 
     </style>
   </head>
   <body>
     <header class="default-wrapper"></header>
-    <main class="default-wrapper default-flow"><bitty-v1-rc4
+    <main class="default-wrapper"><bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="injestInput|loadInput|startUpdates"
+  data-send="loadInput|startUpdates"
 >
 <div>
   <ul>
@@ -118,8 +144,10 @@ textarea {
     <li><a href="https://links.alanwsmith.com/">other projects</a></li>
   </ul>
 </div>
+  <div class="output" data-receive="inputPayload"></div>
 
-  <div class="output default-flow" data-receive="loadInput">
+
+  <pre data-receive="loadInput" hidden>
 Alice was beginning to get very tired of sitting by her sister on the
 bank, and of having nothing to do. Once or twice she had peeped into the
 book her sister was reading, but it had no pictures or conversations in
@@ -141,7 +169,6 @@ before seen a rabbit with either a waistcoat-pocket, or a watch to take
 out of it, and, burning with curiosity, she ran across the field after
 it and was just in time to see it pop down a large rabbit-hole, under
 the hedge. In another moment, down went Alice after it!
-fox jumps over the lazy dog.
 
 The rabbit-hole went straight on like a tunnel for some way and then
 dipped suddenly down, so suddenly that Alice had not a moment to think
@@ -174,7 +201,45 @@ hear it say, as it turned a corner, &quot;Oh, my ears and whiskers, how late
 it's getting!&quot; She was close behind it when she turned the corner, but
 the Rabbit was no longer to be seen.
 
-  </div>
+She found herself in a long, low hall, which was lit up by a row of
+lamps hanging from the roof. There were doors all 'round the hall, but
+they were all locked; and when Alice had been all the way down one side
+and up the other, trying every door, she walked sadly down the middle,
+wondering how she was ever to get out again.
+
+Suddenly she came upon a little table, all made of solid glass. There
+was nothing on it but a tiny golden key, and Alice's first idea was that
+this might belong to one of the doors of the hall; but, alas! either the
+locks were too large, or the key was too small, but, at any rate, it
+would not open any of them. However, on the second time 'round, she came
+upon a low curtain she had not noticed before, and behind it was a
+little door about fifteen inches high. She tried the little golden key
+in the lock, and to her great delight, it fitted!
+
+Alice opened the door and found that it led into a small passage, not
+much larger than a rat-hole; she knelt down and looked along the passage
+into the loveliest garden you ever saw. How she longed to get out of
+that dark hall and wander about among those beds of bright flowers and
+those cool fountains, but she could not even get her head through the
+doorway. &quot;Oh,&quot; said Alice, &quot;how I wish I could shut up like a telescope!
+I think I could, if I only knew how to begin.&quot;
+
+Alice went back to the table, half hoping she might find another key on
+it, or at any rate, a book of rules for shutting people up like
+telescopes. This time she found a little bottle on it (&quot;which certainly
+was not here before,&quot; said Alice), and tied 'round the neck of the
+bottle was a paper label, with the words &quot;DRINK ME&quot; beautifully printed
+on it in large letters.
+
+&quot;No, I'll look first,&quot; she said, &quot;and see whether it's marked '_poison_'
+or not,&quot; for she had never forgotten that, if you drink from a bottle
+marked &quot;poison,&quot; it is almost certain to disagree with you, sooner or
+later. However, this bottle was _not_ marked &quot;poison,&quot; so Alice ventured
+to taste it, and, finding it very nice (it had a sort of mixed flavor of
+cherry-tart, custard, pineapple, roast turkey, toffy and hot buttered
+toast), she very soon finished it off.
+
+  </pre>
 </bitty-v1-rc4>
 
   <noscript>
