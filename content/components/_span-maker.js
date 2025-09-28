@@ -35,11 +35,11 @@ const SpanMaker = class {
     // but leaving the word split in anyway.
     this.wordParagraphs = this.textParagraphs.map((para) => {
       return para
-        .replaceAll(`"`, "")
-        .replaceAll(`?`, "")
-        .replaceAll(`-`, " ")
-        .replaceAll(`)`, "")
-        .replaceAll(`(`, "")
+        //.replaceAll(`"`, "")
+        // .replaceAll(`?`, "")
+        // .replaceAll(`-`, " ")
+        // .replaceAll(`)`, "")
+        // .replaceAll(`(`, "")
         .replaceAll(/\s\s+/g, " ").split(" ");
     });
     return this;
@@ -77,6 +77,10 @@ const SpanMaker = class {
   }
 
   output() {
-    return `<p>${this.spanParagraphs.join("</p><p>")}</p>`;
+    return `<div class="pAlt">${
+      this.spanParagraphs.join(
+        '</div><div class="pAlt">',
+      )
+    }</div>`;
   }
 };

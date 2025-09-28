@@ -11,9 +11,9 @@
 }
 
 :root {
-    --background-color: black;
-    --border-color: #aaa;
-    --color: rgb(180 180 180);
+  --background-color: black;
+  --border-color: #aaa;
+  --color: rgb(180 180 180);
 }
 
 *, 
@@ -33,7 +33,7 @@ body {
 }
 
 bitty-v1-rc4 {
-  display: block;
+  display: inilne-block;
 }
 
 /*
@@ -96,6 +96,10 @@ transform: translate(30%, 50%);
 }
 */
 
+.pAlt {
+  margin-bottom: 3.5rem;
+}
+
 .word {
   display: inline-flex;
   margin-left: 0.5em;
@@ -124,7 +128,7 @@ transform: translate(30%, 50%);
     <main class="default-wrapper"><bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="injestInput|loadInput|startUpdates"
+  data-send="loadInput|startUpdates"
 >
 <div>
   <ul>
@@ -133,8 +137,10 @@ transform: translate(30%, 50%);
     <li><a href="https://links.alanwsmith.com/">other projects</a></li>
   </ul>
 </div>
+  <div class="output" data-receive="inputPayload"></div>
 
-  <pre class="output default-flow" data-receive="loadInput">
+
+  <pre data-receive="loadInput" hidden>
 Alice was beginning to get very tired of sitting by her sister on the
 bank, and of having nothing to do. Once or twice she had peeped into the
 book her sister was reading, but it had no pictures or conversations in

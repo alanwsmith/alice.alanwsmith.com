@@ -23,6 +23,10 @@ export default class {
   loadInput(_event, el) {
     const spanMaker = new SpanMaker(el.innerText);
     this.spans = spanMaker.makeParagraphs().makeWords().makeSpans().output();
+    this.api.forward(null, "inputPayload");
+  }
+
+  inputPayload(_event, el) {
     el.innerHTML = this.spans;
   }
 

@@ -6,7 +6,7 @@
 <bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="injestInput|loadInput|startUpdates"
+  data-send="loadInput|startUpdates"
 >
 <div>
   <ul>
@@ -15,8 +15,10 @@
     <li><a href="https://links.alanwsmith.com/">other projects</a></li>
   </ul>
 </div>
+  <div class="output" data-receive="inputPayload"></div>
 
-  <pre class="output default-flow" data-receive="loadInput">
+
+  <pre data-receive="loadInput" hidden>
 Alice was beginning to get very tired of sitting by her sister on the
 bank, and of having nothing to do. Once or twice she had peeped into the
 book her sister was reading, but it had no pictures or conversations in
