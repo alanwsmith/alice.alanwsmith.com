@@ -1,6 +1,5 @@
 export default class {
   async bittyInit() {
-    this.spans = null;
     addBaseStyleSheet();
     setAll("color-l", 0);
     setAll("color-c", 0);
@@ -12,12 +11,9 @@ export default class {
     applyUpdates();
   }
 
-  injestInput(_event, el) {
-    const spanMaker = new SpanMaker(el.value);
-    this.spans = spanMaker.makeParagraphs().makeWords().makeSpans().output();
-  }
-
   loadInput(_event, el) {
+    const spanMaker = new SpanMaker(el.innerText);
+    this.spans = spanMaker.makeParagraphs().makeWords().makeSpans().output();
     el.innerHTML = this.spans;
   }
 
@@ -34,8 +30,6 @@ export default class {
     prepAllFromSeed("color", "xsmall");
     prepAllFromSeed("font", "default");
     applyUpdates();
-
-    // applyUpdates();
   }
 }
 
