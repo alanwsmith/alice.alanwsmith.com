@@ -3,6 +3,7 @@ let loopCount = 0;
 export default class {
   async bittyInit() {
     addBaseStyleSheet();
+    pickOne("font-t");
     setAll("color-l", 0);
     setAll("color-c", 0);
     setAll("color-h", 0);
@@ -20,35 +21,61 @@ export default class {
   }
 
   async startUpdates(_event, el) {
+    //console.log(state.letters["a"]);
     await sleep(100);
-    setAll("color-transition", 4000);
-    setAll("font-transition", 4000);
+    setAll("color-transition", 4600);
+    setAll("font-transition", 4600);
     applyUpdates();
     await sleep(100);
+    pickOne("font-t");
     generateSeed("color-l", 74, 86);
     generateSeed("color-c", 10, 18);
     generateSeed("color-h", 0, 360);
-    generateSeeds("font", 100, 200);
+    generateSeeds("font", 100, 300);
     prepAllFromSeed("color", "small");
     prepAllFromSeed("font", "default");
     applyUpdates();
-    await sleep(4000);
+    await sleep(5200);
     shiftLoop();
   }
 }
 
 async function shiftLoop() {
-  setAll("color-transition", 4800);
-  setAll("font-transition", 4800);
-  shiftSeed("font", "default");
-  prepAllFromSeed("font", "large");
-  shiftSeed("color-h", "large");
-  shiftSeed("color-c", "deafult");
-  prepAllFromSeed("color", "large");
-  applyUpdates();
-  await sleep(5100);
   loopCount += 1;
+  pickOne("font-t");
+  if (loopCount % 5 === 0) {
+    generateSeeds("font", 500, 700);
+    // generateRandomSeeds("font-t");
+    shiftSeed("color-h", "small");
+    prepAllFromSeed("color", "xsmall");
+    //generateSeed("color-c", 70, 180);
+  } else {
+    generateSeeds("font", 100, 200);
+    generateSeed("color-h", 0, 360);
+    prepAllFromSeed("color", "default");
+  }
+  shiftSeed("color-c", "xlarge");
+  prepAllFromSeed("font", "default");
+  applyUpdates();
+  await sleep(5200);
   shiftLoop();
+}
+
+function pickOne(type) {
+  const pick = randomInt(0, arrayOfSeeds(type).length - 1);
+  arrayOfLetters().forEach((letter) => {
+    arrayOfSeeds(type).forEach((seed, index) => {
+      // console.log(letter.char);
+      // console.log(seed.prefix);
+      if (index === pick) {
+        setProp(letter.char, seed.prefix, randomInt(400, 1000));
+      } else {
+        setProp(letter.char, seed.prefix, 0);
+      }
+      // console.log(pick);
+      // console.log(seed);
+    });
+  });
 }
 
 function shiftSeed(prefix, amount) {
@@ -96,7 +123,7 @@ function applyUpdates() {
           const value = `${letter.props[seed.prefix].next_value}${
             propUnit(seed.prefix)
           }`;
-          // console.log(`${key} - ${value}`);
+          //console.log(`${key} - ${value}`);
           document.documentElement.style.setProperty(
             key,
             value,
@@ -110,7 +137,17 @@ function applyUpdates() {
 }
 
 function seedTypes() {
-  return ["color", "color-transition", "font", "font-transition"];
+  const seedTypeSet = new Set();
+  Object.entries(state.seeds).forEach(([_, seed]) => {
+    seedTypeSet.add(seed.type);
+    //console.log(seed.type);
+  });
+  return [...seedTypeSet];
+
+  //console.log(seedTypeSet);
+  // console.log(state.seeds);
+
+  //return ["color", "color-transition", "font", "font-transition"];
 }
 
 function randomShift(position, min, max, distance, direction) {
@@ -170,6 +207,16 @@ function setAll(prefix, value) {
   });
 }
 
+function generateRandomSeed(prefix, min, max) {
+  // setSeed(prefix));
+}
+
+function generateRandomSeeds(type, min, max) {
+  arrayOfSeeds(type).forEach((seed) => {
+    generateRandomSeed(seed.prefix, min, max);
+  });
+}
+
 function generateSeed(prefix, min, max) {
   setSeed(prefix, randomInt(min, max));
 }
@@ -200,12 +247,10 @@ function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
   styles.push(`:root{
---default-font-size: 1.0rem;
---letter-font-size: 2.7rem;
 }`);
 
   styles.push(`.output { 
-    font-size: var(--default-font-size);
+    font-size: var(--letter-font-size);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
       color var(--color-transition-q),
@@ -216,15 +261,12 @@ function addBaseStyleSheet() {
       'SKLA' var(--SKLA-q), 
       'SKLB' var(--SKLB-q), 
       'SKLD' var(--SKLD-q), 
-      'TRMA' var(--TRMA-q), 
-      'TRMB' var(--TRMB-q), 
       'TRMC' var(--TRMC-q), 
-      'TRMD' var(--TRMD-q), 
       'TRME' var(--TRME-q), 
-      'TRMF' var(--TRMF-q), 
       'TRMG' var(--TRMG-q), 
-      'TRMK' var(--TRMK-q), 
-      'TRML' var(--TRML-q);}`);
+      'TRML' var(--TRML-q)
+
+;}`);
 
   arrayOfLetters().forEach((details) => {
     const letter = details.char;
@@ -240,15 +282,12 @@ function addBaseStyleSheet() {
           'SKLA' var(--SKLA-${letter}),
           'SKLB' var(--SKLB-${letter}),
           'SKLD' var(--SKLD-${letter}),
-          'TRMA' var(--TRMA-${letter}),
-          'TRMB' var(--TRMB-${letter}),
           'TRMC' var(--TRMC-${letter}),
-          'TRMD' var(--TRMD-${letter}),
           'TRME' var(--TRME-${letter}),
-          'TRMF' var(--TRMF-${letter}),
           'TRMG' var(--TRMG-${letter}),
-          'TRMK' var(--TRMK-${letter}),
-          'TRML' var(--TRML-${letter});}`);
+          'TRML' var(--TRML-${letter})
+
+;}`);
   });
 
   stylesSheet.replaceSync(styles.join("\n"));

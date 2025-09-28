@@ -6,20 +6,15 @@ seedStrings = [
   "color|color-l|60|90|%|5|10|15|20|30",
   "color|color-c|0|140||10|18|30|60|90",
   "color|color-h|0|360||50|90|170|240|300",
-  "font|BLDA|0|1000||90|150|300|450|700",
+  "font|BLDA|0|500||50|100|150|200|300",
   "font|BLDB|0|1000||90|150|300|450|700",
-  "font|SKLA|0|1000||90|150|300|450|700",
+  "font|SKLA|0|460||20|60|120|200|300",
   "font|SKLB|0|1000||90|150|300|450|700",
-  "font|SKLD|0|1000||90|150|300|450|700",
-  "font|TRMA|0|1000||90|150|300|450|700",
-  "font|TRMB|0|1000||90|150|300|450|700",
-  "font|TRMC|0|1000||90|150|300|450|700",
-  "font|TRMD|0|1000||90|150|300|450|700",
-  "font|TRME|0|1000||90|150|300|450|700",
-  "font|TRMF|0|1000||90|150|300|450|700",
-  "font|TRMG|0|1000||90|150|300|450|700",
-  "font|TRMK|0|1000||90|150|300|450|700",
-  "font|TRML|0|1000||90|150|300|450|700",
+  "font|SKLD|0|400||20|60|120|200|300",
+  "font-t|TRMC|0|1000||90|150|300|450|700",
+  "font-t|TRME|0|1000||90|150|300|450|700",
+  "font-t|TRMG|0|1000||90|150|300|450|700",
+  "font-t|TRML|0|1000||90|150|300|450|700",
   "color-transition|color-transition|0|7000|ms|100|300|1000|3000|4500",
   "font-transition|font-transition|0|7000|ms|100|300|1000|3000|4500",
 ]
@@ -112,12 +107,69 @@ class DataMaker:
 
 # print(json_string)
 
+def tmp_slider_check_styles(): 
+    print(":root {")
+    for seed in seedStrings:
+        parts = seed.split("|")
+        if parts[0] == "font":
+            print(f"--font-{parts[1]}: 100;")
+    print("}\n")
+    out_vars = []
+    for seed in seedStrings:
+        parts = seed.split("|")
+        if parts[0] == "font":
+            out_vars.append(f"""'{parts[1]}' var(--font-{parts[1]})""")
+    print(".output {");
+    print("font-variation-settings:")
+    print(",".join(out_vars))
+    print("}\n")
 
+
+def tmp_slider_check_sliders():
+    for seed in seedStrings:
+        parts = seed.split("|")
+        if parts[0] == "font":
+            print(f"""<div>
+                  <label>{parts[1]}
+<input type="range" data-send="update" data-prop="{parts[1]}"
+min="0" max="1000"
+                  value="0"
+                  >
+                  </label>
+                  <span data-receive="update" data-prop="{parts[1]}">#</span>
+                  </div>""")
+
+def tmp_report():
+    for seed in seedStrings:
+        parts = seed.split("|")
+        if parts[0] == "font" or parts[0] == "font-t":
+            print(f"""- {parts[1]} (0-{parts[3]})
+""")
 
 if __name__ == "__main__":
+    #tmp_slider_check_sliders()
+
+    # tmp_report()
+
+
     dm = DataMaker()
     dm.load_seeds()
     dm.add_letters()
     dm.write_file()
     print(dm.output())
 
+
+          # 'BLDA' var(--BLDA-${letter}),
+          # 'BLDB' var(--BLDB-${letter}),
+          # 'SKLA' var(--SKLA-${letter}),
+          # 'SKLB' var(--SKLB-${letter}),
+          # 'SKLD' var(--SKLD-${letter}),
+          # 'TRMA' var(--TRMA-${letter}),
+          # 'TRMB' var(--TRMB-${letter}),
+          # 'TRMC' var(--TRMC-${letter}),
+          # 'TRMD' var(--TRMD-${letter}),
+          # 'TRME' var(--TRME-${letter}),
+          # 'TRMF' var(--TRMF-${letter}),
+          # 'TRMG' var(--TRMG-${letter}),
+          # 'TRMK' var(--TRMK-${letter}),
+          # 'TRML' var(--TRML-${letter});}`);
