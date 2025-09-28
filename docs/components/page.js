@@ -27,7 +27,7 @@ export default class {
     generateSeed("color-c", 10, 18);
     generateSeed("color-h", 0, 360);
     generateSeeds("font", 100, 200);
-    prepAllFromSeed("color", "small");
+    prepAllFromSeed("color", "default");
     prepAllFromSeed("font", "default");
     applyUpdates();
   }
@@ -170,8 +170,9 @@ function addBaseStyleSheet() {
   styles.push(`.output { 
     font-size: var(--default-font-size);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
-    transition-property: color;
-    transition-duration: var(--color-transition-q);
+    transition: 
+      color var(--color-transition-q),
+      font-variation-settings var(--font-transition-q);
     font-variation-settings: 
       'BLDA' var(--BLDA-q), 
       'BLDB' var(--BLDB-q), 
@@ -193,8 +194,9 @@ function addBaseStyleSheet() {
     styles.push(`.letter-${letter} {
         font-size: var(--letter-font-size);
         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
-        transition-property: color;
-        transition-duration: var(--color-transition-${letter});
+        transition: 
+          color var(--color-transition-${letter}),
+          font-variation-settings var(--font-transition-${letter});
         font-variation-settings:
           'BLDA' var(--BLDA-${letter}),
           'BLDB' var(--BLDB-${letter}),
