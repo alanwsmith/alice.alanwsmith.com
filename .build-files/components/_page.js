@@ -23,8 +23,8 @@ export default class {
   async startUpdates(_event, el) {
     //console.log(state.letters["a"]);
     await sleep(100);
-    setAll("color-transition", 4600);
-    setAll("font-transition", 4600);
+    setAll("color-transition", 1600);
+    setAll("font-transition", 3000);
     applyUpdates();
     await sleep(100);
     pickOne("font-t");
@@ -243,18 +243,28 @@ function arrayOfLetters() {
   return Object.entries(state.letters).map(([char, letter]) => letter);
 }
 
+function fontVariations(char) {
+  const prefixes = [];
+  arrayOfSeeds("font").forEach((seed) => {
+    prefixes.push(seed.prefix);
+  });
+  arrayOfSeeds("font-t").forEach((seed) => {
+    prefixes.push(seed.prefix);
+  });
+  console.log(prefixes);
+}
+
 function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
-  styles.push(`:root{
-}`);
+  fontVariations();
 
   styles.push(`.output { 
     font-size: var(--letter-font-size);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
-      color var(--color-transition-q),
-      font-variation-settings var(--font-transition-q);
+      color var(--color-transition-q) linear,
+      font-variation-settings var(--font-transition-q) linear;
     font-variation-settings: 
       'BLDA' var(--BLDA-q), 
       'BLDB' var(--BLDB-q), 
@@ -274,8 +284,8 @@ function addBaseStyleSheet() {
         font-size: var(--letter-font-size);
         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
         transition: 
-          color var(--color-transition-${letter}),
-          font-variation-settings var(--font-transition-${letter});
+          color var(--color-transition-${letter}) linear,
+          font-variation-settings var(--font-transition-${letter}) linear;
         font-variation-settings:
           'BLDA' var(--BLDA-${letter}),
           'BLDB' var(--BLDB-${letter}),
