@@ -8,31 +8,16 @@ export default class {
     setAllOfType("font-t", 0);
     setAllOfType("font-t2", 0);
     setAllFontsToSize(2.5);
-    setAllOfPrefix("SKLD", 1000);
-    setAllOfPrefix("TRMF", 1000);
-    setAllOfPrefix("TRMK", 1000);
-    setAllOfPrefix("TRML", 1000);
-    // setAllOfType("font-s", 1000);
-    // setAllOfType("font-t", 1000);
-    // setAllOfType("font-t2", 100);
-    setAllOfType("color-transition", 4000);
-    setAllOfType("font-transition", 4000);
-    console.log(state.letters["a"].props["SKLD"]);
-
-    await sleep(100);
+    setAllOfPrefix("SKLD", 900);
+    setAllOfPrefix("TRMF", 800);
+    setAllOfPrefix("TRMK", 800);
+    setAllOfPrefix("TRML", 800);
+    setAllOfPrefix("color-l", 0);
+    setAllOfPrefix("color-c", 0);
+    setAllOfPrefix("color-h", 0);
+    setAllOfType("color-transition", 2000);
+    setAllOfType("font-transition", 3000);
     applyUpdates();
-
-    /*
-    pickOne("font-t");
-    setAll("color-l", 0);
-    setAll("color-c", 0);
-    setAll("color-h", 0);
-    setAll("color-transition", 0);
-    setAll("font-transition", 0);
-    generateSeeds("font", 700, 900);
-    prepAllFromSeed("font", "default");
-    applyUpdates();
-    */
   }
 
   loadInput(_event, el) {
@@ -42,11 +27,22 @@ export default class {
   }
 
   async startUpdates(_event, el) {
+    await sleep(200);
+    generateSeed("color-l", 74, 86);
+    generateSeed("color-c", 10, 18);
+    generateSeed("color-h", 0, 360);
+    prepAllFromSeed("color", "small");
+    setAllOfPrefix("SKLD", 200);
+    setAllOfPrefix("TRMF", 200);
+    setAllOfPrefix("TRMK", 200);
+    setAllOfPrefix("TRML", 200);
+    applyUpdates();
+
     // await sleep(200);
 
     // setAllOfType("font-s", 300);
     // setAllOfType("font-t", 300);
-    // setAllOfType("font-t2", 300);
+    //  setAllOfType("font-t2", 300);
 
     //console.log(state.letters["a"]);
     // applyUpdates();
@@ -254,7 +250,7 @@ function setSeed(prefix, value) {
   state.seeds[prefix].next_value = value;
 }
 
-function getNextSeedValue(char, prefix) {
+function getNextSeedValue(prefix) {
   // Necessary to pull values out instead of
   // getting a reference.
   return state.seeds[prefix].next_value;
@@ -302,6 +298,7 @@ function generateRandomSeeds(type, min, max) {
 }
 
 function generateSeed(prefix, min, max) {
+  //console.log(prefix);
   setSeed(prefix, randomInt(min, max));
 }
 
@@ -347,11 +344,18 @@ function fontVariations(char) {
 function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
+
   styles.push(
-    ":root { --color-easing: ease; }",
-    ":root { --font-easing: ease; }",
-    ":root { --size-easing: ease; }",
+    ":root { --color-easing: linear; }",
+    ":root { --font-easing: linear; }",
+    ":root { --size-easing: linear; }",
   );
+
+  // styles.push(
+  //   ":root { --color-easing: ease; }",
+  //   ":root { --font-easing: ease; }",
+  //   ":root { --size-easing: ease; }",
+  // );
 
   styles.push(`.output { 
     font-size: var(--font-size-q);
@@ -2576,9 +2580,11 @@ const SpanMaker = class {
       if (!this.textParagraphs[parasIndex]) {
         this.textParagraphs.push("");
       }
-      this.textParagraphs[parasIndex] += `${line} `;
-      if (line === "") {
+      if (line.trim() === "") {
         parasIndex += 1;
+      } else {
+        this.textParagraphs[parasIndex] += `${line} `;
+        console.log(`LINE: ${line}`);
       }
     });
     return this;
@@ -2604,8 +2610,8 @@ const SpanMaker = class {
 
   makeSpans() {
     this.spanParagraphs = this.wordParagraphs.map((para) => {
-      return para.map((word) => {
-        return [
+      let content = para.map((word) => {
+        let content2 = [
           `<div class="word">`,
           word.trim().split("").map((char) => {
             if (this.isLetter(char)) {
@@ -2626,7 +2632,9 @@ const SpanMaker = class {
           }).join(""),
           `</div>`,
         ].join("");
+        return content2;
       }).join(``);
+      return content;
     });
     return this;
   }

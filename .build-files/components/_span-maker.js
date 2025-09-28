@@ -17,9 +17,11 @@ const SpanMaker = class {
       if (!this.textParagraphs[parasIndex]) {
         this.textParagraphs.push("");
       }
-      this.textParagraphs[parasIndex] += `${line} `;
-      if (line === "") {
+      if (line.trim() === "") {
         parasIndex += 1;
+      } else {
+        this.textParagraphs[parasIndex] += `${line} `;
+        console.log(`LINE: ${line}`);
       }
     });
     return this;
@@ -45,8 +47,8 @@ const SpanMaker = class {
 
   makeSpans() {
     this.spanParagraphs = this.wordParagraphs.map((para) => {
-      return para.map((word) => {
-        return [
+      let content = para.map((word) => {
+        let content2 = [
           `<div class="word">`,
           word.trim().split("").map((char) => {
             if (this.isLetter(char)) {
@@ -67,7 +69,9 @@ const SpanMaker = class {
           }).join(""),
           `</div>`,
         ].join("");
+        return content2;
       }).join(``);
+      return content;
     });
     return this;
   }
