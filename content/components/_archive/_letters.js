@@ -96,7 +96,13 @@ class Letters {
   }
 
   async start() {
-    await this.runCollection("first");
+    // this.initState();
+
+    //await this.runCollection("first");
+  }
+
+  initState() {
+    console.log("HERE");
   }
 
   generateSeeds(key) {

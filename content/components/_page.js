@@ -1,97 +1,107 @@
 export default class {
   bittyInit() {
-    addBaseStyleSheet();
-    const letters = new Letters();
-    letters.start();
-
-    // state.updateSeeds();
-    // state.updateLetters();
-    // state.updateStyleVars();
-
-    // this.triggerChange();
+    this.spans = null;
+    initLetterColors();
+    setAllColorTransitions(0);
+    // initColorTransitions();
+    //initSeeds();
+    // initLetters();
   }
 
-  triggerChange() {
-    setTimeout(() => {
-      this.api.forward(null, "doChange");
-      this.triggerChange();
-    }, 4000);
+  injestInput(_event, el) {
+    const spanMaker = new SpanMaker(el.value);
+    this.spans = spanMaker.makeParagraphs().makeWords().makeSpans().output();
   }
 
-  // TODO: Deprecate
-  //changeValue(event, el) {
-  //  const ds = event.target.dataset;
-  //  let value = event.target.value;
-  //  //state.setSliderValue(ds.name, value);
-  //}
-
-  loadLetters(_event, el) {
-    letters().forEach((letter) => {
-      let btn = document.createElement("button");
-      btn.innerHTML = letter;
-      btn.dataset.send = "setLetter|loadControls";
-      btn.dataset.letter = letter;
-      el.appendChild(btn);
-    });
+  loadInput(_event, el) {
+    el.innerHTML = this.spans;
   }
+}
 
-  // TODO: Deprecate
-  // loadControls(_event, el) {
-  //   el.replaceChildren();
-  //   state.sliders().forEach((slider) => {
-  //     const newDiv = document.createElement("div");
-  //     const value = state.getSliderValue(slider.name);
-  //     newDiv.innerHTML = `
-  //     <label>${slider.name}<br />
-  //     <input
-  //       type="range"
-  //       min="${state.sliderData(slider.name, "min")}"
-  //       max="${state.sliderData(slider.name, "max")}"
-  //       step="${state.sliderData(slider.name, "step")}"
-  //       value="${value}"
-  //       data-send="changeValue"
-  //       data-name="${slider.name}"
-  //     />
-  //     </label>`;
-  //     el.appendChild(newDiv);
-  //   });
-  // }
-
-  input(_event, el) {
-    const ta = this.api.querySelector("textarea");
-    let spans = new SpanMaker(ta.value).makeParagraphs().makeWords()
-      .makeSpans();
-    el.innerHTML = spans.output();
-  }
-
-  makeSpans(_event, el) {
-    if (el) {
-      let spans = new SpanMaker(el.innerText).makeParagraphs().makeWords()
-        .makeSpans();
-      el.innerHTML = spans.output();
+function arrayOfLetterObjects() {
+  for (let [prefix, details] of Object.entries(state.letters[char].vars)) {
+    if (listOfColorPrefixes().includes(prefix)) {
+      details.next_value = 0;
     }
   }
+  return [];
+}
 
-  // TODO: Deprecate
-  // setLetter(event, _el) {
-  //   if (event) {
-  //     state.setCurrentLetter(
-  //       event.target.dataset.letter,
-  //     );
-  //     state.startValue = {
-  //       "Hue": state.data.letters[state.getCurrentLetter()].values["Hue"].value,
-  //     };
+function setAllColorTransitions(value) {
+  arrayOfLetterObjects().forEach((letterObject) => {
+    console.log(letterObject);
+  });
+
+  // listOfLetters().forEach((char) => {
+  //   for (let [prefix, details] of Object.entries(state.letters[char].vars)) {
+  //     if (listOfColorPrefixes().includes(prefix)) {
+  //       details.next_value = 0;
+  //     }
   //   }
-  // }
+  // });
+}
 
-  doChange(_event, _el) {
-    // state.updateSeeds();
-    // state.updateLetters();
-    // state.updateStyleVars();
+function listOfLetters() {
+  return Object.keys(state.letters).map((char) => char);
+}
 
-    // document.documentElement.style.setProperty(
-    //   "--color-h-A",
-    //   randomInt(0, 360),
-    // );
-  }
+function listOfColorPrefixes() {
+  return Object.entries(state.seeds).filter(([prefix, seed]) => {
+    return seed.type === "color";
+  }).map(([prefix, seed]) => prefix);
+}
+
+function listOfTransitionPrefixes() {
+  return Object.entries(state.seeds).filter(([prefix, seed]) => {
+    return seed.type === "color-transition";
+  }).map(([prefix, seed]) => prefix);
+}
+
+function listOfAllPrefixes() {
+  return Object.keys(state.props).map((prefix) => prefix);
+}
+
+// function initColorTransitions() {
+//   listOfLetters().forEach((char) => {
+//     for (let [prefix, details] of Object.entries(state.letters[char].vars)) {
+//       if (listOfColorPrefixes().includes(prefix)) {
+//         details.next_value = 0;
+//       }
+//     }
+//   });
+// }
+
+function initLetterColors() {
+  listOfLetters().forEach((char) => {
+    for (let [prefix, details] of Object.entries(state.letters[char].vars)) {
+      if (listOfColorPrefixes().includes(prefix)) {
+        details.next_value = 0;
+      }
+    }
+  });
+}
+
+function getProp(prefix) {
+}
+
+// function generateSeed(prefix, key) {
+//   if (key === "initial") {
+//     console.log(prop);
+//   }
+// }
+
+function initSeeds() {
+  //   state.props.forEach((prop) => {
+  //     prop.currentSeed = null;
+  //     prop.previousSeed = null;
+  //   });
+  //   arrayOfPrefixes().forEach((prefix) => {
+  //     generateSeed(prefix, "initial");
+  //   });
+}
+
+function initLetters() {
+  arrayOfChars().forEach((char) => {
+    console.log(state.letters[char]);
+  });
 }

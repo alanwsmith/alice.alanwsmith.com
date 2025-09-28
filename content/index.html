@@ -6,8 +6,7 @@
 <bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="input|makeSpans"
-  data-listeners="mousedown"
+  data-send="injestInput|loadInput"
 >
 <div>
   <ul>
@@ -16,9 +15,9 @@
     <li><a href="https://links.alanwsmith.com/">other projects</a></li>
   </ul>
 </div>
-  <div class="output default-flow" data-receive="input"></div>
+  <div class="output default-flow" data-receive="loadInput"></div>
   <details><summary>Input</summary>
-  <textarea data-send="input">
+  <textarea data-receive="injestInput">
 Alice was beginning to get very tired of sitting by her sister on the
 bank, and of having nothing to do. Once or twice she had peeped into the
 book her sister was reading, but it had no pictures or conversations in
