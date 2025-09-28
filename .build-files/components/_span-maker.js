@@ -21,7 +21,7 @@ const SpanMaker = class {
         parasIndex += 1;
       } else {
         this.textParagraphs[parasIndex] += `${line} `;
-        console.log(`LINE: ${line}`);
+        // console.log(`LINE: ${line}`);
       }
     });
     return this;
@@ -61,7 +61,7 @@ const SpanMaker = class {
               ].join("");
             } else {
               return [
-                `<span class="letter-alt">`,
+                `<span class="letter-alt letter-q">`,
                 char,
                 `</span>`,
               ].join("");

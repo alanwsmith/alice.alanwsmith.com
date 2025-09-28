@@ -367,10 +367,8 @@ function addBaseStyleSheet() {
     transition: 
       color var(--color-transition-q) var(--color-easing),
       font-variation-settings var(--font-transition-q) var(--font-easing);
-/*
     font-variation-settings: 
       ${fontVariations("q")};
-*/
 }`);
   arrayOfLetters().forEach((details) => {
     const letter = details.char;
@@ -378,8 +376,8 @@ function addBaseStyleSheet() {
         font-size: var(--font-size-${letter});
         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
         transition: 
-          color var(--color-transition-${letter}) linear,
-          font-variation-settings var(--font-transition-${letter}) linear;
+          color var(--color-transition-${letter}) var(--color-easing),
+          font-variation-settings var(--font-transition-${letter}) var(--font-easing);
         font-variation-settings:
           ${fontVariations(letter)};
 }`);
