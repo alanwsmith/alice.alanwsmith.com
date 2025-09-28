@@ -1,3 +1,5 @@
+let loopCount = 0;
+
 export default class {
   async bittyInit() {
     addBaseStyleSheet();
@@ -36,15 +38,16 @@ export default class {
 }
 
 async function shiftLoop() {
-  setAll("color-transition", 6200);
-  setAll("font-transition", 6200);
-  generateSeeds("font", 100, 500);
+  setAll("color-transition", 4800);
+  setAll("font-transition", 4800);
+  shiftSeed("font", "default");
   prepAllFromSeed("font", "large");
   shiftSeed("color-h", "large");
-  generateSeed("color-c", 2, 18);
+  shiftSeed("color-c", "deafult");
   prepAllFromSeed("color", "large");
   applyUpdates();
-  await sleep(7000);
+  await sleep(5100);
+  loopCount += 1;
   shiftLoop();
 }
 
