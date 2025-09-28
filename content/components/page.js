@@ -1,3 +1,10 @@
+[! include "components/_page.js" !]
+
+[! include "components/_config.js" !]
+
+[! include "components/_span-maker.js" !]
+
+
 // Hey there!
 //
 // Welcome to the code! This project involved a lot
@@ -8,27 +15,4 @@
 // It's the first real thing I've built with it.
 // Helped me refine a bunch. I really like
 // the way it's working.
-
-[! include "components/_color_prefix.js" !]
-
-[! include "components/_color_seed.js" !]
-
-[! include "components/_color_seeds.js" !]
-
-[! include "components/_vars.js" !]
-
-[! include "components/_letter.js" !]
-
-[! include "components/_letters.js" !]
-
-[! include "components/_prop.js" !]
-
-
-[! include "components/_span-maker.js" !]
-
-[! include "components/_functions.js" !]
-
-[! include "components/_state.js" !]
-
-[! include "components/_page.js" !]
 

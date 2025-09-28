@@ -6,6 +6,11 @@ const SpanMaker = class {
     this.spanParagraphs = [];
   }
 
+  isLetter(char) {
+    let code = char.charCodeAt(0);
+    return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
+  }
+
   makeParagraphs() {
     let parasIndex = 0;
     this.text.split("\n").forEach((line) => {
@@ -44,10 +49,10 @@ const SpanMaker = class {
         return [
           `<div class="word">`,
           word.trim().split("").map((char) => {
-            if (isLetter(char)) {
+            if (this.isLetter(char)) {
               return [
                 `<span class="letter letter-`,
-                char.toUpperCase(),
+                char.toLowerCase(),
                 `">`,
                 char,
                 `</span>`,

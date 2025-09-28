@@ -1,97 +1,256 @@
+let loopCount = 0;
+
 export default class {
-  bittyInit() {
+  async bittyInit() {
     addBaseStyleSheet();
-    const letters = new Letters();
-    letters.start();
-
-    // state.updateSeeds();
-    // state.updateLetters();
-    // state.updateStyleVars();
-
-    // this.triggerChange();
+    setAll("color-l", 0);
+    setAll("color-c", 0);
+    setAll("color-h", 0);
+    setAll("color-transition", 0);
+    setAll("font-transition", 0);
+    generateSeeds("font", 700, 900);
+    prepAllFromSeed("font", "default");
+    applyUpdates();
   }
 
-  triggerChange() {
-    setTimeout(() => {
-      this.api.forward(null, "doChange");
-      this.triggerChange();
-    }, 4000);
+  loadInput(_event, el) {
+    const spanMaker = new SpanMaker(el.innerText);
+    this.spans = spanMaker.makeParagraphs().makeWords().makeSpans().output();
+    el.innerHTML = this.spans;
   }
 
-  // TODO: Deprecate
-  //changeValue(event, el) {
-  //  const ds = event.target.dataset;
-  //  let value = event.target.value;
-  //  //state.setSliderValue(ds.name, value);
-  //}
+  async startUpdates(_event, el) {
+    await sleep(100);
+    setAll("color-transition", 4000);
+    setAll("font-transition", 4000);
+    applyUpdates();
+    await sleep(100);
+    generateSeed("color-l", 74, 86);
+    generateSeed("color-c", 10, 18);
+    generateSeed("color-h", 0, 360);
+    generateSeeds("font", 100, 200);
+    prepAllFromSeed("color", "small");
+    prepAllFromSeed("font", "default");
+    applyUpdates();
+    await sleep(4000);
+    shiftLoop();
+  }
+}
 
-  loadLetters(_event, el) {
-    letters().forEach((letter) => {
-      let btn = document.createElement("button");
-      btn.innerHTML = letter;
-      btn.dataset.send = "setLetter|loadControls";
-      btn.dataset.letter = letter;
-      el.appendChild(btn);
+async function shiftLoop() {
+  setAll("color-transition", 4800);
+  setAll("font-transition", 4800);
+  shiftSeed("font", "default");
+  prepAllFromSeed("font", "large");
+  shiftSeed("color-h", "large");
+  shiftSeed("color-c", "deafult");
+  prepAllFromSeed("color", "large");
+  applyUpdates();
+  await sleep(5100);
+  loopCount += 1;
+  shiftLoop();
+}
+
+function shiftSeed(prefix, amount) {
+  seedTypes().forEach((type) => {
+    arrayOfSeeds(type).forEach((seed) => {
+      if (prefix === seed.prefix) {
+        setSeed(
+          prefix,
+          randomShift(
+            seed.next_value,
+            seed.min,
+            seed.max,
+            seed.moves[amount],
+            randomDirection(),
+          ),
+        );
+      }
     });
-  }
+  });
+}
 
-  // TODO: Deprecate
-  // loadControls(_event, el) {
-  //   el.replaceChildren();
-  //   state.sliders().forEach((slider) => {
-  //     const newDiv = document.createElement("div");
-  //     const value = state.getSliderValue(slider.name);
-  //     newDiv.innerHTML = `
-  //     <label>${slider.name}<br />
-  //     <input
-  //       type="range"
-  //       min="${state.sliderData(slider.name, "min")}"
-  //       max="${state.sliderData(slider.name, "max")}"
-  //       step="${state.sliderData(slider.name, "step")}"
-  //       value="${value}"
-  //       data-send="changeValue"
-  //       data-name="${slider.name}"
-  //     />
-  //     </label>`;
-  //     el.appendChild(newDiv);
-  //   });
-  // }
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
-  input(_event, el) {
-    const ta = this.api.querySelector("textarea");
-    let spans = new SpanMaker(ta.value).makeParagraphs().makeWords()
-      .makeSpans();
-    el.innerHTML = spans.output();
-  }
-
-  makeSpans(_event, el) {
-    if (el) {
-      let spans = new SpanMaker(el.innerText).makeParagraphs().makeWords()
-        .makeSpans();
-      el.innerHTML = spans.output();
+function propUnit(prefix) {
+  for (let type of seedTypes()) {
+    for (let seed of arrayOfSeeds(type)) {
+      if (seed.prefix === prefix) {
+        return seed.unit;
+      }
     }
   }
+}
 
-  // TODO: Deprecate
-  // setLetter(event, _el) {
-  //   if (event) {
-  //     state.setCurrentLetter(
-  //       event.target.dataset.letter,
-  //     );
-  //     state.startValue = {
-  //       "Hue": state.data.letters[state.getCurrentLetter()].values["Hue"].value,
-  //     };
-  //   }
-  // }
+function applyUpdates() {
+  arrayOfLetters().forEach((letter) => {
+    seedTypes().forEach((type) => {
+      arrayOfSeeds(type).forEach((seed) => {
+        if (
+          letter.props[seed.prefix].previous_value !=
+            letter.props[seed.prefix].next_value
+        ) {
+          const key = `--${seed.prefix}-${letter.char}`;
+          const value = `${letter.props[seed.prefix].next_value}${
+            propUnit(seed.prefix)
+          }`;
+          // console.log(`${key} - ${value}`);
+          document.documentElement.style.setProperty(
+            key,
+            value,
+          );
+          letter.props[seed.prefix].previous_value =
+            letter.props[seed.prefix].next_value;
+        }
+      });
+    });
+  });
+}
 
-  doChange(_event, _el) {
-    // state.updateSeeds();
-    // state.updateLetters();
-    // state.updateStyleVars();
+function seedTypes() {
+  return ["color", "color-transition", "font", "font-transition"];
+}
 
-    // document.documentElement.style.setProperty(
-    //   "--color-h-A",
-    //   randomInt(0, 360),
-    // );
+function randomShift(position, min, max, distance, direction) {
+  // console.log(`${position} ${min} ${max} ${base} ${direction}`);
+  const move = randomInt(0, distance);
+  for (let count = 0; count < Math.abs(move); count += 1) {
+    position += direction;
+    if (position >= max) {
+      direction = -1;
+    } else if (position <= min) {
+      direction = 1;
+    }
   }
+  return position;
+}
+
+function randomDirection() {
+  return randomInt(0, 1) === 1 ? 1 : -1;
+}
+
+function prepAllFromSeed(type, distance) {
+  arrayOfLetters().forEach((letter) => {
+    arrayOfSeeds(type).forEach((seed) => {
+      const value = randomShift(
+        seed.next_value,
+        seed.min,
+        seed.max,
+        seed.moves[distance],
+        randomDirection(),
+      );
+      setProp(letter.char, seed.prefix, value);
+    });
+  });
+}
+
+function matchTransitionSeeds() {
+  state.seeds["font-transition"].previous_value =
+    state.seeds["font-transition"].next_value;
+  state.seeds["font-transition"].next_value =
+    state.seeds["color-transition"].next_value;
+}
+
+function setSeed(prefix, value) {
+  state.seeds[prefix].previous_value = state.seeds[prefix].next_value;
+  state.seeds[prefix].next_value = value;
+}
+
+function setProp(char, prefix, value) {
+  state.letters[char].props[prefix].previous_value =
+    state.letters[char].props[prefix].next_value;
+  state.letters[char].props[prefix].next_value = value;
+}
+
+function setAll(prefix, value) {
+  arrayOfLetters().forEach((letter) => {
+    setProp(letter.char, prefix, value);
+  });
+}
+
+function generateSeed(prefix, min, max) {
+  setSeed(prefix, randomInt(min, max));
+}
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function generateSeeds(type, min, max) {
+  arrayOfSeeds(type).forEach((seed) => {
+    generateSeed(seed.prefix, min, max);
+  });
+}
+
+function arrayOfSeeds(type) {
+  return Object.entries(state.seeds).filter(([prefix, details]) => {
+    return details.type === type;
+  }).map(([prefix, details]) => {
+    return details;
+  });
+}
+
+function arrayOfLetters() {
+  return Object.entries(state.letters).map(([char, letter]) => letter);
+}
+
+function addBaseStyleSheet() {
+  const stylesSheet = new CSSStyleSheet();
+  let styles = [];
+  styles.push(`:root{
+--default-font-size: 1.0rem;
+--letter-font-size: 2.7rem;
+}`);
+
+  styles.push(`.output { 
+    font-size: var(--default-font-size);
+    color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
+    transition: 
+      color var(--color-transition-q),
+      font-variation-settings var(--font-transition-q);
+    font-variation-settings: 
+      'BLDA' var(--BLDA-q), 
+      'BLDB' var(--BLDB-q), 
+      'SKLA' var(--SKLA-q), 
+      'SKLB' var(--SKLB-q), 
+      'SKLD' var(--SKLD-q), 
+      'TRMA' var(--TRMA-q), 
+      'TRMB' var(--TRMB-q), 
+      'TRMC' var(--TRMC-q), 
+      'TRMD' var(--TRMD-q), 
+      'TRME' var(--TRME-q), 
+      'TRMF' var(--TRMF-q), 
+      'TRMG' var(--TRMG-q), 
+      'TRMK' var(--TRMK-q), 
+      'TRML' var(--TRML-q);}`);
+
+  arrayOfLetters().forEach((details) => {
+    const letter = details.char;
+    styles.push(`.letter-${letter} {
+        font-size: var(--letter-font-size);
+        color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
+        transition: 
+          color var(--color-transition-${letter}),
+          font-variation-settings var(--font-transition-${letter});
+        font-variation-settings:
+          'BLDA' var(--BLDA-${letter}),
+          'BLDB' var(--BLDB-${letter}),
+          'SKLA' var(--SKLA-${letter}),
+          'SKLB' var(--SKLB-${letter}),
+          'SKLD' var(--SKLD-${letter}),
+          'TRMA' var(--TRMA-${letter}),
+          'TRMB' var(--TRMB-${letter}),
+          'TRMC' var(--TRMC-${letter}),
+          'TRMD' var(--TRMD-${letter}),
+          'TRME' var(--TRME-${letter}),
+          'TRMF' var(--TRMF-${letter}),
+          'TRMG' var(--TRMG-${letter}),
+          'TRMK' var(--TRMK-${letter}),
+          'TRML' var(--TRML-${letter});}`);
+  });
+
+  stylesSheet.replaceSync(styles.join("\n"));
+  document.adoptedStyleSheets.push(stylesSheet);
 }

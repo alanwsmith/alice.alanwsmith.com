@@ -6,8 +6,7 @@
 <bitty-v1-rc4
   class="default-flow" 
   data-connect="/components/page.js"
-  data-send="input|makeSpans"
-  data-listeners="mousedown"
+  data-send="injestInput|loadInput|startUpdates"
 >
 <div>
   <ul>
@@ -16,9 +15,8 @@
     <li><a href="https://links.alanwsmith.com/">other projects</a></li>
   </ul>
 </div>
-  <div class="output default-flow" data-receive="input"></div>
-  <details><summary>Input</summary>
-  <textarea data-send="input">
+
+  <div class="output default-flow" data-receive="loadInput">
 Alice was beginning to get very tired of sitting by her sister on the
 bank, and of having nothing to do. Once or twice she had peeped into the
 book her sister was reading, but it had no pictures or conversations in
@@ -72,8 +70,8 @@ moment to be lost. Away went Alice like the wind and was just in time to
 hear it say, as it turned a corner, &quot;Oh, my ears and whiskers, how late
 it's getting!&quot; She was close behind it when she turned the corner, but
 the Rabbit was no longer to be seen.
-    </textarea>
-  </details>
+
+  </div>
 </bitty-v1-rc4>
 
   <noscript>

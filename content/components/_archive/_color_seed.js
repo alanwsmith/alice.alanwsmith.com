@@ -44,7 +44,7 @@ class ColorSeed {
     return this._direction;
   }
 
-  generateRandomSeed() {
+  generateSeed(key) {
     this.setCurrentValue(randomInt(
       this.min(),
       this.max(),
