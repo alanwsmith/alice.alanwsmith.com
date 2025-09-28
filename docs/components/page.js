@@ -6,19 +6,13 @@ export default class {
     setAll("color-h", 0);
     setAll("color-transition", 0);
     setAll("font-transition", 0);
-
-    // setAllColorL(0);
-    // setAllColorC(0);
-    // setAllColorH(0);
-
-    // // setAllColorTransitions(0);
-    // generateFontSeeds(100, 400);
-    // generateColorSeed("color-l", 60, 70);
-    // generateColorSeed("color-c", 40, 80);
-    // generateColorSeed("color-h", 0, 360);
-    // generateColorTransitionSeed(3000, 4000);
-
-    console.log(state.letters["a"].props);
+    generateSeed("color-l", 60, 76);
+    generateSeed("color-c", 30, 78);
+    generateSeed("color-h", 0, 360);
+    generateSeed("color-transition", 3000, 4000);
+    matchTransitionSeeds();
+    generateSeeds("font", 100, 400);
+    console.log(state.seeds);
   }
 
   injestInput(_event, el) {
@@ -31,6 +25,18 @@ export default class {
   }
 }
 
+function matchTransitionSeeds() {
+  state.seeds["font-transition"].previous_value =
+    state.seeds["font-transition"].next_value;
+  state.seeds["font-transition"].next_value =
+    state.seeds["color-transition"].next_value;
+}
+
+function setSeed(prefix, value) {
+  state.seeds[prefix].previous_value = state.seeds[prefix].next_value;
+  state.seeds[prefix].next_value = value;
+}
+
 function setProp(char, prefix, value) {
   state.letters[char].props[prefix].previous_value =
     state.letters[char].props[prefix].next_value;
@@ -41,6 +47,11 @@ function setAll(prefix, value) {
   listOfLetterChars().forEach((char) => {
     setProp(char, prefix, value);
   });
+}
+
+function generateSeed(prefix, min, max) {
+  state.seeds[prefix].previous_value = state.seeds[prefix].next_value;
+  state.seeds[prefix].next_value = randomInt(min, max);
 }
 
 function generateColorTransitionSeed(min, max) {
@@ -61,9 +72,9 @@ function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function generateFontSeeds(min, max) {
+function generateSeeds(min, max) {
   arrayOfSeeds("font").forEach((seed) => {
-    seed.next_value = randomInt(min, max);
+    generateSeed(seed.prefix, min, max);
   });
 }
 
@@ -117,23 +128,23 @@ function setAllColorTransitions(value) {
   });
 }
 
-function setAllColorL(value) {
-  listOfLetterChars().forEach((char) => {
-    setLetterProp(char, "color-l", value);
-  });
-}
+// function setAllColorL(value) {
+//   listOfLetterChars().forEach((char) => {
+//     setLetterProp(char, "color-l", value);
+//   });
+// }
 
-function setAllColorC(value) {
-  listOfLetterChars().forEach((char) => {
-    setLetterProp(char, "color-c", value);
-  });
-}
+// function setAllColorC(value) {
+//   listOfLetterChars().forEach((char) => {
+//     setLetterProp(char, "color-c", value);
+//   });
+// }
 
-function setAllColorH(value) {
-  listOfLetterChars().forEach((char) => {
-    setLetterProp(char, "color-h", value);
-  });
-}
+// function setAllColorH(value) {
+//   listOfLetterChars().forEach((char) => {
+//     setLetterProp(char, "color-h", value);
+//   });
+// }
 
 function listOfLetterChars() {
   return Object.keys(state.letters).map((char) => char);
