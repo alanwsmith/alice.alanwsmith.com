@@ -271,39 +271,31 @@ function arrayOfLetters() {
 
 function fontVariations(char) {
   const prefixes = [];
-  arrayOfSeeds("font").forEach((seed) => {
+  arrayOfSeeds("font-s").forEach((seed) => {
     prefixes.push(seed.prefix);
   });
   arrayOfSeeds("font-t").forEach((seed) => {
     prefixes.push(seed.prefix);
   });
   const output = prefixes.map((prefix) => {
-    return `'${prefix}' var(--${prefix}-${char})`;
+    return `"${prefix}" var(--${prefix}-${char})`;
   });
-  console.log(output.join(",\n"));
+  return (output.join(",\n"));
 }
 
 function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
-  fontVariations("a");
-
   styles.push(`.output { 
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
       color var(--color-transition-q) linear,
       font-variation-settings var(--font-transition-q) linear;
+/*
     font-variation-settings: 
-      'SKLA' var(--SKLA-q), 
-      'SKLB' var(--SKLB-q), 
-      'SKLD' var(--SKLD-q), 
-      'TRMC' var(--TRMC-q), 
-      'TRME' var(--TRME-q), 
-      'TRMG' var(--TRMG-q), 
-      'TRML' var(--TRML-q)
-
-;}`);
-
+      ${fontVariations("q")};
+*/
+}`);
   arrayOfLetters().forEach((details) => {
     const letter = details.char;
     styles.push(`.letter-${letter} {
@@ -312,15 +304,8 @@ function addBaseStyleSheet() {
           color var(--color-transition-${letter}) linear,
           font-variation-settings var(--font-transition-${letter}) linear;
         font-variation-settings:
-          'SKLA' var(--SKLA-${letter}),
-          'SKLB' var(--SKLB-${letter}),
-          'SKLD' var(--SKLD-${letter}),
-          'TRMC' var(--TRMC-${letter}),
-          'TRME' var(--TRME-${letter}),
-          'TRMG' var(--TRMG-${letter}),
-          'TRML' var(--TRML-${letter})
-
-;}`);
+          ${fontVariations(letter)};
+}`);
   });
 
   stylesSheet.replaceSync(styles.join("\n"));

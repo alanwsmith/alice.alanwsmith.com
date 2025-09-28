@@ -16,10 +16,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -86,10 +82,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -162,10 +154,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -232,10 +220,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -308,10 +292,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -378,10 +358,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -454,10 +430,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -524,10 +496,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -600,10 +568,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -670,10 +634,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -746,10 +706,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -816,10 +772,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -892,10 +844,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -962,10 +910,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1038,10 +982,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -1108,10 +1048,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1184,10 +1120,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -1254,10 +1186,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1330,10 +1258,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -1400,10 +1324,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1476,10 +1396,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -1546,10 +1462,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1622,10 +1534,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -1692,10 +1600,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1768,10 +1672,6 @@ const state = {
           "next_value": null,
           "previous_value": null
         },
-        "TRMA": {
-          "next_value": null,
-          "previous_value": null
-        },
         "TRMB": {
           "next_value": null,
           "previous_value": null
@@ -1838,10 +1738,6 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
-          "next_value": null,
-          "previous_value": null
-        },
-        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1949,22 +1845,6 @@ const state = {
       "type": "font",
       "unit": ""
     },
-    "TRMA": {
-      "max": 1000,
-      "min": 0,
-      "moves": {
-        "default": 300,
-        "large": 450,
-        "small": 150,
-        "xlarge": 700,
-        "xsmall": 90
-      },
-      "next_value": 0,
-      "prefix": "TRMA",
-      "previous_value": 0,
-      "type": "font",
-      "unit": ""
-    },
     "TRMB": {
       "max": 1000,
       "min": 0,
@@ -1978,7 +1858,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMB",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMC": {
@@ -1994,7 +1874,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMC",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMD": {
@@ -2010,7 +1890,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMD",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRME": {
@@ -2026,7 +1906,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRME",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMF": {
@@ -2042,7 +1922,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMF",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMG": {
@@ -2058,7 +1938,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMG",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRMK": {
@@ -2074,7 +1954,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMK",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "TRML": {
@@ -2090,7 +1970,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRML",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-t",
       "unit": ""
     },
     "color-c": {

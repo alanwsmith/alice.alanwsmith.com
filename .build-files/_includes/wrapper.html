@@ -14,66 +14,27 @@
     --background-color: black;
     --border-color: #aaa;
     --color: rgb(180 180 180);
-    --letter-font-size: 1.1em;
 }
 
-
-/*
 *, 
 *::before, 
 *::after {
   box-sizing: border-box;
 }
 
-*/
-
-/*
 * {
   margin: 0;
 }
-
-*/
-
-/*
-html {
-  color-scheme: dark light;
-}
-
-*/
 
 body {
   background-color: var(--background-color);
   color: #333;
   font-family: Decovar;
-vertical-align: middle;
-  /*
--moz-font-smoothing: 2em;
-font-smooth: never;
-text-rendering: geometricPrecision;
-text-rendering: optimizeLegibility;
-*/
-
 }
-
-
-/*
-button {
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
-  outline: inherit;
-  padding: 0;
-}
-*/
-
-/*
 
 bitty-v1-rc4 {
   display: block;
 }
-*/
 
 /*
 .default-flow > :where(:not(:first-child)) {
@@ -81,37 +42,12 @@ bitty-v1-rc4 {
 }
 */
 
-/*
 .default-wrapper {
-  width: min(100vw - 3em, 48em);
+  width: min(100vw - 3rem, 52rem);
   margin-inline: auto;
 }
-*/
 
 
-/*
-h1 {
-  padding-top: 2.4em;
-  border-bottom: 1px solid #333;
-}
-*/
-
-
-
-.word {
-  display: inline-flex;
-dominant-baseline: middle;
-
-vertical-align: middle;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-    /*
-  margin-left: 0.5em;
-  padding: 0;
-  margin-block: 0.2em;;
-  */
-}
 
 .padder {
   font-size: 3.7em;
@@ -119,18 +55,16 @@ vertical-align: middle;
 }
 
 .letter {
+  display: block;
+  /*
+  position-self: center;
+*/
 
   /*
 vertical-align: middle;
 font-size-adjust: none;
 dominant-baseline: middle;
 */
-
-  display: block;
-  /*
-  position-self: center;
-*/
-
   /*
 overflow-position: unsafe;
   display: grid;
@@ -149,6 +83,9 @@ transform: translate(30%, 50%);
 }
 */
 
+.letter-alt {
+  display: block;
+}
 
 /*
 .letter-alt {
@@ -160,8 +97,24 @@ transform: translate(30%, 50%);
 }
 */
 
+/*
 .output {
   width: 100%;
+}
+*/
+
+.word {
+  display: inline-flex;
+  margin-left: 0.5em;
+/*
+ dominant-baseline: middle;
+  vertical-align: middle;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  padding: 0;
+  margin-block: 0.2em;;
+  */
 }
 
 

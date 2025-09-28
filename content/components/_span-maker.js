@@ -47,8 +47,7 @@ const SpanMaker = class {
     this.spanParagraphs = this.wordParagraphs.map((para) => {
       return para.map((word) => {
         return [
-          `<div class="word"><span class="padder">|</span>`,
-
+          `<div class="word">`,
           word.trim().split("").map((char) => {
             if (this.isLetter(char)) {
               return [
@@ -59,14 +58,11 @@ const SpanMaker = class {
                 `</span>`,
               ].join("");
             } else {
-              return "";
-
-              //return [
-              //  `<span class="letter-alt`,
-              //  `">`,
-              //  //char,
-              //  `</span>`,
-              //].join("");
+              return [
+                `<span class="letter-alt">`,
+                char,
+                `</span>`,
+              ].join("");
             }
           }).join(""),
           `</div>`,
