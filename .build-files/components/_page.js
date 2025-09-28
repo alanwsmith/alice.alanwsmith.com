@@ -17,20 +17,54 @@ export default class {
     el.innerHTML = this.spans;
   }
 
-  async startUpdates(_event, _el) {
+  async startUpdates(_event, el) {
     await sleep(100);
-    setAll("color-transition", 2400);
-    setAll("font-transition", 2400);
+    setAll("color-transition", 4000);
+    setAll("font-transition", 4000);
     applyUpdates();
     await sleep(100);
     generateSeed("color-l", 74, 86);
     generateSeed("color-c", 10, 18);
     generateSeed("color-h", 0, 360);
     generateSeeds("font", 100, 200);
-    prepAllFromSeed("color", "default");
+    prepAllFromSeed("color", "small");
     prepAllFromSeed("font", "default");
     applyUpdates();
+    await sleep(4000);
+    shiftLoop();
   }
+}
+
+async function shiftLoop() {
+  setAll("color-transition", 6200);
+  setAll("font-transition", 6200);
+  generateSeeds("font", 100, 500);
+  prepAllFromSeed("font", "large");
+  shiftSeed("color-h", "large");
+  generateSeed("color-c", 2, 18);
+  prepAllFromSeed("color", "large");
+  applyUpdates();
+  await sleep(7000);
+  shiftLoop();
+}
+
+function shiftSeed(prefix, amount) {
+  seedTypes().forEach((type) => {
+    arrayOfSeeds(type).forEach((seed) => {
+      if (prefix === seed.prefix) {
+        setSeed(
+          prefix,
+          randomShift(
+            seed.next_value,
+            seed.min,
+            seed.max,
+            seed.moves[amount],
+            randomDirection(),
+          ),
+        );
+      }
+    });
+  });
 }
 
 function sleep(ms) {

@@ -2353,11 +2353,11 @@ const state = {
       "max": 360,
       "min": 0,
       "moves": {
-        "default": 120,
-        "large": 170,
-        "small": 56,
-        "xlarge": 210,
-        "xsmall": 30
+        "default": 170,
+        "large": 240,
+        "small": 90,
+        "xlarge": 300,
+        "xsmall": 50
       },
       "next_value": 0,
       "prefix": "color-h",
