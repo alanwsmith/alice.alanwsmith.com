@@ -1,20 +1,31 @@
 export default class {
-  bittyInit() {
+  async bittyInit() {
     this.spans = null;
-    setAll("color-l", 70);
-    setAll("color-c", 50);
-    setAll("color-h", 40);
+    addBaseStyleSheet();
+    setAll("color-l", 0);
+    setAll("color-c", 0);
+    setAll("color-h", 0);
     setAll("color-transition", 0);
     setAll("font-transition", 0);
-    generateSeed("color-l", 60, 76);
-    generateSeed("color-c", 30, 78);
-    generateSeed("color-h", 0, 360);
-    generateSeed("color-transition", 3000, 4000);
-    matchTransitionSeeds();
-    generateSeeds("font", 100, 400);
-    prepAllFromSeed("default", "font");
+    generateSeeds("font", 100, 200);
+    prepAllFromSeed("font", "default");
+    generateSeed("color-transition", 300, 600);
+    //matchTransitionSeeds();
+    prepAllFromSeed("color-transition", "default");
+    prepAllFromSeed("font-transition", "default");
     applyUpdates();
-    //console.log(state);
+
+    // setAll("color-transition", 1000);
+    // applyUpdates();
+    // await sleep(1000);
+    // prepAllFromSeed( "color","default");
+    // applyUpdates();
+    // await sleep(1000);
+    // console.log("asdf");
+    // prepAllFromSeed("default", "color");
+
+    // applyUpdates();
+    // console.log(state.letters["a"]);
   }
 
   injestInput(_event, el) {
@@ -25,6 +36,21 @@ export default class {
   loadInput(_event, el) {
     el.innerHTML = this.spans;
   }
+
+  async startUpdates(_event, _el) {
+    await sleep(100);
+    generateSeed("color-l", 60, 76);
+    generateSeed("color-c", 30, 78);
+    generateSeed("color-h", 0, 360);
+    prepAllFromSeed("color", "default");
+    applyUpdates();
+
+    // applyUpdates();
+  }
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function propUnit(prefix) {
@@ -45,10 +71,11 @@ function applyUpdates() {
           letter.props[seed.prefix].previous_value !=
             letter.props[seed.prefix].next_value
         ) {
-          const key = `${seed.prefix}-${letter.char}`;
+          const key = `--${seed.prefix}-${letter.char}`;
           const value = `${letter.props[seed.prefix].next_value}${
             propUnit(seed.prefix)
           }`;
+          // console.log(`${key} - ${value}`);
           document.documentElement.style.setProperty(
             key,
             value,
@@ -83,7 +110,7 @@ function randomDirection() {
   return randomInt(0, 1) === 1 ? 1 : -1;
 }
 
-function prepAllFromSeed(distance, type) {
+function prepAllFromSeed(type, distance) {
   arrayOfLetters().forEach((letter) => {
     arrayOfSeeds(type).forEach((seed) => {
       const value = randomShift(
@@ -98,11 +125,11 @@ function prepAllFromSeed(distance, type) {
   });
 }
 
-function matchTransitionSeeds() {
-  state.seeds["font-transition"].previous_value =
-    state.seeds["font-transition"].next_value;
-  state.seeds["font-transition"].next_value =
-    state.seeds["color-transition"].next_value;
+function matchTransitions() {
+  // state.seeds["font-transition"].previous_value =
+  //   state.seeds["font-transition"].next_value;
+  // state.seeds["font-transition"].next_value =
+  //   state.seeds["color-transition"].next_value;
 }
 
 function setSeed(prefix, value) {
@@ -146,6 +173,63 @@ function arrayOfSeeds(type) {
 
 function arrayOfLetters() {
   return Object.entries(state.letters).map(([char, letter]) => letter);
+}
+
+function addBaseStyleSheet() {
+  const stylesSheet = new CSSStyleSheet();
+  let styles = [];
+  styles.push(`:root{
+--default-font-size: 1.0rem;
+--letter-font-size: 2.7rem;
+}`);
+
+  styles.push(`.output { 
+    font-size: var(--default-font-size);
+    color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
+    transition-property: color;
+    transition-duration: var(--color-transition-q);
+    font-variation-settings: 
+      'BLDA' var(--BLDA-q), 
+      'BLDB' var(--BLDB-q), 
+      'SKLA' var(--SKLA-q), 
+      'SKLB' var(--SKLB-q), 
+      'SKLD' var(--SKLD-q), 
+      'TRMA' var(--TRMA-q), 
+      'TRMB' var(--TRMB-q), 
+      'TRMC' var(--TRMC-q), 
+      'TRMD' var(--TRMD-q), 
+      'TRME' var(--TRME-q), 
+      'TRMF' var(--TRMF-q), 
+      'TRMG' var(--TRMG-q), 
+      'TRMK' var(--TRMK-q), 
+      'TRML' var(--TRML-q);}`);
+
+  arrayOfLetters().forEach((details) => {
+    const letter = details.char;
+    styles.push(`.letter-${letter} {
+        font-size: var(--letter-font-size);
+        color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
+        transition-property: color;
+        transition-duration: var(--color-transition-${letter});
+        font-variation-settings:
+          'BLDA' var(--BLDA-${letter}),
+          'BLDB' var(--BLDB-${letter}),
+          'SKLA' var(--SKLA-${letter}),
+          'SKLB' var(--SKLB-${letter}),
+          'SKLD' var(--SKLD-${letter}),
+          'TRMA' var(--TRMA-${letter}),
+          'TRMB' var(--TRMB-${letter}),
+          'TRMC' var(--TRMC-${letter}),
+          'TRMD' var(--TRMD-${letter}),
+          'TRME' var(--TRME-${letter}),
+          'TRMF' var(--TRMF-${letter}),
+          'TRMG' var(--TRMG-${letter}),
+          'TRMK' var(--TRMK-${letter}),
+          'TRML' var(--TRML-${letter});}`);
+  });
+
+  stylesSheet.replaceSync(styles.join("\n"));
+  document.adoptedStyleSheets.push(stylesSheet);
 }
 // The state const is auto generated.
 const state = {
