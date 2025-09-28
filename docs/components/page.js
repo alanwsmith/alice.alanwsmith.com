@@ -1,16 +1,24 @@
 export default class {
   bittyInit() {
     this.spans = null;
-    setAllColorL(0);
-    setAllColorC(0);
-    setAllColorH(0);
-    setAllColorTransitions(0);
-    generateFontSeeds(100, 400);
-    generateColorSeed("color-l", 60, 70);
-    generateColorSeed("color-c", 40, 80);
-    generateColorSeed("color-h", 0, 360);
-    generateColorTransitionSeed(3000, 4000);
-    console.log(state.seeds);
+    setAll("color-l", 0);
+    setAll("color-c", 0);
+    setAll("color-h", 0);
+    setAll("color-transition", 0);
+    setAll("font-transition", 0);
+
+    // setAllColorL(0);
+    // setAllColorC(0);
+    // setAllColorH(0);
+
+    // // setAllColorTransitions(0);
+    // generateFontSeeds(100, 400);
+    // generateColorSeed("color-l", 60, 70);
+    // generateColorSeed("color-c", 40, 80);
+    // generateColorSeed("color-h", 0, 360);
+    // generateColorTransitionSeed(3000, 4000);
+
+    console.log(state.letters["a"].props);
   }
 
   injestInput(_event, el) {
@@ -21,6 +29,18 @@ export default class {
   loadInput(_event, el) {
     el.innerHTML = this.spans;
   }
+}
+
+function setProp(char, prefix, value) {
+  state.letters[char].props[prefix].previous_value =
+    state.letters[char].props[prefix].next_value;
+  state.letters[char].props[prefix].next_value = value;
+}
+
+function setAll(prefix, value) {
+  listOfLetterChars().forEach((char) => {
+    setProp(char, prefix, value);
+  });
 }
 
 function generateColorTransitionSeed(min, max) {
