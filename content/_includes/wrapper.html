@@ -11,7 +11,11 @@
 }
 
 :root {
-  --background-color: black;
+  --background-l: 0%;
+  --background-c: 0;
+  --background-h: 0;
+  --background-transition: 20000ms;
+  --background-easing: linear;
   --border-color: #aaa;
   --color: rgb(180 180 180);
 }
@@ -27,9 +31,11 @@
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: lch(var(--background-l) var(--background-c) var(--background-h));
   color: #333;
   font-family: Decovar;
+  transition: 
+    background-color var(--background-transition) var(--background-easing);
 }
 
 bitty-v1-rc4 {

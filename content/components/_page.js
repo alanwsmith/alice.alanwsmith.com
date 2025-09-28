@@ -54,23 +54,41 @@ export default class {
 
 async function doRun() {
   await sleep(100);
-  setAllOfType("color-transition", 7000);
-  setAllOfType("font-transition", 6200);
+  setAllOfType("color-transition", 9000);
+  setAllOfType("font-transition", 3600);
   setAllOfType("size-transition", 9200);
   applyUpdates();
   await sleep(100);
   pickColors();
   pickShapes();
+  pickBackground();
+}
+
+async function pickBackground() {
+  document.documentElement.style.setProperty(
+    `--background-l`,
+    `${randomInt(0, 30)}%`,
+  );
+  document.documentElement.style.setProperty(
+    `--background-c`,
+    randomInt(0, 40),
+  );
+  document.documentElement.style.setProperty(
+    `--background-h`,
+    randomInt(0, 360),
+  );
+  await sleep(24000);
+  pickBackground();
 }
 
 async function pickColors() {
   applyUpdates();
-  generateSeed("color-l", 74, 86);
-  generateSeed("color-c", 10, 100);
+  generateSeed("color-l", 50, 90);
+  generateSeed("color-c", 10, 160);
   generateSeed("color-h", 0, 360);
-  prepAllFromSeed("color", "small");
+  prepAllFromSeed("color", "default");
   applyUpdates();
-  await sleep(7000);
+  await sleep(9200);
   pickColors();
 }
 
@@ -78,10 +96,12 @@ async function pickShapes() {
   pickOne("font-t");
   pickOne("font-t2");
   pickOne("font-s");
-  generateSeeds("font", 100, 500);
+  // generateSeeds("font-s", 100, 900);
+  // generateSeeds("font-t", 100, 900);
+  // generateSeeds("font-t", 100, 900);
   prepAllFromSeed("font", "default");
   applyUpdates();
-  await sleep(5000);
+  await sleep(4000);
   pickShapes();
 }
 

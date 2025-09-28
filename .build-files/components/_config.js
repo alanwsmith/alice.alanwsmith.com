@@ -2110,7 +2110,7 @@ const state = {
   },
   "seeds": {
     "SKLA": {
-      "max": "1000",
+      "max": "700",
       "min": "0",
       "moves": {
         "default": "120",
@@ -2142,7 +2142,7 @@ const state = {
       "unit": ""
     },
     "SKLD": {
-      "max": "1000",
+      "max": "700",
       "min": "0",
       "moves": {
         "default": "120",
