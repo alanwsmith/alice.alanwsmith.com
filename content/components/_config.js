@@ -1914,7 +1914,7 @@ const state = {
       "next_value": 0,
       "prefix": "SKLA",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "SKLB": {
@@ -1930,7 +1930,7 @@ const state = {
       "next_value": 0,
       "prefix": "SKLB",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "SKLD": {
@@ -1946,7 +1946,7 @@ const state = {
       "next_value": 0,
       "prefix": "SKLD",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "TRMB": {
@@ -2026,7 +2026,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMF",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font-t2",
       "unit": ""
     },
     "TRMG": {
@@ -2058,7 +2058,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMK",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font-t2",
       "unit": ""
     },
     "TRML": {
@@ -2074,7 +2074,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRML",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font-t2",
       "unit": ""
     },
     "color-c": {

@@ -3,7 +3,25 @@ let loopCount = 0;
 export default class {
   async bittyInit() {
     addBaseStyleSheet();
-    setAllFontsToSize(2.7);
+    // Must set to zero to start
+    setAllOfType("font-s", 0);
+    setAllOfType("font-t", 0);
+    setAllOfType("font-t2", 0);
+    setAllFontsToSize(2.5);
+    setAllOfPrefix("SKLD", 1000);
+    setAllOfPrefix("TRMF", 1000);
+    setAllOfPrefix("TRMK", 1000);
+    setAllOfPrefix("TRML", 1000);
+    // setAllOfType("font-s", 1000);
+    // setAllOfType("font-t", 1000);
+    // setAllOfType("font-t2", 100);
+    setAllOfType("color-transition", 4000);
+    setAllOfType("font-transition", 4000);
+    console.log(state.letters["a"].props["SKLD"]);
+
+    await sleep(100);
+    applyUpdates();
+
     /*
     pickOne("font-t");
     setAll("color-l", 0);
@@ -24,13 +42,16 @@ export default class {
   }
 
   async startUpdates(_event, el) {
+    // await sleep(200);
+
+    // setAllOfType("font-s", 300);
+    // setAllOfType("font-t", 300);
+    // setAllOfType("font-t2", 300);
+
     //console.log(state.letters["a"]);
-    setAll("color-transition", 5000);
-    setAll("font-transition", 700);
-    applyUpdates();
-    await sleep(100);
+    // applyUpdates();
     // pickColors();
-    pickShapes();
+    // pickShapes();
 
     // await sleep(100);
     // pickOne("font-t");
@@ -88,7 +109,7 @@ async function shiftLoop() {
 
 function setAllFontsToSize(size) {
   arrayOfLetters().forEach((letter) => {
-    console.log(letter.char);
+    // console.log(letter.char);
     setProp("font-size", letter.char, size);
   });
 }
@@ -148,8 +169,8 @@ function applyUpdates() {
     seedTypes().forEach((type) => {
       arrayOfSeeds(type).forEach((seed) => {
         if (
-          letter.props[seed.prefix].previous_value !=
-            letter.props[seed.prefix].next_value
+          letter.props[seed.prefix].previous_value !==
+            getNextPrefixValue(letter.char, seed.prefix)
         ) {
           const key = `--${seed.prefix}-${letter.char}`;
           const value = `${letter.props[seed.prefix].next_value}${
@@ -162,8 +183,10 @@ function applyUpdates() {
             key,
             value,
           );
-          letter.props[seed.prefix].previous_value =
-            letter.props[seed.prefix].next_value;
+          letter.props[seed.prefix].previous_value = getNextPrefixValue(
+            letter.char,
+            seed.prefix,
+          );
         }
       });
     });
@@ -218,26 +241,53 @@ function prepAllFromSeed(type, distance) {
 }
 
 function matchTransitionSeeds() {
-  state.seeds["font-transition"].previous_value =
-    state.seeds["font-transition"].next_value;
-  state.seeds["font-transition"].next_value =
-    state.seeds["color-transition"].next_value;
+  state.seeds["font-transition"].previous_value = getNextSeedValue(
+    "font-transition",
+  );
+  state.seeds["font-transition"].next_value = getNextSeedValue(
+    "color-transition",
+  );
 }
 
 function setSeed(prefix, value) {
-  state.seeds[prefix].previous_value = state.seeds[prefix].next_value;
+  state.seeds[prefix].previous_value = getNextSeedValue(prefix);
   state.seeds[prefix].next_value = value;
 }
 
-function setProp(prefix, char, value) {
-  state.letters[char].props[prefix].previous_value =
-    state.letters[char].props[prefix].next_value;
-  state.letters[char].props[prefix].next_value = value;
+function getNextSeedValue(char, prefix) {
+  // Necessary to pull values out instead of
+  // getting a reference.
+  return state.seeds[prefix].next_value;
 }
 
-function setAll(prefix, value) {
+function getNextPrefixValue(char, prefix) {
+  // Necessary to pull values out instead of
+  // getting a reference.
+  return state.letters[char].props[prefix].next_value;
+}
+
+function setProp(prefix, char, value) {
+  state.letters[char].props[prefix].previous_value = getNextPrefixValue(
+    char,
+    prefix,
+  );
+  state.letters[char].props[prefix].next_value = value;
+  // if (char === "a") {
+  //   console.log(`${prefix} - ${char} - ${value}`);
+  // }
+}
+
+function setAllOfPrefix(prefix, value) {
   arrayOfLetters().forEach((letter) => {
     setProp(prefix, letter.char, value);
+  });
+}
+
+function setAllOfType(type, value) {
+  arrayOfSeeds(type).forEach((seed) => {
+    arrayOfLetters().forEach((letter) => {
+      setProp(seed.prefix, letter.char, value);
+    });
   });
 }
 
@@ -285,6 +335,9 @@ function fontVariations(char) {
   arrayOfSeeds("font-t").forEach((seed) => {
     prefixes.push(seed.prefix);
   });
+  arrayOfSeeds("font-t2").forEach((seed) => {
+    prefixes.push(seed.prefix);
+  });
   const output = prefixes.map((prefix) => {
     return `"${prefix}" var(--${prefix}-${char})`;
   });
@@ -294,12 +347,18 @@ function fontVariations(char) {
 function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
+  styles.push(
+    ":root { --color-easing: ease; }",
+    ":root { --font-easing: ease; }",
+    ":root { --size-easing: ease; }",
+  );
+
   styles.push(`.output { 
     font-size: var(--font-size-q);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
-      color var(--color-transition-q) linear,
-      font-variation-settings var(--font-transition-q) linear;
+      color var(--color-transition-q) var(--color-easing),
+      font-variation-settings var(--font-transition-q) var(--font-easing);
 /*
     font-variation-settings: 
       ${fontVariations("q")};
@@ -2237,7 +2296,7 @@ const state = {
       "next_value": 0,
       "prefix": "SKLA",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "SKLB": {
@@ -2253,7 +2312,7 @@ const state = {
       "next_value": 0,
       "prefix": "SKLB",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "SKLD": {
@@ -2269,7 +2328,7 @@ const state = {
       "next_value": 0,
       "prefix": "SKLD",
       "previous_value": 0,
-      "type": "font",
+      "type": "font-s",
       "unit": ""
     },
     "TRMB": {
@@ -2349,7 +2408,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMF",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font-t2",
       "unit": ""
     },
     "TRMG": {
@@ -2381,7 +2440,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRMK",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font-t2",
       "unit": ""
     },
     "TRML": {
@@ -2397,7 +2456,7 @@ const state = {
       "next_value": 0,
       "prefix": "TRML",
       "previous_value": 0,
-      "type": "font-t",
+      "type": "font-t2",
       "unit": ""
     },
     "color-c": {
