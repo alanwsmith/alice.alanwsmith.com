@@ -16,7 +16,8 @@ export default class {
     setAllOfPrefix("color-c", 0);
     setAllOfPrefix("color-h", 0);
     setAllOfType("color-transition", 2000);
-    setAllOfType("font-transition", 3000);
+    setAllOfType("font-transition", 2200);
+    setAllOfType("size-transition", 2200);
     applyUpdates();
   }
 
@@ -33,14 +34,20 @@ export default class {
   async startUpdates(_event, el) {
     await sleep(200);
     generateSeed("color-l", 74, 86);
-    generateSeed("color-c", 10, 18);
+    generateSeed("color-c", 14, 24);
     generateSeed("color-h", 0, 360);
     prepAllFromSeed("color", "small");
+    applyUpdates();
+    await sleep(2000);
+
     setAllOfPrefix("SKLD", 200);
     setAllOfPrefix("TRMF", 200);
     setAllOfPrefix("TRMK", 200);
     setAllOfPrefix("TRML", 200);
     applyUpdates();
+
+    pickColors();
+    pickShapes();
 
     // await sleep(200);
 
