@@ -2211,57 +2211,10 @@ const settingsString = `[
 }]`;
 
 const settings = JSON.parse(settingsString);
-let loopCount = 0;
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function randomFloat(min, max) {
-  return (Math.random() * (max - min)) + min;
-}
-
-function addBaseStyleSheet() {
-  const stylesSheet = new CSSStyleSheet();
-  let styles = [];
-  styles.push(
-    ":root { --color-easing: linear; }",
-    ":root { --font-easing: linear; }",
-    ":root { --background-easing: linear; }",
-  );
-  styles.push(`.output { 
-    font-size: var(--font-size-q);
-    color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
-    transition: 
-      color var(--color-transition-q) var(--color-easing),
-      font-variation-settings var(--font-transition-q) var(--font-easing);
-    font-variation-settings: 
-      ${fontVariations("q")};
-}`);
-  arrayOfLetters().forEach((details) => {
-    const letter = details.char;
-    styles.push(`.letter-${letter} {
-        font-size: var(--font-size-${letter});
-        color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
-        transition: 
-          color var(--color-transition-${letter}) var(--color-easing),
-          font-variation-settings var(--font-transition-${letter}) var(--font-easing);
-        font-variation-settings:
-          ${fontVariations(letter)};
-}`);
-  });
-  stylesSheet.replaceSync(styles.join("\n"));
-  document.adoptedStyleSheets.push(stylesSheet);
-}
-
 export default class {
   async bittyInit() {
     initVars();
-    // addBaseStyleSheet();
+    addBaseStyleSheet();
   }
 
   loadInput(_event, el) {
@@ -2276,6 +2229,35 @@ export default class {
 
   async startUpdates(_event, el) {
   }
+}
+
+function addBaseStyleSheet() {
+  const css = new CSSStyleSheet();
+  let styles = [];
+  for (let char of listOfLetters()) {
+    const variations = listOfVariations().map((variation) => {
+      const varString = `"${variation}" var(--${variation}-${char})`;
+      return varString;
+    });
+    styles.push(`.letter-${char} {`);
+    styles.push(`font-size: var(--font-size-${char});`);
+    styles.push(
+      `color: lch(var(--color-l-${char}) var(--color-c-${char}) var(--color-h-${char}) );`,
+    );
+    styles.push(`transition:`);
+    styles.push(`color var(--color-transition-${char}) var(--color-easing),`);
+    styles.push(
+      `font-variation-settings var(--font-transition-${char}) var(--font-easing);`,
+    );
+
+    styles.push(`font-variation-settings: `);
+    styles.push(variations.join(","));
+    styles.push(";");
+    styles.push("}");
+  }
+  const output = styles.join("\n");
+  css.replaceSync(output);
+  document.adoptedStyleSheets.push(css);
 }
 
 function setProp(key, value) {
@@ -2293,13 +2275,47 @@ async function initVars() {
   setProp(`--color-easing`, `linear`);
   setProp(`--background-easing`, `linear`);
 
-  console.log(listOfLetters());
+  for (let char of listOfLetters()) {
+    setProp(`--font-size-${char}`, `2.8rem`);
+    setProp(`--color-l-${char}`, `90%`);
+    setProp(`--color-c-${char}`, 70);
+    setProp(`--color-h-${char}`, 100);
+    for (let v of listOfVariations()) {
+      setProp(`--${v}-${char}`, 500);
+    }
+  }
+
+  // font-size: var(--font-size-${letter});
+  // color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
+  // transition:
+  //   color var(--color-transition-${letter}) var(--color-easing),
+  //   font-variation-settings var(--font-transition-${letter}) var(--font-easing);
+  // font-variation-settings:
+  //   ${fontVariations(letter)};
+
+  // console.log(listOfLetters());
 }
 
 function listOfLetters() {
   return [...Array(26)].map((_, i) =>
     String.fromCharCode("a".charCodeAt(0) + i)
   );
+}
+
+function listOfVariations() {
+  return Object.keys(settings[0]);
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function randomFloat(min, max) {
+  return (Math.random() * (max - min)) + min;
 }
 
 // async function switchToSingleFont(fontIndex, minMax, shiftTimeMs, padTimeMs) {
@@ -2815,6 +2831,34 @@ function listOfLetters() {
 //   // resizeLetters(30);
 //   // // switchToSingleFont(0, "min", 0, 0);
 //   // applyUpdates();
+// }
+
+// function addBaseStyleSheet() {
+//   const stylesSheet = new CSSStyleSheet();
+//   let styles = [];
+//   styles.push(`.output {
+//     font-size: var(--font-size-q);
+//     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) );
+//     transition:
+//       color var(--color-transition-q) var(--color-easing),
+//       font-variation-settings var(--font-transition-q) var(--font-easing);
+//     font-variation-settings:
+//       ${fontVariations("q")};
+// }`);
+//   arrayOfLetters().forEach((details) => {
+//     const letter = details.char;
+//     styles.push(`.letter-${letter} {
+//         font-size: var(--font-size-${letter});
+//         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
+//         transition:
+//           color var(--color-transition-${letter}) var(--color-easing),
+//           font-variation-settings var(--font-transition-${letter}) var(--font-easing);
+//         font-variation-settings:
+//           ${fontVariations(letter)};
+// }`);
+//   });
+//   stylesSheet.replaceSync(styles.join("\n"));
+//   document.adoptedStyleSheets.push(stylesSheet);
 // }
 // The state const is auto generated.
 const state = {
