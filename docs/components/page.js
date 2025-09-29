@@ -2229,16 +2229,13 @@ export default class {
     setAllOfPrefix("TRMK", 900);
     setAllOfPrefix("TRMG", 900);
     setAllOfPrefix("TRML", 900);
-    setAllOfPrefix("color-l", 90);
-    setAllOfPrefix("color-c", 10);
-    setAllOfPrefix("color-h", 90);
+    setAllOfPrefix("font-size", 2.9);
+    setAllOfPrefix("color-l", 0);
+    setAllOfPrefix("color-c", 0);
+    setAllOfPrefix("color-h", 0);
     resizeLetters(30);
     applyUpdates();
 
-    setAllOfType("color-transition", 400);
-    setAllOfType("font-transition", 5200);
-    setAllOfType("size-transition", 200);
-    applyUpdates();
     // await sleep(100);
     // applyUpdates();
   }
@@ -2254,17 +2251,21 @@ export default class {
   }
 
   async startUpdates(_event, el) {
-    await sleep(300);
-    // generateSeed("color-l", 60, 90);
-    // generateSeed("color-c", 20, 50);
-    // generateSeed("color-h", 0, 360);
-    // prepAllFromSeed("color", "default");
+    await sleep(100);
+    setAllOfType("color-transition", 400);
+    setAllOfType("font-transition", 5200);
+    setAllOfType("size-transition", 200);
+    generateSeed("color-l", 84, 100);
+    generateSeed("color-c", 10, 30);
+    generateSeed("color-h", 0, 360);
+    prepAllFromSeed("color", "default");
     applyUpdates();
     // await sleep(100);
 
     arrayOfLetters().forEach((letter) => {
       updateLetterWithRandomSetting(letter.char);
     });
+    applyUpdates();
 
     // setAllOfPrefix("SKLD", 200);
     // setAllOfPrefix("TRMF", 200);
