@@ -1,5 +1,8 @@
 const s = {
   currentProps: {},
+  background: {
+    loop: 0,
+  },
   color: {
     loop: 0,
     lMin: 80,
@@ -12,7 +15,6 @@ const s = {
   font: {
     loop: 0,
   },
-  current: {},
 };
 
 export default class {
@@ -32,9 +34,21 @@ export default class {
   }
 
   async startUpdaters(_event, _el) {
-    updateFonts();
+    updateBackground();
     updateColors();
+    updateFonts();
   }
+}
+
+async function updateBackground() {
+  console.log(s.background.loop);
+  setProp(`--background-l`, `${randomInt(7, 12)}%`);
+  setProp(`--background-c`, randomInt(12, 36));
+  setProp(`--background-h`, randomInt(0, 360));
+
+  await sleep(20000);
+  s.background.loop += 1;
+  updateBackground();
 }
 
 async function updateFonts() {
@@ -173,7 +187,7 @@ async function setProp(key, value) {
 async function initVars() {
   setProp(
     `--background-transition`,
-    `4000ms`,
+    `17000ms`,
   );
   setProp(`--color-easing`, `linear`);
   setProp(`--background-easing`, `linear`);
