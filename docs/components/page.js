@@ -2686,7 +2686,7 @@ const SpanMaker = class {
       return para
         //.replaceAll(`"`, "")
         // .replaceAll(`?`, "")
-        // .replaceAll(`-`, " ")
+        .replaceAll(`-`, " ")
         // .replaceAll(`)`, "")
         // .replaceAll(`(`, "")
         .replaceAll(/\s\s+/g, " ").split(" ");
