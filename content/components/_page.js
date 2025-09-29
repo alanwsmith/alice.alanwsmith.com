@@ -36,7 +36,6 @@ function addBaseStyleSheet() {
     styles.push(
       `font-variation-settings var(--font-transition-${char}) var(--font-easing);`,
     );
-
     styles.push(`font-variation-settings: `);
     styles.push(variations.join(","));
     styles.push(";");
@@ -71,16 +70,6 @@ async function initVars() {
       setProp(`--${v}-${char}`, 500);
     }
   }
-
-  // font-size: var(--font-size-${letter});
-  // color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
-  // transition:
-  //   color var(--color-transition-${letter}) var(--color-easing),
-  //   font-variation-settings var(--font-transition-${letter}) var(--font-easing);
-  // font-variation-settings:
-  //   ${fontVariations(letter)};
-
-  // console.log(listOfLetters());
 }
 
 function listOfLetters() {
