@@ -15,26 +15,24 @@ export default class {
   }
 
   async startUpdaters(_event, _el) {
-    // updateFonts();
+    updateFonts();
     updateColors();
   }
 }
 
 async function updateColors() {
   console.log("updateColors()");
-  setProp(`--color-transition`, `2000ms`);
+  setProp(`--color-transition`, `4000ms`);
   for (let char of listOfLetters()) {
     // gotta sleep otherwise chrome batches
     // the updates in oneshot
-    await sleep(20);
+    await sleep(10);
     const lKey = `--color-l-${char}`;
     const lValue = `${randomInt(30, 90)}%`;
     setProp(lKey, lValue);
-    await sleep(20);
     const cKey = `--color-c-${char}`;
     const cValue = randomInt(30, 90);
     setProp(cKey, cValue);
-    await sleep(20);
     const hKey = `--color-h-${char}`;
     const hValue = randomInt(0, 360);
     setProp(hKey, hValue);
@@ -44,9 +42,9 @@ async function updateColors() {
 }
 
 async function updateFonts() {
-  setProp(`--font-transition`, `4000ms`);
+  setProp(`--font-transition`, `5000ms`);
   setFontTo(randomInt(1, listOfVars().length - 1));
-  await sleep(5300);
+  await sleep(6300);
   updateFonts();
 }
 
@@ -54,6 +52,7 @@ async function setFontTo(fontIndex) {
   for (let v of listOfVars()) {
     const key = `--${v}`;
     const value = settings[fontIndex][v]["min"];
+    await sleep(200);
     setProp(key, value);
   }
 }
@@ -128,16 +127,16 @@ function addBaseStyleSheet() {
   document.adoptedStyleSheets.push(css);
 }
 
-function setProp(key, value) {
-  var bodyStyles = window.getComputedStyle(document.body);
-  var currentValue = bodyStyles.getPropertyValue(key);
-  if (currentValue !== value) {
-    //console.log(`setProp(${key}, ${value}`);
-    document.documentElement.style.setProperty(
-      key,
-      value,
-    );
-  }
+async function setProp(key, value) {
+  // var bodyStyles = window.getComputedStyle(document.body);
+  //  var currentValue = bodyStyles.getPropertyValue(key);
+  // if (currentValue !== value) {
+  //console.log(`setProp(${key}, ${value}`);
+  document.documentElement.style.setProperty(
+    key,
+    value,
+  );
+  //}
 }
 
 async function initVars() {
@@ -155,9 +154,9 @@ async function initVars() {
 
   for (let char of listOfLetters()) {
     setProp(`--font-size-${char}`, `${randomFloat(1.7, 2.9)}rem`);
-    setProp(`--color-l-${char}`, `90%`);
-    setProp(`--color-c-${char}`, 70);
-    setProp(`--color-h-${char}`, 100);
+    setProp(`--color-l-${char}`, `0%`);
+    setProp(`--color-c-${char}`, 0);
+    setProp(`--color-h-${char}`, 0);
   }
 
   // for (let char of listOfLetters()) {
