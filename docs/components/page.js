@@ -2231,32 +2231,45 @@ export default class {
     el.innerHTML = this.spans;
   }
 
-  startTicks(_event, _el) {
-    setAllLettersToFont(1, "min", 2000, 600);
+  async startTicks(_event, _el) {
+    setFontTo(randomInt(3, 20));
+    await sleep(2000);
+    this.tickUpdates();
   }
 
-  async tickUpdates(_event, el) {
-  }
-}
-
-async function setAllLettersToFont(fontIndex, minMax, loopTime, shiftTimeMs) {
-  for (let char of listOfLetters()) {
-    setLetterToFont(char, fontIndex, minMax, shiftTimeMs);
-    await sleep(loopTime);
+  async tickUpdates() {
+    setFontTo(randomInt(3, 20));
+    await sleep(2000);
+    this.tickUpdates();
   }
 }
 
-async function setLetterToFont(char, fontIndex, minMax, shiftTime) {
+async function setFontTo(fontIndex) {
   for (let v of listOfVars()) {
-    const timeKey = `--font-transition-${char}`;
-    const timeValue = `${shiftTime}ms`;
-    setProp(timeKey, timeValue);
-    const key = `--${v}-${char}`;
-    const value = settings[fontIndex][v][minMax];
+    const key = `--${v}`;
+    const value = settings[fontIndex][v]["min"];
     setProp(key, value);
-    //console.log(`setLetterToFont: ${key} - ${value}`);
   }
 }
+
+// async function setAllLettersToFont(fontIndex, minMax, loopTime, shiftTimeMs) {
+//   for (let char of listOfLetters()) {
+//     setLetterToFont(char, fontIndex, minMax, shiftTimeMs);
+//     await sleep(loopTime);
+//   }
+// }
+
+//async function setLetterToFont(char, fontIndex, minMax, shiftTime) {
+//  for (let v of listOfVars()) {
+//    const timeKey = `--font-transition-${char}`;
+//    const timeValue = `${shiftTime}ms`;
+//    setProp(timeKey, timeValue);
+//    const key = `--${v}-${char}`;
+//    const value = settings[fontIndex][v][minMax];
+//    setProp(key, value);
+//    //console.log(`setLetterToFont: ${key} - ${value}`);
+//  }
+//}
 
 function addBaseStyleSheet() {
   const css = new CSSStyleSheet();
@@ -2309,7 +2322,7 @@ function addBaseStyleSheet() {
   // }
 
   const output = styles.join("\n");
-  console.log(output);
+  // console.log(`STYLESHEET: ${output}`);
   css.replaceSync(output);
   document.adoptedStyleSheets.push(css);
 }
@@ -2318,7 +2331,7 @@ function setProp(key, value) {
   var bodyStyles = window.getComputedStyle(document.body);
   var currentValue = bodyStyles.getPropertyValue(key);
   if (currentValue !== value) {
-    console.log(currentValue);
+    console.log(value);
     document.documentElement.style.setProperty(
       key,
       value,
@@ -2333,7 +2346,6 @@ async function initVars() {
   );
   setProp(`--color-easing`, `linear`);
   setProp(`--background-easing`, `linear`);
-
   // setProp(`--font-size`, `${randomFloat(1.7, 2.9)}rem`);
   setProp(`--color-l`, `90%`);
   setProp(`--color-c`, 70);
