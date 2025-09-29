@@ -18,17 +18,25 @@ export default class {
     el.innerHTML = this.spans;
   }
 
-  async startTicks(_event, _el) {
-    setFontTo(randomInt(3, 20));
-    await sleep(2000);
-    this.tickUpdates();
+  async startUpdaters(_event, _el) {
+    switchFonts();
+    // setFontTo(randomInt(3, 20));
+    // await sleep(5500);
+    // this.tickUpdates();
   }
 
-  async tickUpdates() {
-    setFontTo(randomInt(3, 20));
-    await sleep(2000);
-    this.tickUpdates();
-  }
+  // async tickUpdates() {
+  //   setFontTo(randomInt(3, 20));
+  //   await sleep(5500);
+  //   this.tickUpdates();
+  // }
+}
+
+async function switchFonts() {
+  setProp(`--font-transition`, `4000ms`);
+  setFontTo(randomInt(1, listOfVars().length - 1));
+  await sleep(5300);
+  switchFonts();
 }
 
 async function setFontTo(fontIndex) {
@@ -67,12 +75,15 @@ function addBaseStyleSheet() {
     return varString;
   });
 
-  styles.push(`.letter {`);
+  styles.push(`.letter, .letter-alt {`);
   styles.push(
     `color: lch(var(--color-l) var(--color-c) var(--color-h) );`,
   );
   styles.push(`transition:`);
-  styles.push(`color var(--color-transition) var(--color-easing),`);
+  // styles.push(`color var(--color-transition) var(--color-easing),`);
+  // styles.push(
+  //   `font-variation-settings var(--font-transition);`,
+  // );
   styles.push(
     `font-variation-settings var(--font-transition);`,
   );
@@ -138,7 +149,7 @@ async function initVars() {
   setProp(`--color-c`, 70);
   setProp(`--color-h`, 100);
   setProp(`--color-transition`, 1200);
-  setProp(`--font-transition`, `5200ms`);
+  setProp(`--font-transition`, `5000ms`);
   for (let v of listOfVars()) {
     setProp(`--${v}`, 500);
   }
