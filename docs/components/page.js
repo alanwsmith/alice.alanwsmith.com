@@ -2217,9 +2217,9 @@ export default class {
   async bittyInit() {
     initWithZeros();
     addBaseStyleSheet();
-    setAllOfType("color-transition", 10);
-    setAllOfType("font-transition", 10);
-    setAllOfType("size-transition", 10);
+    setAllOfType("color-transition", 1000);
+    setAllOfType("font-transition", 1000);
+    setAllOfType("size-transition", 1000);
     setBackgroundTransition(8000);
     setAllOfPrefix("SKLA", 900);
     setAllOfPrefix("SKLB", 900);
@@ -2251,20 +2251,21 @@ export default class {
   }
 
   async startUpdates(_event, el) {
-    await sleep(100);
-    setAllOfType("color-transition", 400);
+    setAllOfType("color-transition", 4000);
     setAllOfType("font-transition", 5200);
     setAllOfType("size-transition", 200);
+    applyUpdates();
+    await sleep(1000);
     generateSeed("color-l", 84, 100);
     generateSeed("color-c", 10, 30);
     generateSeed("color-h", 0, 360);
     prepAllFromSeed("color", "default");
-    applyUpdates();
     // await sleep(100);
 
-    arrayOfLetters().forEach((letter) => {
-      updateLetterWithRandomSetting(letter.char);
-    });
+    // arrayOfLetters().forEach((letter) => {
+    //   updateLetterWithRandomSetting(letter.char);
+    // });
+
     applyUpdates();
 
     // setAllOfPrefix("SKLD", 200);
@@ -2533,9 +2534,9 @@ async function applyUpdates() {
             const value = `${letter.props[seed.prefix].next_value}${
               propUnit(seed.prefix)
             }`;
-            // if (letter.char === "a") {
-            //   console.log(`${key} - ${value}`);
-            // }
+            if (letter.char === "a") {
+              console.log(`applyUpdates() - ${key} - ${value}`);
+            }
             document.documentElement.style.setProperty(
               key,
               value,
@@ -2629,14 +2630,14 @@ function prepAllFromSeed(type, distance) {
   });
 }
 
-function matchTransitionSeeds() {
-  state.seeds["font-transition"].previous_value = getNextSeedValue(
-    "font-transition",
-  );
-  state.seeds["font-transition"].next_value = getNextSeedValue(
-    "color-transition",
-  );
-}
+// function matchTransitionSeeds() {
+//   state.seeds["font-transition"].previous_value = getNextSeedValue(
+//     "font-transition",
+//   );
+//   state.seeds["font-transition"].next_value = getNextSeedValue(
+//     "color-transition",
+//   );
+// }
 
 function randomFloat(min, max) {
   return (Math.random() * (max - min)) + min;
@@ -2746,27 +2747,20 @@ function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
 
-  // styles.push(
-  //   ":root { --color-easing: linear; }",
-  //   ":root { --font-easing: linear; }",
-  //   ":root { --size-easing: linear; }",
-  //   `:root {--background-transition: ${
-  //     state.misc["background-transition"]
-  //   }ms; }`,
-  //   ":root {--background-easing: linear; }",
-  // );
-
-  // styles.push(
-  //   ":root { --color-easing: ease; }",
-  //   ":root { --font-easing: ease; }",
-  //   ":root { --size-easing: ease; }",
-  // );
+  styles.push(
+    ":root { --color-easing: linear; }",
+    ":root { --font-easing: linear; }",
+    ":root { --size-easing: linear; }",
+    `:root {--background-transition: ${
+      state.misc["background-transition"]
+    }ms; }`,
+    ":root {--background-easing: linear; }",
+  );
 
   styles.push(`.output { 
     font-size: var(--font-size-q);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
-      font-size var(--color-transition-q) var(--color-easing),
       color var(--color-transition-q) var(--color-easing),
       font-variation-settings var(--font-transition-q) var(--font-easing);
     font-variation-settings: 
@@ -2778,7 +2772,6 @@ function addBaseStyleSheet() {
         font-size: var(--font-size-${letter});
         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
         transition: 
-          font-size var(--color-transition-${letter}) var(--color-easing),
           color var(--color-transition-${letter}) var(--color-easing),
           font-variation-settings var(--font-transition-${letter}) var(--font-easing);
         font-variation-settings:
@@ -2791,9 +2784,9 @@ function addBaseStyleSheet() {
 }
 
 function setProp(char, prefix, value) {
-  // if (char === "a") {
-  //   console.log(`${char} - ${prefix} - ${value}`);
-  // }
+  if (char === "a") {
+    console.log(`setProp() - ${char} - ${prefix} - ${value}`);
+  }
   state.letters[char].props[prefix].previous_value = getNextPrefixValue(
     char,
     prefix,
