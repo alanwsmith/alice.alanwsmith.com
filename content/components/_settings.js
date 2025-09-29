@@ -1,4 +1,242 @@
 const settingsString = `[
+
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 1000,
+    "max": 1000
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 660,
+    "max": 660
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
 {
   "SKLA": {
     "min": "640",

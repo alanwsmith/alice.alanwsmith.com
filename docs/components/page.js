@@ -1,5 +1,243 @@
 
 const settingsString = `[
+
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 1000,
+    "max": 1000
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 660,
+    "max": 660
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
 {
   "SKLA": {
     "min": "640",
@@ -2211,8 +2449,21 @@ const settingsString = `[
 }]`;
 
 const settings = JSON.parse(settingsString);
-const state = {
-  currentValues: {},
+const s = {
+  currentProps: {},
+  color: {
+    loop: 0,
+    lMin: 80,
+    lMax: 100,
+    cMin: 10,
+    cMax: 24,
+    hMin: 0,
+    hMax: 360,
+  },
+  font: {
+    loop: 0,
+  },
+  current: {},
 };
 
 export default class {
@@ -2237,32 +2488,45 @@ export default class {
   }
 }
 
+async function updateFonts() {
+  setProp(`--font-transition`, `6000ms`);
+  if (s.font.loop === 0) {
+    setFontTo(0);
+  } else {
+    setFontTo(randomInt(0, listOfVars().length - 1));
+  }
+  await sleep(6700);
+  s.font.loop += 1;
+  updateFonts();
+}
+
 async function updateColors() {
-  console.log("updateColors()");
-  setProp(`--color-transition`, `4000ms`);
+  if (s.color.loop <= 3) {
+    setProp(`--color-transition`, `4000ms`);
+    s.color.cMin = 10 + (s.color.loop * 5);
+    s.color.cMax = 14 + (20 * s.color.loop);
+  } else {
+    s.color.cMin = 0;
+    s.color.cMax = 140;
+  }
+  const chroma = randomInt(s.color.cMin, s.color.cMax);
   for (let char of listOfLetters()) {
     // gotta sleep otherwise chrome batches
     // the updates in oneshot
     await sleep(10);
     const lKey = `--color-l-${char}`;
-    const lValue = `${randomInt(30, 90)}%`;
+    const lValue = `${randomInt(86, 96)}%`;
     setProp(lKey, lValue);
     const cKey = `--color-c-${char}`;
-    const cValue = randomInt(30, 90);
+    const cValue = chroma;
     setProp(cKey, cValue);
     const hKey = `--color-h-${char}`;
     const hValue = randomInt(0, 360);
     setProp(hKey, hValue);
   }
-  await sleep(5000);
+  await sleep(5200);
+  s.color.loop += 1;
   updateColors();
-}
-
-async function updateFonts() {
-  setProp(`--font-transition`, `5000ms`);
-  setFontTo(randomInt(1, listOfVars().length - 1));
-  await sleep(6300);
-  updateFonts();
 }
 
 async function setFontTo(fontIndex) {
@@ -2344,7 +2608,7 @@ function addBaseStyleSheet() {
 }
 
 async function setProp(key, value) {
-  if (state.currentValues[key] !== value) {
+  if (s.currentProps[key] !== value) {
     // var bodyStyles = window.getComputedStyle(document.body);
     //  var currentValue = bodyStyles.getPropertyValue(key);
     // if (currentValue !== value) {
@@ -2367,7 +2631,7 @@ async function initVars() {
   setProp(`--color-transition`, `6000ms`);
   setProp(`--font-transition`, `5000ms`);
   for (let v of listOfVars()) {
-    setProp(`--${v}`, 500);
+    setProp(`--${v}`, 0);
   }
 
   for (let char of listOfLetters()) {
