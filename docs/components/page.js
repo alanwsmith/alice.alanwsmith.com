@@ -2232,20 +2232,30 @@ export default class {
   }
 
   startTicks(_event, _el) {
-    setAllLettersToFont(1, "min", 300);
+    setAllLettersToFont(1, "min", 2000, 600);
   }
 
   async tickUpdates(_event, el) {
   }
 }
 
-async function setAllLettersToFont(fontIndex, minMax, shiftTimeMs) {
+async function setAllLettersToFont(fontIndex, minMax, loopTime, shiftTimeMs) {
   for (let char of listOfLetters()) {
     setLetterToFont(char, fontIndex, minMax, shiftTimeMs);
+    await sleep(loopTime);
   }
 }
 
 async function setLetterToFont(char, fontIndex, minMax, shiftTime) {
+  for (let v of listOfVars()) {
+    const timeKey = `--font-transition-${char}`;
+    const timeValue = `${shiftTime}ms`;
+    setProp(timeKey, timeValue);
+    const key = `--${v}-${char}`;
+    const value = settings[fontIndex][v][minMax];
+    setProp(key, value);
+    //console.log(`setLetterToFont: ${key} - ${value}`);
+  }
 }
 
 function addBaseStyleSheet() {
@@ -2262,9 +2272,9 @@ function addBaseStyleSheet() {
       `color: lch(var(--color-l-${char}) var(--color-c-${char}) var(--color-h-${char}) );`,
     );
     styles.push(`transition:`);
-    styles.push(`color var(--color-transition-${char}) var(--color-easing),`);
+    //    styles.push(`color var(--color-transition-${char}) var(--color-easing),`);
     styles.push(
-      `font-variation-settings var(--font-transition-${char}) var(--font-easing);`,
+      `font-variation-settings var(--font-transition-${char});`,
     );
     styles.push(`font-variation-settings: `);
     styles.push(variations.join(","));
@@ -2277,10 +2287,15 @@ function addBaseStyleSheet() {
 }
 
 function setProp(key, value) {
-  document.documentElement.style.setProperty(
-    key,
-    value,
-  );
+  var bodyStyles = window.getComputedStyle(document.body);
+  var currentValue = bodyStyles.getPropertyValue(key);
+  if (currentValue !== value) {
+    console.log(currentValue);
+    document.documentElement.style.setProperty(
+      key,
+      value,
+    );
+  }
 }
 
 async function initVars() {
@@ -2297,7 +2312,7 @@ async function initVars() {
     setProp(`--color-c-${char}`, 70);
     setProp(`--color-h-${char}`, 100);
     setProp(`--color-transition-${char}`, 1200);
-    setProp(`--font-transition-${char}`, 3200);
+    setProp(`--font-transition-${char}`, `5200ms`);
     for (let v of listOfVars()) {
       setProp(`--${v}-${char}`, 500);
     }
