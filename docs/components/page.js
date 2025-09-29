@@ -1,3 +1,2216 @@
+
+const settingsString = `[
+{
+  "SKLA": {
+    "min": "640",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "640",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "810",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "690",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": "480",
+    "max": "480"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "690",
+    "max": "900"
+  },
+  "SKLB": {
+    "min": "620",
+    "max": "620"
+  },
+  "SKLD": {
+    "min": "540",
+    "max": "580"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "480",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "390",
+    "max": "640"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": "610"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "430",
+    "max": "580"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": "760"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "320",
+    "max": "490"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+
+{
+  "SKLA": {
+    "min": "650",
+    "max": "760"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "810"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "650",
+    "max": "760"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "340"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+
+{
+  "SKLA": {
+    "min": "650",
+    "max": "760"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "340"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "660",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "660",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "740",
+    "max": "740"
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "660",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "740",
+    "max": "740"
+  },
+  "SKLD": {
+    "min": "340",
+    "max": "450"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": "400"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "480",
+    "max": "480"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+
+{
+  "SKLA": {
+    "min": "340",
+    "max": "770"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "480",
+    "max": "570"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "440",
+    "max": "770"
+  },
+  "SKLB": {
+    "min": "540",
+    "max": "740"
+  },
+  "SKLD": {
+    "min": "480",
+    "max": "570"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": "1000"
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": 0
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "520",
+    "max": "510"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": "0",
+    "max": 0
+  },
+  "TRMC": {
+    "min": "0",
+    "max": 0
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "440"
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "700",
+    "max": "820"
+  },
+  "SKLD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRME": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "350"
+  },
+  "TRMG": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "0",
+    "max": 0
+  },
+  "TRML": {
+    "min": "0",
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "350",
+    "max": "490"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRME": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": 0,
+    "max": "320"
+  },
+  "TRMG": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "350",
+    "max": "570"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "300",
+    "max": "320"
+  },
+  "TRMG": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "350",
+    "max": "570"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "300",
+    "max": "320"
+  },
+  "TRMG": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMK": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRML": {
+    "min": "0",
+    "max": "1000"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "630",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMG": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRML": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "630",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "580"
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "520"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMG": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRML": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": "660"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "480",
+    "max": "520"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "230"
+  },
+  "TRMG": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRML": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": "0"
+  },
+  "SKLB": {
+    "min": 0,
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "110",
+    "max": "220"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "400",
+    "max": "430"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMG": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "780",
+    "max": "1000"
+  },
+  "TRML": {
+    "min": "680",
+    "max": "1000"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": 0
+  },
+  "SKLB": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "480"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMD": {
+    "min": 0,
+    "max": 0
+  },
+  "TRME": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMF": {
+    "min": "570",
+    "max": "570"
+  },
+  "TRMG": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMK": {
+    "min": 0,
+    "max": 0
+  },
+  "TRML": {
+    "min": 0,
+    "max": "0"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": "0"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": 0,
+    "max": "1000"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMG": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRML": {
+    "min": 0,
+    "max": "0"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": "0"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMG": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRML": {
+    "min": 0,
+    "max": "0"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "700",
+    "max": "700"
+  },
+  "SKLB": {
+    "min": 0,
+    "max": "650"
+  },
+  "SKLD": {
+    "min": "630",
+    "max": "680"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "340"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": 0,
+    "max": "330"
+  },
+  "TRMG": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMK": {
+    "min": 0,
+    "max": "50"
+  },
+  "TRML": {
+    "min": "590",
+    "max": "1000"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLB": {
+    "min": 0,
+    "max": "650"
+  },
+  "SKLD": {
+    "min": "630",
+    "max": "680"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "340"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": 0,
+    "max": "330"
+  },
+  "TRMG": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMK": {
+    "min": 0,
+    "max": "50"
+  },
+  "TRML": {
+    "min": "590",
+    "max": "1000"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "520",
+    "max": "520"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRME": {
+    "min": 0,
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": 0,
+    "max": "320"
+  },
+  "TRMG": {
+    "min": 0,
+    "max": "1000"
+  },
+  "TRMK": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRML": {
+    "min": 0,
+    "max": "0"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+
+
+{
+  "SKLA": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMA": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMB": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRME": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMF": {
+    "min": "150",
+    "max": "150"
+  },
+  "TRMG": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRML": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "620",
+    "max": "620"
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "420",
+    "max": "420"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRME": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "640",
+    "max": "640"
+  },
+  "TRMG": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMK": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRML": {
+    "min": 0,
+    "max": "0"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": 0,
+    "max": 0
+  },
+  "SKLB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "550",
+    "max": "550"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRMB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMD": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "330",
+    "max": "360"
+  },
+  "TRMG": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMK": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRML": {
+    "min": 0,
+    "max": "0"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "0"
+  },
+  "SKLD": {
+    "min": "440",
+    "max": "440"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMD": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "210"
+  },
+  "TRMG": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRMK": {
+    "min": 0,
+    "max": "0"
+  },
+  "TRML": {
+    "min": 0,
+    "max": "0"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+{
+  "SKLA": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": 0
+  },
+  "SKLD": {
+    "min": "0",
+    "max": 0
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": 0
+  },
+  "TRMD": {
+    "min": "0",
+    "max": 0
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": 0
+  },
+  "TRMG": {
+    "min": "0",
+    "max": 0
+  },
+  "TRMK": {
+    "min": "0",
+    "max": "1000"
+  },
+  "TRML": {
+    "min": "0",
+    "max": 0
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+},
+
+
+{
+  "SKLA": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "SKLB": {
+    "min": "0",
+    "max": "1000"
+  },
+  "SKLD": {
+    "min": "530",
+    "max": "590"
+  },
+  "TRMA": {
+    "min": 0,
+    "max": 0
+  },
+  "TRMB": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMC": {
+    "min": "0",
+    "max": 0
+  },
+  "TRMD": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRME": {
+    "min": "1000",
+    "max": "1000"
+  },
+  "TRMF": {
+    "min": "0",
+    "max": "450"
+  },
+  "TRMG": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRMK": {
+    "min": "0",
+    "max": "0"
+  },
+  "TRML": {
+    "min": "0",
+    "max": "0"
+  },
+  "BLDA": {
+    "min": 0,
+    "max": 0
+  },
+  "BLDB": {
+    "min": 0,
+    "max": 0
+  }
+}]`;
+
+const settings = JSON.parse(settingsString);
 let loopCount = 0;
 
 export default class {
@@ -43,17 +2256,62 @@ export default class {
     generateSeed("color-c", 20, 50);
     generateSeed("color-h", 0, 360);
     prepAllFromSeed("color", "small");
-    setAllOfPrefix("SKLD", 200);
-    setAllOfPrefix("TRMF", 200);
-    setAllOfPrefix("TRMK", 200);
-    setAllOfPrefix("TRML", 200);
+
+    arrayOfLetters().forEach((letter) => {
+      updateLetterWithRandomSetting(letter.char);
+    });
+    // setAllOfPrefix("SKLD", 200);
+    // setAllOfPrefix("TRMF", 200);
+    // setAllOfPrefix("TRMK", 200);
+    // setAllOfPrefix("TRML", 200);
     applyUpdates();
-    await sleep(4600);
+    await sleep(6600);
     doRun();
   }
 }
 
 async function doRun() {
+  pickColors();
+  pickShapes();
+  pickBackground();
+
+  // console.log(settings.length);
+  // arrayOfLetters().forEach((letter) => {
+  //   updateLetterWithRandomSetting(letter.char);
+  // });
+  // await sleep(100);
+  // applyUpdates();
+}
+
+async function pickShapes() {
+  arrayOfLetters().forEach((letter) => {
+    if (randomInt(0, 3) === 3) {
+      updateLetterWithRandomSetting(letter.char);
+    }
+  });
+  applyUpdates();
+  await sleep(2000);
+  pickShapes();
+}
+
+function updateLetterWithRandomSetting(char) {
+  const setting = randomInt(0, settings.length - 1);
+  arrayOfLetters().forEach((letter) => {
+    if (letter.char === char) {
+      // console.log(char);
+      // console.log(setting);
+      // console.log(settings[setting]);
+      Object.entries(settings[setting]).forEach(([x, y]) => {
+        const min = parseInt(y.min, 10);
+        const max = parseInt(y.max, 10);
+        const value = randomInt(min, max);
+        setProp(char, x, value);
+      });
+    }
+  });
+}
+
+async function xdoRun() {
   await sleep(100);
   setAllOfType("color-transition", 9000);
   setAllOfType("font-transition", 3600);
@@ -81,11 +2339,11 @@ async function resizeRandomLetter() {
 async function pickBackground() {
   document.documentElement.style.setProperty(
     `--background-l`,
-    `${randomInt(0, 19)}%`,
+    `${randomInt(0, 24)}%`,
   );
   document.documentElement.style.setProperty(
     `--background-c`,
-    randomInt(0, 13),
+    randomInt(0, 18),
   );
   document.documentElement.style.setProperty(
     `--background-h`,
@@ -106,7 +2364,7 @@ async function pickColors() {
   pickColors();
 }
 
-async function pickShapes() {
+async function xpickShapes() {
   setAllOfType("font-transition", 600);
   pickOne("font-s", 200, 700);
   pickOne("font-t", 300, 900);
@@ -319,14 +2577,15 @@ function getNextPrefixValue(char, prefix) {
 }
 
 function setProp(char, prefix, value) {
+  // console.log(`${char} - ${prefix} - ${value}`);
+  // if (char === "a") {
+  //   console.log(`${prefix} - ${char} - ${value}`);
+  // }
   state.letters[char].props[prefix].previous_value = getNextPrefixValue(
     char,
     prefix,
   );
   state.letters[char].props[prefix].next_value = value;
-  // if (char === "a") {
-  //   console.log(`${prefix} - ${char} - ${value}`);
-  // }
 }
 
 function setAllOfPrefix(prefix, value) {
@@ -444,6 +2703,14 @@ const state = {
     "a": {
       "char": "a",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -453,6 +2720,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -525,6 +2796,14 @@ const state = {
     "b": {
       "char": "b",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -534,6 +2813,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -606,6 +2889,14 @@ const state = {
     "c": {
       "char": "c",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -615,6 +2906,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -687,6 +2982,14 @@ const state = {
     "d": {
       "char": "d",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -696,6 +2999,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -768,6 +3075,14 @@ const state = {
     "e": {
       "char": "e",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -777,6 +3092,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -849,6 +3168,14 @@ const state = {
     "f": {
       "char": "f",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -858,6 +3185,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -930,6 +3261,14 @@ const state = {
     "g": {
       "char": "g",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -939,6 +3278,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1011,6 +3354,14 @@ const state = {
     "h": {
       "char": "h",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1020,6 +3371,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1092,6 +3447,14 @@ const state = {
     "i": {
       "char": "i",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1101,6 +3464,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1173,6 +3540,14 @@ const state = {
     "j": {
       "char": "j",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1182,6 +3557,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1254,6 +3633,14 @@ const state = {
     "k": {
       "char": "k",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1263,6 +3650,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1335,6 +3726,14 @@ const state = {
     "l": {
       "char": "l",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1344,6 +3743,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1416,6 +3819,14 @@ const state = {
     "m": {
       "char": "m",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1425,6 +3836,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1497,6 +3912,14 @@ const state = {
     "n": {
       "char": "n",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1506,6 +3929,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1578,6 +4005,14 @@ const state = {
     "o": {
       "char": "o",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1587,6 +4022,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1659,6 +4098,14 @@ const state = {
     "p": {
       "char": "p",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1668,6 +4115,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1740,6 +4191,14 @@ const state = {
     "q": {
       "char": "q",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1749,6 +4208,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1821,6 +4284,14 @@ const state = {
     "r": {
       "char": "r",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1830,6 +4301,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1902,6 +4377,14 @@ const state = {
     "s": {
       "char": "s",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1911,6 +4394,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1983,6 +4470,14 @@ const state = {
     "t": {
       "char": "t",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1992,6 +4487,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2064,6 +4563,14 @@ const state = {
     "u": {
       "char": "u",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2073,6 +4580,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2145,6 +4656,14 @@ const state = {
     "v": {
       "char": "v",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2154,6 +4673,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2226,6 +4749,14 @@ const state = {
     "w": {
       "char": "w",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2235,6 +4766,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2307,6 +4842,14 @@ const state = {
     "x": {
       "char": "x",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2316,6 +4859,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2388,6 +4935,14 @@ const state = {
     "y": {
       "char": "y",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2397,6 +4952,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2469,6 +5028,14 @@ const state = {
     "z": {
       "char": "z",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2478,6 +5045,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2549,9 +5120,41 @@ const state = {
     }
   },
   "seeds": {
+    "BLDA": {
+      "max": "500",
+      "min": "0",
+      "moves": {
+        "default": "150",
+        "large": "200",
+        "small": "100",
+        "xlarge": "300",
+        "xsmall": "50"
+      },
+      "next_value": 0,
+      "prefix": "BLDA",
+      "previous_value": 0,
+      "type": "font",
+      "unit": ""
+    },
+    "BLDB": {
+      "max": "1000",
+      "min": "0",
+      "moves": {
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
+      },
+      "next_value": 0,
+      "prefix": "BLDB",
+      "previous_value": 0,
+      "type": "font",
+      "unit": ""
+    },
     "SKLA": {
       "max": "700",
-      "min": "0",
+      "min": "400",
       "moves": {
         "default": "120",
         "large": "200",
@@ -2582,7 +5185,7 @@ const state = {
       "unit": ""
     },
     "SKLD": {
-      "max": "700",
+      "max": "750",
       "min": "0",
       "moves": {
         "default": "120",
@@ -2595,6 +5198,22 @@ const state = {
       "prefix": "SKLD",
       "previous_value": 0,
       "type": "font-s",
+      "unit": ""
+    },
+    "TRMA": {
+      "max": "1000",
+      "min": "0",
+      "moves": {
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
+      },
+      "next_value": 0,
+      "prefix": "TRMA",
+      "previous_value": 0,
+      "type": "font-t",
       "unit": ""
     },
     "TRMB": {
@@ -2662,7 +5281,7 @@ const state = {
       "unit": ""
     },
     "TRMF": {
-      "max": "1000",
+      "max": "500",
       "min": "0",
       "moves": {
         "default": "300",

@@ -1,3 +1,6 @@
+
+[! include "components/_settings.js" !]
+
 [! include "components/_page.js" !]
 
 [! include "components/_config.js" !]

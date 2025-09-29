@@ -1,4 +1,4 @@
-const settings = `[
+const settingsString = `[
 {
   "SKLA": {
     "min": "640",
@@ -2208,3 +2208,5 @@ const settings = `[
     "max": 0
   }
 }]`;
+
+const settings = JSON.parse(settingsString);

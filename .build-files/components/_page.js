@@ -43,17 +43,62 @@ export default class {
     generateSeed("color-c", 20, 50);
     generateSeed("color-h", 0, 360);
     prepAllFromSeed("color", "small");
-    setAllOfPrefix("SKLD", 200);
-    setAllOfPrefix("TRMF", 200);
-    setAllOfPrefix("TRMK", 200);
-    setAllOfPrefix("TRML", 200);
+
+    arrayOfLetters().forEach((letter) => {
+      updateLetterWithRandomSetting(letter.char);
+    });
+    // setAllOfPrefix("SKLD", 200);
+    // setAllOfPrefix("TRMF", 200);
+    // setAllOfPrefix("TRMK", 200);
+    // setAllOfPrefix("TRML", 200);
     applyUpdates();
-    await sleep(4600);
+    await sleep(6600);
     doRun();
   }
 }
 
 async function doRun() {
+  pickColors();
+  pickShapes();
+  pickBackground();
+
+  // console.log(settings.length);
+  // arrayOfLetters().forEach((letter) => {
+  //   updateLetterWithRandomSetting(letter.char);
+  // });
+  // await sleep(100);
+  // applyUpdates();
+}
+
+async function pickShapes() {
+  arrayOfLetters().forEach((letter) => {
+    if (randomInt(0, 3) === 3) {
+      updateLetterWithRandomSetting(letter.char);
+    }
+  });
+  applyUpdates();
+  await sleep(2000);
+  pickShapes();
+}
+
+function updateLetterWithRandomSetting(char) {
+  const setting = randomInt(0, settings.length - 1);
+  arrayOfLetters().forEach((letter) => {
+    if (letter.char === char) {
+      // console.log(char);
+      // console.log(setting);
+      // console.log(settings[setting]);
+      Object.entries(settings[setting]).forEach(([x, y]) => {
+        const min = parseInt(y.min, 10);
+        const max = parseInt(y.max, 10);
+        const value = randomInt(min, max);
+        setProp(char, x, value);
+      });
+    }
+  });
+}
+
+async function xdoRun() {
   await sleep(100);
   setAllOfType("color-transition", 9000);
   setAllOfType("font-transition", 3600);
@@ -81,11 +126,11 @@ async function resizeRandomLetter() {
 async function pickBackground() {
   document.documentElement.style.setProperty(
     `--background-l`,
-    `${randomInt(0, 19)}%`,
+    `${randomInt(0, 24)}%`,
   );
   document.documentElement.style.setProperty(
     `--background-c`,
-    randomInt(0, 13),
+    randomInt(0, 18),
   );
   document.documentElement.style.setProperty(
     `--background-h`,
@@ -106,7 +151,7 @@ async function pickColors() {
   pickColors();
 }
 
-async function pickShapes() {
+async function xpickShapes() {
   setAllOfType("font-transition", 600);
   pickOne("font-s", 200, 700);
   pickOne("font-t", 300, 900);
@@ -319,14 +364,15 @@ function getNextPrefixValue(char, prefix) {
 }
 
 function setProp(char, prefix, value) {
+  // console.log(`${char} - ${prefix} - ${value}`);
+  // if (char === "a") {
+  //   console.log(`${prefix} - ${char} - ${value}`);
+  // }
   state.letters[char].props[prefix].previous_value = getNextPrefixValue(
     char,
     prefix,
   );
   state.letters[char].props[prefix].next_value = value;
-  // if (char === "a") {
-  //   console.log(`${prefix} - ${char} - ${value}`);
-  // }
 }
 
 function setAllOfPrefix(prefix, value) {

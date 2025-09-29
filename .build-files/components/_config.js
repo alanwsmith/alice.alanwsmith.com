@@ -4,6 +4,14 @@ const state = {
     "a": {
       "char": "a",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -13,6 +21,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -85,6 +97,14 @@ const state = {
     "b": {
       "char": "b",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -94,6 +114,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -166,6 +190,14 @@ const state = {
     "c": {
       "char": "c",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -175,6 +207,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -247,6 +283,14 @@ const state = {
     "d": {
       "char": "d",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -256,6 +300,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -328,6 +376,14 @@ const state = {
     "e": {
       "char": "e",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -337,6 +393,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -409,6 +469,14 @@ const state = {
     "f": {
       "char": "f",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -418,6 +486,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -490,6 +562,14 @@ const state = {
     "g": {
       "char": "g",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -499,6 +579,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -571,6 +655,14 @@ const state = {
     "h": {
       "char": "h",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -580,6 +672,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -652,6 +748,14 @@ const state = {
     "i": {
       "char": "i",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -661,6 +765,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -733,6 +841,14 @@ const state = {
     "j": {
       "char": "j",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -742,6 +858,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -814,6 +934,14 @@ const state = {
     "k": {
       "char": "k",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -823,6 +951,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -895,6 +1027,14 @@ const state = {
     "l": {
       "char": "l",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -904,6 +1044,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -976,6 +1120,14 @@ const state = {
     "m": {
       "char": "m",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -985,6 +1137,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1057,6 +1213,14 @@ const state = {
     "n": {
       "char": "n",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1066,6 +1230,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1138,6 +1306,14 @@ const state = {
     "o": {
       "char": "o",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1147,6 +1323,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1219,6 +1399,14 @@ const state = {
     "p": {
       "char": "p",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1228,6 +1416,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1300,6 +1492,14 @@ const state = {
     "q": {
       "char": "q",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1309,6 +1509,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1381,6 +1585,14 @@ const state = {
     "r": {
       "char": "r",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1390,6 +1602,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1462,6 +1678,14 @@ const state = {
     "s": {
       "char": "s",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1471,6 +1695,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1543,6 +1771,14 @@ const state = {
     "t": {
       "char": "t",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1552,6 +1788,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1624,6 +1864,14 @@ const state = {
     "u": {
       "char": "u",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1633,6 +1881,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1705,6 +1957,14 @@ const state = {
     "v": {
       "char": "v",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1714,6 +1974,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1786,6 +2050,14 @@ const state = {
     "w": {
       "char": "w",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1795,6 +2067,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1867,6 +2143,14 @@ const state = {
     "x": {
       "char": "x",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1876,6 +2160,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -1948,6 +2236,14 @@ const state = {
     "y": {
       "char": "y",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -1957,6 +2253,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2029,6 +2329,14 @@ const state = {
     "z": {
       "char": "z",
       "props": {
+        "BLDA": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "BLDB": {
+          "next_value": null,
+          "previous_value": null
+        },
         "SKLA": {
           "next_value": null,
           "previous_value": null
@@ -2038,6 +2346,10 @@ const state = {
           "previous_value": null
         },
         "SKLD": {
+          "next_value": null,
+          "previous_value": null
+        },
+        "TRMA": {
           "next_value": null,
           "previous_value": null
         },
@@ -2109,9 +2421,41 @@ const state = {
     }
   },
   "seeds": {
+    "BLDA": {
+      "max": "500",
+      "min": "0",
+      "moves": {
+        "default": "150",
+        "large": "200",
+        "small": "100",
+        "xlarge": "300",
+        "xsmall": "50"
+      },
+      "next_value": 0,
+      "prefix": "BLDA",
+      "previous_value": 0,
+      "type": "font",
+      "unit": ""
+    },
+    "BLDB": {
+      "max": "1000",
+      "min": "0",
+      "moves": {
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
+      },
+      "next_value": 0,
+      "prefix": "BLDB",
+      "previous_value": 0,
+      "type": "font",
+      "unit": ""
+    },
     "SKLA": {
       "max": "700",
-      "min": "0",
+      "min": "400",
       "moves": {
         "default": "120",
         "large": "200",
@@ -2142,7 +2486,7 @@ const state = {
       "unit": ""
     },
     "SKLD": {
-      "max": "700",
+      "max": "750",
       "min": "0",
       "moves": {
         "default": "120",
@@ -2155,6 +2499,22 @@ const state = {
       "prefix": "SKLD",
       "previous_value": 0,
       "type": "font-s",
+      "unit": ""
+    },
+    "TRMA": {
+      "max": "1000",
+      "min": "0",
+      "moves": {
+        "default": "300",
+        "large": "450",
+        "small": "150",
+        "xlarge": "700",
+        "xsmall": "90"
+      },
+      "next_value": 0,
+      "prefix": "TRMA",
+      "previous_value": 0,
+      "type": "font-t",
       "unit": ""
     },
     "TRMB": {
@@ -2222,7 +2582,7 @@ const state = {
       "unit": ""
     },
     "TRMF": {
-      "max": "1000",
+      "max": "500",
       "min": "0",
       "moves": {
         "default": "300",
