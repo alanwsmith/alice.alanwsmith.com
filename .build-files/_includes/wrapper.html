@@ -14,7 +14,7 @@
   --background-l: 0%;
   --background-c: 0;
   --background-h: 0;
-  --background-transition: 20000ms;
+  --background-transition: 19000ms;
   --background-easing: linear;
   --border-color: #aaa;
   --color: rgb(180 180 180);
@@ -38,70 +38,43 @@ body {
     background-color var(--background-transition) var(--background-easing);
 }
 
+
+a {
+  color: lch(76% 30 250);
+  text-decoration: none;
+}
+
 bitty-v1-rc4 {
   display: inilne-block;
 }
 
-/*
-.default-flow > :where(:not(:first-child)) {
-  margin-top: var(--flow-space, 0.7em);
-}
-*/
-
 .default-wrapper {
-  width: min(100vw - 3rem, 52rem);
+  width: min(100vw - 1.8rem, 42rem);
   margin-inline: auto;
 }
 
 .letter {
-  display: block;
-  /*
-  position-self: center;
-*/
-
-  /*
-vertical-align: middle;
-font-size-adjust: none;
-dominant-baseline: middle;
-*/
-  /*
-overflow-position: unsafe;
-  display: grid;
-  align-self: center;
-  padding: 0.2em;
-  margin: 0.2em;
-  outline-offset: 0.2em;
-  transform: translate(-0.1em, -0.1em);
-*/
-
-}
-
-/*
-.letter-a {
-transform: translate(30%, 50%);
-}
-*/
-
-.letter-alt {
-  display: block;
-  font-family: system-ui;
-}
-
-/*
-.letter-alt {
-  display: block;
+  display: inline-block;
   align-content: end;
-  padding: 0;
-  margin: 0;
-  height: 1.7em;
+  margin-left: 0.2rem;
 }
-*/
 
-/*
-.output {
-  width: 100%;
+.letter-alt {
+  display: inline-block;
+  font-family: system-ui;
+  opacity: 0.9;
+  align-content: end;
 }
-*/
+
+.nav {
+  margin-left: 1.2rem;
+  color: lch(70% 10 200);
+  padding-top: 1.2rem;
+  padding-bottom: 2.82rem;
+  display: flex;
+  flex-wrap: warp;
+  gap: 1rem;
+}
 
 .pAlt {
   margin-bottom: 3.5rem;
@@ -109,24 +82,9 @@ transform: translate(30%, 50%);
 
 .word {
   display: inline-flex;
-  margin-left: 0.5em;
-/*
- dominant-baseline: middle;
-  vertical-align: middle;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  padding: 0;
-  margin-block: 0.2em;;
-  */
+  align-content: end;
+  margin-left: 1rem;
 }
-
-
-/*
-.space {
-  display: inline-flex;
-}
-*/
 
     </style>
   </head>
