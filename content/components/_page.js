@@ -1,3 +1,7 @@
+const state = {
+  tickTimeMs: 4000,
+};
+
 export default class {
   async bittyInit() {
     initVars();
@@ -14,15 +18,28 @@ export default class {
     el.innerHTML = this.spans;
   }
 
-  async startUpdates(_event, el) {
+  startTicks(_event, _el) {
+    setAllLettersToFont(1, "min", 300);
   }
+
+  async tickUpdates(_event, el) {
+  }
+}
+
+async function setAllLettersToFont(fontIndex, minMax, shiftTimeMs) {
+  for (let char of listOfLetters()) {
+    setLetterToFont(char, fontIndex, minMax, shiftTimeMs);
+  }
+}
+
+async function setLetterToFont(char, fontIndex, minMax, shiftTime) {
 }
 
 function addBaseStyleSheet() {
   const css = new CSSStyleSheet();
   let styles = [];
   for (let char of listOfLetters()) {
-    const variations = listOfVariations().map((variation) => {
+    const variations = listOfVars().map((variation) => {
       const varString = `"${variation}" var(--${variation}-${char})`;
       return varString;
     });
@@ -62,23 +79,40 @@ async function initVars() {
   setProp(`--background-easing`, `linear`);
 
   for (let char of listOfLetters()) {
-    setProp(`--font-size-${char}`, `2.8rem`);
+    setProp(`--font-size-${char}`, `${randomFloat(1.7, 2.9)}rem`);
     setProp(`--color-l-${char}`, `90%`);
     setProp(`--color-c-${char}`, 70);
     setProp(`--color-h-${char}`, 100);
-    for (let v of listOfVariations()) {
+    setProp(`--color-transition-${char}`, 1200);
+    setProp(`--font-transition-${char}`, 3200);
+    for (let v of listOfVars()) {
       setProp(`--${v}-${char}`, 500);
     }
   }
 }
 
 function listOfLetters() {
-  return [...Array(26)].map((_, i) =>
+  const letters = [...Array(26)].map((_, i) =>
     String.fromCharCode("a".charCodeAt(0) + i)
   );
+  shuffleArray(letters);
+  return letters;
 }
 
-function listOfVariations() {
+function shuffleArray(array) {
+  let currentIndex = array.length;
+  let randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+}
+
+function listOfVars() {
   return Object.keys(settings[0]);
 }
 

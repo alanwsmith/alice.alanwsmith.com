@@ -3,8 +3,6 @@
 
 [! include "components/_page.js" !]
 
-[! include "components/_config.js" !]
-
 [! include "components/_span-maker.js" !]
 
 
