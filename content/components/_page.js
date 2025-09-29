@@ -1,7 +1,3 @@
-const state = {
-  tickTimeMs: 4000,
-};
-
 export default class {
   async bittyInit() {
     initVars();
@@ -19,24 +15,19 @@ export default class {
   }
 
   async startUpdaters(_event, _el) {
-    switchFonts();
-    // setFontTo(randomInt(3, 20));
-    // await sleep(5500);
-    // this.tickUpdates();
+    updateFonts();
+    updateColors();
   }
-
-  // async tickUpdates() {
-  //   setFontTo(randomInt(3, 20));
-  //   await sleep(5500);
-  //   this.tickUpdates();
-  // }
 }
 
-async function switchFonts() {
+async function updateColors() {
+}
+
+async function updateFonts() {
   setProp(`--font-transition`, `4000ms`);
   setFontTo(randomInt(1, listOfVars().length - 1));
   await sleep(5300);
-  switchFonts();
+  updateFonts();
 }
 
 async function setFontTo(fontIndex) {
@@ -47,43 +38,19 @@ async function setFontTo(fontIndex) {
   }
 }
 
-// async function setAllLettersToFont(fontIndex, minMax, loopTime, shiftTimeMs) {
-//   for (let char of listOfLetters()) {
-//     setLetterToFont(char, fontIndex, minMax, shiftTimeMs);
-//     await sleep(loopTime);
-//   }
-// }
-
-//async function setLetterToFont(char, fontIndex, minMax, shiftTime) {
-//  for (let v of listOfVars()) {
-//    const timeKey = `--font-transition-${char}`;
-//    const timeValue = `${shiftTime}ms`;
-//    setProp(timeKey, timeValue);
-//    const key = `--${v}-${char}`;
-//    const value = settings[fontIndex][v][minMax];
-//    setProp(key, value);
-//    //console.log(`setLetterToFont: ${key} - ${value}`);
-//  }
-//}
-
 function addBaseStyleSheet() {
   const css = new CSSStyleSheet();
   let styles = [];
-
   const variations = listOfVars().map((variation) => {
     const varString = `"${variation}" var(--${variation})`;
     return varString;
   });
-
   styles.push(`.letter, .letter-alt {`);
   styles.push(
     `color: lch(var(--color-l) var(--color-c) var(--color-h) );`,
   );
   styles.push(`transition:`);
-  // styles.push(`color var(--color-transition) var(--color-easing),`);
-  // styles.push(
-  //   `font-variation-settings var(--font-transition);`,
-  // );
+  styles.push(`color var(--color-transition) var(--color-easing),`);
   styles.push(
     `font-variation-settings var(--font-transition);`,
   );
@@ -91,13 +58,14 @@ function addBaseStyleSheet() {
   styles.push(variations.join(","));
   styles.push(";");
   styles.push("} ");
-
   for (let char of listOfLetters()) {
     styles.push(`.letter-${char} {`);
     styles.push(`font-size: var(--font-size-${char});`);
+    styles.push(
+      `color: lch(var(--color-l-${char}) var(--color-c-${char}) var(--color-h-${char}) );`,
+    );
     styles.push("}");
   }
-
   // for (let char of listOfLetters()) {
   //   const variations = listOfVars().map((variation) => {
   //     const varString = `"${variation}" var(--${variation}-${char})`;
@@ -118,7 +86,6 @@ function addBaseStyleSheet() {
   //   styles.push(";");
   //   styles.push("}");
   // }
-
   const output = styles.join("\n");
   // console.log(`STYLESHEET: ${output}`);
   css.replaceSync(output);
@@ -144,10 +111,6 @@ async function initVars() {
   );
   setProp(`--color-easing`, `linear`);
   setProp(`--background-easing`, `linear`);
-  // setProp(`--font-size`, `${randomFloat(1.7, 2.9)}rem`);
-  setProp(`--color-l`, `90%`);
-  setProp(`--color-c`, 70);
-  setProp(`--color-h`, 100);
   setProp(`--color-transition`, 1200);
   setProp(`--font-transition`, `5000ms`);
   for (let v of listOfVars()) {
@@ -156,6 +119,9 @@ async function initVars() {
 
   for (let char of listOfLetters()) {
     setProp(`--font-size-${char}`, `${randomFloat(1.7, 2.9)}rem`);
+    setProp(`--color-l-${char}`, `90%`);
+    setProp(`--color-c-${char}`, 70);
+    setProp(`--color-h-${char}`, 100);
   }
 
   // for (let char of listOfLetters()) {
@@ -750,3 +716,15 @@ function randomFloat(min, max) {
 //   stylesSheet.replaceSync(styles.join("\n"));
 //   document.adoptedStyleSheets.push(stylesSheet);
 // }
+
+//async function setLetterToFont(char, fontIndex, minMax, shiftTime) {
+//  for (let v of listOfVars()) {
+//    const timeKey = `--font-transition-${char}`;
+//    const timeValue = `${shiftTime}ms`;
+//    setProp(timeKey, timeValue);
+//    const key = `--${v}-${char}`;
+//    const value = settings[fontIndex][v][minMax];
+//    setProp(key, value);
+//    //console.log(`setLetterToFont: ${key} - ${value}`);
+//  }
+//}
