@@ -2228,12 +2228,32 @@ export default class {
   }
 
   async startUpdaters(_event, _el) {
-    updateFonts();
+    // updateFonts();
     updateColors();
   }
 }
 
 async function updateColors() {
+  console.log("updateColors()");
+  setProp(`--color-transition`, `2000ms`);
+  for (let char of listOfLetters()) {
+    // gotta sleep otherwise chrome batches
+    // the updates in oneshot
+    await sleep(20);
+    const lKey = `--color-l-${char}`;
+    const lValue = `${randomInt(30, 90)}%`;
+    setProp(lKey, lValue);
+    await sleep(20);
+    const cKey = `--color-c-${char}`;
+    const cValue = randomInt(30, 90);
+    setProp(cKey, cValue);
+    await sleep(20);
+    const hKey = `--color-h-${char}`;
+    const hValue = randomInt(0, 360);
+    setProp(hKey, hValue);
+  }
+  await sleep(5000);
+  updateColors();
 }
 
 async function updateFonts() {
@@ -2259,14 +2279,17 @@ function addBaseStyleSheet() {
     return varString;
   });
   styles.push(`.letter, .letter-alt {`);
-  styles.push(
-    `color: lch(var(--color-l) var(--color-c) var(--color-h) );`,
-  );
+
+  // styles.push(
+  //   `color: lch(var(--color-l) var(--color-c) var(--color-h) );`,
+  // );
   styles.push(`transition:`);
-  styles.push(`color var(--color-transition) var(--color-easing),`);
+  styles.push(`color var(--color-transition)`);
+  styles.push(`,`);
   styles.push(
-    `font-variation-settings var(--font-transition);`,
+    `font-variation-settings var(--font-transition)`,
   );
+  styles.push(`;`);
   styles.push(`font-variation-settings: `);
   styles.push(variations.join(","));
   styles.push(";");
@@ -2277,6 +2300,19 @@ function addBaseStyleSheet() {
     styles.push(
       `color: lch(var(--color-l-${char}) var(--color-c-${char}) var(--color-h-${char}) );`,
     );
+
+    // styles.push(`transition:`);
+    // styles.push(`color var(--color-transition)`);
+    // styles.push(`;`);
+
+    // styles.push(`transition:`);
+    // styles.push(`color var(--color-transition)`);
+    // styles.push(`,`);
+    // styles.push(
+    //   `font-variation-settings var(--font-transition)`,
+    // );
+    // styles.push(`;`);
+
     styles.push("}");
   }
   // for (let char of listOfLetters()) {
@@ -2309,7 +2345,7 @@ function setProp(key, value) {
   var bodyStyles = window.getComputedStyle(document.body);
   var currentValue = bodyStyles.getPropertyValue(key);
   if (currentValue !== value) {
-    //console.log(value);
+    //console.log(`setProp(${key}, ${value}`);
     document.documentElement.style.setProperty(
       key,
       value,
@@ -2324,7 +2360,7 @@ async function initVars() {
   );
   setProp(`--color-easing`, `linear`);
   setProp(`--background-easing`, `linear`);
-  setProp(`--color-transition`, 1200);
+  setProp(`--color-transition`, `6000ms`);
   setProp(`--font-transition`, `5000ms`);
   for (let v of listOfVars()) {
     setProp(`--${v}`, 500);
