@@ -96,7 +96,7 @@ function setProp(key, value) {
   var bodyStyles = window.getComputedStyle(document.body);
   var currentValue = bodyStyles.getPropertyValue(key);
   if (currentValue !== value) {
-    console.log(value);
+    //console.log(value);
     document.documentElement.style.setProperty(
       key,
       value,
