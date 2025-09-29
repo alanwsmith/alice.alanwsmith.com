@@ -1,3 +1,7 @@
+const state = {
+  currentValues: {},
+};
+
 export default class {
   async bittyInit() {
     initVars();
@@ -52,7 +56,6 @@ async function setFontTo(fontIndex) {
   for (let v of listOfVars()) {
     const key = `--${v}`;
     const value = settings[fontIndex][v]["min"];
-    await sleep(200);
     setProp(key, value);
   }
 }
@@ -128,14 +131,16 @@ function addBaseStyleSheet() {
 }
 
 async function setProp(key, value) {
-  // var bodyStyles = window.getComputedStyle(document.body);
-  //  var currentValue = bodyStyles.getPropertyValue(key);
-  // if (currentValue !== value) {
-  //console.log(`setProp(${key}, ${value}`);
-  document.documentElement.style.setProperty(
-    key,
-    value,
-  );
+  if (state.currentValues[key] !== value) {
+    // var bodyStyles = window.getComputedStyle(document.body);
+    //  var currentValue = bodyStyles.getPropertyValue(key);
+    // if (currentValue !== value) {
+    //console.log(`setProp(${key}, ${value}`);
+    document.documentElement.style.setProperty(
+      key,
+      value,
+    );
+  }
   //}
 }
 
