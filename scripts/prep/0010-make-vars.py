@@ -31,6 +31,9 @@ seedStrings = [
 class DataMaker:
     def __init__(self):
         self.data = {
+            "misc": {
+                "background-transition": 18000
+                },
             "letters": {},
             "seeds": {}
         }

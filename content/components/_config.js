@@ -2420,6 +2420,9 @@ const state = {
       }
     }
   },
+  "misc": {
+    "background-transition": 18000
+  },
   "seeds": {
     "BLDA": {
       "max": "500",

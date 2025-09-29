@@ -2216,28 +2216,41 @@ let loopCount = 0;
 export default class {
   async bittyInit() {
     addBaseStyleSheet();
+    initWithZeros();
     // Must set to zero to start
     setAllOfType("color-transition", 0);
     setAllOfType("font-transition", 0);
     setAllOfType("size-transition", 0);
+    setBackgroundTransition(8000);
     setAllOfType("font-s", 0);
     setAllOfType("font-t", 0);
     setAllOfType("font-t2", 0);
     setAllFontsToSize(2.5);
+    setAllOfPrefix("SKLA", 900);
+    setAllOfPrefix("SKLB", 900);
     setAllOfPrefix("SKLD", 900);
-    setAllOfPrefix("TRMF", 800);
-    setAllOfPrefix("TRMK", 800);
-    setAllOfPrefix("TRML", 800);
-    setAllOfPrefix("color-l", 0);
+    setAllOfPrefix("TRMF", 900);
+    setAllOfPrefix("TRMK", 900);
+    setAllOfPrefix("TRMK", 900);
+    setAllOfPrefix("TRMG", 900);
+    setAllOfPrefix("TRML", 900);
+    // prepAllFromSeed("font-s", "xsmall");
+    // prepAllFromSeed("font-t", "xsmall");
+    // prepAllFromSeed("font-t2", "xsmall");
+    setAllOfPrefix("color-l", 100);
     setAllOfPrefix("color-c", 0);
     setAllOfPrefix("color-h", 0);
+    applyUpdates();
     resizeLetters(30);
+    //switchToFontWithDelay(0);
     applyUpdates();
     await sleep(100);
-    setAllOfType("color-transition", 3000);
-    setAllOfType("font-transition", 4200);
-    setAllOfType("size-transition", 2200);
+    setAllOfType("color-transition", 400);
+    setAllOfType("font-transition", 5200);
+    setAllOfType("size-transition", 200);
     await sleep(100);
+    applyUpdates();
+    console.log(state.letters.a);
   }
 
   loadInput(_event, el) {
@@ -2252,28 +2265,48 @@ export default class {
 
   async startUpdates(_event, el) {
     await sleep(200);
-    generateSeed("color-l", 60, 90);
-    generateSeed("color-c", 20, 50);
-    generateSeed("color-h", 0, 360);
-    prepAllFromSeed("color", "small");
+
+    // generateSeed("color-l", 60, 90);
+    // generateSeed("color-c", 20, 50);
+    // generateSeed("color-h", 0, 360);
+    // prepAllFromSeed("color", "default");
+    // await sleep(100);
+    // applyUpdates();
 
     arrayOfLetters().forEach((letter) => {
       updateLetterWithRandomSetting(letter.char);
     });
+
     // setAllOfPrefix("SKLD", 200);
     // setAllOfPrefix("TRMF", 200);
     // setAllOfPrefix("TRMK", 200);
     // setAllOfPrefix("TRML", 200);
+
     applyUpdates();
-    await sleep(6600);
-    doRun();
+    // await sleep(600);
+    // doRun();
   }
 }
 
+async function switchToSingleFont() {
+  arrayOfLetters().forEach((letter) => {
+    if (randomInt(0, 2) === 2) {
+      updateLetterWithRandomSetting(letter.char);
+    }
+  });
+  //await sleep(4800);
+  //pickShapes();
+}
+
+async function switchToFontWithDelay(ms) {
+}
+
 async function doRun() {
-  pickColors();
-  pickShapes();
+  // pickColors();
+  // pickShapes();
   pickBackground();
+
+  //pickSize();
 
   // console.log(settings.length);
   // arrayOfLetters().forEach((letter) => {
@@ -2283,15 +2316,33 @@ async function doRun() {
   // applyUpdates();
 }
 
+async function pickSize() {
+  arrayOfLetters().forEach((letter) => {
+    if (randomInt(0, 2) === 2) {
+      setProp(letter.char, "font-size", randomFloat(1.9, 2.7));
+    }
+  });
+  await sleep(4000);
+  pickSize();
+}
+
 async function pickShapes() {
   arrayOfLetters().forEach((letter) => {
-    if (randomInt(0, 3) === 3) {
+    if (randomInt(0, 2) === 2) {
       updateLetterWithRandomSetting(letter.char);
     }
   });
   applyUpdates();
-  await sleep(2000);
+  await sleep(4800);
   pickShapes();
+}
+
+function setBackgroundTransition(ms) {
+  state.misc["background-transition"] = ms;
+  document.documentElement.style.setProperty(
+    `--background-transition`,
+    `${state.misc["background-transition"]}ms`,
+  );
 }
 
 function updateLetterWithRandomSetting(char) {
@@ -2321,7 +2372,7 @@ async function xdoRun() {
   pickColors();
   pickShapes();
   pickBackground();
-  //  pickSizes();
+  // pickSizes();
 }
 
 async function resizeLetters(count) {
@@ -2339,26 +2390,26 @@ async function resizeRandomLetter() {
 async function pickBackground() {
   document.documentElement.style.setProperty(
     `--background-l`,
-    `${randomInt(0, 24)}%`,
+    `${randomInt(0, 12)}%`,
   );
   document.documentElement.style.setProperty(
     `--background-c`,
-    randomInt(0, 18),
+    randomInt(0, 80),
   );
   document.documentElement.style.setProperty(
     `--background-h`,
     randomInt(0, 360),
   );
-  await sleep(26000);
+  await sleep(state.misc["background-transition"] + 400);
   pickBackground();
 }
 
 async function pickColors() {
   applyUpdates();
-  generateSeed("color-l", 50, 90);
-  generateSeed("color-c", 10, 160);
+  generateSeed("color-l", 90, 100);
+  generateSeed("color-c", 40, 120);
   generateSeed("color-h", 0, 360);
-  prepAllFromSeed("color", "default");
+  prepAllFromSeed("color", "large");
   applyUpdates();
   await sleep(9800);
   pickColors();
@@ -2482,9 +2533,9 @@ function applyUpdates() {
           const value = `${letter.props[seed.prefix].next_value}${
             propUnit(seed.prefix)
           }`;
-          // if (letter.char === "a") {
-          //   console.log(`${key} - ${value}`);
-          // }
+          if (letter.char === "a") {
+            console.log(`${key} - ${value}`);
+          }
           document.documentElement.style.setProperty(
             key,
             value,
@@ -2577,9 +2628,9 @@ function getNextPrefixValue(char, prefix) {
 }
 
 function setProp(char, prefix, value) {
-  // console.log(`${char} - ${prefix} - ${value}`);
+  //console.log(`${char} - ${prefix} - ${value}`);
   // if (char === "a") {
-  //   console.log(`${prefix} - ${char} - ${value}`);
+  //   console.log(`${char} - ${prefix} - ${value}`);
   // }
   state.letters[char].props[prefix].previous_value = getNextPrefixValue(
     char,
@@ -2656,15 +2707,35 @@ function fontVariations(char) {
   return (output.join(",\n"));
 }
 
+function initWithZeros() {
+  arrayOfLetters().forEach((letter) => {
+    Object.entries(letter.props).forEach(([prefix, details]) => {
+      details.next_value = 0;
+
+      const key = `--${prefix}-${letter.char}`;
+      const value = `0${propUnit(prefix)}`;
+
+      document.documentElement.style.setProperty(
+        key,
+        value,
+      );
+    });
+  });
+}
+
 function addBaseStyleSheet() {
   const stylesSheet = new CSSStyleSheet();
   let styles = [];
 
-  styles.push(
-    ":root { --color-easing: linear; }",
-    ":root { --font-easing: linear; }",
-    ":root { --size-easing: linear; }",
-  );
+  // styles.push(
+  //   ":root { --color-easing: linear; }",
+  //   ":root { --font-easing: linear; }",
+  //   ":root { --size-easing: linear; }",
+  //   `:root {--background-transition: ${
+  //     state.misc["background-transition"]
+  //   }ms; }`,
+  //   ":root {--background-easing: linear; }",
+  // );
 
   // styles.push(
   //   ":root { --color-easing: ease; }",
@@ -2676,6 +2747,7 @@ function addBaseStyleSheet() {
     font-size: var(--font-size-q);
     color: lch(var(--color-l-q) var(--color-c-q) var(--color-h-q) ); 
     transition: 
+      font-size var(--color-transition-q) var(--color-easing),
       color var(--color-transition-q) var(--color-easing),
       font-variation-settings var(--font-transition-q) var(--font-easing);
     font-variation-settings: 
@@ -2687,6 +2759,7 @@ function addBaseStyleSheet() {
         font-size: var(--font-size-${letter});
         color: lch(var(--color-l-${letter}) var(--color-c-${letter}) var(--color-h-${letter}) );
         transition: 
+          font-size var(--color-transition-${letter}) var(--color-easing),
           color var(--color-transition-${letter}) var(--color-easing),
           font-variation-settings var(--font-transition-${letter}) var(--font-easing);
         font-variation-settings:
@@ -5118,6 +5191,9 @@ const state = {
         }
       }
     }
+  },
+  "misc": {
+    "background-transition": 18000
   },
   "seeds": {
     "BLDA": {
