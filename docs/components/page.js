@@ -2215,17 +2215,12 @@ let loopCount = 0;
 
 export default class {
   async bittyInit() {
-    addBaseStyleSheet();
     initWithZeros();
-    // Must set to zero to start
-    setAllOfType("color-transition", 0);
-    setAllOfType("font-transition", 0);
-    setAllOfType("size-transition", 0);
+    addBaseStyleSheet();
+    setAllOfType("color-transition", 10);
+    setAllOfType("font-transition", 10);
+    setAllOfType("size-transition", 10);
     setBackgroundTransition(8000);
-    setAllOfType("font-s", 0);
-    setAllOfType("font-t", 0);
-    setAllOfType("font-t2", 0);
-    setAllFontsToSize(2.5);
     setAllOfPrefix("SKLA", 900);
     setAllOfPrefix("SKLB", 900);
     setAllOfPrefix("SKLD", 900);
@@ -2234,23 +2229,18 @@ export default class {
     setAllOfPrefix("TRMK", 900);
     setAllOfPrefix("TRMG", 900);
     setAllOfPrefix("TRML", 900);
-    // prepAllFromSeed("font-s", "xsmall");
-    // prepAllFromSeed("font-t", "xsmall");
-    // prepAllFromSeed("font-t2", "xsmall");
-    setAllOfPrefix("color-l", 100);
-    setAllOfPrefix("color-c", 0);
-    setAllOfPrefix("color-h", 0);
-    applyUpdates();
+    setAllOfPrefix("color-l", 90);
+    setAllOfPrefix("color-c", 10);
+    setAllOfPrefix("color-h", 90);
     resizeLetters(30);
-    //switchToFontWithDelay(0);
     applyUpdates();
-    await sleep(100);
+
     setAllOfType("color-transition", 400);
     setAllOfType("font-transition", 5200);
     setAllOfType("size-transition", 200);
-    await sleep(100);
     applyUpdates();
-    console.log(state.letters.a);
+    // await sleep(100);
+    // applyUpdates();
   }
 
   loadInput(_event, el) {
@@ -2264,14 +2254,13 @@ export default class {
   }
 
   async startUpdates(_event, el) {
-    await sleep(200);
-
+    await sleep(300);
     // generateSeed("color-l", 60, 90);
     // generateSeed("color-c", 20, 50);
     // generateSeed("color-h", 0, 360);
     // prepAllFromSeed("color", "default");
+    applyUpdates();
     // await sleep(100);
-    // applyUpdates();
 
     arrayOfLetters().forEach((letter) => {
       updateLetterWithRandomSetting(letter.char);
@@ -2282,7 +2271,6 @@ export default class {
     // setAllOfPrefix("TRMK", 200);
     // setAllOfPrefix("TRML", 200);
 
-    applyUpdates();
     // await sleep(600);
     // doRun();
   }
@@ -2430,7 +2418,7 @@ async function xpickShapes() {
 async function prepSomeFromSeed(type, distance) {
   arrayOfLetters().forEach((letter) => {
     if (randomInt(30, 40) === 20) {
-      console.log(`Doing: ${letter.char}`);
+      // console.log(`prepSeomFromSeed: ${letter.char}`);
       arrayOfSeeds(type).forEach((seed) => {
         const value = randomShift(
           seed.next_value,
@@ -2521,7 +2509,17 @@ function propUnit(prefix) {
   }
 }
 
-function applyUpdates() {
+async function applyUpdates() {
+  // This sets transition times first
+  // then runs the rest to make sure
+  // everything applies with the proper
+  // timing. Could stand to dedup the loop
+  // but it's fine for now.
+  const transitionPrefixes = [
+    "color-transition",
+    "font-transition",
+    "shape-transition",
+  ];
   arrayOfLetters().forEach((letter) => {
     seedTypes().forEach((type) => {
       arrayOfSeeds(type).forEach((seed) => {
@@ -2529,25 +2527,58 @@ function applyUpdates() {
           letter.props[seed.prefix].previous_value !==
             getNextPrefixValue(letter.char, seed.prefix)
         ) {
-          const key = `--${seed.prefix}-${letter.char}`;
-          const value = `${letter.props[seed.prefix].next_value}${
-            propUnit(seed.prefix)
-          }`;
-          if (letter.char === "a") {
-            console.log(`${key} - ${value}`);
+          if (transitionPrefixes.includes(seed.prefix)) {
+            const key = `--${seed.prefix}-${letter.char}`;
+            const value = `${letter.props[seed.prefix].next_value}${
+              propUnit(seed.prefix)
+            }`;
+            // if (letter.char === "a") {
+            //   console.log(`${key} - ${value}`);
+            // }
+            document.documentElement.style.setProperty(
+              key,
+              value,
+            );
+            letter.props[seed.prefix].previous_value = getNextPrefixValue(
+              letter.char,
+              seed.prefix,
+            );
           }
-          document.documentElement.style.setProperty(
-            key,
-            value,
-          );
-          letter.props[seed.prefix].previous_value = getNextPrefixValue(
-            letter.char,
-            seed.prefix,
-          );
         }
       });
     });
   });
+
+  arrayOfLetters().forEach((letter) => {
+    seedTypes().forEach((type) => {
+      arrayOfSeeds(type).forEach((seed) => {
+        if (
+          letter.props[seed.prefix].previous_value !==
+            getNextPrefixValue(letter.char, seed.prefix)
+        ) {
+          if (!transitionPrefixes.includes(seed.prefix)) {
+            const key = `--${seed.prefix}-${letter.char}`;
+            const value = `${letter.props[seed.prefix].next_value}${
+              propUnit(seed.prefix)
+            }`;
+            if (letter.char === "a") {
+              console.log(`applyUpdates() - ${key} - ${value}`);
+            }
+            document.documentElement.style.setProperty(
+              key,
+              value,
+            );
+            letter.props[seed.prefix].previous_value = getNextPrefixValue(
+              letter.char,
+              seed.prefix,
+            );
+          }
+        }
+      });
+    });
+  });
+
+  //
 }
 
 function seedTypes() {
@@ -2627,18 +2658,6 @@ function getNextPrefixValue(char, prefix) {
   return state.letters[char].props[prefix].next_value;
 }
 
-function setProp(char, prefix, value) {
-  //console.log(`${char} - ${prefix} - ${value}`);
-  // if (char === "a") {
-  //   console.log(`${char} - ${prefix} - ${value}`);
-  // }
-  state.letters[char].props[prefix].previous_value = getNextPrefixValue(
-    char,
-    prefix,
-  );
-  state.letters[char].props[prefix].next_value = value;
-}
-
 function setAllOfPrefix(prefix, value) {
   arrayOfLetters().forEach((letter) => {
     setProp(letter.char, prefix, value);
@@ -2711,7 +2730,6 @@ function initWithZeros() {
   arrayOfLetters().forEach((letter) => {
     Object.entries(letter.props).forEach(([prefix, details]) => {
       details.next_value = 0;
-
       const key = `--${prefix}-${letter.char}`;
       const value = `0${propUnit(prefix)}`;
 
@@ -2769,6 +2787,17 @@ function addBaseStyleSheet() {
 
   stylesSheet.replaceSync(styles.join("\n"));
   document.adoptedStyleSheets.push(stylesSheet);
+}
+
+function setProp(char, prefix, value) {
+  // if (char === "a") {
+  //   console.log(`${char} - ${prefix} - ${value}`);
+  // }
+  state.letters[char].props[prefix].previous_value = getNextPrefixValue(
+    char,
+    prefix,
+  );
+  state.letters[char].props[prefix].next_value = value;
 }
 // The state const is auto generated.
 const state = {
