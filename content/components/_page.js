@@ -18,6 +18,7 @@ export default class {
     setAllOfPrefix("color-l", 0);
     setAllOfPrefix("color-c", 0);
     setAllOfPrefix("color-h", 0);
+    resizeLetters(30);
     applyUpdates();
     await sleep(100);
     setAllOfType("color-transition", 3000);
@@ -38,8 +39,8 @@ export default class {
 
   async startUpdates(_event, el) {
     await sleep(200);
-    generateSeed("color-l", 74, 86);
-    generateSeed("color-c", 14, 24);
+    generateSeed("color-l", 60, 90);
+    generateSeed("color-c", 20, 50);
     generateSeed("color-h", 0, 360);
     prepAllFromSeed("color", "small");
     setAllOfPrefix("SKLD", 200);
@@ -62,22 +63,35 @@ async function doRun() {
   pickColors();
   pickShapes();
   pickBackground();
+  //  pickSizes();
+}
+
+async function resizeLetters(count) {
+  for (let i = 0; i < count; i++) {
+    resizeRandomLetter();
+  }
+}
+
+async function resizeRandomLetter() {
+  const index = randomInt(0, 25);
+  const char = arrayOfLetters()[index].char;
+  setProp(char, "font-size", randomFloat(1.5, 3));
 }
 
 async function pickBackground() {
   document.documentElement.style.setProperty(
     `--background-l`,
-    `${randomInt(0, 30)}%`,
+    `${randomInt(0, 19)}%`,
   );
   document.documentElement.style.setProperty(
     `--background-c`,
-    randomInt(0, 40),
+    randomInt(0, 13),
   );
   document.documentElement.style.setProperty(
     `--background-h`,
     randomInt(0, 360),
   );
-  await sleep(24000);
+  await sleep(26000);
   pickBackground();
 }
 
@@ -88,65 +102,80 @@ async function pickColors() {
   generateSeed("color-h", 0, 360);
   prepAllFromSeed("color", "default");
   applyUpdates();
-  await sleep(9200);
+  await sleep(9800);
   pickColors();
 }
 
 async function pickShapes() {
-  pickOne("font-t");
-  pickOne("font-t2");
-  pickOne("font-s");
-  // generateSeeds("font-s", 100, 900);
-  // generateSeeds("font-t", 100, 900);
-  // generateSeeds("font-t", 100, 900);
-  prepAllFromSeed("font", "default");
+  setAllOfType("font-transition", 600);
+  pickOne("font-s", 200, 700);
+  pickOne("font-t", 300, 900);
+  pickOne("font-t2", 400, 800);
+  pickOne("font-t2", 400, 800);
+  pickOne("font-t2", 400, 800);
   applyUpdates();
-  await sleep(4000);
+  await sleep(1000);
   pickShapes();
 }
 
-async function shiftLoop() {
-  loopCount += 1;
-  pickOne("font-t");
-  if (loopCount % 5 === 0) {
-    generateSeeds("font", 500, 700);
-    // generateRandomSeeds("font-t");
-    shiftSeed("color-h", "small");
-    prepAllFromSeed("color", "xsmall");
-    //generateSeed("color-c", 70, 180);
-  } else {
-    generateSeeds("font", 100, 200);
-    generateSeed("color-h", 0, 360);
-    prepAllFromSeed("color", "default");
-  }
-  shiftSeed("color-c", "xlarge");
-  prepAllFromSeed("font", "default");
-  applyUpdates();
-  await sleep(5200);
-  shiftLoop();
+async function prepSomeFromSeed(type, distance) {
+  arrayOfLetters().forEach((letter) => {
+    if (randomInt(30, 40) === 20) {
+      console.log(`Doing: ${letter.char}`);
+      arrayOfSeeds(type).forEach((seed) => {
+        const value = randomShift(
+          seed.next_value,
+          seed.min,
+          seed.max,
+          seed.moves[distance],
+          randomDirection(),
+        );
+        setProp(letter.char, seed.prefix, value);
+      });
+    }
+  });
 }
+
+//async function shiftLoop() {
+//  loopCount += 1;
+//  pickOne("font-t");
+//  if (loopCount % 5 === 0) {
+//    generateSeeds("font", 500, 700);
+//    // generateRandomSeeds("font-t");
+//    shiftSeed("color-h", "small");
+//    prepAllFromSeed("color", "xsmall");
+//    //generateSeed("color-c", 70, 180);
+//  } else {
+//    generateSeeds("font", 100, 200);
+//    generateSeed("color-h", 0, 360);
+//    prepAllFromSeed("color", "default");
+//  }
+//  shiftSeed("color-c", "xlarge");
+//  prepAllFromSeed("font", "default");
+//  applyUpdates();
+//  await sleep(5200);
+//  shiftLoop();
+//}
 
 function setAllFontsToSize(size) {
   arrayOfLetters().forEach((letter) => {
     // console.log(letter.char);
-    setProp("font-size", letter.char, size);
+    setProp(letter.char, "font-size", size);
   });
 }
 
-function pickOne(type) {
+function pickOne(type, min, max) {
   const pick = randomInt(0, arrayOfSeeds(type).length - 1);
   arrayOfLetters().forEach((letter) => {
-    arrayOfSeeds(type).forEach((seed, index) => {
-      // console.log(letter.char);
-      // console.log(seed.prefix);
-      if (index === pick) {
-        setProp(seed.prefix, letter.char, randomInt(400, 1000));
-      } else {
-        setProp(seed.prefix, letter.char, 0);
-      }
-      // console.log(pick);
-      // console.log(seed);
-    });
+    if (randomInt(0, 1) === 1) {
+      arrayOfSeeds(type).forEach((seed, index) => {
+        // console.log(letter.char);
+        // console.log(seed.prefix);
+        if (index === pick) {
+          setProp(letter.char, seed.prefix, randomInt(min, max));
+        }
+      });
+    }
   });
 }
 
@@ -254,7 +283,7 @@ function prepAllFromSeed(type, distance) {
         seed.moves[distance],
         randomDirection(),
       );
-      setProp(seed.prefix, letter.char, value);
+      setProp(letter.char, seed.prefix, value);
     });
   });
 }
@@ -266,6 +295,10 @@ function matchTransitionSeeds() {
   state.seeds["font-transition"].next_value = getNextSeedValue(
     "color-transition",
   );
+}
+
+function randomFloat(min, max) {
+  return (Math.random() * (max - min)) + min;
 }
 
 function setSeed(prefix, value) {
@@ -285,7 +318,7 @@ function getNextPrefixValue(char, prefix) {
   return state.letters[char].props[prefix].next_value;
 }
 
-function setProp(prefix, char, value) {
+function setProp(char, prefix, value) {
   state.letters[char].props[prefix].previous_value = getNextPrefixValue(
     char,
     prefix,
@@ -298,14 +331,14 @@ function setProp(prefix, char, value) {
 
 function setAllOfPrefix(prefix, value) {
   arrayOfLetters().forEach((letter) => {
-    setProp(prefix, letter.char, value);
+    setProp(letter.char, prefix, value);
   });
 }
 
 function setAllOfType(type, value) {
   arrayOfSeeds(type).forEach((seed) => {
     arrayOfLetters().forEach((letter) => {
-      setProp(seed.prefix, letter.char, value);
+      setProp(letter.char, seed.prefix, value);
     });
   });
 }
