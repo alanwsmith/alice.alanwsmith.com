@@ -38,15 +38,15 @@ body {
     background-color var(--background-transition) var(--background-easing);
 }
 
+
+a {
+  color: lch(76% 30 250);
+  text-decoration: none;
+}
+
 bitty-v1-rc4 {
   display: inilne-block;
 }
-
-/*
-.default-flow > :where(:not(:first-child)) {
-  margin-top: var(--flow-space, 0.7em);
-}
-*/
 
 .default-wrapper {
   width: min(100vw - 1.8rem, 42rem);
@@ -57,33 +57,7 @@ bitty-v1-rc4 {
   display: inline-block;
   align-content: end;
   margin-left: 0.2rem;
-
-  /*
-  position-self: center;
-*/
-
-  /*
-vertical-align: middle;
-font-size-adjust: none;
-dominant-baseline: middle;
-*/
-  /*
-overflow-position: unsafe;
-  display: grid;
-  align-self: center;
-  padding: 0.2em;
-  margin: 0.2em;
-  outline-offset: 0.2em;
-  transform: translate(-0.1em, -0.1em);
-*/
-
 }
-
-/*
-.letter-a {
-transform: translate(30%, 50%);
-}
-*/
 
 .letter-alt {
   display: inline-block;
@@ -92,21 +66,15 @@ transform: translate(30%, 50%);
   align-content: end;
 }
 
-/*
-.letter-alt {
-  display: block;
-  align-content: end;
-  padding: 0;
-  margin: 0;
-  height: 1.7em;
+.nav {
+  margin-left: 1.2rem;
+  color: lch(70% 10 200);
+  padding-top: 1.2rem;
+  padding-bottom: 2.82rem;
+  display: flex;
+  flex-wrap: warp;
+  gap: 1rem;
 }
-*/
-
-/*
-.output {
-  width: 100%;
-}
-*/
 
 .pAlt {
   margin-bottom: 3.5rem;
@@ -116,23 +84,7 @@ transform: translate(30%, 50%);
   display: inline-flex;
   align-content: end;
   margin-left: 1rem;
-/*
- dominant-baseline: middle;
-  vertical-align: middle;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  padding: 0;
-  margin-block: 0.2em;;
-  */
 }
-
-
-/*
-.space {
-  display: inline-flex;
-}
-*/
 
     </style>
   </head>
