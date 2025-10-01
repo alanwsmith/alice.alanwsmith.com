@@ -2485,13 +2485,19 @@ export default class {
 
     let options = {
       root: null,
-      rootMargin: "1000px 0px",
+      rootMargin: "700px 0px 1400px 0px",
     };
 
     let observer = new IntersectionObserver(updateStatus, options);
 
     document
       .querySelectorAll(`.letter`)
+      .forEach((el) => {
+        observer.observe(el);
+      });
+
+    document
+      .querySelectorAll(`.letter-alt`)
       .forEach((el) => {
         observer.observe(el);
       });
@@ -2581,14 +2587,21 @@ function addBaseStyleSheet() {
   styles.push(variations.join(","));
   styles.push(";");
   styles.push("} ");
+
   for (let char of listOfLetters()) {
     styles.push(`.active.letter-${char} {`);
-    styles.push(`font-size: var(--font-size-${char});`);
     styles.push(
       `color: lch(var(--color-l-${char}) var(--color-c-${char}) var(--color-h-${char}) );`,
     );
     styles.push("}");
   }
+
+  for (let char of listOfLetters()) {
+    styles.push(`.letter-${char} {`);
+    styles.push(`font-size: var(--font-size-${char});`);
+    styles.push("}");
+  }
+
   const output = styles.join("\n");
   css.replaceSync(output);
   document.adoptedStyleSheets.push(css);
