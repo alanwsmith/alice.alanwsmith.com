@@ -1,8 +1,36 @@
+[!- set page_title -!]Variations of Alice[@ day_num @][!- endset -!]
+[!- set description -!]
+Alice's Adventures in Wonderland where the shapes and colors change as you read.
+[!- endset -!]
+[!- set og_image -!]
+https://alice.alanwsmith.com/images/main-og-image-jpg
+[!- endset -!]
+[!- set favicon_root -!]
+/favicons
+[!- endset -!]
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[@ page_title @]</title>
+    <meta property="og:title" content="[@ page_title @]" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="description" content="[@ the_description @]" />
+    <meta property="og:description" content="[@ the_description @]" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="[@ og_url @]" />
+    <meta property="og:image" content="[@ og_image @]" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="[@ og_image @]">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="manifest" href="/favicons/site.webmanifest" />
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5" />
+
 
     <style>
 @font-face {
