@@ -2482,6 +2482,19 @@ export default class {
 
   inputPayload(_event, el) {
     el.innerHTML = this.spans;
+
+    let options = {
+      root: null,
+      rootMargin: "1000px 0px",
+    };
+
+    let observer = new IntersectionObserver(updateStatus, options);
+
+    document
+      .querySelectorAll(`.letter`)
+      .forEach((el) => {
+        observer.observe(el);
+      });
   }
 
   async startUpdaters(_event, _el) {
@@ -2556,7 +2569,7 @@ function addBaseStyleSheet() {
     const varString = `"${variation}" var(--${variation})`;
     return varString;
   });
-  styles.push(`.letter, .letter-alt {`);
+  styles.push(`.active.letter, .active.letter-alt {`);
   styles.push(`transition:`);
   styles.push(`color var(--color-transition)`);
   styles.push(`,`);
@@ -2569,7 +2582,7 @@ function addBaseStyleSheet() {
   styles.push(";");
   styles.push("} ");
   for (let char of listOfLetters()) {
-    styles.push(`.letter-${char} {`);
+    styles.push(`.active.letter-${char} {`);
     styles.push(`font-size: var(--font-size-${char});`);
     styles.push(
       `color: lch(var(--color-l-${char}) var(--color-c-${char}) var(--color-h-${char}) );`,
@@ -2646,6 +2659,16 @@ function randomInt(min, max) {
 
 function randomFloat(min, max) {
   return (Math.random() * (max - min)) + min;
+}
+
+function updateStatus(entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add(`active`);
+    } else {
+      entry.target.classList.remove(`active`);
+    }
+  });
 }
 const SpanMaker = class {
   constructor(text) {
